@@ -1,0 +1,158 @@
+{% extends 'main' %}
+
+
+{% block intro %}
+    <section class="wrapper-outer element-header">
+        <section class="wl-wrapper{% if pageId == 2 %} contentIntroStart{% elseif pageId != 2 and sectionName == 'blog'  %} contentIntroBlog{% elseif pageId != 2 and sectionName == 'news'  %} contentIntroNews{% else %} contentIntro{% endif %}">
+            {% set matrixIntro = entry.moduleIntroMatrix %}
+            {% if matrixIntro is defined and matrixIntro %}
+                {% for block in matrixIntro %}
+                    {% include ('_include-introblock-components/intromodul_' ~ block.type.handle) with {blockid: block.id, sectionname: entry.section.handle, pageid: entry.id}  %}
+                {% endfor %}
+            {% endif %}
+        </section>
+    </section>
+{% endblock %}
+
+{% block content %}
+
+    {% set cat = ( craft.app.request.getParam('cat') )? craft.app.request.getParam('cat') : '' %}
+    {% set auswahlKategorieObj = entry.auswahlKategorie %}
+
+    <section class="wl-wrapper news-detail">
+        <div class="elementIntro content-grid-12">
+
+            <div class="elementBackLink">
+
+                {% set showBackButton = mewsConfig.backLink|default(false) %}
+                {% if showBackButton %}
+                    {% if  mewsConfig.backLink.type == 'entry' %}
+                        <a href="{{mewsConfig.backLink.getUrl()}}#result"><img src="/assets/images/icons/arrow-back.svg" alt="back" /></a>
+                    {% endif %}
+                {% endif %}
+
+            </div>
+
+            <div class="elementSocialIcons">
+
+                <a id="linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url={{ craft.app.request.absoluteUrl }}" target="_blank">
+                    <svg id="linkedinIcn"  height="21" viewBox="0 0 21 21" width="21" xmlns="http://www.w3.org/2000/svg">
+                        <g fill="#000000">
+                            <path id="linkedinIcn_1" d="m0 0h21v21h-21z" opacity="0"/>
+                            <path id="linkedinIcn_1" d="m0 7.09a1.957 1.957 0 0 1 .636-1.5 2.334 2.334 0 0 1 1.654-.59 2.264 2.264 0 0 1 1.618.582 2.05 2.05 0 0 1 .636 1.563 1.914 1.914 0 0 1 -.618 1.455 2.338 2.338 0 0 1 -1.672.6h-.018a2.224 2.224 0 0 1 -1.618-.6 2.015 2.015 0 0 1 -.618-1.51zm.236 15.9v-12.137h4.036v12.142zm6.271 0h4.035v-6.78a2.366 2.366 0 0 1 .918-2.027 1.975 1.975 0 0 1 1.3-.427q2.036 0 2.036 2.745v6.489h4.035v-6.957a5.85 5.85 0 0 0 -1.272-4.081 4.34 4.34 0 0 0 -3.359-1.39 4.125 4.125 0 0 0 -3.654 2.018v.036h-.018l.018-.036v-1.727h-4.039q.036.582.036 3.617t-.036 8.525z" transform="translate(1.084 -3.498)"/>
+                        </g>
+                    </svg>
+                </a>
+
+                <a id="xing" href=https://www.xing.com/spi/shares/new?url=={{ craft.app.request.absoluteUrl }}" target="_blank">
+                    <svg id="xing-icon" xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+                        <g id="xing" transform="translate(-1180 -4145)">
+                            <rect id="Rechteck_553" data-name="Rechteck 553" width="21" height="21" transform="translate(1180 4145)" fill="#000000" opacity="0"/>
+                            <g id="xing-icon" transform="translate(754.889 4042.761)">
+                                <path id="xingIcn_1" data-name="Pfad 776" d="M428.483,142a.453.453,0,0,0-.4.185.458.458,0,0,0,.017.453l2,3.457a.015.015,0,0,1,0,.017l-3.139,5.538a.457.457,0,0,0,0,.453.435.435,0,0,0,.386.2H430.3a.9.9,0,0,0,.806-.57l3.189-5.639c-.012-.019-2.031-3.541-2.031-3.541a.913.913,0,0,0-.822-.554h-2.954Z" transform="translate(0 -35.456)" fill="#000000"/>
+                                <path id="xingIcn_2" data-name="Pfad 777" d="M499.027,102.5a.866.866,0,0,0-.791.563s-6.363,11.285-6.573,11.656l4.2,7.7a.924.924,0,0,0,.825.563h2.95a.436.436,0,0,0,.392-.189.46.46,0,0,0-.006-.457l-4.164-7.608a.017.017,0,0,1,0-.019l6.54-11.564a.463.463,0,0,0,.006-.456.438.438,0,0,0-.393-.189h-2.984Z" transform="translate(-58.134 0)" fill="#000000"/>
+                            </g>
+                        </g>
+                    </svg>
+                </a>
+
+                <a id="mail" class="wl-mail" href="mailto:?subject={{ mewsConfig.teilenSubjectMail }}&amp;body={{ mewsConfig.teilenMailBody }} {{ craft.app.request.absoluteUrl }}" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="21.155" height="16.924" viewBox="0 0 21.155 16.924">
+                        <path id="mailIcn" d="M5.587,24.924a1.522,1.522,0,0,1-1.111-.476A1.522,1.522,0,0,1,4,23.337V9.587a1.522,1.522,0,0,1,.476-1.111A1.522,1.522,0,0,1,5.587,8H23.568a1.627,1.627,0,0,1,1.587,1.587V23.337a1.627,1.627,0,0,1-1.587,1.587Zm8.991-7.986-8.991-5.9v12.3H23.568v-12.3Zm0-1.587,8.885-5.765H5.719Zm-8.991-4.31v0Z" transform="translate(-4 -8)" fill="#000000"/>
+                    </svg>
+                </a>
+
+            </div>
+
+            <div class="elementCatButtons">
+                <div class="article-kategorie-button">
+                    <ul>
+                    {% set auswahlKategorieObj = entry.auswahlKategorie %}
+                    {% if cat == 'all' %}
+
+                        {% for item in auswahlKategorieObj %}
+                            <li><div class="kategorie-button">{{ item.title }}</div></li>
+                        {% endfor %}
+
+                    {% else %}
+
+                        {% for item in auswahlKategorieObj %}
+                            {% if cat == item.id|string %}
+                                <li><div class="kategorie-button">{{ item.title }}</div></li>
+                            {% endif %}
+                        {% endfor %}
+
+                    {% endif %}
+                    </ul>
+                </div>
+            </div>
+
+            <div class="elementContent">
+
+                <h1>{{ entry.title }}</h1>
+
+                {# ###################################################################################################### #}
+                {% set settings = {
+                    '0-1300': {
+                        'size' : '726x409',
+                        'mode' : 'crop'
+                    },
+                    '1-500': {
+                        'size' : '415x243',
+                        'mode' : 'crop'
+                    },
+                    '0-500': {
+                        'size' : '344x194',
+                        'mode' : 'crop'
+                    },
+                } %}
+                {# ###################################################################################################### #}
+                {% set matrixElemente = entry.newsDetailMatrix %}
+                {% if matrixElemente is defined and matrixElemente %}
+                    {% for block in matrixElemente %}
+
+                        {% if block.type == "text" %}
+                            <div class="elementContentText text">
+                                {{ block.detailText }}
+                            </div>
+
+                        {% elseif block.type == "blogAbstand" %}
+
+                            {% set outputAbstand = '' %}
+                            {% set outputAbstand = block.abstandTrenner|number  %}
+                            {% set dataMin = 25 %}
+                            {% set dataMaxDefault = 45 %}
+                            {% set abstand = (outputAbstand == '')? dataMaxDefault : outputAbstand %}
+                            {% set prefix = loop.index %}
+                            <section data-abstandContainer class="wl-wrapper">
+                                <div data-attr="height" data-min="{{ dataMin }}" data-max="{{ abstand }}" class="abstand-{{ prefix }}"></div>
+                            </section>
+
+                        {% elseif block.type == "image" %}
+                            {% set bildUnterschrift = block.bildUnterschrift|default(false) %}
+                            <div class="elementContentImage imgSpacingTop{% if bildUnterschrift == false %} imgSpacingBottom{% endif %}">
+                                {% include '_include-vendor/image-picture' with {class: 'content-bild', sourceMediaSettings: settings, image: block.detailImage.one(), imageSize: '1080x609', imageMode: 'crop'} %}
+                            </div>
+
+                            {% if bildUnterschrift %}
+                                <div class="elementContentImageUnterschrift">
+                                    {{ bildUnterschrift|nl2br }}
+                                </div>
+                            {% endif %}
+
+                        {% endif %}
+
+                    {% endfor %}
+                {% endif %}
+
+                <div class="buttonBackContainer">
+                    {% if  mewsConfig.backLink.type == 'entry' %}
+                        <a class="btn" href="{{mewsConfig.backLink.getUrl()}}#result">{{mewsConfig.backLink.getCustomText()}}</a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+{% endblock %}

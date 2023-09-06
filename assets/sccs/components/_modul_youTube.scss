@@ -1,0 +1,23 @@
+.modul-youTube{
+
+  .video-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    @include  dynamic-distance(17, 1013, height);
+
+  }
+
+}
+
+
+

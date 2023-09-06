@@ -1,0 +1,93 @@
+{% extends 'main' %}
+
+{% block intro %}
+{% if pageId == '' %}{% set entry = seite404 %}{% endif %}
+<section class="wrapper-outer element-header">
+  <section class="wl-wrapper{% if pageId != 2 and sectionName != 'blog' %} contentIntro{% elseif pageId != 2 and sectionName == 'blog'  %} contentIntroBlog{% else %} contentIntroStart{% endif %}">
+    {% set matrixIntro = entry.moduleIntroMatrix %}
+    {% if matrixIntro is defined and matrixIntro %}
+      {% for block in matrixIntro %}
+        {% include ('_include-introblock-components/intromodul_' ~ block.type.handle) with {blockid: block.id, sectionname: entry.section.handle, pageid: entry.id}  %}
+      {% endfor %}
+    {% endif %}
+  </section>
+</section>
+{% endblock %}
+
+{% block content %}
+  {% if pageId == '' %}{% set entry = seite404 %}{% endif %}
+  <section>
+    {% set matrixElemente = entry.generalModules %}
+    {% if matrixElemente is defined and matrixElemente %}
+      {% set blockCounter = 0 %}
+      {% for block in matrixElemente %}
+        {% if block.type.handle != 'abstand' %}
+          {% set blockCounter = blockCounter + 1 %}
+        {% endif %}
+        {% include ('_include-block-components/modul_' ~ block.type.handle) with {blockid: block.id, sectionname: entry.section.handle, pageid: entry.id, blockCounter: blockCounter }  %}
+      {% endfor %}
+    {% endif %}
+  </section>
+{% endblock %}
+
+{% block assetsHead %}
+  {% if pageId == '' %}{% set entry = seite404 %}{% endif %}
+  {% set assetsArr = {} %}
+  {% set matrixElemente = entry.generalModules.all() %}
+  {% if matrixElemente is defined and matrixElemente %}
+    {# ---------------------------------------------------------------------------------------------------------------------------------- #}
+    {% set counter = 0 %}
+    {% set logoleisteSlider = 0 %}
+    {% set formular = 0 %}
+    {% set imageGallery = 0 %}
+    {% set haendlerFilter = 0 %}
+    {% for block in matrixElemente %}
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+      {% if block.type.handle == 'haendlerFilter' %}
+        {% set counter = counter + 1 %}
+        {% if haendlerFilter == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/haendler-filter.min.js"></script>' }) %}
+        {% endif %}
+        {% set haendlerFilter = haendlerFilter + 1 %}
+      {% endif %}
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+      {% if block.type.handle == 'logoleisteSlider' %}
+        {% set counter = counter + 1 %}
+        {% if logoleisteSlider == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/slick.min.js"></script>' }) %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<link defer rel="stylesheet" href="/assets/css/slick-logoleisteSlider.min.css">' }) %}
+        {% endif %}
+        {% set logoleisteSlider = logoleisteSlider + 1 %}
+      {% endif %}
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+      {% if block.type.handle == 'formular' %}
+        {% set counter = counter + 1 %}
+        {% if formular == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/select.min.js"></script>' }) %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/fileinput.min.js"></script>' }) %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/formValidate.min.js"></script>' }) %}
+        {% endif %}
+        {% set formular = formular + 1 %}
+      {% endif %}
+      {#
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+      {% if block.type.handle == 'imageGallery' %}
+        {% set counter = counter + 1 %}
+        {% if imageGallery == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/lazysizes.min.js"></script>' }) %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/jquery.imageGallery.min.js"></script>' }) %}
+        {% endif %}
+        {% set imageGallery = imageGallery + 1 %}
+      {% endif %}
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+    {% endfor %}
+  {% endif %}
+  {# ===== AUSGABE ========== (Bei der Ausgabe werden doppelte Elemente im Array entfernt) ============================================== #}
+  {% for element in assetsArr|reduce((unique, item) => item in unique ? unique : unique|merge([item]), []) %}
+
+    {{ element|raw }}{% endfor %}
+  {# ==================================================================================================================================== #}
+{% endblock %}
+
+
+

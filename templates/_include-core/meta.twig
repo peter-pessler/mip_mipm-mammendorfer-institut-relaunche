@@ -1,0 +1,69 @@
+{% set seoTitlePage = entry.seoTitle|default(false) %}
+{% if seoTitlePage %}
+        {% set title = seoTitlePage %}
+{% else %}
+        {% set title = entry.title %}
+{% endif %}
+{% set titleZuatzInfo = siteConfig.organization|default(false) %}
+{% if titleZuatzInfo %}
+        {% set title = (titleZuatzInfo)? title ~ ' | ' ~ titleZuatzInfo %}
+{% endif %}
+{# ------------------------------------------------------------------------------- #}
+{% set seoDescriptionPage = entry.seoDescription|default(false) %}
+{% if seoDescriptionPage %}
+        {% set description = seoDescriptionPage %}
+{% else %}
+        {% set descriptionDefault = seo.seoDescription|default(false) %}
+        {% if descriptionDefault %}
+                {% set description = descriptionDefault %}
+        {% else %}
+                {% set description = '' %}
+        {% endif %}
+{% endif %}
+{# ------------------------------------------------------------------------------- #}
+{% set indexierenGlobal = (seo.indexierenGlobal)? true : false %}
+{% if indexierenGlobal == false or craft.app.config.general.devMode %}
+        {% set indexieren = 'noindex,nofollow' %}
+{% else %}
+        {% set indexieren = 'index,follow' %}
+
+        {% set indexierenPage = (entry.indexierenPage)? true : false %}
+        {% if indexierenPage == false %}
+                {% set indexieren = 'noindex,nofollow' %}
+        {% endif %}
+{% endif %}
+{# ------------------------------------------------------------------------------- #}
+{% set canonical =  craft.app.request.absoluteUrl  %}
+{% set canonicalDefault = seo.seoCanonicalLink|default(false) %}
+{% set canonicalPage = entry.seoCanonicalLink|default(false) %}
+{% if canonicalDefault %}
+        {% set canonical = canonicalDefault %}
+{% endif %}
+{% if canonicalPage %}
+        {% set canonical = canonicalPage %}
+{% endif %}
+{# ------------------------------------------------------------------------------- #}
+{% set siteVerificationID = siteConfig.siteVerificationId|default(false) %}
+{# ------------------------------------------------------------------------------- #}
+
+<title>{{ title }}</title>
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no" />{% if description != '' %}
+
+<meta name="description" content="{{ description }}" />{% endif %}
+
+<meta name="robots" content="{{ indexieren }}">
+{% if seo.noimageindex %}
+<meta name="robots" content="noimageindex" />
+<meta name="googlebot-image" content="noindex" />
+<meta name="MSNBot-Media" content="noindex" />
+{% endif %}
+<meta property="og:url" content="{{ craft.app.request.absoluteUrl }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ title }}" />
+<meta property="og:description" content="{{ description }}" />
+{% if siteVerificationID %}<meta name="google-site-verification" content="{{ siteVerificationID }}" />{% endif %}
+
+<link rel="canonical" href="{{ canonical }}" />

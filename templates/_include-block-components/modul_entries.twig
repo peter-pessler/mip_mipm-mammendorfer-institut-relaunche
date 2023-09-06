@@ -1,0 +1,319 @@
+
+    {% set IDfolderLevel1Exists = (craft.app.request.getParam('idl1') and craft.app.request.getParam('idl1') != '' )? true : false %}
+    {% set IDfolderLevel2Exists = (craft.app.request.getParam('idl2') and craft.app.request.getParam('idl2') != '' )? true : false %}
+    {% set IDordnerLevel1 = (IDfolderLevel1Exists)? craft.app.request.getParam('idl1') : '' %}
+    {% set IDordnerLevel2 = (IDfolderLevel1Exists)? craft.app.request.getParam('idl2') : '' %}
+    {% set catName = (IDfolderLevel1Exists)? craft.entries.id(IDordnerLevel1).one().title : '' %}
+    {% set entriesItems = '' %}
+    {% set sectionName = 'entry' %}
+    {% set selectAllClass = (IDfolderLevel1Exists)? 'noselected' : 'selected' %}
+    {% set selectAllClassLevel2 = (IDfolderLevel2Exists)? 'nohighlight' : 'highlight' %}
+    {% set setIdLevel1Param = (IDfolderLevel1Exists)?'?idl1=' ~ IDordnerLevel1 : '' %}
+    {% set setIdLevel2Param = (IDfolderLevel1Exists)?'&idl2=' ~ IDordnerLevel2 : '' %}
+    {% set levelOneItems = craft.entries().section(sectionName).level('> 1') %}
+    {% set levelOneButtonItems = craft.entries().section(sectionName).level('1') %}
+    {% set ausgabeNur3Teaser = (block.ausgabeNur3Teaser)? true : false %}
+
+
+    {# *-----------------------------------------*#}
+
+    {% if IDfolderLevel1Exists %}
+        {% set levelTwoItemsAll = craft.entries.section(sectionName).descendantOf(IDordnerLevel1) %}
+        {% set levelTwoItems = craft.entries.section(sectionName).descendantOf(IDordnerLevel1).level('2') %}
+    {% endif %}
+
+    {# *------------* Konfiguration Pager *------------ *#}
+    {% set pageSizeArtikel = block.anzahlArtikel|number %}
+    {% set showPager = block.pager|number %}
+    {% if showPager == 0 %}
+        {% set pageSizeArtikel = 10000 %}
+    {% endif %}
+     {% if ausgabeNur3Teaser %}
+         {% set pageSizeArtikel = 3 %}
+     {% endif %}
+    {# *-----------------------------------------*#}
+
+    {% set idsToExclude = {} %}
+    {% set counter = 0 %}
+    {% set hasChildren = false %}
+    {% set childrenExists = false %}
+    {% if IDfolderLevel1Exists %}
+        {% for elementL1 in levelTwoItems %}
+
+            {% set folderId =  elementL1.id  %}
+            {% set this = craft.entries.section(sectionName).descendantOf(folderId) %}
+
+            {% if this.count > 0 %}
+                {% set hasChildren = true %}
+                {% set childrenExists = true %}
+            {% endif %}
+
+            {% if hasChildren %}
+                {% set idsToExclude = idsToExclude|merge({ (counter)  : folderId }) %}
+                {% set counter = counter + 1 %}
+            {% endif %}
+
+            {% set hasChildren = false %}
+
+        {% endfor %}
+    {% endif %}
+
+    {# *-----------------------------------------*#}
+
+    {% if IDfolderLevel1Exists and IDfolderLevel2Exists == false %}
+
+         {% set articleItems = craft.entries
+            .section(sectionName)
+            .descendantOf(IDordnerLevel1)
+            .id(['not']|merge(idsToExclude))
+            .orderBy('startDate desc')
+            .limit(pageSizeArtikel) %}
+
+    {% elseif IDfolderLevel1Exists and IDfolderLevel2Exists %}
+
+        {% set articleItems = craft.entries
+            .section(sectionName)
+            .descendantOf(IDordnerLevel2)
+            .orderBy('startDate desc')
+            .limit(pageSizeArtikel) %}
+
+    {% else %}
+
+        {% set outputLevel = '> 1' %}
+        {% set articleItems = craft.entries()
+            .section(sectionName)
+            .id(['not']|merge(idsToExclude))
+            .level(outputLevel)
+            .orderBy('startDate desc')
+            .limit(pageSizeArtikel) %}
+
+   {% endif %}
+
+
+    {# *-----------------------------------------*#}
+
+    {% paginate articleItems as pageInfo, entries %}
+
+    {% set pageParam = craft.app.request.absoluteUrl %}
+    {% set myUrl = url(craft.app.request.pathInfo) %}
+    {% set url= myUrl ~ "/p1"  %}
+
+    {% if '/p' not in pageParam  and showPager != 0 %}
+        {% redirect url %}
+    {% endif %}
+
+    {# *-----------------------------------------*#}
+
+    {% set anzahlentriesArtikel = articleItems.count()  %}
+    {% if showPager == 1 and anzahlentriesArtikel > 3 and anzahlentriesArtikel > pageSizeArtikel %}
+        {% set pager = true %}
+    {% else %}
+        {% set pager = false %}
+    {% endif %}
+
+    {% if pager %}
+        {% set items = entries %}
+    {% else %}
+        {% set items = articleItems %}
+    {% endif %}
+
+    {# *-----------------------------------------*#}
+
+
+    <section class="blog-wrapper-outer modul-entries" id="result">
+        <section class="wl-wrapper entries">
+
+            {% if ausgabeNur3Teaser == false %}
+            <div class="container-select  content-grid-12">
+                <div class="container-select-filter">
+
+                    <div class="entries-select-button">
+                        <a href="{{ myUrl }}/p1#articles" class="catButton-js {{ selectAllClass }}">{{ block.alleEintraege }}</a>
+                        {% for element in levelOneButtonItems %}
+                            {% set categoryName =  element.categoryName  %}
+                            {% set categoryFolderId =  element.id  %}
+                            {% set selectClass = ( categoryFolderId == IDordnerLevel1 )? 'selected' : 'noselected' %}
+                            {% set checkCategoryName = (element.categoryName != '')? true : false %}
+                            {% if checkCategoryName %}
+                                <a href="{{ myUrl }}/p1?idl1={{ categoryFolderId }}#articles" class="catButton-js {{ selectClass }}">{{ categoryName  }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+            {% endif %}
+
+        {% if childrenExists %}
+            {% set levelTwoItemsOutput = craft.entries.section(sectionName).descendantOf(IDordnerLevel1).level('2').id(idsToExclude) %}
+            <div class="container-children-select content-grid-12">
+
+                <div class="container-select-body-children">
+
+                    <div class="levelTwo-select-button">
+
+                        <a href="{{ myUrl }}/p1{{ setIdLevel1Param }}#articles" class="{{ selectAllClassLevel2 }}">Show all from {{ catName }}</a>
+                        {% for element in levelTwoItemsOutput %}
+                            {% set categoryName = element.title %}
+                            {% set level2FolderId = element.id  %}
+                            {% set selectClass = ( level2FolderId == IDordnerLevel2 )? 'highlight' : 'nohighlight' %}
+                            <a href="{{ myUrl }}/p1{{ setIdLevel1Param }}&idl2={{ level2FolderId }}#articles" class="{{ selectClass }}">{{ categoryName  }}</a>
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+              </div>
+            {% endif %}
+
+        {% set itemsCounter = 0 %}
+        {% for entry in items %}
+            {% set startDate =  entry.startDate|default(false) %}
+            {% if startDate %}
+                {% set itemsCounter = itemsCounter + 1 %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="container-body  content-grid-12" id="articles">
+            <div class="modul-entries-article">
+                <div class="articleContainer">
+                    {% set settings = {
+                        '0-1920' : {
+                            'size' : '392x290',
+                            'mode' : 'crop'
+                        }
+                    } %}
+                    {% set counter = 1 %}
+                    {% for entry in items %}
+                        {% set startDate =  entry.startDate|default(false) %}
+                        {% set parentId =  entry.parent ? entry.parent.id  %}
+                        {% set parentTitle =  entry.parent ? entry.parent.title %}
+                        {% set showLinkExten = false %}
+                        {% set setTarget = '' %}
+
+                        {% if startDate %}
+
+                            {% set articleLink = entry.url %}
+
+                            <a href="{{ articleLink }}" class="article-link item">
+                                <article class="item-content">
+
+                                    <div class="img">
+
+                                        {% set showArticleImage =  false %}
+                                        {% set checkArticleImage =  entry.teaserImage|default(false) %}
+                                        {% if checkArticleImage %}
+                                            {% set articleImage = entry.teaserImage.one() %}
+                                            {% set showArticleImage =  true %}
+                                        {% endif %}
+                                        {% if showArticleImage %}
+                                            {% include '_include-vendor/image-picture' with {class: 'entries-teaser-img', sourceMediaSettings: settings, image: articleImage, imageSize: '392x290', imageMode: 'crop'} %}
+                                        {% endif %}
+
+                                    </div>
+
+                                    <div class="text">
+
+                                        <div class="category-name">
+                                            {{ parentTitle }}
+                                        </div>
+
+                                        <div class="text-content">
+                                            <div class="article-name ratgeberTitle-js">
+                                                {{ entry.title }}
+                                            </div>
+                                        </div>
+
+                                        <div class="article-arrow">
+                                            <img src="/assets/images/icons/arrow.svg" alt="Arrow" />
+                                        </div>
+
+                                        {#
+                                        <div class="event-date strong">
+                                            {% set startDate =  entry.startDate|default(false) %}
+                                            {% set YearStartDate = entry.startDate|date('Y') %}
+                                            {% set MonthStartDate = entry.startDate|date('n') %}
+                                            {% set MonthStartDateLong = entry.startDate|date('F') %}
+                                            {% set DayStartDate = entry.startDate|date('j') %}
+                                            {{ MonthStartDateLong }} {{ DayStartDate }}, {{ YearStartDate }}
+                                        </div>
+                                        #}
+
+                                    </div>
+
+                                </article>
+                            </a>
+
+                            {% set counter = counter + 1 %}
+
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if itemsCounter == 0  %}
+                        <article class="noEntry strong">
+                            {{ block.keineEintraegeVorhanden }}
+                        </article>
+
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+
+        {% if pager %}
+            <div class="pagination-container">
+                <div class="pagination">
+
+                    <div class="pagination-arrow-counter">
+                        <div class="pagination-arrow-counter-inner">
+                            {% for i in range(1,pageInfo.totalPages) %}
+                                {% if IDfolderLevel1Exists %}
+                                    <a class="{% if pageInfo.currentPage == loop.index %}active{% else %}notactive{% endif %}" href="{{ myUrl }}/p{{loop.index}}{{ setIdLevel1Param }}{{ setIdLevel2Param }}#articles">{{loop.index}}</a>
+                                {% else %}
+                                    <a class="{% if pageInfo.currentPage == loop.index %}active{% else %}notactive{% endif %}" href="{{ myUrl }}/p{{loop.index}}#articles">{{loop.index}}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        {% endif %}
+
+
+      </section>
+    </section>
+
+    <script>
+
+        $( document ).ready(function() {
+
+
+            var thisWidth ;
+            thisWidth = $(window).width();
+
+            if( thisWidth <= 500){
+                equal_width($('.catButton-js'));
+            } else {
+                $('.catButton-js').each(function() {
+                    $(this).removeAttr('style');
+                });
+            }
+
+            $(window).resize(function() {
+                thisWidth = $(window).width();
+                if( thisWidth <= 500){
+                    equal_width($('.catButton-js'));
+                } else {
+                    $('.catButton-js').each(function() {
+                        $(this).removeAttr('style');
+                    });
+                }
+            })
+
+        });
+
+    </script>

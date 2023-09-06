@@ -1,0 +1,146 @@
+{# -------------- https://craftcms.com/docs/3.x/sites.html#site-groups -------------- #}
+{# -------------- Neuer Passwort-Hash zu rendern -------------- #}
+{# -------------- meineDomain?craftpasswort=demo1234 -------------- #}
+{% if craft.app.request.getParam('craftpasswort') %}
+    {% set craftpasswort = craft.app.request.getParam('craftpasswort') %}
+    {% if craftpasswort != '' %}{{ craft.app.security.hashPassword(craftpasswort) }}{% endif %}
+{% endif %}
+{# ------------------------------------------------------------------- #}
+{% set pageId = entry.id %}
+{% set pageIdParent = entry.getParent().id ?? 0  %}
+{# {% set imgFormat = siteConfig.imageFormat %} #}
+{% set sectionName = entry.section.handle %}
+{% set imgQuality = 85 %}
+{% set protokollDomain = currentSite.baseUrl|trim('/') %}
+{% set domainAndPath = craft.app.request.absoluteUrl %}
+{% set doNotTrack = craft.wul.doNotTrack() %}{# output: true/false #}
+{# -------------- Simulation Live Ansicht-------------- #}
+{% set showLiveAnsicht = (adminConfig.simulationLiveAnsicht)? true : false %}
+{# -------------- Sprache-------------- #}
+{% set lg = currentSite.handle %}
+{# -------------- Blogübersicht -------------- #}
+{% if pageId != 397 %}{# Id 397 = Blogübersicht #}
+ {% set redirect = entry.redirect %}
+ {% if redirect is defined and redirect is not null %}
+     {% set redirectLink = redirect.getUrl() %}
+     {% if redirectLink is not null %}
+         {% redirect redirectLink %}
+     {% endif %}
+ {% endif %}
+{% endif %}
+<!DOCTYPE HTML>
+<html{% if doNotTrack %} data-doNotTrack="on"{% else %} data-doNotTrack="off"{% endif %} lang="{{ currentSite.language }}" dir="{{craft.app.i18n.getLocaleById(currentSite.id).getOrientation()}}">
+<head>
+
+{% include '_include-core/meta' %}
+
+{% include '_include-core/favicons' %}
+
+{% if not craft.app.config.general.devMode and doNotTrack == false %}
+    {% include '_include-core/tracking-code-head-end' %}
+{% else %}
+    {% if showLiveAnsicht %}
+        {% include '_include-core/tracking-code-head-end' %}
+    {% endif %}
+{% endif %}
+
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/scripts.min.js"></script>
+{# <script src="https://kit.fontawesome.com/f7d5330d63.js" crossorigin="anonymous"></script> #}
+<link href="/assets/css/styles.min.css" rel="stylesheet">
+
+    <script src="/assets/js/slick.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/assets/css/slick.min.css"/>
+
+{% block assetsHead %}{% endblock %}
+
+</head>
+
+<body class="{% if pageId == 2%}startseite{% else %}contentseite{% endif %} {{body_class ?? null}} {{craft.app.request.isMobileBrowser() ? 'is-mobile' : 'is-desktop'}}">
+
+{% if not craft.app.config.general.devMode %}
+    {% include '_include-core/tracking-code-body-start' %}
+{% else %}
+    {% if showLiveAnsicht %}
+        {% include '_include-core/tracking-code-body-start' %}
+    {% endif %}
+{% endif %}
+
+{# Startanimation #}
+{% include '_include-atoms/preloader.twig' %}
+
+  <header>
+      {% include '_include-core/header' %}
+      {% block intro %}{% endblock %}
+  </header>
+
+  <main>
+      <section class="wl-wrapper">
+
+       {# START | Zum Test füt Headline marging (Wenn erfolgreich angewandt, bitte löschen) #}
+
+              <h1>Ich bin eine H1 Überschrift | ygj ÄÜÖ</h1>
+
+              <h2>Ich bin eine H2 Überschrift | ygj ÄÜÖ</h2>
+
+              <h3 class="demo-1 demo-2">Ich bin eine H3 Überschrift | ygj ÄÜÖ</h3>
+
+              <h4>Ich bin eine H4 Überschrift | ygj ÄÜÖ</h4>
+
+
+          {#
+          <section class="wl-wrapper">
+              {% include '_include-atoms/grid-demo-12' %}
+              <br /><br />
+              {% include '_include-atoms/grid-demo-24' %}
+              <br /><br />
+              {% include '_include-atoms/grid-demo-layout.twig' %}
+              <br /><br />
+          </section>
+          #}
+       {# ENDE ____________________________________________________________________________ #}
+
+      {% set headline = entry.headline %}
+      {% set entryHeadline = entry.headline|default(false) %}
+      {% if entryHeadline %}
+          <h1>{{ headline }}</h1>
+      {% endif %}
+        <div style="border: 1px solid red; padding: 30px;">
+          <a href="#" class="btnWul">
+              <span class="text-green">Click me Click me<svg width="13px" height="10px" viewBox="0 0 13 10">
+                      <path d="M1,5 L11,5"></path>
+                      <polyline points="8 1 12 5 8 9"></polyline>
+                  </svg></span>
+
+
+
+               </a>
+        </div>
+      </section>
+
+      {% block module %}{% endblock %}
+      {% block blogdetail %}{% endblock %}
+      {% block karrieredetail %}{% endblock %}
+      {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+      {% include '_include-core/footer' %}
+  </footer>
+
+  {% block assetsEndBody %}{% endblock %}
+
+  {% if not craft.app.config.general.devMode and doNotTrack == false %}
+      {% include '_include-core/tracking-code-body-end' %}
+  {% else %}
+      {% if showLiveAnsicht %}
+          {% include '_include-core/tracking-code-body-end' %}
+      {% endif %}
+  {% endif %}
+
+
+</body>
+
+</html>
+
+

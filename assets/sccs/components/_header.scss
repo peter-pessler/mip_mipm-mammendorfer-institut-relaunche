@@ -1,0 +1,217 @@
+#header {
+  background-color: #ffffff;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+header {
+
+
+  @include dynamic-distance(35, 45, padding-top);
+
+  .wl-header-wrapper{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .header-body{
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+    .nav-container{
+
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+
+
+      .boxBody{
+
+        color: $wl-color-black;
+        @include responsive-font(17px, 20px, $base-font-family-bold, $base-line-height);
+
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+
+
+        .boxBodyLeft{
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          align-content: stretch;
+
+          width: 400px;
+
+
+          .boxLogo{
+            width: 285px;
+
+            @include wl-breakpoint(1100) {
+              @include dynamic-distance(150, 500, width);
+            }
+
+            @include wl-breakpoint(900) {
+              width: 174px;
+            }
+            @include wl-breakpoint(370) {
+              width: 120px;
+            }
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: stretch;
+
+            .logoContainer{
+              .logo {
+                img{
+                  width: 115px;
+                  height: auto;
+                  margin-bottom: 4px;
+                  @include wl-breakpoint(370) {
+                    width: 90px;
+                  }
+                }
+              }
+            }
+
+          }
+
+
+          .boxLanguage {
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+            align-content: stretch;
+
+            text-transform: uppercase;
+            color: $wl-color-black;
+
+            a{
+              text-transform: uppercase;
+              color: #979cae;
+              text-decoration: none;
+
+              &:hover{
+                color: $wl-color-blue;
+                transition: all .4s ease-in-out;
+              }
+            }
+
+            .trenner{
+              width: 18px;
+              font-size: 1.2em;
+              text-align: center;
+            }
+
+          }
+
+        }
+
+
+        .boxBodyRight{
+          width: calc(100% - 400px);
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: flex-end;
+          align-items: center;
+          align-content: stretch;
+
+
+          .boxMenue{
+            width:100%;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-end;
+            align-items: center;
+            align-content: stretch;
+
+            .menueOuter{
+              display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              justify-content: flex-end;
+              align-items: center;
+              align-content: stretch;
+
+              span{
+
+                &.textMenue{
+                  display: none;
+                  @include wl-breakpoint($breakpoint-navigation) {
+                    display: inline-block;
+                  }
+                  cursor: pointer;
+                  margin-left: 8px;
+
+                  color: $wl-color-black;
+                  transition-duration: 0.4s;
+                  @include responsive-font(17px, 20px, $base-font-family-bold, $base-line-height);
+
+                  @include wl-breakpoint(1100) {
+                    padding-top: 1px;
+                  }
+
+                  @include wl-breakpoint(480) {
+                    display: none;
+                  }
+
+                }
+
+              }
+
+
+            }
+
+          }
+
+          .wl-wrapper{
+            @media only screen and (min-width: #{$breakpoint-navigation}px ) {
+              padding-left: 0px;
+              padding-right: 0px;
+            }
+          }
+
+        }
+
+
+      }
+
+
+    }
+
+  }
+
+}
+
+
+
+
+

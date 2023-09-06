@@ -1,0 +1,261 @@
+{% set produktgruppeid = ( craft.app.request.getParam('produktgruppeid') )? craft.app.request.getParam('produktgruppeid') : '' %}
+{% set landid = ( craft.app.request.getParam('landid') )? craft.app.request.getParam('landid') : '' %}
+{% set resultContainerClassName = ( craft.app.request.getParam('produktgruppeid') )? '' : ' resultContainer' %}
+{% set lgSlug = (currentSite.handle == 'en')? '/en' : '' %}
+
+
+<script>
+
+    $(document).ready(function(){
+
+        $('.resultContainer').hide();
+
+        {% if produktgruppeid != '' %}
+        changeProduktgruppe({{ produktgruppeid }});
+        setTimeout(function() {
+            var dataElement  = $('[data-value="{{ produktgruppeid }}"]').text();
+            $('.custom-select-1 span.custom-select-trigger').text(dataElement);
+            $('.custom-select-2').find('.alleCat').hide();
+            $(".custom-select-2 .custom-select-trigger").css('background-color', '#EC6500');
+            $(".custom-select-2 .custom-select-trigger").css('color', '#FFFFFF');
+            $(".custom-select-2 .custom-select-trigger").addClass('highlight');
+        }, 100);
+
+        {% else %}
+        changeProduktgruppe();
+        {% endif %}
+
+        setTimeout(function() {
+            $('.resultContainer').fadeIn();
+        }, 500);
+
+    });
+
+    function ajaxFeedback(land = '', produktgruppe = '') {
+
+
+        if(produktgruppe == ''){
+            produktgruppe = $('#produktgruppe-select #alle').val();
+        }
+
+        var dataElementLand  = $('#articles').attr("data-startLand");
+
+        if(dataElementLand != ''){
+            land = dataElementLand;
+            $('#articles').attr("data-startLand", "");
+            dataElementLand = '';
+        }
+
+        /*
+        if(dataElementLand == '' || dataElementLand == 'undefined' ){
+            land = land;
+        }
+        */
+
+
+
+        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendler&blockid={{ blockid }}&catstatus=0&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+            resultContainer = $('.resultContainer');
+
+        $.get(ajaxUrl, function(data){
+
+            $(resultContainer).html(data);
+
+            if($('.getMore').html() == undefined) {
+                $('#getMoreBtn').html('');
+            } else {
+                $('#getMoreBtn').html( $('.getMore').html() );
+                $('.getMore').remove();
+            }
+
+        });
+
+    };
+
+    /*
+    function statusLandCategory(land = '', produktgruppe = '') {
+
+        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendler&blockid={{ blockid }}&catstatus=1&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result;
+
+        $.ajax({
+            produktgruppee: "GET",
+            url: ajaxUrl,
+            success: function(data) {
+
+                result = data.replace(" ", "");
+                result =  $.trim(result);
+
+                $("#land-select").children("[data-alle]").remove();
+                $("#land-select").children("[value^=" + land + "]").prop( "disabled", false );
+
+                if(result == '0'){
+                    $("#land-select").children("[value^=" + land + "]").prop( "disabled", true ).addClass('disabled');
+                    $(".custom-select-2 .custom-options").children("[data-value^=" + land + "]").addClass('disabled');
+                };
+
+            },
+            error: function() {
+                alert('Error');
+            }
+        });
+
+    }
+    */
+
+function statusLandCategory(produktgruppe = '') {
+
+
+    $(".custom-select-2 .custom-options").children().removeClass( "disabled" );
+
+        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendlerFilter-statusLand&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result, resutArr;
+
+        $.ajax({
+            produktgruppee: "GET",
+            url: ajaxUrl,
+            success: function(data) {
+
+                result = data.replace(" ", "");
+                result =  $.trim(result);
+
+                //$("#land-select").children("[data-alle]").remove();
+                //$("#land-select").children("[value^=" + land + "]").prop( "disabled", false );
+
+                resutArr = jQuery.parseJSON( result );
+
+                IDsCategoryLandStr = $('#produktgruppe-select').attr("data-categoryLandStr");
+                IDsCategoryLandArr = IDsCategoryLandStr.split(',');
+                IDsCategoryLandArrDisabled = IDsCategoryLandArr;
+
+
+
+                //$(".custom-select-2 .custom-options").children().removeClass( "disabled" );
+                $.each(IDsCategoryLandArr, function(key, land) {
+
+                    for (var i = 0; i < resutArr.length; i++) {
+                        if( resutArr[i] == land ) {
+                            //Function Remove Item in Array
+                            IDsCategoryLandArrDisabled.remove(land);
+                        }
+                    };
+
+                });
+
+
+                $.each(IDsCategoryLandArrDisabled, function(key, land) {
+                    $("#land-select").children("[value^=" + land + "]").prop( "disabled", true ).addClass('disabled');
+                    $(".custom-select-2 .custom-options").children("[data-value^=" + land + "]").addClass('disabled');
+
+                });
+
+            },
+            error: function() {
+                alert('Error');
+            }
+        });
+
+    }
+
+    //Function Remove Item in Array
+    Array.prototype.remove = function(v) {
+         this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1);
+    }
+
+
+</script>
+
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="blog-wrapper-outer modul-haendlerFilter" id="result">
+    <div class="wl-wrapper">
+
+
+                {# Auswahl Produkt Gruppe #}
+                {% set categoryProduktgruppeStr = ''  %}
+                {% set counter = '1' %}
+                {% set kategorieProduktgruppeArr = {} %}
+
+                {% set allCategoryProduktgruppe = craft.categories().group('produktGruppen') %}
+                {% for elemente in allCategoryProduktgruppe.all() %}
+                    {% set categoryProduktgruppeStr  = (counter == 1)? elemente.id : categoryProduktgruppeStr  ~ ',' ~ elemente.id  %}
+                    {% set kategorieProduktgruppeArr = kategorieProduktgruppeArr|merge({ (loop.index)  :  '<option value="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</option>' }) %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+
+                {#  ========================================================================================================================================== #}
+
+                {# Auswahl Land #}
+                {% set categoryLandStr = ''  %}
+                {% set counter = '1' %}
+                {% set categoryLandArr = {} %}
+
+                {% set allCategoryLand = craft.categories().group('land') %}
+                {% for elemente in allCategoryLand.all() %}
+                    {% set categoryLandStr  = (counter == 1)? elemente.id : categoryLandStr  ~ ',' ~ elemente.id  %}
+                    {% set categoryLandArr = categoryLandArr|merge({ (loop.index)  :  '<option value="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</option>' }) %}
+                    {% set counter = counter + 1 %}
+                {% endfor %}
+
+                {#  ========================================================================================================================================== #}
+
+                {# Alle Händler String #}
+                {% set sectionName = 'land' %}
+                {% set allProduktgruppeIds = '' %}
+                {% set produktgruppeNameEbene1 = craft.entries().section(sectionName).level('1') %}
+                {% for element in produktgruppeNameEbene1 %}
+                    {% set allProduktgruppeIds = allProduktgruppeIds ~ ',' ~ element.id  %}
+                {% endfor %}
+                {% set allProduktgruppeIds = allProduktgruppeIds|trim(',') %}
+                {# ------------------------------------------------------------ #}
+
+                <div class="content-grid-12">
+                    <div class="select-container">
+
+                        <div class="auswahlProduktgruppe" data-start="{{ produktgruppeid }}">
+                            <div class="select-Beschreibung">Produktgruppe</div>
+                            <select name="auswahlProduktgruppe" id="produktgruppe-select" data-categoryLandStr="{{ categoryLandStr }}" class="custom-select-1 custom-select sources"  placeholder="Bitte wählen">
+                                <option class="selectText" value="">Produkt wählen</option>
+                                <option class="allTyp" id="alle" value="{{ categoryProduktgruppeStr }}">alle Produktgruppen</option>
+                                {% for option in kategorieProduktgruppeArr %}
+                                    {{ option|raw }}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                        <div class="auswahlLand">
+                            <div class="select-Beschreibung">Land</div>
+                            <select name="auswahlLand" id="land-select" class="custom-select-2 custom-select sources" placeholder="Bitte wählen" data-produktgruppe>
+                                <option class="selectText"  value="">Land wählen</option>
+                                <option value="" class="alleCat" data-alle>alle Länder</option>
+                                {% for option in categoryLandArr %}
+                                    {{ option|raw }}
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="content-grid-12">
+                        <div class="teaser-container" id="articles" data-startLand="{{ landid }}">
+                            <div class="result resultContainer"></div>
+                        </div>
+                </div>
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+

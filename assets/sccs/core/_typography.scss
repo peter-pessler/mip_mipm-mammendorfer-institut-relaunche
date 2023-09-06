@@ -1,0 +1,95 @@
+body {
+  color: $base-font-color;
+}
+
+b, .b, strong, .strong {
+  @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family-bold, $base-line-height);
+  /* font-weight:$font-weight-strong; //optional wenn es keinen bold Font gibt */
+}
+
+em, .em {
+  font-style: italic;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline;
+}
+
+small, .small {
+  font-size: .8125rem;
+}
+
+sub, sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+
+header{
+  @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
+  font-weight:$font-weight-normal;
+}
+
+main{
+  @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
+  font-weight:$font-weight-normal;
+}
+
+footer{
+  @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
+  font-weight:$font-weight-normal;
+}
+
+
+/*****************************************************************************************************************
+HEADLINES
+*****************************************************************************************************************/
+
+h1, h2, h3, h4 {
+  margin: 0;
+}
+
+h1, .h1 {
+  @include responsive-font(31px, 99px, $h1-font-family, $base-line-height-h1);
+
+  color: $wl-color-black;
+  margin-top: -0.05em;
+  margin-bottom: -0.04em;
+}
+h2, .h2 {
+  @include responsive-font(26px, 52px, $h2-font-family, $base-line-height-h2);
+
+  margin-top: -0.05em;
+  margin-bottom: -0.04em;;
+}
+h3, .h3 {
+  @include responsive-font(21px, 48px, $h3-font-family, $base-line-height-h3);
+
+  margin-top: -0.05em;
+  margin-bottom: -0.04em;
+}
+h4, .h4 {
+  @include responsive-font(20px, 45px, $h4-font-family, $base-line-height-h3);
+
+  margin-top: -0.05em;
+  margin-bottom: -0.04em;
+}
+
+

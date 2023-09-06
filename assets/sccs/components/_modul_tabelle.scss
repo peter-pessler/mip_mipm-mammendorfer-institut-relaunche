@@ -1,0 +1,125 @@
+/**
+Vorlage: https://codepen.io/amwill04/pen/QNPpqx
+ */
+
+.modul-tabelle-body{
+  grid-row: 1;
+  grid-column-start: 2;
+  grid-column-end: 12;
+
+  @include wl-breakpoint(900) {
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
+}
+
+/* **************************************** */
+
+.modul-tabelle-body{
+  .h2box{
+    @include dynamic-distance(33, 25, margin-bottom)
+  }
+}
+
+.tableSubHeadline{
+  @include responsive-font(20px, 25px, $base-font-family-bold, 1.45);
+  color: $wl-color-orange;
+  @include dynamic-distance(23, 12, margin-bottom)
+}
+
+.heading-font-declaration{
+
+  strong{
+    @include responsive-font(16px, 20px,  $base-font-family-bold, 1.45);
+    color: $wl-color-black;
+    margin-top: -0.05em;
+    margin-bottom: -0.25em;
+  }
+
+}
+
+
+/* **************************************** */
+
+.table {
+  display: table;
+  text-align: left;
+  width: 100%;
+  margin: 0 auto 0;
+  border-collapse: separate;
+  hyphens: auto!important;
+}
+
+.table_row {
+  display: table-row;
+  position: relative;
+}
+
+.theader {
+  display: table-row;
+}
+
+.table_header {
+  display: table-cell;
+  border-bottom: $wl-color-orange 1px solid;
+  padding-top: 6px;
+}
+
+.table_small {
+  display: table-cell;
+}
+
+.column-left{
+  display: none;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+
+}
+
+.colum-inner {
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border-top: $wl-color-orange 1px solid;
+}
+
+.theader-colum-inner{
+  display: block;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.extraStyle{
+  padding-left: 0!important;
+}
+
+.tableRowBorder{
+  border-left: $wl-color-orange 1px solid;
+}
+
+.table_row > .table_small > .table_cell:nth-child(odd) {
+  display: none;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.table_row > .table_small > .table_cell {
+  //padding-top: 6px;
+  //padding-bottom: 6px;
+  //border-top: $wl-color-orange 1px solid;
+}
+
+.cell-distance{
+  padding-right: 20px;
+}
+
+.first-table-font-style{
+  @include responsive-font($base-font-size-min, $base-font-size-max, $font-weight-strong, $base-line-height);
+}

@@ -1,0 +1,14 @@
+// Layoutbezogene Styles der Website
+
+.content-grid{
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  @include dynamic-distance(40, 24, column-gap);//Abstand zwischen Spalten
+}
+
+
+a {
+  &.btnWul {
+    @include btnWul();
+  }
+}

@@ -1,0 +1,251 @@
+.modul-teaser-news{
+
+  .teaser-container-wrapper{
+
+    &.teaserWidth-100{
+      width: 100%;
+    }
+
+    &.teaserWidth-50{
+      width: 50%;
+      @include wl-breakpoint(700) {
+        width: 100%;
+      }
+    }
+
+  }
+
+  $breakpointTeaserFull: 892;
+  .teaser-container{
+
+    width: 100%;
+
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(900) {
+      grid-row: 3;
+    }
+
+
+    display:  grid;
+    grid-template-columns: repeat(auto-fit, minmax(309px, 1fr)); /* Umbrechen, sobald die Box 300 Pixel Breite hat */
+    @include dynamic-distance(30, 40, column-gap);
+    @include dynamic-distance(30, 40, row-gap);
+    @include wl-breakpoint($breakpointTeaserFull) {
+      row-gap: 30px;
+    }
+    justify-content:center;
+
+    @include wl-breakpoint($breakpointTeaserFull) {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+    }
+
+
+
+
+
+
+    a{
+      &.article-link{
+        text-decoration: none;
+      }
+    }
+
+
+    .article-link:hover{
+
+      .article-text{
+        box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      img{
+        //transform: scale(1.20) rotate(5deg);
+        transform: scale(1.20) ;
+      }
+
+
+      .wl-article{
+        background: none;
+      }
+
+    }
+
+
+    .wl-article{
+      border-radius: 8px;
+      background: linear-gradient(to top, transparent 0%, rgba(#e3e1de, 0.2) 30%);
+      width: 100%;
+
+
+      .article-img{
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: rgba(0, 0, 0, 0.15);
+
+        img{
+          border-top-left-radius: 8px;
+          border-top-right-radius: 8px;
+          transition: transform .5s ease-in-out;
+        }
+
+        position: relative;
+        z-index: 5;
+      }
+
+
+      .article-img{
+        overflow: hidden;
+      }
+
+
+
+      .article-text{
+        @include dynamic-distance(25, 38, padding-left);
+        @include dynamic-distance(25, 38, padding-right);
+        @include dynamic-distance(35, 50, padding-top);
+        @include dynamic-distance(40, 60, padding-bottom);
+
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        margin-top: -10px;
+        border: 1px solid #ffffff;
+
+        position: relative;
+        z-index: 4;
+
+      }
+
+
+      .article-title{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: stretch;
+
+        padding-top: 5px;
+        @include responsive-font(20px, 24px, $base-font-family-bold, $base-line-height);
+        color: $wl-color-black;
+      }
+
+
+    }
+
+  }
+
+  .teaserButtonWrapper{
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+  }
+
+  .headlineContainerWrapper, .teaserButtonWrapper{
+    grid-row: 1;
+    grid-column-start: 5;
+    grid-column-end: 21;
+    //++++++++++++++++++++++++++++++++++
+    @include wl-breakpoint(1100) {
+      grid-column-start: 4;
+      grid-column-end: 22;
+    }
+    //++++++++++++++++++++++++++++++++++
+    @include wl-breakpoint(900) {
+      grid-column-start: 3;
+      grid-column-end: 23;
+    }
+    //++++++++++++++++++++++++++++++++++
+    @include wl-breakpoint(700) {
+      grid-column-start: 2;
+      grid-column-end: 24;
+    }
+    //++++++++++++++++++++++++++++++++++
+    @include wl-breakpoint(500) {
+      grid-column-start: 1;
+      grid-column-end: 25;
+    }
+
+  }
+
+  .teaserHeadline{
+    @include dynamic-distance(60, 100, margin-bottom);
+  }
+
+  .bgImage{
+    background-image: url("/assets/images/bg-modul-left.svg");
+    background-repeat: no-repeat;
+
+    @include wl-breakpoint($page-width) {
+      background-image: url("/assets/images/bg-modul-left-cut.svg");
+      background-position: top 60px left 0;
+      @include dynamic-distance(120, 453, background-size);
+    }
+  }
+
+  /**
+  *** DOWLLOAD
+   */
+
+  .-detail{
+
+
+    &.download{
+
+      .stickyContainerInnerBody{
+
+        margin: 0;
+
+        .active-campaign-headline{
+          width: 100%;
+          margin-bottom: 57px;
+        }
+
+        .active-campaign-formular{
+          width: 100%;
+
+        }
+
+      }
+
+
+    }
+
+  }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

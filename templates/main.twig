@@ -1,0 +1,107 @@
+{% if craft.app.request.getParam('craftpasswort') %}
+    {# -------------- Neuer Passwort-Hash zu rendernb / meineDomain?craftpasswort=demo1234 -------------- #}
+    {% set craftpasswort = craft.app.request.getParam('craftpasswort') %}
+    {% if craftpasswort != '' %}{{ craft.app.security.hashPassword(craftpasswort) }}{% endif %}
+{% endif %}
+{# ------------------------------------------------------------------- #}
+{% set startAnimation = craft.app.session.get('startanimation') %}
+{% if startAnimation != 'dontLoad' %}
+    {% do craft.app.session.set("startanimation", "dontLoad") %}
+{% endif %}
+{# ------------------------------------------------------------------- #}
+{% set pageId = entry.id %}
+{% set pageIdParent = entry.getParent().id ?? 0  %}
+{% set imgFormat = adminConfig.imageFormat %}
+{% set sectionName = entry.section.handle %}
+{% set imgQuality = 75 %}
+{% set protokollDomain = currentSite.baseUrl|trim('/') %}
+{% set domainAndPath = craft.app.request.absoluteUrl %}
+{% set doNotTrack = craft.wul.doNotTrack() %}{# output: true/false #}
+{# -------------- Simulation Live Ansicht-------------- #}
+{% set showLiveAnsicht = (adminConfig.simulationLiveAnsicht)? true : false %}
+{# -------------- Sprache-------------- #}
+{% set lg = currentSite.handle %}
+<!DOCTYPE HTML>
+<html{% if doNotTrack %} data-doNotTrack="on"{% else %} data-doNotTrack="off"{% endif %} lang="{{ currentSite.language }}" dir="{{craft.app.i18n.getLocaleById(currentSite.id).getOrientation()}}">
+<head>
+{% include '_include-core/meta' %}
+{% include '_include-core/favicons' %}
+{% include '_include-core/mediaSharing' %}
+
+<script src="/assets/js/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/scripts.min.js"></script>
+<link href="/assets/css/styles.min.css" rel="stylesheet">
+{% block assetsHead %}{% endblock %}
+
+{# -------------- tracking-code-head-end -------------- #}
+{% if not craft.app.config.general.devMode and doNotTrack == false %}
+
+{{seo.headerendscripts|raw}}
+
+{% else %}
+    {% if showLiveAnsicht %}
+
+{{seo.headerendscripts|raw}}
+
+    {% endif %}
+{% endif %}
+
+</head>
+
+<body class="{% if pageId == 2%}startseite{% else %}contentseite{% endif %} {{body_class ?? null}} {{craft.app.request.isMobileBrowser() ? 'is-mobile' : 'is-desktop'}}">
+
+{# -------------- tracking-code-body-start -------------- #}
+{% if not craft.app.config.general.devMode %}
+
+    {{seo.bodystartscripts|raw}}
+
+{% else %}
+    {% if showLiveAnsicht %}
+
+    {{seo.bodystartscripts|raw}}
+
+    {% endif %}
+{% endif %}
+
+    {# Startanimation #}
+    {% if startAnimation != 'dontLoad' %}
+    {# {% include '_include-vendor/preloader.twig' %} #}
+    {% endif %}
+
+    <header id="header" class="unveiled-navigation">
+        <section class="wrapper-outer element-header">
+            <section class="wl-wrapper{% if pageId != 2 and sectionName != 'blog' %} contentIntro{% elseif pageId != 2 and sectionName == 'blog'  %} contentIntroBlog{% else %} contentIntroStart{% endif %}">
+                {% include '_include-core/header' %}
+            </section>
+        </section>
+    </header>
+
+    <main id="main">
+      {% block intro %}{% endblock %}
+      {# -------------- H1/h2/h3/H4 | Grid ... für Entwicklung -------------- #}
+      {% include '_include-vendor/code-entwicklung.twig' %}
+      {% block content %}{% endblock %}
+    </main>
+
+    <footer id="foo">
+        {% include '_include-core/footer.twig' %}
+    </footer>
+
+{# -------------- tracking-code-body-end -------------- #}
+{% if not craft.app.config.general.devMode and doNotTrack == false %}
+
+    {{seo.bodyendscripts|raw}}
+
+{% else %}
+    {% if showLiveAnsicht %}
+
+    {{seo.bodyendscripts|raw}}
+
+    {% endif %}
+{% endif %}
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,44 @@
+<section class="wl-wrapper">
+
+    {% if pageId == 2%}
+
+    <h1>Ich bin eine H1 Überschrift | ygj ÄÜÖ</h1>
+
+    <h2>Ich bin eine H2 Überschrift | ygj ÄÜÖ</h2>
+
+    <h3 class="demo-1 demo-2">Ich bin eine H3 Überschrift | ygj ÄÜÖ</h3>
+
+    <h4>Ich bin eine H4 Überschrift | ygj ÄÜÖ</h4>
+
+
+
+    <br /><br />
+
+
+    {% set setTooltipClass = craft.app.request.isMobileBrowser() ? '' : 'simptip-position-top simptip-fade' %}
+    {% if siteConfig.phone is not empty %}
+        <span class="{{ setTooltipClass }}" data-tooltip="{{ siteConfig.phone }}">
+            {{ craft.wul.phone(siteConfig.phone,'telefonnummer','0')|raw }}
+                <img class="telefonnummer-icn" src="/assets/images/icons/phone-icn.svg" height="31" width="31" alt="{{ siteConfig.phone }}" />{{ siteConfig.phone }}
+            </a>
+        </span>
+        {% endif %}
+
+    {% endif %}
+
+
+
+
+
+
+    <br /><br />
+    {% include '_include-vendor/grid-demo-12' %}
+    <br /><br />
+
+    {% set headline = entry.headline %}
+    {% set entryHeadline = entry.headline|default(false) %}
+    {% if entryHeadline %}
+        <h1>{{ headline }}</h1>
+    {% endif %}
+
+</section>

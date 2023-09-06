@@ -1,0 +1,145 @@
+$breakpoint-text: 1200;
+
+.modul-bildText{
+
+  .containerText-headline{
+    grid-row: 1;
+    grid-column-start: 7;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(1500) {
+      grid-column-start: 6;
+    }
+    @include wl-breakpoint(1200) {
+      grid-column-start: 5;
+    }
+
+    @include wl-breakpoint(900) {
+      grid-column-start: 1;
+      padding-left: 0;
+    }
+    position: relative;
+
+
+    .h2box{
+
+        margin-top: -8px;
+
+         h2{
+           color: $wl-color-black;
+         }
+
+        @include dynamic-distance(30, 50, margin-bottom);
+        @include wl-breakpoint($breakpoint-text) {
+          margin-bottom: 0px;
+          padding-left: 0px;
+        }
+        @include wl-breakpoint(900) {
+          margin-bottom: 20px;
+        }
+
+    }
+
+    @include wl-breakpoint($breakpoint-text) {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+    }
+
+    @include wl-breakpoint(900) {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+  }
+
+  .containerText-body{
+    grid-row: 2;
+    grid-column-start: 7;
+    grid-column-end: 12;
+
+    padding-top: 20px;
+
+    @include wl-breakpoint(1500) {
+      grid-column-start: 6;
+    }
+
+    @include wl-breakpoint(1200) {
+      grid-column-start: 5;
+    }
+
+
+    @include wl-breakpoint(900) {
+      grid-row: 3;
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+  }
+
+  .containerBild{
+    grid-row: 1/4;
+
+    grid-column-start: 1;
+    grid-column-end: 7;
+
+    @include wl-breakpoint(1500) {
+      grid-column-start: 1;
+      grid-column-end: 6;
+    }
+
+    @include wl-breakpoint(1200) {
+      grid-column-start: 1;
+      grid-column-end: 5;
+    }
+
+    @include wl-breakpoint(900) {
+      grid-row: 2;
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    .modulbild{
+      img{
+        border-radius: 30px;
+        @include wl-breakpoint(1200) {
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+  }
+
+  .muster{
+    grid-row: 1;
+    grid-column-start: 12;
+    grid-column-end: 13;
+
+    @include wl-breakpoint(900) {
+      grid-row: 4;
+      grid-column-start: 1;
+      grid-column-end: 13;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+      align-items: stretch;
+      align-content: stretch;
+
+    }
+
+
+  }
+
+}
+
+
+
+
+
+

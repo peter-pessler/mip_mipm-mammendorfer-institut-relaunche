@@ -1,0 +1,267 @@
+.accordion {
+
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    row-gap: 30px;
+
+    @include wl-breakpoint(800) {
+      flex-direction: column;
+    }
+
+    /**
+       ============================ Accordion Body ============================
+       */
+
+    .articleContainer {
+      width: 100%;
+    }
+
+    /**
+   ===================================================================================
+   */
+
+    $wl-arrow-position-top-max: 24;
+    $wl-arrow-position-top-min: 24;
+
+    $wl-arrow-position-top-hover-max: 32;
+    $wl-arrow-position-top-hover-min: 32;
+
+    $wl-arrow-position-right-max: 30;
+    $wl-arrow-position-right-min: 30;
+
+    /**
+   ===================================================================================
+   */
+
+    /**
+    Allgemein *********************************************************************************************************
+     */
+
+    ul.accordion-list {
+
+      position: relative;
+      display: block;
+      width: 100%;
+      height: auto;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      border-bottom: 1px solid $wl-color-blue;
+
+      li {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: auto;
+
+        /* ---------------------------------------------------------------------------------------------------- */
+
+        label {
+
+          @include responsive-font(26px, 33px, $h4-font-family, $base-line-height-h4);
+          font-weight: 300;
+          color: $wl-color-black;
+          padding-bottom: 20px;
+
+          cursor: pointer;
+
+          position: relative;
+          display: block;
+          width: 100%;
+          height: auto;
+
+          background-color: $wl-color-white;
+          padding: 30px 90px 20px 0px;
+
+          @include wl-breakpoint(600) {
+            padding-right: 60px;
+          }
+
+
+        }
+
+        /* ---------------------------------------------------------------------------------------------------- */
+
+        div.accordion-content {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: auto;
+          margin: 0px;
+          padding: 0px;
+          background-color: #ffffff;
+
+
+          .accordion-content-body{
+            width: 100%;
+            padding-top: 20px;
+            padding-bottom: 20px;
+
+            p {
+              margin: 0;
+            }
+
+            ul {
+              display: inline-block;
+              margin-top: 50px;
+              margin-bottom: 35px;
+            }
+          }
+
+        }
+
+      }
+
+    }
+
+
+    ul.accordion-list {
+
+        li {
+
+          label {
+
+            &.lableOff{
+                transition: $transition;
+                &::after {
+                content: url('/assets/images/icons/arrow_accordion.svg');
+                height: 40px;
+                width: 40px;
+                position: absolute;
+                @include dynamic-distance($wl-arrow-position-right-min, $wl-arrow-position-right-max, right);
+                @include wl-breakpoint(600) {
+                  right: 5px;
+                }
+                @include dynamic-distance($wl-arrow-position-top-min, $wl-arrow-position-top-max, top);
+                transform-origin: 50% 50%;
+                transform: rotate(0deg);
+                transition-duration: 0.6s;
+              }
+
+            }
+
+            /* =================== */
+
+            &.lableOn{
+                transition: $transition;
+                &::after {
+                content: url('/assets/images/icons/arrow_accordion.svg');
+                height: 40px;
+                width: 40px;
+                position: absolute;
+               @include dynamic-distance($wl-arrow-position-right-min, $wl-arrow-position-right-max, right);
+                @include wl-breakpoint(600) {
+                  right: 5px;
+                }
+                @include dynamic-distance(   $wl-arrow-position-top-hover-min,  $wl-arrow-position-top-hover-max, top);
+                transform-origin: 50% 50%;
+                transform: rotate(90deg);
+                transition-duration: 0.6s;
+              }
+
+            }
+
+          }
+
+          /* ---------------------------------------------------------------------------------------------------- */
+
+        }
+
+        li{
+          &.active {
+
+            label{
+
+              &.lableOff {
+                  transition: $transition;
+                  &:after {
+                    content: url('/assets/images/icons/arrow_accordion.svg');
+                    transform: rotate(90deg);
+                    transition: $transition;
+                    transition-duration: 0.6s;
+                    @include dynamic-distance($wl-arrow-position-top-hover-min, $wl-arrow-position-top-hover-max, top);
+                    @include dynamic-distance($wl-arrow-position-right-min, $wl-arrow-position-right-max, right);
+                    @include wl-breakpoint(600) {
+                      right: 5px;
+                    }
+                  }
+              }
+
+              /* =================== */
+
+              &.lableOn{
+                &::after {
+                  content: url('/assets/images/icons/arrow_accordion.svg');;
+                  transform: rotate(0deg);
+                  transition: $transition;
+                  transition-duration: 0.6s;
+                  @include dynamic-distance( $wl-arrow-position-top-min, $wl-arrow-position-top-max, top);
+                  @include dynamic-distance($wl-arrow-position-right-min, $wl-arrow-position-right-max, right);
+                  @include wl-breakpoint(600) {
+                    right: 5px;
+                  }
+                }
+              }
+
+            }
+          }
+        }
+
+
+    }
+
+
+  /**
+  DESKTOP *********************************************************************************************************
+   */
+
+  ul.accordion-list {
+    &.desktop {
+      li {
+
+        label {
+
+          &.lableOnOpen {
+            transition: $transition;
+
+            &::after {
+              content: url('/assets/images/icons/arrow_accordion.svg');
+              height: 40px;
+              width: 40px;
+              position: absolute;
+              @include dynamic-distance($wl-arrow-position-right-min, $wl-arrow-position-right-max, right);
+              @include wl-breakpoint(600) {
+                right: 5px;
+              }
+              @include dynamic-distance($wl-arrow-position-top-hover-min, $wl-arrow-position-top-hover-max, top);
+              transform-origin: 50% 50%;
+              transform: rotate(90deg);
+              transition-duration: 0.6s;
+            }
+
+          }
+
+        }
+
+      }
+    }
+  }
+
+
+
+
+  }
+
+
+
+
+
+
+
+

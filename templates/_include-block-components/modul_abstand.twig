@@ -1,0 +1,13 @@
+{% set outputAbstandMax = '' %}
+{% set outputAbstandMin = '' %}
+{% set outputAbstandMax = block.abstandTrennerMax|number  %}
+{% set outputAbstandMin = block.abstandTrennerMin|number  %}
+{% set dataMinDefault = 30 %}
+{% set dataMaxDefault = 100 %}
+{% set abstandMax = (outputAbstandMax == '')? dataMaxDefault : outputAbstandMax %}
+{% set abstandMin = (outputAbstandMin == '')? dataMinDefault : outputAbstandMin %}
+{% set prefix = loop.index %}
+
+<section data-abstandContainer class="wl-wrapper">
+    <div data-attr="height" data-min="{{ abstandMin }}" data-max="{{ abstandMax }}" class="abstand-{{ prefix }}"></div>
+</section>

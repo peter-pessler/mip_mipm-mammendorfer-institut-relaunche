@@ -1,0 +1,174 @@
+{# PAGE INHALTE #}
+{% set page = '' %}
+{% set matrixSocialSharingPage = entry.moduleSharedSocialMatrix|default(false) %}
+{% if matrixSocialSharingPage %}
+    {% set page = entry.moduleSharedSocialMatrix.one() %}
+{% endif %}
+{# GLOBALE INHALTE #}
+{% set globaleInhalte = '' %}
+{% set matrixSocialSharingGlobaleInhalte = socialMediaSharing.moduleSharedSocialMatrix %}
+{% if matrixSocialSharingGlobaleInhalte is defined and matrixSocialSharingGlobaleInhalte %}
+    {% set globaleInhalte = socialMediaSharing.moduleSharedSocialMatrix.one() %}
+{% endif %}
+{# ===================== shared on Facebook ===================== #}
+{% set showSharedFacebookPage = false %}
+{% if matrixSocialSharingPage %}
+    {% set showSharedFacebookPage = (page.sharedOnFacebookEinschalten)? true : false %}
+{% endif %}
+{% if showSharedFacebookPage %}
+    {% set showSharedFacebook = true %}
+    {% set showSharedFacebookGlobaleInhalte = (globaleInhalte.sharedOnFacebookEinschalten)? true : false %}
+    {% if showSharedFacebookGlobaleInhalte %}
+        {% set showSharedFacebook = true %}
+    {% else %}
+        {% set showSharedFacebook = false %}
+    {% endif %}
+{% else %}
+    {% set showSharedFacebook = false %}
+{% endif %}
+
+{% if showSharedFacebook %}
+    {% set facebookSharedHeadline = '' %}
+    {% set facebookSharedText  = '' %}
+    {% set facebookSharedImage  = '' %}
+    {# ************************************************************************************* #}
+    {% set facebookSharedHeadlinePage = page.sharedOnFacebookHeadline|default(false)  %}
+    {% set facebookSharedTextPage   = page.sharedOnFacebookText|default(false) %}
+    {% set facebookSharedImagePage  = page.sharedOnFacebookBild.one().getUrl({
+        mode: 'crop',
+        format: 'jpg',
+        width: '1200',
+        height: '630',
+        quality: (imgQuality),
+    }) |default(false) %}
+    {# ************************************************************************************* #}
+    {% set facebookSharedHeadlineDefault = globaleInhalte.sharedOnFacebookHeadline|default(false) %}
+    {% set facebookSharedTextDefault  = globaleInhalte.sharedOnFacebookText|default(false) %}
+    {% set facebookSharedImageDefault  = globaleInhalte.sharedOnFacebookBild.one().getUrl({
+        mode: 'crop',
+        format: 'jpg',
+        width: '1200',
+        height: '630',
+        quality: (imgQuality),
+    }) |default(false) %}
+    {# ************************************************************************************* #}
+    {% if facebookSharedHeadlinePage %}
+        {% set facebookSharedHeadline = facebookSharedHeadlinePage %}
+    {% else %}
+        {% if facebookSharedHeadlineDefault %}
+            {% set facebookSharedHeadline = facebookSharedHeadlineDefault %}
+        {% else %}
+            {% set facebookSharedHeadline = page.title %}
+        {% endif %}
+    {% endif %}
+    {# ************************************************************************************* #}
+    {% if facebookSharedTextPage %}
+        {% set facebookSharedText = facebookSharedTextPage %}
+    {% else %}
+        {% if facebookSharedTextDefault %}
+            {% set facebookSharedText = facebookSharedTextDefault %}
+        {% else %}
+            {% set facebookSharedText = '' %}
+        {% endif %}
+    {% endif %}
+    {# ************************************************************************************* #}
+    {% if facebookSharedImagePage %}
+        {% set facebookSharedImage = facebookSharedImagePage %}
+    {% else %}
+        {% if facebookSharedImageDefault %}
+            {% set facebookSharedImage = facebookSharedImageDefault %}
+        {% endif %}
+    {% endif %}
+    {# ************************************************************************************* #}
+
+<!-- facebook -->
+<meta property="og:url" content="{{ craft.app.request.absoluteUrl }}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ facebookSharedHeadline }}" />
+<meta property="og:image" content="{{ facebookSharedImage }}" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:description" content="{{ facebookSharedText }}" />
+<meta property="og:site_name" content="{{ systemName }}" />
+<meta property="og:locale" content="{{ lg }}" />
+{% endif %}
+{# ===================== shared on Twitter ===================== #}
+{% set showSharedTwitterPage = false %}
+{% if matrixSocialSharingPage %}
+    {% set showSharedTwitterPage = (page.sharedOnTwitterEinschalten)? true : false %}
+{% endif %}
+{% if showSharedTwitterPage %}
+    {% set showSharedTwitter = true %}
+    {% set showSharedTwitterGlobaleInhalte = (globaleInhalte.sharedOnTwitterEinschalten)? true : false %}
+    {% if showSharedTwitterGlobaleInhalte %}
+        {% set showSharedTwitter = true %}
+    {% else %}
+        {% set showSharedTwitter = false %}
+    {% endif %}
+{% else %}
+    {% set showSharedTwitter = false %}
+{% endif %}
+
+{% if showSharedTwitter %}
+    {% set twitterSharedHeadline = '' %}
+    {% set twitterSharedText   = '' %}
+    {% set twitterSharedImage   = '' %}
+    {# ************************************************************************************* #}
+    {% set twitterSharedHeadlinePage = page.sharedOnTwitterHeadline|default(false) %}
+    {% set twitterSharedTextPage   = page.sharedOnTwitterText|default(false) %}
+    {% set twitterSharedImagePage  = page.sharedOnTwitterBild.one().getUrl({
+        mode: 'crop',
+        format: 'jpg',
+        width: '1200',
+        height: '600',
+        quality: (imgQuality),
+    }) |default(false) %}
+    {# ************************************************************************************* #}
+    {% set twitterSharedHeadlineDefault = page.title|default(false) %}
+    {% set twitterSharedTextDefault   = globaleInhalte.sharedOnTwitterText|default(false) %}
+    {% set twitterSharedImageDefault  = globaleInhalte.sharedOnTwitterBild.one().getUrl({
+        mode: 'crop',
+        format: 'jpg',
+        width: '1200',
+        height: '600',
+        quality: (imgQuality),
+    }) |default(false) %}
+    {# ************************************************************************************* #}
+    {% if twitterSharedHeadlinePage %}
+        {% set twitterSharedHeadline = twitterSharedHeadlinePage %}
+    {% else %}
+        {% if twitterSharedHeadlineDefault %}
+            {% set twitterSharedHeadline = twitterSharedHeadlineDefault %}
+            {% set twitterSharedHeadline = page.title %}
+        {% else %}
+            {% set twitterSharedHeadline = page.title %}
+        {% endif %}
+    {% endif %}
+    {# ************************************************************************************* #}
+    {% if twitterSharedTextPage %}
+        {% set twitterSharedText = twitterSharedTextPage %}
+    {% else %}
+        {% if twitterSharedTextDefault %}
+            {% set twitterSharedText = twitterSharedTextDefault %}
+        {% else %}
+            {% set twitterSharedText = '' %}
+        {% endif %}
+    {% endif %}
+    {# ************************************************************************************* #}
+    {% if twitterSharedImagePage %}
+        {% set twitterSharedImage = twitterSharedImagePage %}
+    {% else %}
+        {% if twitterSharedImageDefault %}
+            {% set twitterSharedImage = twitterSharedImageDefault %}
+        {% endif %}
+    {% endif %}
+    {# ************************************************************************************* #}
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="{{ siteConfig.organization }}" />
+<meta name="twitter:url" content="{{ craft.app.request.absoluteUrl }}" />
+<meta name="twitter:title" content="{{ twitterSharedHeadline }}" />
+<meta name="twitter:description" content="{{ twitterSharedText }}" />
+<meta name="twitter:image" content="{{ twitterSharedImage }}" />
+{% endif %}

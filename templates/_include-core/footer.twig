@@ -1,0 +1,108 @@
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+
+
+{% set contactMatrix = siteConfig.moduleFooterContactMatrix.all() %}
+{% set contactListArr = {} %}
+{% if contactMatrix is defined and contactMatrix %}
+      {# ---------------------------------------------------------------------------------------------------------------------------------- #}
+
+      {% set counter = 0 %}
+      {% for block in contactMatrix %}
+
+          {# -------------------------------------------------------------------------------------------------------------------------------- #}
+          {% if block.type.handle == 'linkListe' %}
+
+              {% set showHref = ( block.href.getUrl() != '')? true : false %}
+              {% set labelAbstandClass = ( block.label is empty)? '' : 'labelAbstand ' %}
+              {% if showHref %}
+                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="' ~ labelAbstandClass ~ 'list-label list-text-js">' ~ block.label ~ '</span> <span class="list-body">' ~ _self.linkList( block.href, 'list-contact' ) | trim | raw  ~ '</span></li>' }) %}
+              {% else %}
+                  {% set element = '' %}
+                  {% set elementText = block.text|default(false) %}
+                  {% if elementText %}
+                      {% set element = '<span class="list-body">' ~ block.text ~ '</span>' %}
+                  {% endif %}
+                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="' ~ labelAbstandClass ~ 'list-label">' ~ block.label ~ '</span> ' ~ element ~ '</li>'}) %}
+              {% endif %}
+
+              {% set counter = counter + 1 %}
+
+          {% endif %}
+          {# -------------------------------------------------------------------------------------------------------------------------------- #}
+
+          {# -------------------------------------------------------------------------------------------------------------------------------- #}
+          {% if block.type.handle == 'linkListeIcon' %}
+
+              {% set classIconZuweisung = (block.iconZuweisung.value != 0)? ' list-icon ' ~ block.iconZuweisung.value : '' %}
+              {% set showHref = ( block.href.getUrl() != '')? true : false %}
+              {% if showHref %}
+                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="list-label' ~ classIconZuweisung ~ '"></span> <span class="list-body">' ~ _self.linkList( block.href, 'list-contact' ) | trim | raw  ~ '</span></li>' }) %}
+              {% else %}
+                  {% set element = '' %}
+                  {% set elementText = block.text|default(false) %}
+                  {% if elementText %}
+                      {% set element = '<span class="list-body">' ~ block.text ~ '</span>' %}
+                  {% endif %}
+                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="list-label' ~ classIconZuweisung ~ '"></span> ' ~ element ~ '</li>'}) %}
+              {% endif %}
+
+              {% set counter = counter + 1 %}
+
+          {% endif %}
+          {# -------------------------------------------------------------------------------------------------------------------------------- #}
+
+      {% endfor %}
+
+{% endif %}
+
+
+        <section class="wrapper-outer element-footer">
+            <section class="wl-wrapper">
+
+
+                <div class="foo-container-body content-grid-12">
+
+                    <div class="foo-container-logo">
+                        <img src="/assets/images/img/logo-footer.svg" height="300" width="43" alt="{{siteConfig.organization}}">
+                        <br />
+                        <p>&copy; {{ 'now'|date('Y') }} {{siteConfig.organization}}</p>
+                    </div>
+
+
+                    <div class="foo-container-adresse">
+                        <ul class="footer-liste-kontakt">
+                            {% for element in contactListArr %}{{ element|raw }}{% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="foo-container-listen">
+
+                        <div class="foo-container-liste1">
+                            <ul class="footer-liste-1">
+                                {% set showListeLinks = siteConfig.linkListe1.one()|default(false) %}{% if showListeLinks %}
+                                    {% for item in siteConfig.linkListe1.all() %}
+
+                                        <li>{{ _self.linkList( item.linkElement, 'liste-1' ) | trim | raw  }}</li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                        <div class="foo-container-liste2">
+                            <ul class="footer-liste-2">
+                                {% set showListeRechts = siteConfig.linkListe2.one()|default(false) %}{% if showListeRechts %}
+                                    {% for item in siteConfig.linkListe2.all() %}
+
+                                        <li>{{ _self.linkList( item.linkElement, 'liste-2' ) | trim | raw  }}</li>
+                                    {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+        </section>

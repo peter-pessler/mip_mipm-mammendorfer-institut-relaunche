@@ -1,0 +1,253 @@
+{% macro linkList(element, className) %}
+    {% if className != '' %}{% set class = ' class="' ~ className ~'"' %}{% else %}{% set class = '' %}{% endif %}
+    {% set type = element.type %}{# asset, email, entry, tel, url, custom #}{% if type == 'email' %}
+    {% set mailCustomText = element.getCustomText() %}
+    {% if mailCustomText != '' %}
+        {% set mailText = mailCustomText %}
+    {% else %}
+         {% set mailText = element.getUrl()|replace({'mailto:': ''}) %}
+    {% endif %}
+    <a href="mailto:{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ mailText }}</a>
+{% elseif  type == 'entry' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ element.getCustomText()}}</a>
+{% elseif  type == 'tel' %}
+    {% set phonenumber = element.getUrl()|replace({'tel:': ''}) %}
+    {% if phonenumber != '' %}{% set cleanPhonenumber = craft.wul.phone(phonenumber,'','','','','1')|raw  %}{% endif %}
+    {% if element.getCustomText() == 'Learn More' %}{# Learn More wird ausgegeben, wenn das Feld leer ist #}
+        {% set phoneText = element.getCustomText() ~ ' ' ~ phonenumber %}
+    {% else %}
+        {% set phoneText = phonenumber %}
+    {% endif %}
+    <a href="tel:{{cleanPhonenumber}}"{{ class|raw }}>{{ phoneText }}</a>
+{% elseif  type == 'url' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ element.getCustomText()}}</a>
+{% elseif  type == 'custom' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ element.getCustomText()}}</a>
+{% elseif  type == 'asset' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ element.getCustomText()}}</a>
+{% endif %}
+{% endmacro %}
+
+{# ======================================================================================================================================================== #}
+
+{% macro linkListOnlyAtag(element, className) %}
+    {% if className != '' %}{% set class = ' class="' ~ className ~'"' %}{% else %}{% set class = '' %}{% endif %}
+    {% set type = element.type %}{# asset, email, entry, tel, url, custom #}{% if type == 'email' %}
+    <a href="mailto:{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
+{% elseif  type == 'entry' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
+{% elseif  type == 'tel' %}
+    {% set phonenumber = element.getUrl()|replace({'tel:': ''}) %}
+    {% if phonenumber != '' %}{% set cleanPhonenumber = craft.wul.phone(phonenumber,'','','','','1')|raw  %}{% endif %}
+    <a href="tel:{{cleanPhonenumber}}"{{ class|raw }}>
+{% elseif  type == 'url' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
+{% elseif  type == 'custom' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
+{% elseif  type == 'asset' %}
+    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
+{% endif %}
+{% endmacro %}
+
+{# ======================================================================================================================================================== #}
+
+{% macro switcherLinks() %}
+
+    {#
+    FÜR UMSCHALTEN SPRACHEN
+    ========================================================
+    AUFRUF:
+        {% import "_macros/switcherLinks.twig" as _self %}
+        {{ _self.switcherLinks() | trim | raw  }}
+    #}
+
+    {% set currentElement = craft.app.urlManager.matchedElement %}
+    {% set sites = craft.app.getSites().getGroupById(currentSite.groupId).getSites() %}
+    {% set switcherLinks = [] %}
+
+
+    {% if sites is not empty  %}
+            {% for site in sites %}
+
+                {% set url = site.getBaseUrl() %}
+                {% if currentElement %}
+                    {% set otherLocaleElement = craft.app.getElements().getElementById(currentElement.id, currentElement.className(), site.id) %}
+                    {% if otherLocaleElement and otherLocaleElement.enabledForSite %}
+                        {% set url = otherLocaleElement.url %}
+                    {% endif %}
+                {% endif %}
+
+                {% set switcherLinks = switcherLinks|merge([{
+                    url: url,
+                    countryCode: site.language|split('-')|last,
+                    current: site.id == currentSite.id ? true : false,
+                    language: site.language,
+                    handle: site.handle,
+                }]) %}
+
+            {% endfor %}
+
+            {# outputting html #}
+            {% if switcherLinks|length > 1 %}
+                {% for switcherLink in switcherLinks %}
+                    {% if  switcherLink.handle != currentSite.handle %}
+                    <a class="{{switcherLink.current ? 'is-active'}}" href="{{switcherLink.url}}" hreflang="{{switcherLink.handle}}" lang="{{switcherLink.handle}}">
+                        {{ switcherLink.handle }}
+                    </a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+
+    {% endif %}
+
+{% endmacro %}
+
+
+{# ======================================================================================================================================================== #}
+
+{% macro formField( formularId, fieldName, block ) %}
+
+    {#
+    Ausgabe Form Field
+    ========================================================
+    AUFRUF:
+        {% import "_macros/switcherLinks.twig" as _self %}
+        {{ _self.formField( formularId, fieldName ) | trim | raw  }}
+    #}
+
+    {% set form = wheelform.form({
+        id: formularId
+    }) %}
+
+    {% set formField = {} %}
+    {% for field in form.fields %}
+        {% if field.name == fieldName %}
+            {% set formField = { ("0") : field } %}
+        {% endif %}
+    {% endfor %}
+
+    {% for field in formField %}
+        {% switch field.type %}
+        {% case "checkbox" %}
+            {% for item in field.items %}
+                {% if field.name == 'antispam' %}
+                    {#
+                    <input class="antispam" type="checkbox" value="prevent spam" name="antispam[]" id="" checked />
+                    <input class="checkbox {{field.name}} {{field.fieldClass}}" type="checkbox" value="{{ item }}" {{values[field.name] is defined and item in values[field.name] ? ' checked="checked"' : '' }} name="{{field.name}}[]" id=""/>
+                    #}
+                {% endif %}
+            {% endfor %}
+            {% if field.name != 'antispam' %}
+                <div class="form-checkbox form-item-wrapper InputfieldCheckbox{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                    {% for item in field.items %}
+
+                        <label>
+                            <input class="checkbox {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="checkbox" value="{{ item }}" {{values[field.name] is defined and item in values[field.name] ? ' checked="checked"' : '' }} name="{{field.name}}[]" id=""/>
+                            <div class="checkmark-labletext">
+                                {% if field.name == 'dsgvo' %}
+                                    {% set labletext = block.datenschutzCheckboxLabelText %}
+                                {% else %}
+                                    {% set labletext = field.label %}
+                                {% endif %}
+                                <span class="checkmark"></span>
+                                <span class="mandatory{% if field.required %} required{% endif %}"><em></em></span>
+                                <span class="labletext{% if field.name == 'dsgvo' %}-dsgvo{% endif %}{% if field.required %} required{% endif %}">{{ labletext }}</span>
+                            </div>
+                        </label>
+
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% case "radio" %}
+            <div class="form-radio form-item-wrapper InputfieldRadio{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label class="form-radio-label{% if field.required %} required{% endif %}">{{field.label|raw}} <em></em></label>
+                <div class="typeRadio">
+                    {% for item in field.items %}
+                        <label class="radioItem">
+                            <input class="custom-radio radio {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="radio" value="{{ item }}" {{values[field.name] is defined and item == values[field.name] ? ' checked="checked"' : '' }} name="{{field.name}}" id="box-shadow" />
+                            {{item}}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% case "select" %}
+            <div class="form-select form-item-wrapper InputfieldSelect{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                {% set break = 0 %}
+                {% set setAciveClassSelect = 'test' %}
+                {% for item in field.items %}
+                    {% if  values[field.name] is defined and item == values[field.name] and break == 0 %}
+                        {% set setAciveClassSelect = 'active ' %}
+                        {% set break = 1 %}
+                    {% endif %}
+                {% endfor %}
+                <label class="{{ setAciveClassSelect }}lableSelect lableSelect lableSelectOverwrite select-icon{% if field.required %}  required{% endif %}">{{field.label}}<em></em></label>
+
+                <select id="wf-select" name="{{field.name}}" class="wf-field {{field.fieldClass}}{% if field.required %} required{% endif %}">
+                    <option></option>
+                    {% for item in field.items %}
+                        <option value="{{ item }}" {{values[field.name] is defined and item == values[field.name] ? 'selected="selected"' : '' }}>{{item}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% case "file" %}
+            <div class="uploadFileContainer form-group form-item-wrapper InputfieldFile{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                {# {{field.label|raw}} #}
+                <label class="errorInfo">Bitte PDF uploaden!<em></em></label>
+
+                {% if field.label|raw == 'pdfUpload1' %}
+                    <label class="inputUploadFile" for="inputUploadFile">
+                        <div class="uploadContainer">
+                            <input class="uploadInput form-control {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="file" name="{{field.name}}" id="inputUploadFile" accept="application/pdf" multiple />
+                            <div id="fileName"></div>
+                        </div>
+                    </label>
+
+                {% endif %}
+
+            </div>
+        {% case "textarea" %}
+            {% set setAciveClass = '' %}
+            {% if craft.app.request.getBodyParam(field.name) != '' %}
+                {% set setAciveClass = 'active ' %}
+            {% endif %}
+            <div class="form-group form-item-wrapper InputfieldTextarea{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label class="{{ setAciveClass }}lableInputField{% if field.required %} required{% endif %}"> {{field.label}}<em></em></label>
+                <textarea class="form-control {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" name="{{field.name}}" id="">{{ values[field.name] ?? '' }}</textarea>
+            </div>
+        {% case "list" %}
+            <div class="form-group form-item-wrapper InputfieldList{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label>{{field.label|raw}} <em></em></label>
+                <input class="form-control {{field.name}} {{field.fieldClass}}" type="text" name="{{field.fieldClass}} {{field.name}}[]" id=""/>
+                <script>//Javascript to handle adding fields</script>
+            </div>
+        {% default %}
+            {% set value = ''  %}
+            {% set value = values[field.name] ?? ''  %}
+            {% set classNameScrollto = '' %}
+            {% if field.name == 'scrollto' %}
+                {% set value = '1' %}
+                {% set classNameScrollto = ' scrollto' %}
+            {% endif %}
+            {% set setAciveClass = '' %}
+            {% if craft.app.request.getBodyParam(field.name) != '' %}
+                {% set setAciveClass = 'active ' %}
+            {% endif %}
+            <div class="{% if field.name == 'scrollto' %}hiddenElement {% endif %}{{ setAciveClass }}form-group form-item-wrapper InputfieldText{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label class="{{ setAciveClass }}lableInputField{% if field.required %} required{% endif %}"> {{field.label}}<em></em></label>
+                <input class="form-control {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="{{field.type}}" value="{{ value }}" name="{{field.name}}" id="form-{{field.name}}"/>
+            </div>
+        {% endswitch %}
+
+        {#
+        {{ wheelformErrors[field.name] is defined ? errorList(wheelformErrors[field.name]) }}
+        #}
+        {% if wheelformErrors[field.name] is defined %}
+            {% set fieldNames = field.label %}
+            {% set errorArray = errorArray|merge( [fieldNames] )  %}
+            {% set formError = 1 %}
+        {% endif %}
+
+    {% endfor %}
+
+{% endmacro %}

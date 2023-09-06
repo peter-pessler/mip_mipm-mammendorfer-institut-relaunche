@@ -1,0 +1,28 @@
+{% set headline =  block.headline |default(false) %}
+{% set text =  block.text |default(false) %}
+
+    {% set buttonClass = 'btn btn-js' %}
+    {# -------------- Macro -------------- #}
+    {% import "_include-core/macros.twig" as _self %}
+    {# ###################################################################################################### #}
+
+
+    <div class="content-grid-12">
+
+        <div class="intromodul-default">
+
+            {% if headline %}
+                <div class="containerText-headlineH1">
+                    <h1>{{ headline }}</h1>
+                </div>
+            {% endif %}
+
+            {% if text %}
+                <div class="containerText-body text">
+                    {{ block.text }}
+                </div>
+            {% endif %}
+
+        </div>
+
+    </div>

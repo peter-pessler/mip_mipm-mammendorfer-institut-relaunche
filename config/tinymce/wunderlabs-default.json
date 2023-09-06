@@ -1,0 +1,121 @@
+{
+    "branding": false,
+    "menubar": false,
+    "contextmenu": false,
+    "extended_valid_elements": "img[src|alt|title|width|height|class|loading],+@[data-options]",
+    "force_br_newlines" : true,
+    "force_p_newlines" : false,
+    "forced_root_block": "",
+    "relative_urls": false,
+    "remove_script_host": false,
+    "convert_urls": false,
+    "paste_as_text": true,
+    "content_css": "https://starter-vers4-entwicklung.dev-wunderlabs.io/assets/css/styles.min.css",
+    "content_css_cors": true,
+    "plugins": "autoresize advcode code table anchor link lists craftlink craftimage table wordcount visualblocks",
+    "toolbar": [
+        "code | styles | bold | bullist | craftlink unlink anchor"
+    ],
+    "Selector": "textarea",
+    "formats": {
+        "removeformat": [
+          {
+            "selector": "b,strong,em,i,font,u,strike,s,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins,small",
+            "remove": "all",
+            "split": true,
+            " block_expand": true,
+            "expand": false,
+            "deep": true
+          },
+          { "selector": "span", 
+            "attributes": ["style", "class"], 
+            "remove": "empty", 
+            "split": true, 
+            "expand": false, 
+            "deep": true 
+          },
+          { "selector": "*", 
+            "attributes": ["style", "class"], 
+            "split": false, 
+            "expand": false, 
+            "deep": true 
+            }
+        ]  
+    },
+    "craftlink_adv_tab": false,
+    "craftlink_data_attr": [],
+    "craftlink_anker": true,
+    "link_class_list": [
+        {
+            "title": "ohne Style",
+            "value": ""
+        },
+        {
+            "title": "Button",
+            "value": "btn"
+        },
+        {
+            "title": "Button Mit Span",
+            "value": "btn",
+            "items": [
+                {
+                    "inline": "span",
+                    "classes": "fc-btn"
+                }
+            ]
+        }
+    ],
+    "object_resizing": false,
+    "craftimage_title": true,
+    "craftimage_class_list": [
+        {
+            "title": "Default",
+            "value": "editor-img-default"
+        }
+    ],
+    "style_formats": [
+        {
+            "title": "Überschriften",
+            "items": [
+                {
+                    "title": "H2",
+                    "format": "h2"
+                },
+                {
+                    "title": "H3",
+                    "format": "h3"
+                },
+                {
+                    "title": "H4",
+                    "format": "h4"
+                }
+            ]
+        },
+        {
+                "title": "Formatierung",
+                "items": [
+                  {
+                    "title": "No Break",
+                    "inline": "span",
+                    "classes": "nobreak"
+                  },
+                {
+                    "title": "orange",
+                    "inline": "span",
+                    "classes": "fc-orange"
+                },
+                  {
+                    "title": "blau", 
+                    "inline": "span", 
+                    "classes": "fc-blue"
+                },
+                {
+                  "title": "remove Style",
+                  "inline": "span",
+                  "remove": "all"
+                }
+            ]
+        }
+
+    ]
+}

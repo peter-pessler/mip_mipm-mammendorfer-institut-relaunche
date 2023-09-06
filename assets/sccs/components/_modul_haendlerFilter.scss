@@ -1,0 +1,79 @@
+.modul-haendlerFilter{
+
+      .select-container{
+
+        width: 100%;
+
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(500) {
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        background-color: #f1f0ed;
+
+      }
+
+      .teaser-container{
+
+        width: 100%;
+
+        grid-row: 1;
+        grid-column-start: 1;
+        grid-column-end: 13;
+
+        @include wl-breakpoint(732) {
+          grid-column-start: 2;
+          grid-column-end: 12;
+        }
+
+        @include wl-breakpoint(500) {
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        background-color: #e5f1e9;
+
+      }
+
+      /*
+      ******************************************
+      ******************************************
+      */
+
+
+      .result{
+
+        width: 100%;
+
+        .article-container{
+          width: 100%;
+
+          display:  grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Umbrechen, sobald die Box 300 Pixel Breite hat */
+          justify-content:center;
+
+          @include dynamic-distance(15, 65, column-gap);
+          @include dynamic-distance(40, 60, row-gap);
+
+        }
+
+        .haendler-item {
+          flex-direction: column;
+          position: relative;
+          text-decoration: none;
+          display: inline-block;
+          cursor: pointer;
+
+          background-color: #5bc0de;
+
+
+        }
+
+      }
+
+
+}

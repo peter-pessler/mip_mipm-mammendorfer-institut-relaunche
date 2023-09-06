@@ -1,0 +1,224 @@
+// Default variables
+
+$input_height: 42px !default;
+
+$gray_dark: #444 !default;
+$gray: #999 !default;
+$gray_light: #e8e8e8 !default;
+$gray_lighter: #f1f1cc !default;
+$primary_light: $gray !default;
+$arrow_color: $gray !default;
+
+
+
+
+.formStateError {
+  .nice-select {
+    border: 2px solid rgba($wl-form-color-error, 0.35);
+  }
+
+}
+
+// Style the dropdown
+.nice-select {
+  background-color: #fff;
+  border-radius: $wl-input-border-radius;
+  border: 2px solid $wl-color-black;
+  box-sizing: border-box;
+  clear: both;
+  cursor: pointer;
+  display: block;
+  outline: none;
+  position: relative;
+  z-index: 100;
+  text-align: left !important;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
+  white-space: nowrap;
+  width: auto;
+  min-height: 59px;
+
+  &:hover {
+    border-color: $wl-color-blue
+  }
+  &:active{
+    border-color: $wl-color-blue;
+  }
+  // Arrow
+
+  &:before {
+    border-bottom: 2px solid $arrow_color;
+    border-right: 2px solid $arrow_color;
+    content: '';
+    display: block;
+    height: 10px;
+    width: 10px;
+    margin-top: -4px;
+    pointer-events: none;
+    position: absolute;
+    right: 35px;
+    top: 50%;
+    transform-origin: 66% 66%;
+    transform: rotate(45deg);
+    transition: all 0.15s ease-in-out;
+  }
+
+  &.open {
+    @extend :active;
+    &:before {
+      transform: rotate(-135deg);
+    }
+    .list {
+      opacity: 1;
+      pointer-events: auto;
+      transform: scale(1) translateY(0);
+    }
+  }
+  &.disabled {
+    border-color: lighten($gray_light, 2%);
+    color: $gray;
+    pointer-events: none;
+    &:before {
+      border-color: lighten($arrow_color, 20%);
+    }
+  }
+
+  // Modifiers
+  &.wide {
+    width: 100%;
+    .list {
+      left: 0 !important;
+      right: 0 !important;
+    }
+  }
+  &.right {
+    float: right;
+    .list {
+      left: auto;
+      right: 0;
+    }
+  }
+
+  // List and options
+  .list {
+    width: calc(100% + 4px);
+
+    /*
+    width: calc(100% + 4px);
+    margin-left: -2px;
+    //background-color: #fff;
+    border-top: 0px solid transparent;
+    border-right-width: 2px;
+    border-left-width: 2px;
+    border-style: solid;
+    border-image:
+            linear-gradient(
+                            to bottom,
+                            white,
+                            #bee2f0
+            ) 1 100%;
+
+
+     */
+
+    background: linear-gradient(white, #bee2f0);
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-left: -2px;
+    opacity: 0;
+    overflow: hidden;
+    padding: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 100%; left: 0;
+    transition: all .2s cubic-bezier(0.5, 0, 0, 1.25), opacity .15s ease-out;
+    z-index: 9;
+    &:hover .option:not(:hover) {
+      background-color: transparent !important;
+    }
+
+    li:first-child{
+
+      display: none;
+
+      &.selected{
+        background-color: transparent;
+      }
+
+    }
+
+    &:after {
+      content: '';
+      display: block;
+      position: relative;
+      height: 20px;
+      width: 100%;
+      border-bottom: 2px solid rgba($wl-color-grey, 0.5);
+    }
+
+  }
+  .option {
+    cursor: pointer;
+    font-weight: 400;
+    line-height: $input_height - 2;
+    list-style: none;
+    min-height: $input_height - 2;
+    outline: none;
+    padding-left: $wl-input-padding-left;
+    padding-right: $wl-input-padding-right + 11;
+    text-align: left;
+    transition: all 0.2s;
+    &:hover{
+      background-color: $wl-color-blue;
+      color: #ffffff;
+    }
+    &:hover{
+      background-color: $wl-color-blue;
+      color: #ffffff;
+
+      &.selected{
+        color: #ffffff;
+        font-family:  $base-font-family;
+        font-weight: 700;
+      }
+
+    }
+
+
+    &.selected {
+      font-family:  $base-font-family;
+      font-weight: 700;
+
+    }
+    &.disabled {
+      background-color: transparent;
+      color: $gray;
+      cursor: default;
+    }
+  }
+
+  .current{
+    @include responsive-font($form-font-size-min, $form-font-size-max, $base-font-family, $base-line-height);
+    font-weight:$font-weight-normal;
+    display: inline-block;
+    padding-right: $wl-input-padding-right;
+    padding-left: $wl-input-padding-left;
+    padding-top: $wl-input-padding-top;
+    padding-bottom: $wl-input-padding-bottom;
+  }
+
+
+}
+
+
+// Use display instead of opacity for IE <= 10
+.no-csspointerevents .nice-select {
+  .list {
+    display: none;
+  }
+  &.open {
+    .list {
+      display: block;
+    }
+  }
+}

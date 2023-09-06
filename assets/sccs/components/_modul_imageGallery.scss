@@ -1,0 +1,336 @@
+
+      /* The gallery overlay */
+
+      #galleryOverlay{
+        width:100%;
+        height:100%;
+        position:fixed;
+        top:0;
+        left:0;
+        opacity:0;
+        z-index:100000;
+        background-color:#222;
+        //background-color:rgba(0,0,0,0.8);
+        overflow:hidden;
+        display:none;
+
+        -moz-transition:opacity 1s ease;
+        -webkit-transition:opacity 1s ease;
+        transition:opacity 1s ease;
+
+        background-image: url("/assets/imageGallery/close.svg");
+        background-position: right 20px top 20px;
+        background-size: 30px 30px;
+        background-repeat: no-repeat;
+      }
+
+
+      #galleryOverlay:before{
+        content:attr(data-count);
+        font-size: 1.1em;
+        color: #fff;
+        position: absolute;
+        height: 30px;
+        width: 60px;
+        line-height: 30px;
+        left: 20px;
+        top:  20px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: center;
+        align-content: stretch;
+      }
+
+      /* This class will trigger the animation */
+
+      #galleryOverlay.visible{
+        opacity:1;
+      }
+
+      #gallerySlider{
+        height:100%;
+
+        left:0;
+        top:0;
+
+        width:100%;
+        white-space: nowrap;
+        position:absolute;
+
+        -moz-transition:left 0.4s ease;
+        -webkit-transition:left 0.4s ease;
+        transition:left 0.4s ease;
+      }
+
+      #gallerySlider .placeholder{
+        background: url("/assets/imageGallery/preloader.gif") no-repeat center center;
+        height: 100%;
+        line-height: 1px;
+        text-align: center;
+        width:100%;
+        display:inline-block;
+        padding-top: 90px;
+        padding-bottom: 90px;
+        pointer-events: all;
+
+        @include wl-breakpoint(1550) {
+          padding-top: 15vw;
+          //padding-bottom: 8vw;
+          padding-left: 5vw;
+          padding-right: 5vw;
+        }
+
+      }
+
+      /* The before element moves the
+       * image halfway from the top */
+
+      #gallerySlider .placeholder:before{
+        content: "";
+        display: inline-block;
+        height: 50%;
+        width: 1px;
+        margin-right:-1px;
+      }
+
+      #gallerySlider .placeholder img{
+        display: inline-block;
+        object-fit: contain;
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        vertical-align: middle;
+      }
+
+      #gallerySlider .placeholder:after{
+        content:attr(data-title);
+        font-size: 1.1em;
+        color: #fff;
+        position: relative;
+        white-space: break-spaces;
+        text-align: center;
+        line-height: 25px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: baseline;
+        align-content: stretch;
+        @include wl-breakpoint(1550) {
+          padding-top: 10px;
+          padding-bottom: 15vw;
+        }
+      }
+
+      #gallerySlider.rightSpring{
+        -moz-animation: rightSpring 0.3s;
+        -webkit-animation: rightSpring 0.3s;
+      }
+
+      #gallerySlider.leftSpring{
+        -moz-animation: leftSpring 0.3s;
+        -webkit-animation: leftSpring 0.3s;
+      }
+
+      /* Firefox Keyframe Animations */
+
+      @-moz-keyframes rightSpring{
+        0%{		margin-left:0px;}
+        50%{	margin-left:-30px;}
+        100%{	margin-left:0px;}
+      }
+
+      @-moz-keyframes leftSpring{
+        0%{		margin-left:0px;}
+        50%{	margin-left:30px;}
+        100%{	margin-left:0px;}
+      }
+
+      /* Safari and Chrome Keyframe Animations */
+
+      @-webkit-keyframes rightSpring{
+        0%{		margin-left:0px;}
+        50%{	margin-left:-30px;}
+        100%{	margin-left:0px;}
+      }
+
+      @-webkit-keyframes leftSpring{
+        0%{		margin-left:0px;}
+        50%{	margin-left:30px;}
+        100%{	margin-left:0px;}
+      }
+
+      /* Arrows */
+
+      #prevArrow,#nextArrow{
+        display: none;
+        border:none;
+        text-decoration:none;
+        background:url('/assets/imageGallery/arrows.png') no-repeat;
+        opacity:0.5;
+        cursor:pointer;
+        position:absolute;
+        width:43px;
+        height:58px;
+        top:50%;
+        margin-top:-29px;
+        -moz-transition:opacity 0.2s ease;
+        -webkit-transition:opacity 0.2s ease;
+        transition:opacity 0.2s ease;
+      }
+
+      #prevArrow:hover, #nextArrow:hover{
+        opacity:1;
+      }
+
+      #prevArrow{
+        background-position:left top;
+        left:40px;
+        @include wl-breakpoint(450) {
+          left:5vw;
+        }
+      }
+
+      #nextArrow{
+        background-position:right top;
+        right:40px;
+        @include wl-breakpoint(450) {
+          right:5vw;
+        }
+      }
+
+      #imageGallery{
+        @include dynamic-distance(30, 25, margin-top);
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        @include wl-breakpoint(1600) {
+          grid-template-columns: repeat(4, 1fr);
+        }
+        @include wl-breakpoint(1100) {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        @include wl-breakpoint(800) {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        @include wl-breakpoint(450) {
+          grid-template-columns: repeat(1, 1fr);
+        }
+        @include dynamic-distance(20, 16, column-gap);//Abstand zwischen Spalten
+        @include dynamic-distance(20, 16, row-gap);//Abstand zwischen Zeilen
+        @include wl-breakpoint(750) {
+          row-gap: 16px;
+          column-gap: 16px
+        }
+        img{
+          cursor: pointer;
+        }
+      }
+
+      /*
+      ************************************************
+      */
+
+      .container-body-full{
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 11;
+
+        @include wl-breakpoint(900) {
+          grid-column-start: 1;
+          grid-column-end: 12;
+        }
+      }
+
+
+
+
+
+.modul-imageGallery{
+
+     .radioItemContainer{
+       display: inline-flex;
+       flex-direction: row;
+       flex-wrap: wrap;
+       justify-content: center;
+       align-items: center;
+       align-content: stretch;
+       margin-bottom: 20px;
+       margin-top: 30px;
+     }
+
+     .radioItem {
+       display: inline-block;
+       border: 3px solid $wl-color-orange;
+       border-radius: 50% !important;
+       height: 26px;
+       width: 26px;
+       @include wl-breakpoint(1280) {
+         height: 20px;
+         width: 20px;
+       }
+       transition: border .25s linear;
+
+       display: flex;
+       flex-direction: row;
+       flex-wrap: nowrap;
+       justify-content: center;
+       align-items: center;
+       align-content: stretch;
+     }
+
+     .radioItemChecked {
+       display: none;
+       position: absolute;
+       border-radius: 50% !important;
+       background-color: $wl-color-orange;
+       height: 12px;
+       width: 12px;
+       @include wl-breakpoint(1280) {
+         height: 8px;
+         width: 8px;
+       }
+       transition: border .25s linear;
+     }
+
+     .radioItemChecked{
+       &.isChecked{
+         display: inline-block;
+       }
+     }
+
+     a{
+       &.gallerySelect{
+
+         position: relative;
+         margin-right: 100px;
+         display: inline-block;
+         padding-left: 30px;
+         display: inline-block;
+         text-decoration: none;
+         padding-top: 5px;
+         @include wl-breakpoint(1280) {
+           padding-top: 2px;
+           padding-left: 20px;
+           margin-right: 60px;
+         }
+         @include responsive-font(23px, 35px, $base-font-family-bold, 1.45);
+
+         color: $wl-color-black;
+         margin-top: -0.05em;
+         margin-bottom: -0.25em;
+
+         &.highlight {
+           color: $wl-color-orange;
+         }
+       }
+     }
+
+ }
+
+
+
+
+
+

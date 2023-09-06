@@ -1,0 +1,121 @@
+.modul-blog{
+
+      /**
+      ============================  Einleitung ============================
+      */
+
+        .body-einleitung{
+          grid-row: 1;
+          grid-column-start: 2;
+          grid-column-end: 12;
+
+          text-align: center;
+
+        }
+
+
+
+
+
+      /**
+      ============================  Themenfilter ============================
+      */
+
+      .modul-blog-themenfilter{
+
+        @include dynamic-distance(90, 150, padding-bottom);
+
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        ul{
+
+          margin: 0px;
+          padding: 0;
+          list-style: none;
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: center;
+          align-items: stretch;
+          align-content: stretch;
+
+          li{
+            padding: 0px;
+            display: inline-block;
+            list-style-type: none;
+            position: relative;
+            white-space: wrap;
+            text-decoration: none;
+            color: $wl-color-black;
+            text-align: center;
+
+
+            a{
+              word-wrap: break-word!important;
+              hyphens: initial!important;
+              &.themenBtn{
+                @include responsive-font(18px, 20px, $font-family-karlaBold, $base-line-height);
+                margin-top: 25px;
+                margin-right: 10px;
+                margin-left: 10px;
+                display: block;
+                padding-top: 11px;
+                padding-bottom: 9px;
+                padding-left: 20px;
+                padding-right: 20px;
+                border-radius: 50px;
+                border: 2px solid $wl-color-orange;
+                text-align: center;
+                text-decoration: none;
+                color: $wl-color-black;
+                position: relative;
+                overflow: hidden;
+                background: transparent;
+                background-size: 300% 100%;
+                transition: all .4s ease-in-out;
+                z-index: 1;
+              }
+
+              &.highlight{
+                background: $wl-color-orange;
+                color: $wl-color-black;
+
+              }
+            }
+
+            a{
+              &.themenBtn:not(.highlight){
+                &:hover{
+                  border: 2px solid $wl-color-blue;
+                  color:  $wl-color-blue;
+                }
+              }
+            }
+
+          }
+        }
+
+
+      }
+
+
+
+      /**
+      ============================  Artikel ============================
+      */
+
+      .modul-blog-artikel{
+
+        grid-row: 1;
+        grid-column-start: 1;
+        grid-column-end: 13;
+
+      }
+
+}
+
+
+

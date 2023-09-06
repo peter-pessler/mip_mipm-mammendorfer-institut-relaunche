@@ -1,0 +1,194 @@
+{# *------------* START Konfiguration *------------ *#}
+{# ************************************************* #}
+{% set categoryIdStr = output %}
+{# *-----------------------------------------*#}
+{% set ausgabeNur3Teaser = (block.ausgabeNur3Teaser)? true : false %}
+{# *-----------------------------------------*#}
+{% set categorySectionname = 'blog' %}
+{# *-----------------------------------------*#}
+{% set showMore = false %}
+{# *-----------------------------------------*#}
+{% set myUrl = url(craft.app.request.pathInfo) %}
+{% set param = '?template=blog&blockid=' ~ blockid ~ '&output=' ~ output ~ '&sectionname=' ~ sectionnamepage ~ '&pageid=' ~ pageid %}
+{# *-----------------------------------------*#}
+{% set catParam = '' %}
+{# *-----------------------------------------*#}
+{% set resultPager = block.pager|number %}
+{% if resultPager == 0 %}
+     {% set pageSizeArtikel = 10000 %}
+     {% set showPager = false %}
+{% else %}
+    {% set pageSizeArtikel = block.anzahlArtikel|number %}
+    {% set showPager = true %}
+{% endif %}
+{% if ausgabeNur3Teaser %}
+   {% set pageSizeArtikel = 3 %}
+   {% set showPager = false %}
+{% endif %}
+{# *-----------------------------------------*#}
+
+ {% set categoryIdsArray = categoryIdStr|split(',') %}
+ {% set categoryIdsCount = categoryIdsArray|length  %}
+ {% set categorySelectById = craft.categories().id(categoryIdsArray).all() %}
+ {% set categoryBy = { element: categorySelectById  }  %}
+ {% set artikelCount = craft.entries()
+      .section(categorySectionname)
+      .relatedTo(['and',categoryBy])
+      .count() %}
+
+{# *-----------------------------------------*#}
+{#
+{% set pageSizeArtikel = (block.anzahlArtikel|number != '' )? block.anzahlArtikel|number : artikelCount|number %}
+#}
+{# ************************************************ #}
+{# *------------* ENDE Konfiguration *------------ *#}
+
+{# *------------* Ausgabe *------------ *#}
+{# ************************************************* #}
+
+ {% if ausgabeNur3Teaser %}
+
+        {% set categoriesEntries = craft.entries()
+        .section(categorySectionname)
+        .relatedTo(['and',categoryBy])
+        .orderBy('startDate desc')
+        .limit(pageSizeArtikel) %}
+
+{% elseif showPager %}
+
+        {% set categoriesEntries = craft.entries()
+        .section(categorySectionname)
+        .relatedTo(['and',categoryBy])
+        .orderBy('startDate desc')
+        .limit(pageSizeArtikel) %}
+
+ {% else %}
+
+        {% set categoriesEntries = craft.entries()
+        .section(categorySectionname)
+        .relatedTo(['and',categoryBy])
+        .orderBy('startDate desc') %}
+
+ {% endif %}
+
+{# * ******************************************************************************************************* *#}
+
+   {% set anzahlArtikel = categoriesEntries.count()  %}
+
+
+     {% if showPager  and anzahlArtikel > 3 and anzahlArtikel > pageSizeArtikel %}
+          {% set pager = true %}
+     {% else %}
+          {% set pager = false %}
+     {% endif %}
+
+{# * ******************************************************************************************************* *#}
+
+     {% set result = categoriesEntries %}
+     {# *-----------------------------------------*#}
+     {% if showPager  %}
+          {% paginate result as pageInfo, entries %}
+     {% else %}
+          {% set entries = result %}
+     {% endif %}
+     {# *-----------------------------------------*#}
+<div class="container-body  content-grid-12">
+    <div class="masonry-grid">
+        <div id="masonry-effect" class="masonryContainer">
+
+         {% if categoryIdsCount == 1 %}{% set catParam = '?cat=' ~ categoryIdStr %}{% else %}{% set catParam = '?cat=all' %}{% endif %}
+         {% set counter = '1' %}
+         {% if entries|length > 0 %}
+              {% for entry in entries %}
+
+                    <a href="{{ entry.url }}{{ catParam }}" class="article-link item">
+                        <article class="item-content">
+
+                             <div class="article-text">
+
+                                 <div class="article-kategorie-button">
+                                     {% set auswahlKategorieObj = entry.auswahlKategorie %}
+                                     {% if categoryIdsCount > 1 %}
+
+                                         {% for item in auswahlKategorieObj %}
+                                             <div class="kategorie-button">{{ item.title }}</div>
+                                         {% endfor %}
+
+                                     {% else %}
+
+                                         {% for item in auswahlKategorieObj %}
+                                             {% if categoryIdStr == item.id|string %}
+                                                 <div class="kategorie-button">{{ item.title }}</div>
+                                             {% endif %}
+                                         {% endfor %}
+
+                                     {% endif %}
+                                 </div>
+
+                                  <div class="article-title">
+                                       <h4>{{ entry.teaserHeadline }}</h4>
+                                  </div>
+
+                                  <div class="article-btn">
+                                       <div class="article-button">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="44.303" height="44.303" viewBox="0 0 44.303 44.303">
+                                                 <path id="arrow-forward" d="M30.151,52.3l-2.907-2.977,17.1-17.1H8V28.075H44.342l-17.1-17.1L30.151,8,52.3,30.151Z" transform="translate(-8 -8)" fill="#fff"/>
+                                            </svg>
+                                       </div>
+                                  </div>
+                             </div>
+
+                        </article>
+                   </a>
+
+                   {% set counter = counter + 1%}
+              {% endfor %}
+         {% else %}
+              {{ block.infoTextErgebnise }}
+         {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+{% if pager %}
+  <div class="blog-pagination-container" style="margin-top: 50px;">
+
+      <div class="blog-pagination">
+
+          <div class="blog-pagination-arrow-left">
+               <a class="btnPager links {% if not pageInfo.prevUrl %} disabled{% endif %}"{% if pageInfo.prevUrl %} data-more="{{ pageInfo.prevUrl }}#articles"{% endif %}>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
+                       <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l1.248-1.277L11.417,18.4h15.6V16.616h-15.6l7.338-7.338L17.507,8,8,17.507Z" transform="translate(-8 -8)" fill="#000"/>
+                   </svg>
+               </a>
+          </div>
+
+
+          <div class="blog-pagination-arrow-counter">
+              <div class="blog-pagination-arrow-counter-inner">
+                  {% for i in range(1,pageInfo.totalPages) %}
+                      <a class="btnPager {% if pageInfo.currentPage == loop.index %} active{% endif %}" data-more="{{ myUrl }}/p{{loop.index}}{{ param }}">{{loop.index}}</a>
+                  {% endfor %}
+              </div>
+          </div>
+
+
+          <div class="blog-pagination-arrow-right">
+               <a class="btnPager rechts {% if not pageInfo.nextUrl %} disabled{% endif %}"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}#articles"{% endif %}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
+                      <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l-1.248-1.277L23.6,18.4H8V16.616H23.6L16.259,9.277,17.507,8l9.507,9.507Z" transform="translate(-8 -8)" fill="#000"/>
+                    </svg>
+               </a>
+          </div>
+
+
+      </div>
+
+  </div>
+{% endif %}
+
+
+
+

@@ -1,0 +1,34 @@
+{% set layout = '' %}
+{% set layoutOutput = '' %}
+{% set layout = element.layoutWechsel.value  %}
+
+<style>
+    {% switch layout %}
+
+        {% case "textBild" %}
+
+                {% set layoutOutput = 'Text / Bild' %}
+
+        {% case "bildText" %}
+
+                {% set layoutOutput = 'Bild / Text' %}
+
+    {% endswitch %}
+
+    .layoutcontainer{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+    }
+
+</style>
+
+<div class="layoutcontainer">
+    <div>
+        <div>{{ layoutOutput }}</div>
+        <img class="theme0" src="/assets/images/backend/neutral-screen.png" />
+    </div>
+</div>

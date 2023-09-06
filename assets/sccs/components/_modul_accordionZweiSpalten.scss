@@ -1,0 +1,54 @@
+
+.modul-accordionZweiSpalten {
+
+
+  .accordionZweiSpalten {
+
+
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+
+    margin-bottom: 15px;
+
+    @include wl-breakpoint(800) {
+      flex-direction: column;
+    }
+
+
+    /**
+    ============================ Accordion Body ============================
+    */
+
+    .articleContainerLinks {
+      width: 46%;
+      @include wl-breakpoint(800) {
+        width: 100%;
+      }
+    }
+
+    .articleContainerRechts {
+      width: 46%;
+      @include wl-breakpoint(800) {
+        width: 100%;
+      }
+    }
+
+
+  }
+
+}
+
+
+
+
+
+
+

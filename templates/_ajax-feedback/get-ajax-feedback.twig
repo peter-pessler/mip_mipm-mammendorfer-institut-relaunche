@@ -1,0 +1,38 @@
+{% set mID = ( craft.app.request.getParam('blockid') )? craft.app.request.getParam('blockid') : '' %}
+{% set output = ( craft.app.request.getParam('output') )? craft.app.request.getParam('output') : '' %}
+{% set land = ( craft.app.request.getParam('land') )? craft.app.request.getParam('land') : '' %}
+{% set typ = ( craft.app.request.getParam('typ') )? craft.app.request.getParam('typ') : '' %}
+{% set produktgruppe = ( craft.app.request.getParam('produktgruppe') )? craft.app.request.getParam('produktgruppe') : '' %}
+{% set catstatus = ( craft.app.request.getParam('catstatus') )? craft.app.request.getParam('catstatus') : '' %}
+{% set sectionname = ( craft.app.request.getParam('sectionname') )? craft.app.request.getParam('sectionname') : '' %}
+{% set pageid = ( craft.app.request.getParam('pageid') )? craft.app.request.getParam('pageid') : '' %}
+{% set getall = ( craft.app.request.getParam('getall') )? craft.app.request.getParam('getall') : '' %}
+{% set excludeid = ( craft.app.request.getParam('excludeid') )? craft.app.request.getParam('excludeid') : '' %}
+{% set artikelausgabe = ( craft.app.request.getParam('artikelausgabe') )? craft.app.request.getParam('artikelausgabe') : '' %}
+{% set pageid = ( craft.app.request.getParam('pageid') )? craft.app.request.getParam('pageid') : '' %}
+
+{% if mID != '' and sectionname != '' %}
+
+    {% for entry in craft.entries.section(sectionname).all() %}
+        {% for modulBlock in entry.generalModules.id(mID).all()  %}
+            {% set block = modulBlock  %}
+            {% if craft.app.request.getParam('template') %}
+                {% set tempalte = craft.app.request.getParam('template') %}
+                {% if tempalte is not empty  %}
+                    {% include  '_ajax-feedback/' ~ tempalte with { block: block, output: output, pageid: entry.id, sectionnamepage: sectionname, blockid: mID }  %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+
+{% endif %}
+
+{#
+{% set mID = craft.app.request.getParam('blockid') %}
+{% set output = craft.app.request.getParam('output') %}
+{% set sectionname = craft.app.request.getParam('sectionname') %}
+{% set pageid = craft.app.request.getParam('pageid') %}
+
+#}
+
+

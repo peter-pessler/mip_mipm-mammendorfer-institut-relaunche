@@ -1,0 +1,317 @@
+{# *------------* Beschreibung GET Variabeln *------------ *#}
+{# ************************************************* #}
+{#
+template        => Dieses Template wird über get-ajax-feedback.twig aufgerufen diese benötigt den Namen dieses templates
+blockid         => wird das matrixElemente der "Content Page" in der Schleife ausgelesen ist dies die Block ID wo das Modul aufgerufen wird (benötigt in get-ajax-feedback.twig )
+catstatus       => Param: 1 oder 0 / gibt Auskunft ob über das Suchergebnis Land mit einer Kategorie verknüpft ist, oder nicht
+produktgruppe   => IDs Produktgruppe-Kategorie
+land            => IDs Land-Kategorie
+sectionname     => sectionname der "Content Page" Seite welches über das entprechende Modul, das Ajax Event ausgelöst
+pageid          => ID der "Content Page" Seite welches über das entprechende Modul, das Ajax Event ausgelöst
+getall          => Diesen Template ist zugewiesen, ob alle Ergebnisse angezeigt werden oder in Etappen nachgeladen wird. Mit "getall" kann dieses geändert werden.
+artikelausgabe  => Gesamtzahl der Augegebenen Artikel (ohne "weitere Ergebnisse anzeigen" obwohl es weitere gibt)
+#}
+
+{% set catstatus = (catstatus != 1)? 0 : 1 %}
+
+{# ************************************************* #}
+{# *------------* START Konfiguration *------------ *#}
+{# ************************************************* #}
+{% set lg = 'en' %}
+{# *-----------------------------------------*#}
+{% set myUrl = url(craft.app.request.pathInfo) %}
+{% set param = '?template=haendler&blockid=' ~ blockid ~ '&output=' ~ output ~ '&sectionname=' ~ sectionnamepage ~ '&pageid=' ~ pageid %}
+{# *-----------------------------------------*#}
+{% set sectionName = 'haendler' %}
+{# *-----------------------------------------*#}
+{% set articleItemsProduktgruppe = '' %}
+{# *-----------------------------------------*#}
+{% set showMore = false %}
+{# *-----------------------------------------*#}
+{% set imgQuality = 85 %}
+{# *-----------------------------------------*#}
+{% set imgFormat = adminConfig.imageFormat %}
+{# *-----------------------------------------*#}
+
+{% set resultPager = block.pager|number %}
+{% if resultPager == 0 %}
+    {% set pageSizeArtikel = 10000 %}
+{% else %}
+    {% set pageSizeArtikel = block.anzahlArtikel|number %}
+{% endif %}
+
+{# *-----------------------------------------*#}
+{% set hasCategory = '0' %}
+{# *-----------------------------------------*#}
+{% set categoryBy = ''  %}
+{# *-----------------------------------------*#}
+ {% set ausgabeLand = '' %}
+{# *-----------------------------------------*#}
+
+{% set pageIdsLand = {} %}
+{% set counterPageIdsLand = 0 %}
+{# *-----------------------------------------*#}
+
+
+{# *----------------* Land *---------------- #}
+{% set categoryLandIdsAnzahl = 0 %}
+
+{% set showAll = (land == '')? true : false %}
+
+
+{% if land != '' %}
+
+    {% set categoryLandIdsArray = land|split(',') %}
+    {% set categoryLandIdsAnzahl = categoryLandIdsArray|length %}
+    {% set categoryLandSelectById = craft.categories().id(categoryLandIdsArray).all() %}
+    {% set categoryLandBy = { element: categoryLandSelectById  }  %}
+    {# ###################################### #}
+    {% set articleItemsLand = craft.entries()
+        .section(sectionName)
+        .relatedTo(['and',categoryLandBy])
+        .limit(pageSizeArtikel) %}
+{% endif %}
+
+{# *-------------* Produktgruppe *------------- #}
+{% set categoryProduktgruppeIdsAnzahl = 0 %}
+{% if produktgruppe != '' %}
+    {% set categoryProduktgruppeIdsArray = produktgruppe|split(',') %}
+    {% set categoryProduktgruppeIdsAnzahl = categoryProduktgruppeIdsArray|length %}
+    {% set categoryProduktgruppeSelectById = craft.categories().id(categoryProduktgruppeIdsArray).all() %}
+    {% set categoryProduktgruppeBy = { element: categoryProduktgruppeSelectById  }  %}
+    {# ###################################### #}
+    {% set articleItemsProduktgruppe = craft.entries()
+        .section(sectionName)
+        .relatedTo(['and',categoryProduktgruppeBy])
+        .limit(pageSizeArtikel) %}
+{% endif %}
+
+
+
+{# * ============================================================ * #}
+{# * ============================================================ * #}
+
+{% if categoryProduktgruppeIdsAnzahl >= 1 and categoryLandIdsAnzahl >= 1 %}
+
+    {% set articleItemsAll = craft.entries()
+        .section(sectionName)
+        .relatedTo(['and',
+            {element: produktgruppe},
+            {element: land}
+        ])
+    %}
+
+    {% for item in articleItemsAll %}
+
+        {% for catLandResult in item.auswahlKategorieLand.all() %}
+            {% if land == catLandResult.id  %}
+                {% set pageIdsLand = pageIdsLand|merge({ (counterPageIdsLand) : item.id }) %}
+                {% set counterPageIdsLand = counterPageIdsLand + 1 %}
+            {% endif %}
+        {% endfor %}
+
+    {% endfor %}
+
+{% endif %}
+
+
+{% if catstatus == 0 %}
+
+    {# ********************************************************************************** #}
+
+    {% if land != '' %}
+
+        {# einzel Land #}
+        {% set pageIdsLandStr = pageIdsLand|join(', ') %}
+
+        {% set articleItems = craft.entries()
+            .section(sectionName)
+            .relatedTo(['and',categoryProduktgruppeBy])
+            .id(pageIdsLandStr)
+            .limit(pageSizeArtikel) %}
+
+        {% paginate articleItems as pageInfo, entries %}
+
+    {% elseif produktgruppe != '' and land == '' %}
+
+        {# Alle Produktgruppen / einzel Produktgruppe #}
+        {% set articleItems = articleItemsProduktgruppe %}
+
+    {% else %}
+
+        {% set articleItems = articleItemsProduktgruppe %}
+
+    {% endif %}
+
+    {# ********************************************************************************** #}
+
+    {% set anzahlArtikel = articleItems.count()  %}
+    {% if anzahlArtikel > 4 and anzahlArtikel > pageSizeArtikel %}
+        {% set showMore = true %}
+    {% else %}
+        {% set showMore = false %}
+    {% endif %}
+
+    {# *-----------------------------------------* #}
+
+    {% paginate articleItems as pageInfo, entries %}
+
+    {% if showMore == false %}
+        {% set entries = articleItems %}
+    {% endif %}
+
+    {# ********************************************************************************** #}
+
+
+{% else %}
+
+    {# ********************************************************************************** #}
+
+
+    {% set articleItems = craft.entries()
+        .section(sectionName)
+        .limit(pageSizeArtikel) %}
+
+    {% if categoryProduktgruppeIdsAnzahl > 0 %}
+
+        {% set pageIdsLand = {} %}
+
+        {% for item in articleItems %}
+
+            {% set produktgruppeExist = false %}
+            {% for catFachbereichResult in item.auswahlKategorieProduktgruppe.all() %}
+                {% if produktgruppe == catFachbereichResult.id  %}
+                    {% set produktgruppeExist = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% if produktgruppeExist %}
+                {% for catLandResult in item.auswahlKategorieLand.all() %}
+                    {% if land == catLandResult.id  %}
+                        {% set pageIdsLand = pageIdsLand|merge({ (counterPageIdsLand) : item.id }) %}
+                        {% set counterPageIdsLand = counterPageIdsLand + 1 %}
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+        {% endfor %}
+
+    {% else %}
+
+        {% set pageIdsLand = {} %}
+        {% for item in articleItems %}
+
+            {% for catLandResult in item.auswahlKategorieLand.all() %}
+                {% if land == catLandResult.id  %}
+                    {% set pageIdsLand = pageIdsLand|merge({ (counterPageIdsLand) : item.id }) %}
+                    {% set counterPageIdsLand = counterPageIdsLand + 1 %}
+                {% endif %}
+            {% endfor %}
+
+        {% endfor %}
+
+    {% endif %}
+
+    {% set hasCategory = ( pageIdsLand|length > 0 )? '1' : '0' %}
+
+    {# ********************************************************************************** #}
+
+{% endif %}
+
+
+{# * ******************************************************************************************************* *#}
+
+ {% if catstatus == 0 %}
+
+     {% set counter = '1' %}
+     {% if entries|length > 0 %}
+
+         <div class="article-container">
+         {% for entry in entries %}
+
+
+
+        {#
+             {% if showAll %}     AAA
+                 {% set standorteStr = '' %}
+                 {% for catStandortResult in entry.auswahlKategorieLand.all() %}
+                     {% set standorteStr  = standorteStr  ~ ', ' ~ catStandortResult %}
+                 {% endfor %}
+                 {% set ausgabeStandort = standorteStr|trim(',') %}
+             {% else %}  BBB
+                 {% for catStandortResult in entry.zuweisungKategorieStandorte.all() %}
+                     {% if catStandortResult.id  == standort %}
+                         {% set ausgabeStandort = catStandortResult %}
+                     {% endif %}
+                 {% endfor %}
+             {% endif %}
+        #}
+             <article class="haendler-item">
+                 <div class="artikelContent">
+                     {{ currentSite.handle }}
+                     <br />=================<br />
+                     {{ entry.title }}
+                     <br />=================<br />
+
+                     {{ entry.teaserText }}
+                 </div>
+             </article>
+
+             {% set counter = counter + 1%}
+         {% endfor %}
+         </div>
+
+     {% else %}
+
+         {% if catstatus == 0 %}
+             Es ist keine Ergebnise zu diesem Standort vorhanden!
+         {% else %}
+             {% set hasCategory = '0' %}
+         {% endif %}
+
+     {% endif %}
+
+ {% endif %}
+ {% if catstatus == 1 %}{{ hasCategory }}{% endif %}
+
+
+{% if showMore %}
+    <div class="blog-pagination-container">
+
+        <div class="blog-pagination">
+
+            <div class="blog-pagination-arrow-left">
+                <a class="btnPager links {% if not pageInfo.prevUrl %} disabled{% endif %}"{% if pageInfo.prevUrl %} data-more="{{ pageInfo.prevUrl }}#articles"{% endif %}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
+                        <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l1.248-1.277L11.417,18.4h15.6V16.616h-15.6l7.338-7.338L17.507,8,8,17.507Z" transform="translate(-8 -8)" fill="#000"/>
+                    </svg>
+                </a>
+            </div>
+
+
+            <div class="blog-pagination-arrow-counter">
+                <div class="blog-pagination-arrow-counter-inner">
+                    {% for i in range(1,pageInfo.totalPages) %}
+                        <a class="btnPager {% if pageInfo.currentPage == loop.index %} active{% endif %}" data-more="{{ myUrl }}/p{{loop.index}}{{ param }}">{{loop.index}}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+            <div class="blog-pagination-arrow-right">
+                <a class="btnPager rechts {% if not pageInfo.nextUrl %} disabled{% endif %}"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}#articles"{% endif %}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
+                        <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l-1.248-1.277L23.6,18.4H8V16.616H23.6L16.259,9.277,17.507,8l9.507,9.507Z" transform="translate(-8 -8)" fill="#000"/>
+                    </svg>
+                </a>
+            </div>
+
+
+        </div>
+
+    </div>
+{% endif %}
+
+
+
+

@@ -1,0 +1,114 @@
+// Mixin
+@import "core/mixin";
+
+// Variables
+//@import "core/vars";
+
+
+$headline-color: #052641;
+$text-color: #74797e;
+$underline-color: #bcddf3;
+$btn-border-color: #639cc2;
+$wl-color-blue: #1558ED;
+
+
+$font-name-karlaRegular: "karla-regular";
+$font-family-karlaRegular: $font-name-karlaRegular, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
+@include font-face($font-name-karlaRegular, 'karla/karla-regular', '' , '');
+/* =================================================== */
+$font-name-karlaBold: "karla-bold";
+$font-family-karlaBold: $font-name-karlaBold, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
+@include font-face($font-name-karlaBold, 'karla/karla-bold', '' , '');
+/* =================================================== */
+
+#tinymce{
+
+  b, .b, strong, .strong {
+    font-family: $font-family-karlaBold;
+    line-height: 1.3;
+    font-size: 17px;
+  }
+
+  font-family: $font-family-karlaRegular;
+  line-height: 1.3;
+  font-weight: normal;
+  font-size: 17px;
+  color: $text-color;
+
+  h2{
+    font-family: $font-family-karlaBold;
+    color: $headline-color;
+    font-size: 1.32em
+  }
+  h3{
+    font-family: $font-family-karlaBold;
+    color: $headline-color;
+    font-size: 1.23em
+  }
+  h4{
+    font-family: $font-family-karlaBold;
+
+    color: $headline-color;
+    font-size: 1.1em
+  }
+
+  a:not(.btn) {
+    hyphens: auto!important;
+    color: $text-color;
+    text-decoration: none;
+
+    background:
+            linear-gradient(to right, rgba($underline-color, 1), rgba($underline-color, 1)),
+            linear-gradient(to right, rgba($underline-color, 1), rgba($underline-color, 1));
+
+    background-size: 100% 0.1em, 0 0.1em;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 400ms;
+  }
+
+  a{
+    &.btn{
+      display: inline-block;
+      padding-top: 5px;
+      padding-bottom: 6px;
+      padding-left: 12px;
+      padding-right: 12px;
+      border-radius: 40px;
+      border: 1px solid $btn-border-color;
+      text-align: center;
+      text-decoration: none;
+      color: $text-color;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+      transition: all .4s ease-in-out;
+      z-index: 1;
+      cursor: pointer;
+    }
+  }
+
+  p{
+    margin-top: 10px;
+    margin-bottom: 0;
+  }
+
+
+}
+
+
+.text{
+  font-family: $font-family-karlaRegular;
+  line-height: 1.3;
+  font-weight: normal;
+  font-size: 17px!important;
+  color: $text-color;
+}
+
+
+
+
+
+
+
+

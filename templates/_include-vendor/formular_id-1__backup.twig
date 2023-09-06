@@ -1,0 +1,240 @@
+{% macro errorList(errors) %}
+
+    {% if errors %}
+        <ul class="errors">
+            {% for error in errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endmacro %}
+
+{% from _self import errorList %}
+
+{% set form = wheelform.form({
+    id: formularId,
+    redirect: formularAntwortUrl,
+}) %}
+
+<div id="form" class="wl-form-wrapper">
+
+    {{ form.open() }}
+    {#
+    {{ wheelformErrors['honeypot'] is defined ? errorList(wheelformErrors['honeypot']) }}
+    #}
+
+    {{ form.honeypot() }}
+    {% set errorArray = [] %}
+    {% set formError = 0 %}
+    {% set setHiddenClass = '' %}
+
+    {% for field in form.fields %}
+        {% switch field.type %}
+        {% case "checkbox" %}
+            {% for item in field.items %}
+                {% if field.name == 'antispam' %}
+
+                    {#
+                    <input class="antispam" type="checkbox" value="prevent spam" name="antispam[]" id="" checked />
+                    <input class="checkbox {{field.name}} {{field.fieldClass}}" type="checkbox" value="{{ item }}" {{values[field.name] is defined and item in values[field.name] ? ' checked="checked"' : '' }} name="{{field.name}}[]" id=""/>
+                    #}
+                {% endif %}
+            {% endfor %}
+            {% if field.name != 'antispam' %}
+            <div class="form-checkbox form-item-wrapper InputfieldCheckbox{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                {% for item in field.items %}
+
+                    <label>
+                        <input class="checkbox {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="checkbox" value="{{ item }}" {{values[field.name] is defined and item in values[field.name] ? ' checked="checked"' : '' }} name="{{field.name}}[]" id=""/>
+                        <div class="checkmark-labletext">
+                            {% if field.name == 'dsgvo' %}
+                                {% set labletext = block.datenschutzCheckboxLabelText %}
+                            {% else %}
+                                {% set labletext = field.label %}
+                            {% endif %}
+                            <span class="checkmark"></span>
+                            <span class="mandatory{% if field.required %} required{% endif %}"><em></em></span>
+                            <span class="labletext{% if field.name == 'dsgvo' %}-dsgvo{% endif %}{% if field.required %} required{% endif %}">{{ labletext }}</span>
+                        </div>
+                    </label>
+
+                {% endfor %}
+            </div>
+            {% endif %}
+        {% case "radio" %}
+            <div class="form-radio form-item-wrapper InputfieldRadio{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label class="form-radio-label{% if field.required %} required{% endif %}">{{field.label|raw}} <em></em></label>
+                <div class="typeRadio">
+                    {% for item in field.items %}
+                        <label class="radioItem">
+                            <input class="custom-radio radio {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="radio" value="{{ item }}" {{values[field.name] is defined and item == values[field.name] ? ' checked="checked"' : '' }} name="{{field.name}}" id="box-shadow" />
+                            {{item}}
+                        </label>
+                    {% endfor %}
+                </div>
+            </div>
+        {% case "select" %}
+            <div class="form-select form-item-wrapper InputfieldSelect{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                {% set break = 0 %}
+                {% set setAciveClassSelect = 'test' %}
+                {% for item in field.items %}
+                    {% if  values[field.name] is defined and item == values[field.name] and break == 0 %}
+                        {% set setAciveClassSelect = 'active ' %}
+                        {% set break = 1 %}
+                    {% endif %}
+                {% endfor %}
+                <label class="{{ setAciveClassSelect }}lableSelect lableSelectOverwrite select-icon{% if field.required %}  required{% endif %}">{{field.label}}<em></em></label>
+
+                <select id="wf-select" name="{{field.name}}" class="wf-field {{field.fieldClass}}{% if field.required %} required{% endif %}">
+                    <option></option>
+                    {% for item in field.items %}
+                        <option value="{{ item }}" {{values[field.name] is defined and item == values[field.name] ? 'selected="selected"' : '' }}>{{item}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        {% case "file" %}
+            <div class="uploadFileContainer form-group form-item-wrapper InputfieldFile{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                {# {{field.label|raw}} #}
+                <label class="errorInfo">Bitte PDF uploaden!<em></em></label>
+
+                {% if field.label|raw == 'pdfUpload1' %}
+                    <label class="inputUploadFile" for="inputUploadFile">
+                        <div class="uploadContainer">
+                            <input class="uploadInput form-control {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="file" name="{{field.name}}" id="inputUploadFile" accept="application/pdf" multiple />
+                            <div id="fileName"></div>
+                        </div>
+                    </label>
+
+                {% endif %}
+
+            </div>
+        {% case "textarea" %}
+            {% set setAciveClass = '' %}
+            {% if craft.app.request.getBodyParam(field.name) != '' %}
+                {% set setAciveClass = 'active ' %}
+            {% endif %}
+            <div class="form-group form-item-wrapper InputfieldTextarea{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label class="{{ setAciveClass }}lableInputField{% if field.required %} required{% endif %}"> {{field.label}}<em></em></label>
+                <textarea class="form-control {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" name="{{field.name}}" id="">{{ values[field.name] ?? '' }}</textarea>
+            </div>
+        {% case "list" %}
+            <div class="form-group form-item-wrapper InputfieldList{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label>{{field.label|raw}} <em></em></label>
+                <input class="form-control {{field.name}} {{field.fieldClass}}" type="text" name="{{field.fieldClass}} {{field.name}}[]" id=""/>
+                <script>//Javascript to handle adding fields</script>
+            </div>
+        {% default %}
+            {% set value = ''  %}
+            {% set value = values[field.name] ?? ''  %}
+            {% set classNameScrollto = '' %}
+            {% if field.name == 'scrollto' %}
+                {% set value = '1' %}
+                {% set classNameScrollto = ' scrollto' %}
+            {% endif %}
+            {% set setAciveClass = '' %}
+            {% if craft.app.request.getBodyParam(field.name) != '' %}
+                {% set setAciveClass = 'active ' %}
+            {% endif %}
+            <div class="{% if field.name == 'scrollto' %}hiddenElement {% endif %}{{ setAciveClass }}form-group form-item-wrapper InputfieldText{{ wheelformErrors[field.name] is defined ? ' formStateError'}}">
+                <label class="{{ setAciveClass }}lableInputField{% if field.required %} required{% endif %}"> {{field.label}}<em></em></label>
+                <input class="form-control {{field.name}} {{field.fieldClass}}{% if field.required %} required{% endif %}" type="{{field.type}}" value="{{ value }}" name="{{field.name}}" id="form-{{field.name}}"/>
+            </div>
+        {% endswitch %}
+
+        {#
+        {{ wheelformErrors[field.name] is defined ? errorList(wheelformErrors[field.name]) }}
+        #}
+        {% if wheelformErrors[field.name] is defined %}
+            {% set fieldNames = field.label %}
+            {% set errorArray = errorArray|merge( [fieldNames] )  %}
+            {% set formError = 1 %}
+        {% endif %}
+
+    {% endfor %}
+
+    <input type="hidden" name="scrollto" value="1">
+
+    {#
+    <pre>{{ dump(errorArray) }}</pre>
+    <div class="InputfieldSubmit"><button class="btn-form" id="submit">Send</button></div>
+    #}
+    <button style="display:none" type="submit" class="submit-button" id="submit">{{ block.submitButtonText }}</button>
+    <span class="submit-button" id="checkSubmit">{{ block.submitButtonText }}</span>
+
+
+    {% if formError == 1%}
+        <div class="form-info">
+            {{ block.infoText }}
+        </div>
+    {% endif %}
+    <div id="lock-modal"></div>
+    <div id="loading-circle"><img src="/assets/images/icons/loading-circle.svg" alt="loading-circle" /></div>
+
+    </form>
+
+    {% set scrollTo = '0' %}
+    {% if craft.app.request.getBodyParam('scrollto') == '1' %}
+        {% set scrollTo = '1' %}
+    {% endif %}
+
+
+    <script>
+
+        $(document).ready(function() {
+
+            $('#form').find('form').addClass('formular-Kontakt');
+
+            formValidate('.formular-Kontakt', '#checkSubmit');
+
+            $('#inputUploadFile').fileinput({
+                multipleText: '{1} files',
+                showMultipleNames: true,
+            });
+
+            $('.fileinput').append('<label class="uploadInfoText">' + 'Bitte PDF wählen <em></em>' + '</label>')
+
+            var scrollTo = {{ scrollTo }}, antispamContent = '<input style="display: block;" class="antispam" type="checkbox" value="prevent spam" name="antispam[]" id="" checked />';
+
+            $('#form').find('.wf-bouncer-1').after(antispamContent);
+
+            if(scrollTo == '1') {
+
+                $('html, body').animate(
+                    {
+                        scrollTop: $('#form').offset().top -60,
+                    },
+                    500,
+                    'linear'
+                )
+            }
+
+            floatLabel(".form-control");
+        });
+
+        /**
+         * Lables Interaktion
+         * @param inputType
+         */
+        function floatLabel(inputType){
+            $(inputType).each(function(){
+                var $this = $(this);
+                // on focus add cladd active to label
+                $this.focus(function(){
+                    $this.parent().find('.lableInputField').addClass("active");
+                });
+                //on blur check field and remove class if needed
+                $this.blur(function(){
+                    if($this.val() === '' || $this.val() === 'blank'){
+                        $this.parent().find('.lableInputField').removeClass("active");
+                    }
+                });
+            });
+
+        }
+    </script>
+
+
+</div>
+
+
+

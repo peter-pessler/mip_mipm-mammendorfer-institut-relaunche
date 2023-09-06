@@ -1,0 +1,54 @@
+{# ###################################################################################################### #}
+{% set settings = {
+    '0-1300' : {
+        'size' : '920x900',
+        'mode' : 'crop'
+    },
+    '0-1000' : {
+        'size' : '920x900',
+        'mode' : 'crop'
+    },
+    '0-700' : {
+        'size' : '920x900',
+        'mode' : 'crop'
+    },
+    '0-500' : {
+        'size' : '920x900',
+        'mode' : 'crop'
+    }
+    ,
+    '0-400' : {
+        'size' : '920x900',
+        'mode' : 'crop'
+    }
+} %}
+{% set image = block.bild.one()|default(false) %}
+{% set buttonClass = 'btn btn-js' %}
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+<div class="intromodul-startseite">
+
+    <div class="grid-container content-grid-12">
+
+            <div class="containerText-headline">
+                <h1>{{ block.headline | nl2br  }}</h1>
+            </div>
+
+            <div class="containerText-body text">
+                {{ block.text }}
+            </div>
+
+            <div class="containerBild">
+                {% if image %}
+                    <div class="introbild">
+                    {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '920x900', imageMode: 'crop'} %}
+                    </div>
+                {% endif %}
+            </div>
+
+    </div>
+
+</div>
+
+

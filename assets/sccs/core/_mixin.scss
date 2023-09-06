@@ -1,0 +1,581 @@
+@use "sass:math";
+
+/* ************************************************************************************
+	* Font Sice-Mixin
+	*
+	* dynamische Schriftgröße, bis zum errechneten Breakpoint
+*/
+@mixin responsive-font($font-size-min, $font-size-max, $font-family, $line-height) {
+
+	$breakpointMax: $page-width; //wird aus _vars.scss übergeben
+	$breakpointMin: calc(calc($font-size-min / $font-size-max ) * $breakpointMax);
+
+	font-family: $font-family;
+	font-size: $font-size-max;
+	@if $line-height != 0{
+		line-height: $line-height;
+	}
+
+	@include wl-breakpoint($breakpointMax) {
+
+		// 1 vw is equal to 1% of the viewport width
+		$vw-context: calc(calc($breakpointMax* .01) * 1px); // 1% viewport width
+		font-size: calc(calc($font-size-max/$vw-context) * 1vw);
+	}
+
+	@include wl-breakpoint($breakpointMin) {
+		font-size: $font-size-min;
+		//color: red;
+	}
+
+}
+
+
+/* ************************************************************************************
+	* FCover-Mixin
+	*
+	* Passt unter Beibehaltung des Seitenverhältnisses die kleinere Seite der Grafik in den Anzeigebereich ein
+*/
+@mixin cover {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+
+/* ************************************************************************************
+	* Font Face-Mixin
+	*
+	* Benutzung: @include font-face(Font-Family, Dateiname, Schriftschnitt (default=300), Italic (default=normal));
+	* Beispiel: @include font-face("Fira Sans", "fira-sans-bold", bold);
+	* Anmerkungen: font-weight & font-style können weggelassen werden, da ein Default gesetzt ist.
+*/
+@mixin font-face($font-family, $font-path, $font-weight:300, $font-style:normal) {
+	@font-face {
+		font-family: "#{$font-family}";
+		src: url("/assets/fonts/#{$font-path}.woff2") format("woff2"), url("/assets/fonts/#{$font-path}.woff") format("woff");
+		font-weight: $font-weight;
+		font-style: $font-style;
+		font-display: swap;
+	}
+}
+
+
+/* ************************************************************************************
+	* Breakpoint-Mixin
+	*
+	* @mixin breakpoint hat nichts mit bootstrap zu tun!
+	* Benutzung: @include breakpoint(Start-Wert, End-Wert, Start-Wert, End-Wert) {…}
+	* Beispiel: @include breakpoint(1200, 800, 750, 500) {…}
+	* Anmerkungen: Es ist möglich, das Mixin mit 1–4 Werten zu befüllen.
+	* Bei einem Media Query mit Mindestbreite: @include breakpoint(0, Start-Wert) {…}
+*/
+@mixin wl-breakpoint($bp-max-width-one, $bp-min-width-one:0, $bp-max-width-two:0, $bp-min-width-two:0) {
+
+	// Max-Width
+	@if $bp-max-width-one > 0 and $bp-min-width-one == 0 and $bp-max-width-two == 0 and $bp-min-width-two == 0 {
+		@media (max-width:#{$bp-max-width-one}px) {
+			@content;
+		}
+	}
+
+	// Min-Width
+	@if $bp-max-width-one == 0 and $bp-min-width-one > 0 and $bp-max-width-two == 0 and $bp-min-width-two == 0 {
+		@media (min-width:#{$bp-min-width-one + 1}px) {
+			@content;
+		}
+	}
+
+	// Max-Width + Min-Width
+	@if $bp-max-width-one > 0 and $bp-min-width-one > 0 and $bp-max-width-two == 0 and $bp-min-width-two == 0 {
+		@media (max-width:#{$bp-max-width-one}px) and (min-width:#{$bp-min-width-one + 1}px) {
+			@content;
+		}
+	}
+
+	// Max-Width + Min-Width & Max-Width
+	@if $bp-max-width-one > 0 and $bp-min-width-one > 0 and $bp-max-width-two > 0 and $bp-min-width-two == 0 {
+		@media (max-width:#{$bp-max-width-one}px) and (min-width:#{$bp-min-width-one + 1}px) {
+			@content;
+		}
+
+		@media (max-width:#{$bp-max-width-two}px) {
+			@content;
+		}
+	}
+
+	// Max-Width + Min-Width & Max-Width + Min-Width
+	@if $bp-max-width-one > 0 and $bp-min-width-one > 0 and $bp-max-width-two > 0 and $bp-min-width-two > 0 {
+		@media (max-width:#{$bp-max-width-one}px) and (min-width:#{$bp-min-width-one + 1}px) {
+			@content;
+		}
+
+		@media (max-width:#{$bp-max-width-two}px) and (min-width:#{$bp-min-width-two + 1}px) {
+			@content;
+		}
+	}
+}
+
+
+/* ************************************************************************************
+* animatedLink-Mixin
+*
+* blendet von links nach rechts eine animierte Linie ein
+* Anmerkungen: Funktioniert auch bei Text mit Umbruch
+*/
+@mixin animatedLink($textColor, $lineColor) {
+
+	transition: all 0.3s linear;
+	display: inline;
+	color: $textColor;
+	text-decoration: none;
+	padding-bottom: 5px;
+	background: linear-gradient(to right, $lineColor 0%, $lineColor 98%);
+	background-size: 0px 2px;
+	background-repeat: no-repeat;
+	background-position: left 85%;
+
+	&:hover {
+		background-size: 100% 2px;
+	}
+
+}
+
+
+/*************************************************************************************
+* link-Mixin
+*
+* blendet eine Linie ein
+* Anmerkungen: Funktioniert auch bei Text mit Umbruch
+*/
+@mixin link($textColor, $lineColor, $textColorHover, $lineColorHover) {
+
+	transition: all 0.3s linear;
+	display: inline;
+	color: $textColor;
+	text-decoration: none;
+	padding-bottom: 5px;
+	background: linear-gradient(to right, $lineColor 0%, $lineColor 98%);
+	background-size: 100% 2px;
+	background-repeat: no-repeat;
+	background-position: left 85%;
+
+	&:hover{
+		transition: $transition;
+		color: $textColorHover;
+		background: linear-gradient(to right, $lineColorHover 0%, $lineColorHover 98%);
+		background-size: 100% 2px;
+		background-repeat: no-repeat;
+		background-position: left 85%;
+	}
+
+}
+
+/*************************************************************************************
+* btnWul-Mixin
+*
+* Botton mit Hover
+* Anmerkungen: Funktioniert auch bei Text mit Umbruch
+*/
+@mixin btnWul() {
+
+	border: none;
+	position: relative;
+	display: inline-block;
+
+	span{
+		display: inline-block;
+		color: black;
+		//mix-blend-mode: difference;
+		position: relative;
+		z-index: 10;
+
+		&::before{
+			transition: all 0.85s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+			content: '';
+			width: 40px;
+			height: 40px;
+			border-radius:100%;
+			background: #ec3006;
+			position: absolute;
+			margin-top: 10px;
+			left: -50px;
+			z-index: 1;
+		}
+
+	}
+
+	&:hover{
+		span{
+			&::before{
+				border-radius:30px;
+				background: #ec3006;
+				width: calc(100% + 50px);
+				height: 100%;
+				z-index: 1;
+			}
+		}
+	}
+
+	svg{
+		position: relative;
+		top: 0;
+		margin-left: 10px;
+		fill: none;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke: black;
+		stroke-width: 2;
+		transform: translateX(-5px);
+		transition: all .3s ease;
+	}
+
+}
+
+/* ************************************************************************************
+* btn-Mixin
+*
+* Standard Mixin für btn Class
+* Botton mit Hover
+* Anmerkungen: Funktioniert auch bei Text mit Umbruch
+*/
+@mixin btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover) {
+
+	@include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family-bold, $base-line-height);
+
+	display: inline-block;
+	padding-top: 10px;
+	padding-bottom: 8px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 30px;
+	color: $textColor;
+	text-decoration: none;
+	border: 2px solid $borderColor;
+
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $bgColor;
+		//border-radius: 30px;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: $bgColorHover;
+		transition: all .3s;
+		border-radius: 30px;
+		z-index: -1;
+	}
+	&:hover {
+		color: $textColorHover;
+		border: 2px solid $borderColorHover;
+		&:before {
+			width: 100%;
+		}
+	}
+
+}
+
+
+/* ************************************************************************************
+* btnSmall-Mixin
+*
+*/
+@mixin btnSmall($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover) {
+
+	display: inline-block;
+	padding-top: 5px;
+	padding-bottom: 3px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 30px;
+	color: $textColor;
+	text-decoration: none;
+	border: 1px solid $borderColor;
+
+	transition: all .3s;
+	position: relative;
+	overflow: hidden;
+	z-index: 1;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: $bgColor;
+		z-index: -2;
+	}
+	&:before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: $bgColorHover;
+		transition: all .3s;
+		border-radius: 30px;
+		z-index: -1;
+	}
+	&:hover {
+		color: $textColorHover;
+		border: 1px solid $borderColorHover;
+		&:before {
+			width: 100%;
+		}
+	}
+
+}
+
+/* ************************************************************************************
+* item-Mixin
+*
+* Grid Aufruf | Anzahl Spalten + Spalten Abstand
+*/
+@mixin item($anzahlItem, $abstandZeile){
+	display: grid;
+	grid-template-columns: repeat($anzahlItem, 1fr);
+	gap: 0 $abstandZeile; /* Spalte | Zeile   */
+
+}
+
+
+/* ************************************************************************************
+* imgRoundWithBorde-Mixin
+*
+* Bild als Kreis mit responsive Rahmen
+*/
+@mixin imgRoundWithBorder($borderColor, $border0pacity:1){
+
+	.square-box{
+		border-radius: 100%;
+		position: relative;
+		width: 100%;
+		overflow: hidden;
+		background-color: rgba($borderColor, $border0pacity)
+	}
+	.square-box:before{
+		content: "";
+		display: block;
+		padding-top: 100%;
+	}
+	.square-content{
+		position:  absolute;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+		justify-content: center;
+		align-items: center;
+		align-content: stretch;
+
+		img{
+			border-radius: 100%;
+			width: 77%;
+			height: 77%;
+		}
+	}
+
+}
+
+
+/* ************************************************************************************
+* dynamic-distance-Mixin
+*
+*  mindest Wert
+*  maximaler Wert
+*  height | margin-bottom | margin-top | padding-bottom | padding-top
+*  Alle Werte ohne px angabe!
+*
+*  AUFRUF:
+*  @include dynamic-distance(70, 200, height);
+*/
+@mixin dynamic-distance( $dataMin, $dataMax, $style ) {
+
+	$pageMaxWidth: $page-width; //wird aus _vars.scss übergeben
+	$breakpointWidth: calc(calc($dataMin / $dataMax)  * $pageMaxWidth );
+
+	#{$style}: #{$dataMax}px;
+
+	@include wl-breakpoint($pageMaxWidth) {
+		$display_width: 100vw;
+		$einheit:  calc($pageMaxWidth / 100);
+		$factor:  calc($display_width / $einheit);
+		$abstandFactor:  calc($dataMax / 100);
+
+		#{$style}: calc(calc($display_width / $einheit)  *  $abstandFactor);
+	}
+
+	@include wl-breakpoint($breakpointWidth) {
+		#{$style}: #{$dataMin}px;
+	}
+}
+
+
+/* ************************************************************************************
+* dynamic-distance-Mixin
+*
+*  mindest Wert
+*  maximaler Wert
+*  height | margin-bottom | margin-top | padding-bottom | padding-top
+*  Alle Werte ohne px angabe!
+*
+*  AUFRUF:
+*  @include dynamic-distance(70, 200, height);
+*/
+@mixin dynamic-treaserWidth( $width, $dataMin, $dataMax) {
+
+	$pageMaxWidth: $page-width; //wird aus _vars.scss übergeben
+	$breakpointWidth: calc(calc($dataMin / $dataMax)  * $pageMaxWidth );
+
+	width: calc( $width - #{$dataMax}px );
+
+	@include wl-breakpoint($pageMaxWidth) {
+		$display_width: 100vw;
+		$einheit:  calc($pageMaxWidth / 100);
+		$factor:  calc($display_width / $einheit);
+		$abstandFactor:  calc($dataMax / 100);
+		$result:  calc(calc($display_width / $einheit)  *  $abstandFactor);
+
+		width: calc( $width - #{$dataMin}px );
+	}
+
+	@include wl-breakpoint($breakpointWidth) {
+		width: #{$dataMin}px;
+	}
+}
+
+
+/* ************************************************************************************
+* dynamic-distance-negativ-Mixin
+*
+*  mindest Wert
+*  maximaler Wert
+*  height | margin-bottom | margin-top | padding-bottom | padding-top
+*  Alle Werte ohne px angabe!
+*
+*  AUFRUF:
+*  @include dynamic-distance-negativ(70, 200, height);
+*/
+@mixin dynamic-distance-negativ($dataMin, $dataMax, $style) {
+
+	$pageMaxWidth: $page-width; //wird aus _vars.scss übergeben
+	$breakpointWidth: calc(calc($dataMin / $dataMax ) * $pageMaxWidth);
+
+	#{$style}: -#{$dataMax}px;
+
+	@include wl-breakpoint($pageMaxWidth) {
+		$display_width: 100vw;
+		$einheit: calc($pageMaxWidth / 100);
+		$factor:  calc($display_width / $einheit);
+		$abstandFactor:  calc($dataMax / 100);
+
+		$result: calc(calc($display_width / $einheit)  *  $abstandFactor);
+
+		#{$style}: -#{$result};
+
+	}
+
+	@include wl-breakpoint($breakpointWidth) {
+		#{$style}: -#{$dataMin}px;
+	}
+
+}
+
+
+/* ************************************************************************************
+* dynamic-background-size-Mixin
+*
+*  mindest Wert
+*  maximaler Wert
+*  height | margin-bottom | margin-top | padding-bottom | padding-top
+*  Alle Werte ohne px angabe!
+*
+*  AUFRUF:
+*  @dynamic-background-size(70, 200, height);
+*/
+@mixin dynamic-background-size($dataMin, $dataMax, $style) {
+
+	$pageMaxWidth: $page-width; //wird aus _vars.scss übergeben
+	$breakpointWidth: calc(calc($dataMin / $dataMax ) * $pageMaxWidth);
+
+	@if $style == height {
+		background-size: auto #{$dataMax}px;
+	}
+
+	@if $style == width {
+		background-size: #{$dataMax}px auto;
+	}
+
+
+	@include wl-breakpoint($pageMaxWidth) {
+		$display_width: 100vw;
+		$einheit:  calc($pageMaxWidth / 100);
+		$factor:  calc($display_width / $einheit);
+		$abstandFactor:  calc($dataMax / 100);
+
+
+		@if $style == height {
+			background-size: auto calc(calc($display_width / $einheit)  *  $abstandFactor);
+		}
+
+		@if $style == width {
+			background-size: calc(calc($display_width / $einheit)  *  $abstandFactor) auto;
+		}
+
+	}
+
+	@include wl-breakpoint($breakpointWidth) {
+
+		@if $style == height {
+			background-size: auto #{$dataMin}px;
+		}
+
+		@if $style == width {
+			background-size: #{$dataMin}px auto;
+		}
+
+	}
+
+}
+
+
+/* ************************************************************************************
+* navLink-Mixin
+*
+*/
+@mixin navLink($lineColor) {
+
+	transition: all 0.3s linear;
+	display: inline;
+	text-decoration: none;
+	padding-bottom: 5px;
+	background: linear-gradient(to right, $lineColor 0%, $lineColor 98%);
+	background-size: 0px 2px;
+	background-repeat: no-repeat;
+	background-position: left 85%;
+
+	&:hover {
+		background-size: 100% 2px;
+	}
+}
+

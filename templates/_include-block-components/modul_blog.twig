@@ -1,0 +1,144 @@
+{% set ausgabeNur3Teaser = (block.ausgabeNur3Teaser)? true : false %}
+{% set headline = block.headline |default(false) %}
+<script>
+    $(document).ready(function () {
+
+        var output;
+
+        setTimeout(function () {
+            output = $('.btnAll').attr("data-output");
+            ajaxFeedback(output);
+            themenfilterHeighlight();
+        }, 50);
+
+        $(document).on('click', '.themenBtn', function () {
+            output = $(this).attr("data-output");
+            ajaxFeedback(output);
+        });
+
+        $(document).on('click', '.btnPager', function () {
+            output = $(this).attr("data-more");
+            ajaxFeedbackNext(output);
+        });
+
+
+        if ($("#masonry-effect").length > 0) {
+            setMasonryHeight();
+        }
+
+        $(window).resize(function () {
+
+            if ($("#masonry-effect").length > 0) {
+                setMasonryHeight();
+            }
+
+        })
+
+    });
+
+    function ajaxFeedback(output = '') {
+
+        var ajaxUrl = '/feedback-ajax?template=blog&blockid={{ blockid }}&output=' + output + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+            resultContainer = $('.result');
+
+        $.get(ajaxUrl, function (data) {
+            $(resultContainer).html(data);
+
+            setTimeout(function () {
+                setMasonryHeight();
+            }, 200);
+
+        });
+
+    };
+
+    function ajaxFeedbackNext(ajaxUrl = '') {
+
+        resultContainer = $('.result');
+
+        $.get(ajaxUrl, function (data) {
+            $(resultContainer).html(data);
+
+            setTimeout(function () {
+                setMasonryHeight();
+            }, 200);
+
+        });
+
+    };
+
+    function themenfilterHeighlight() {
+
+        $(document).on('click', '.themenBtn', function () {
+
+            $('.themenBtn').each(function (index, value) {
+                $(this).removeClass("highlight");
+            });
+
+            $(this).addClass('highlight');
+        });
+
+    };
+</script>
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="blog-wrapper-outer modul-blog" id="result">
+    <div class="wl-wrapper">
+
+    {% if ausgabeNur3Teaser%}
+    <div class="einleitung grid-container content-grid-12">
+        <div class="body-einleitung">
+            {% if headline %}
+                <h2>{{ headline|nl2br }}</h2>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% set allCategory = craft.categories.group('blogCat') %}
+    {% set categoryStr = ''  %}
+    {% set counter = '0' %}
+    {% set buttonArr = {} %}
+    {% for elemente in allCategory %}
+        {% set counter = counter + 1 %}
+        {% set categoryStr  = (counter == 1)? elemente.id : categoryStr  ~ ',' ~ elemente.id  %}
+        {% set buttonArr = buttonArr|merge({ (loop.index)  :  '<a href="?#result" class="themenBtn" data-output="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</a>' }) %}
+    {% endfor %}
+
+        <div class="themenfilter grid-container content-grid-12"{% if ausgabeNur3Teaser or counter < 2 %} style="display: none"{% endif %}>
+            <div class="modul-blog-themenfilter">
+                <ul>
+
+                    <li class="themenfilterbutton"><a href="?#result" class="themenBtn btnAll highlight" data-output="{{ categoryStr }}">{{ block.buttonText }}</a></li>
+
+                    {% for btn in buttonArr %}
+<li class="themenfilterbutton">{{ btn|raw }}</li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="artikels grid-container content-grid-12">
+            <div class="modul-blog-artikel">
+                <div id="articles">
+                    <div class="wl-article-container result"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,34 @@
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-accordion">
+    <section class="wl-wrapper">
+
+        <div class="content-grid-12" id="articles">
+
+            <div class="modul-accordion accordionContent">
+                <div class="accordion" data-scrolltop="on">
+                    {% for entry in block.accordionElemente %}
+                        <ul class="accordion-list {{ craft.app.request.isMobileBrowser() ? '' : 'desktop' }}">
+                            <li>
+                                <label class="accordion-label lableOff">
+                                    <div class="label-body">
+                                        {{ entry.headline }}
+                                    </div>
+                                </label>
+                                <div class="accordion-content">
+                                    <div class="accordion-content-body text">
+                                        {{ entry.text }}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+</section>
+
+

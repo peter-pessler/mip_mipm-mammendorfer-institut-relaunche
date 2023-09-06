@@ -1,0 +1,60 @@
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-accordionZweiSpalten">
+    <section class="wl-wrapper">
+
+        <div class="content-grid-12" id="articles">
+            <div class="accordionZweiSpalten">
+
+                <div class="articleContainerLinks">
+                    <div class="accordionContent">
+                        <div class="accordion" data-scrolltop="on">
+                            {% for entry in block.accordionLinks %}
+                                <ul class="accordion-list {{ craft.app.request.isMobileBrowser() ? 'mobile' : 'desktop' }}">
+                                    <li>
+                                        <label class="accordion-label lableOff">
+                                            <div class="label-body">
+                                                {{ entry.headline }}
+                                            </div>
+                                        </label>
+                                        <div class="accordion-content">
+                                            <div class="accordion-content-body text">
+                                                {{ entry.text }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="articleContainerRechts">
+                    <div class="accordionContent">
+                        <div class="accordion" data-scrolltop="on">
+                            {% for entry in block.accordionRechts %}
+                                <ul class="accordion-list {{ craft.app.request.isMobileBrowser() ? 'mobile' : 'desktop' }}">
+                                    <li>
+                                        <label class="accordion-label lableOff">
+                                            <div class="label-body">
+                                                {{ entry.headline }}
+                                            </div>
+                                        </label>
+                                        <div class="accordion-content">
+                                            <div class="accordion-content-body text">
+                                                {{ entry.text }}
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+</section>
+
+
