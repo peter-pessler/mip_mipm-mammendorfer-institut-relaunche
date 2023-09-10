@@ -8,6 +8,32 @@
 
     $(document).ready(function(){
 
+        $(document).on('click', '.btnPager', function () {
+            output = $(this).attr("data-more");
+            ajaxFeedbackNext(output);
+        });
+
+        //=================================================================================
+
+        function ajaxFeedbackNext(ajaxUrl = '') {
+
+            resultContainer = $('.resultContainer');
+
+            $.get(ajaxUrl, function (data) {
+                $(resultContainer).html(data);
+            }).done(function() {
+                setTimeout(function () {
+                    phoneNumberOnlyIsDesktop();
+                    replaceEmail();
+                }, 200);
+            });
+
+
+
+        };
+
+        //=================================================================================
+
         $('.resultContainer').hide();
 
         {% if produktgruppeid != '' %}
@@ -31,8 +57,8 @@
 
     });
 
-    function ajaxFeedback(land = '', produktgruppe = '') {
 
+    function ajaxFeedback(land = '', produktgruppe = '') {
 
         if(produktgruppe == ''){
             produktgruppe = $('#produktgruppe-select #alle').val();
@@ -46,68 +72,25 @@
             dataElementLand = '';
         }
 
-        /*
-        if(dataElementLand == '' || dataElementLand == 'undefined' ){
-            land = land;
-        }
-        */
-
-
-
-        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendler&blockid={{ blockid }}&catstatus=0&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+        var ajaxUrl='{{lgSlug}}/feedback-ajax/?template=haendler&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
             resultContainer = $('.resultContainer');
 
         $.get(ajaxUrl, function(data){
-
             $(resultContainer).html(data);
 
-            if($('.getMore').html() == undefined) {
-                $('#getMoreBtn').html('');
-            } else {
-                $('#getMoreBtn').html( $('.getMore').html() );
-                $('.getMore').remove();
-            }
-
+        }).done(function() {
+            setTimeout(function () {
+                phoneNumberOnlyIsDesktop();
+                replaceEmail();
+            }, 200);
         });
 
     };
 
-    /*
-    function statusLandCategory(land = '', produktgruppe = '') {
-
-        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendler&blockid={{ blockid }}&catstatus=1&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result;
-
-        $.ajax({
-            produktgruppee: "GET",
-            url: ajaxUrl,
-            success: function(data) {
-
-                result = data.replace(" ", "");
-                result =  $.trim(result);
-
-                $("#land-select").children("[data-alle]").remove();
-                $("#land-select").children("[value^=" + land + "]").prop( "disabled", false );
-
-                if(result == '0'){
-                    $("#land-select").children("[value^=" + land + "]").prop( "disabled", true ).addClass('disabled');
-                    $(".custom-select-2 .custom-options").children("[data-value^=" + land + "]").addClass('disabled');
-                };
-
-            },
-            error: function() {
-                alert('Error');
-            }
-        });
-
-    }
-    */
 
 function statusLandCategory(produktgruppe = '') {
 
-
-    $(".custom-select-2 .custom-options").children().removeClass( "disabled" );
-
-        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendlerFilter-statusLand&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result, resutArr;
+        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendlerFilter-statusLand&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result, resutArr,  IDsCategoryLandDisabledStr;
 
         $.ajax({
             produktgruppee: "GET",
@@ -116,35 +99,35 @@ function statusLandCategory(produktgruppe = '') {
 
                 result = data.replace(" ", "");
                 result =  $.trim(result);
-
-                //$("#land-select").children("[data-alle]").remove();
-                //$("#land-select").children("[value^=" + land + "]").prop( "disabled", false );
-
                 resutArr = jQuery.parseJSON( result );
+                //alert('Array result' + resutArr.toString());
+
+                $(".custom-select-2 .custom-options").children().removeClass( "disabled" );
+                $("#land-select").children("[data-alle]").remove();
 
                 IDsCategoryLandStr = $('#produktgruppe-select').attr("data-categoryLandStr");
                 IDsCategoryLandArr = IDsCategoryLandStr.split(',');
-                IDsCategoryLandArrDisabled = IDsCategoryLandArr;
-
+                IDsCategoryLandDisabledStr = IDsCategoryLandStr;
 
 
                 //$(".custom-select-2 .custom-options").children().removeClass( "disabled" );
                 $.each(IDsCategoryLandArr, function(key, land) {
 
-                    for (var i = 0; i < resutArr.length; i++) {
-                        if( resutArr[i] == land ) {
-                            //Function Remove Item in Array
-                            IDsCategoryLandArrDisabled.remove(land);
+                    $("#land-select").children("[value^=" + land + "]").prop( "disabled", false );
+
+                    $.each(resutArr, function(k, value) {
+                        if( value == land ) {
+                            IDsCategoryLandDisabledStr = IDsCategoryLandDisabledStr.replace("," + value, "");
+                            IDsCategoryLandDisabledStr = IDsCategoryLandDisabledStr.replace( value + ",", "");
                         }
-                    };
+                    });
 
                 });
 
-
+                IDsCategoryLandArrDisabled = IDsCategoryLandDisabledStr.split(',');
                 $.each(IDsCategoryLandArrDisabled, function(key, land) {
                     $("#land-select").children("[value^=" + land + "]").prop( "disabled", true ).addClass('disabled');
                     $(".custom-select-2 .custom-options").children("[data-value^=" + land + "]").addClass('disabled');
-
                 });
 
             },
@@ -154,12 +137,6 @@ function statusLandCategory(produktgruppe = '') {
         });
 
     }
-
-    //Function Remove Item in Array
-    Array.prototype.remove = function(v) {
-         this.splice(this.indexOf(v) == -1 ? this.length : this.indexOf(v), 1);
-    }
-
 
 </script>
 
@@ -167,7 +144,6 @@ function statusLandCategory(produktgruppe = '') {
 <div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
 <section class="blog-wrapper-outer modul-haendlerFilter" id="result">
     <div class="wl-wrapper">
-
 
                 {# Auswahl Produkt Gruppe #}
                 {% set categoryProduktgruppeStr = ''  %}

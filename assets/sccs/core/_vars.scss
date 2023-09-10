@@ -36,8 +36,10 @@ Farben der Website
 $wl-color-white: #fff;
 $wl-bgcolor-html: $wl-color-white;
 $wl-bgcolor-body: $wl-color-white;
-$wl-color-black: #00274A;
-$wl-color-blue: #44ADD3;
+$wl-color-black: #000000;
+$wl-color-blue: #1372D0;
+$wl-color-blue-dark: #001C57;
+$wl-color-green: #31C390;
 
 
 // Farben Starter
@@ -59,7 +61,7 @@ $telefonnummer-breakpoint: 900;
 $transition: all 0.15s ease-in-out;
 /* =================================================== */
 // Config allgemein
-$breakpoint-navigation: 1300;
+$breakpoint-navigation: 1500;
 $base-background-color: $wl-bgcolor-html;
 /* =================================================== */
 

@@ -21,6 +21,8 @@
 {% set showLiveAnsicht = (adminConfig.simulationLiveAnsicht)? true : false %}
 {# -------------- Sprache-------------- #}
 {% set lg = currentSite.handle %}
+
+
 <!DOCTYPE HTML>
 <html{% if doNotTrack %} data-doNotTrack="on"{% else %} data-doNotTrack="off"{% endif %} lang="{{ currentSite.language }}" dir="{{craft.app.i18n.getLocaleById(currentSite.id).getOrientation()}}">
 <head>
@@ -48,7 +50,7 @@
 
 </head>
 
-<body class="{% if pageId == 2%}startseite{% else %}contentseite{% endif %} {{body_class ?? null}} {{craft.app.request.isMobileBrowser() ? 'is-mobile' : 'is-desktop'}}">
+<body data-navbreakpoint="1500" class="{% if pageId == 2%}startseite{% else %}contentseite{% endif %} {{body_class ?? null}} {{craft.app.request.isMobileBrowser() ? 'is-mobile' : 'is-desktop'}}">
 
 {# -------------- tracking-code-body-start -------------- #}
 {% if not craft.app.config.general.devMode %}
@@ -99,6 +101,113 @@
 
     {% endif %}
 {% endif %}
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var displayWidth = $(window).width();
+        display(displayWidth);
+
+        $(window).resize(function(event) {
+
+            displayWidth = $(window).width();
+            display(displayWidth);
+            $("body").removeClass('menueOpen');
+            $('.menu-toggle-wrapper').removeClass('active');
+
+        })
+
+        $('.menu-open').on('click', function() {
+
+            /*
+            if($("body").hasClass('menueOpen')){
+                closeMobileMenu();
+                return false;
+            } else {
+                openMobileMenu();
+                return false;
+            }
+             */
+
+            openMobileMenu();
+            return false;
+
+        });
+
+
+        $('.menu-close').on('click', function() {
+            closeMobileMenu();
+            return false;
+        });
+
+        function display(displayWidth) {
+
+            var breakpointNavigation = 1500, nav = $('.navigation'), wlNav = $("#wl-nav");
+
+            if(displayWidth <= breakpointNavigation){
+
+                $('html').click(function(e) {
+                    if (!nav.is(e.target) && nav.has(e.target).length === 0){
+                        if($("body").hasClass('menueOpen')) {
+                            closeMobileMenu();
+                        }
+                    }
+                });
+
+                if($("body").hasClass('menueOpen')){
+                    wlNav.addClass('displayShow');
+                    wlNav.removeClass('displayHide');
+                    nav.addClass('statusOff');
+                    nav.removeClass('statusOn');
+                } else {
+                    nav.addClass('displayHide');
+                    nav.removeClass('displayShow');
+                }
+
+            } else {
+                wlNav.addClass('displayShow');
+                wlNav.removeClass('displayHide');
+                nav.removeClass('statusOff');
+            }
+
+        }
+
+        function closeMobileMenu() {
+
+            var nav = $('.navigation'), wlNav = $("#wl-nav"), body = $("body"), toggle = $('.menu-toggle-wrapper');
+
+            if(body.hasClass('menueOpen')){
+                toggle.removeClass('active');
+                body.removeClass('menueOpen');
+                wlNav.addClass('displayHide');
+                wlNav.removeClass('displayShow');
+                nav.addClass('statusOff');
+                nav.removeClass('statusOn');
+            }
+
+        }
+
+        function openMobileMenu() {
+
+            var nav = $('.navigation'), wlNav = $("#wl-nav"), body = $("body"), toggle = $('.menu-toggle-wrapper');
+
+            toggle.addClass('active');
+            body.addClass('menueOpen');
+            wlNav.addClass('displayShow');
+            wlNav.removeClass('displayHide');
+            nav.removeClass('statusOff');
+            nav.addClass('statusOn');
+
+        }
+
+
+    });
+
+</script>
+
+
 
 </body>
 

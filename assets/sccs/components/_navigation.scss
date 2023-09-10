@@ -1,463 +1,138 @@
-/* ====================================================== */
-/**
-                  Start Burger
- */
-/* ====================================================== */
-
-$h-width: 24px;
-$h-height: 14px;
-$h-transition-function: ease;
-$h-transition-opacity: 0;
-$h-vertical-gap: 6px;
-$h-initial-opposition: 0px;
-
-
-@mixin line-props {
-  width: 100%;
-  height: 2px;
-  background-color: $wl-color-black;
-  border-radius: 4px;
-  position: absolute;
-  transition-property: transform, opacity;
-  transition-timing-function: ease;
-  transition-duration: 0.4s;
+.displayShow{
+  display: flex;
 }
 
+.displayHide{
+  display: none;
+}
 
-.menueOuter{
+.menu-toggle {
+
+  width: 70px;
+  height: 70px;
+  position: relative;
+  right: 0;
+  cursor: pointer;
+  z-index: 1;
+
+  span {
+    position: absolute;
+    display: block;
+    height: 2px;
+    border-radius: 5px;
+
+    width: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+}
+
+.menu-open{
+
+  span{
+    background: $wl-color-black;
+  }
 
   &:hover{
-    .textMenue{
-      color: $wl-color-orange!important;
-      transition-duration: 0.4s;
+    span{
+      background: $wl-color-green;
     }
-
-    @extend .mobile-nav-button-hover;
-
   }
 
-}
-
-.mobile-nav-button-hover {
-
-    &:hover  .hamburger__inner {
-      background-color: $wl-color-orange;
-      transition-duration: 0.4s;
-    }
-
-    &:hover .hamburger__inner::before,
-    &:hover .hamburger__inner::after {
-      background-color: $wl-color-orange;
-      transition-duration: 0.4s;
-    }
-
-}
-
-
-.mobile-nav-button {
- display: none; //nur bei Dektop Variante
-
-  @include wl-breakpoint(480) {
-    border-left: 0;
+  .menu-toggle span:nth-child(1) {
+    top: 35%;
   }
 
-  cursor: pointer;
-  //display: inline-block;
-  background-color: transparent;
-
-  @include wl-breakpoint($page-width) {
-    right: 7.3vw;
-  }
-  @include wl-breakpoint(600) {
-    right: 8.5vw;
-  }
-  @include wl-breakpoint(400) {
-    right: 7vw;
-  }
-
-  .hamburger__container {
-    width: $h-width;
-    height: $h-height;
-    position: relative;
-  }
-
-  .clickArea{
-    position: relative;
-    width: 24px;
-    height: 14px;
-    background-color: red;
-  }
-
-  &.is-active .clickArea{
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: red;
-    right:70px
-  }
-
-  &.is-active .hamburger__inner {
-    display: none;
-  }
-
-  .hamburger__inner {
-    @include line-props();
+  .menu-toggle span:nth-child(2) {
     top: 50%;
-    transform: translate($h-initial-opposition, -50%);
-    opacity: 1;
+  }
 
-    &::before,
-    &::after {
-      @include line-props();
+  .menu-toggle span:nth-child(3) {
+    top: 65%;
+  }
+}
 
-      content: "";
-      opacity: 1;
-      transform: translate(-#{$h-initial-opposition}, 0);
+
+.menu-close{
+
+  padding-bottom: 40px;
+
+  .menu-toggle{
+    background: $wl-color-blue-dark;
+
+    &:hover{
+
+      span:nth-child(1) {
+        background: $wl-color-green;
+      }
+      span:nth-child(3) {
+        background: $wl-color-green;
+      }
+
     }
 
-    &::before {
-      top: -#{$h-vertical-gap};
-    }
-
-    &::after {
-      top: $h-vertical-gap;
-    }
   }
 
-
-  &.is-active .hamburger__hidden {
-    opacity: 1;
-    transform: rotate(45deg);
-    //right: 72px;
-    position: absolute;
+  .menu-toggle span:nth-child(1) {
+    background:$wl-color-white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
   }
 
-  &.is-active .hamburger__hidden::before {
-    transform: translate(0, #{$h-vertical-gap}) rotate(90deg);
-    transform-origin: center;
-  }
-
-  &.is-active .hamburger__hidden::after {
-    transform-origin: center;
-    transform: translate(0, -#{$h-vertical-gap}) rotate(0);
-  }
-
-  .hamburger__hidden {
+  .menu-toggle span:nth-child(2) {
     opacity: 0;
-    @include line-props();
+  }
 
-    background-color: $wl-color-orange;
-    transition-duration: 0.4s;
+  .menu-toggle span:nth-child(3) {
+    background:$wl-color-white;
     top: 50%;
-
-    &::before,
-    &::after {
-      @include line-props();
-      background-color: $wl-color-orange;
-      transition-duration: 0.4s;
-      content: "";
-    }
-
-    &::before {
-      top: -#{$h-vertical-gap};
-    }
-
-    &::after {
-      top: $h-vertical-gap;
-    }
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
   }
 
 }
 
-/* ====================================================== */
-/**
-                  End Burger
- */
-/* ====================================================== */
+
+.menu-toggle-wrapper{
+  &.active{
+    .menu-toggle{
+      opacity: 0;
+    }
+  }
+}
+
+.menu-close{
+  display: none;
+}
 
 
 
+/* MOBILE ANSICHT */
+@include wl-breakpoint($breakpoint-navigation) {
 
-/* ====================================================== */
-/**
-                  Start Mobile Menü Layer
- */
-/* ====================================================== */
-
-
-.mobile-menu {
-
-  &.layoutDektop{
-    width: 100%;
-    position: relative;
-
+  .menu-close{
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
+    align-items: stretch;
     align-content: stretch;
-
-    ul {
-      margin: 0px;
-      padding: 0px;
-
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: flex-start;
-      align-items: stretch;
-      align-content: stretch;
-
-    }
-
-    li {
-
-      list-style: none;
-      display: block;
-      margin-top: 0;
-      margin-bottom: 0;
-      margin-right: 25px;
-      padding: 0px ;
-      border: 0px;
-
-      a {
-        display: inline-block;
-        @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
-        color: $wl-color-black;
-        @include navLink($wl-color-black);
-      }
-
-    }
-
   }
 
-}
-
-/* ====================================================== */
-/**
-                  End Mobile Menü Layer
- */
-/* ====================================================== */
-
-
-
-
-
-
-
-/* ====================================================== */
-/**
-                  Start mobil Navigation
- */
-/* ====================================================== */
-
-@include wl-breakpoint($breakpoint-navigation) {
-
-  #nav{
-    display: none;
+  .menu-active {
+    width: 300px;
+    opacity: 1;
+    transition: all 0.2s linear;
   }
 
-  body{
-    &.menueOpen {
-      overflow: hidden!important;
-
-      #nav{
+  .buttonNavigation {
+    &.buttonNavigationMobile{
         display: block;
-      }
-
-      .mobile-nav-button {
-        position: fixed;
-        right: -45px;
-        top: 25px;
-        transition:1s ease;
-        display: block;
-
-      }
-
-
-      .hamburger__hidden {
-        background-color: $wl-color-black;
-        &::before,
-        &::after {
-          background-color: $wl-color-black;
-        }
-      }
-
+        margin-bottom: 50px;
     }
   }
-
-
-  /* ====================================================== */
-
-  .mobile-nav-button {
-    display: block;
-    z-index:9999;
-    cursor:pointer;
-    .mobile-nav-button__line {
-      width:100%;
-      height:3px;
-      background:$wl-color-white;
-      position:relative;
-      transition:1s ease;
-      &:nth-of-type(2) {
-        margin:0.5rem 0;
-      }
-
-    }
-
-  }
-
-
-  /* ====================================================== */
-
-
-  .mobile-menu {
-
-    right:-100%;
-    opacity:0;
-    display: none;
-    position: absolute;
-
-    &.layoutDektop{
-      display:none;
-    }
-
-
-    &.layoutMobile{
-      display:block;
-      max-width:420px;
-      width:100%;
-      height: 100vh;
-      background-color: $wl-color-grey;
-      position:fixed;
-      z-index:9998;
-      transition: 0.6s ease;
-      top:0;
-
-      .nav-inner{
-        overflow-x: hidden;
-        height: 100%;
-        margin-top: 60px;
-        position: relative;
-        padding-top: 50px;
-        padding-bottom: 200px;
-        //padding-right: 30px;
-        //padding-left: 50px;
-
-
-
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: center;
-        align-content: stretch;
-
-        @include wl-breakpoint(700) {
-          margin-top: 50px;
-          display: flex;
-          flex-direction: column;
-          flex-wrap: nowrap;
-          justify-content: flex-start;
-          align-items: stretch;
-          align-content: stretch;
-        }
-
-        @include wl-breakpoint(500) {
-          margin-top: 40px;
-        }
-
-
-      }
-
-      ul {
-        height: auto;
-        width: 100%;
-        position: relative;
-        top: 0;
-        padding: 0;
-        margin: 0;
-
-        li {
-          list-style: none;
-          text-align: left;
-          cursor: pointer;
-          margin-bottom: 20px;
-
-          @include wl-breakpoint(700) {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: center;
-            align-content: stretch;
-          }
-
-          a {
-            max-width:$page-width;
-            display:inline-block;
-            text-decoration:none;
-            @include responsive-font(23px, 25px, $base-font-family-bold, $base-line-height-h4);
-            //font-weight: lighter;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            color:$wl-color-black;;
-            hyphens: none;
-
-
-           @include wl-breakpoint(800) {
-             span{
-               //word-wrap: break-word !important;
-               hyphens: auto;
-             }
-             @include wl-breakpoint(700) {
-               text-align: center;
-             }
-          }
-
-            //------------------------
-            transition: all 0.3s linear;
-            display: inline;
-            text-decoration: none;
-            padding-bottom: 5px;
-            background: linear-gradient(to right,$wl-color-black 0%, $wl-color-black 98%);
-            background-size: 0px 2px;
-            background-repeat: no-repeat;
-            background-position: left 85%;
-
-            &.active{
-              color: $wl-color-orange;
-              background: linear-gradient(to right,$wl-color-orange 0%, $wl-color-orange 98%);
-              background-size: 0px 2px;
-              background-repeat: no-repeat;
-              background-position: left 85%;
-            }
-
-          }
-          //------------------------
-
-          &:hover{
-            a {
-              background-size: 100% 2px;
-            }
-          }
-
-
-        }
-      }
-
-    }
-
-  }
-
-  /* ====================================================== */
-
-  .mobile-menu--open {
-    right:0;
-    opacity:1;
-  }
-
-  /* ====================================================== */
 
 }

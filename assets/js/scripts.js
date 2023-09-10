@@ -1,39 +1,8 @@
-// @codekit-prepend  "_jquery.matchHeight.js", "_navigation.js", "_unveiledNavigation.js";
+// @codekit-prepend  "_jquery.matchHeight.js";
 
 
 // Ausführen, wenn Website geladen wurde
 $(document).ready(function() {
-
-    /**
-     *  Links Phone Number
-     *  Demo Einbettung: => <a class="cursor"  href="tel:567898">Telefon</a>
-     */
-
-    if ($("body").hasClass( "is-desktop" )) {
-
-        var phone = $('[href^="tel"]');
-        var telNummer = '';
-
-        phone.each(function () {
-
-                var currentElement  = $(this), myClassname = $(this).attr('class'), dataTooltip = $(this).attr("data-tooltip"), phoneNumber;
-
-                if(typeof myClassname == 'undefined' || myClassname == ''){
-                    phoneNumber     = currentElement.html(), newPhoneElement = $('<i></i>');
-                } else if(dataTooltip && dataTooltip != '') {
-                    phoneNumber     = currentElement.html(), newPhoneElement = $('<i class="' + myClassname + '" data-tooltip="' + dataTooltip  + '"></i>');
-                }else {
-                    phoneNumber     = currentElement.html(), newPhoneElement = $('<i class="' + myClassname + '"></i>');
-                }
-
-                currentElement.before(newPhoneElement);
-                newPhoneElement.html(phoneNumber);
-                currentElement.remove();
-
-        });
-    }
-
-    /* *********************************************************************************************************************** */
 
     /**
      * Accordion
@@ -104,15 +73,14 @@ $(document).ready(function() {
     /* *********************************************************************************************************************** */
 
 
-    /**
-     * Preload Animation Startseite
-    */
 
-    $(".preloader").delay(4000).fadeOut();
 
     /* *********************************************************************************************************************** */
 
     setTimeout(function() {
+        phoneNumberOnlyIsDesktop();
+        styleMenue();
+
         equal_width($('.list-text-js'));
         responsiveAbstand();
     }, 50);
@@ -126,6 +94,8 @@ $(document).ready(function() {
     $(window).resize(function() {
 
         setTimeout(function() {
+            styleMenue();
+
             equal_width($('.list-text-js'));
             responsiveAbstand();
         }, 50);
@@ -304,6 +274,54 @@ function responsiveAbstand() {
 
 /* *********************************************************************************************************************** */
 
+function phoneNumberOnlyIsDesktop() {
+
+    /**
+     *  Links Phone Number
+     *  Demo Einbettung: => <a class="cursor"  href="tel:567898">Telefon</a>
+     */
+
+    if ($("body").hasClass( "is-desktop" )) {
+
+        var phone = $('[href^="tel"]');
+        var telNummer = '';
+
+        phone.each(function () {
+
+            var currentElement  = $(this), myClassname = $(this).attr('class'), dataTooltip = $(this).attr("data-tooltip"), phoneNumber;
+
+            if(typeof myClassname == 'undefined' || myClassname == ''){
+                phoneNumber     = currentElement.html(), newPhoneElement = $('<i></i>');
+            } else if(dataTooltip && dataTooltip != '') {
+                phoneNumber     = currentElement.html(), newPhoneElement = $('<i class="' + myClassname + '" data-tooltip="' + dataTooltip  + '"></i>');
+            }else {
+                phoneNumber     = currentElement.html(), newPhoneElement = $('<i class="' + myClassname + '"></i>');
+            }
+
+            currentElement.before(newPhoneElement);
+            newPhoneElement.html(phoneNumber);
+            currentElement.remove();
+
+        });
+    }
+
+};/* *********************************************************************************************************************** */
+
+function replaceEmail() {
+
+    var mail = $('[data-email]');
+    mail.each(function () {
+        var dataEmail = $(this).attr("data-email"), newUrl;
+        dataEmail = dataEmail.replace('[at]', '@').replace(/\[dot\]/g, '.');
+        newUrl = 'mailto:' + dataEmail;
+        $(this).attr("href", newUrl);
+        $(this).attr('data-email', '').removeAttr('data-email');
+    })
+
+};
+
+/* *********************************************************************************************************************** */
+
 function setMasonryHeight() {
     var itemHeight;
 
@@ -383,7 +401,7 @@ function tabellenSpaltenBreite(tabellenId,showBorder,breakpoint) {
         $.each($('.table_small'), function(index, value) {
 
             if ( $(this).attr("data-width")  !== "undefined"){
-                $(this).removeAttr("style");
+                $(this).removeremoveAttr("style");
             }
 
         });
@@ -419,6 +437,95 @@ function tabellenSpaltenBreite(tabellenId,showBorder,breakpoint) {
 
     }
 
+}
+
+/* *********************************************************************************************************************** */
+
+function styleMenue() {
+    var width, count = 0,  counter = 0, top = 0,  mystyle = "", leftWidth = 0, hrefWidth = 0, breakpoint = parseInt($('body').attr("data-navbreakpoint")), hrefWidthBefore;
+
+    $('head style').remove();
+
+    width = $(window).innerWidth();
+    width = parseInt( width );
+
+
+    $('#wl-nav').find('a').each(function(e) {
+        count = count+1;
+    });
+
+
+
+    if( width < breakpoint + 1){
+
+        // Script für umschalten auf Mobile hier einfügen!
+
+
+
+        // Navigation Mobile ----------------------------------------------------------------------------------------
+
+        $('#wl-nav').find('a').each(function(e) {
+
+            counter = counter+1;
+
+
+            if(counter > 1){
+                top = top + 50;
+            }
+
+            /*
+            if(counter == count){
+                top = top + 20;
+            }
+             */
+
+
+            if($(this).hasClass( "active" )){
+                mystyle += "#wl-nav div.active, #wl-nav a:nth-child(" + counter + "):hover~.animation { top: " + top + "px;} \n\r ";
+            } else {
+                mystyle += "#wl-nav a:nth-child(" + counter + "):hover~.animation { top: " + top + "px;} \n\r ";
+            }
+
+        });
+
+        $( "<style>" + mystyle + "</style>" ).appendTo( "head" );
+
+
+    } else {
+
+        // Navigation Desktop ----------------------------------------------------------------------------------------
+
+        // Script für umschalten auf Desktop hier einfügen!
+
+        //----------------------------------------------------------------------------------------
+
+        $('#wl-nav').find('a').each(function(e) {
+            counter = counter+1;
+            hrefWidth = Math.round($(this).innerWidth());
+
+            if(counter > 1){
+                leftWidth = leftWidth + hrefWidthBefore;
+            }
+
+            /*
+            if(counter == count){
+                leftWidth = leftWidth + 20;
+            }
+             */
+
+            if($(this).hasClass( "active" )){
+                mystyle += "#wl-nav div.active, #wl-nav a:nth-child(" + counter + "):hover~.animation { left: " + leftWidth + "px; width: " + hrefWidth + "px; } \n\r ";
+            } else {
+                mystyle += "#wl-nav a:nth-child(" + counter + "):hover~.animation { left: " + leftWidth + "px; width: " + hrefWidth + "px; } \n\r ";
+            }
+
+            mystyle += "#wl-nav a:nth-child(" + counter + ") {  width: " + hrefWidth + "px; } \n\r ";
+            hrefWidthBefore = hrefWidth;
+
+        });
+
+        $( "<style>" + mystyle + "</style>" ).appendTo( "head" );
+    }
 }
 
 

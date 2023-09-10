@@ -1,14 +1,11 @@
 #header {
   background-color: #ffffff;
-  position: fixed;
-  top: 0;
+  position: relative;
   width: 100%;
   z-index: 10;
 }
 
-
 header {
-
 
   @include dynamic-distance(35, 45, padding-top);
 
@@ -60,82 +57,22 @@ header {
           align-items: center;
           align-content: stretch;
 
-          width: 400px;
+          width: 100px;
 
-
-          .boxLogo{
-            width: 285px;
-
-            @include wl-breakpoint(1100) {
-              @include dynamic-distance(150, 500, width);
-            }
-
-            @include wl-breakpoint(900) {
-              width: 174px;
-            }
+          img{
+            width: 117px;
+            height: auto;
+            margin-bottom: 4px;
             @include wl-breakpoint(370) {
-              width: 120px;
+              width: 90px;
             }
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: center;
-            align-content: stretch;
-
-            .logoContainer{
-              .logo {
-                img{
-                  width: 115px;
-                  height: auto;
-                  margin-bottom: 4px;
-                  @include wl-breakpoint(370) {
-                    width: 90px;
-                  }
-                }
-              }
-            }
-
-          }
-
-
-          .boxLanguage {
-
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: center;
-            align-content: stretch;
-
-            text-transform: uppercase;
-            color: $wl-color-black;
-
-            a{
-              text-transform: uppercase;
-              color: #979cae;
-              text-decoration: none;
-
-              &:hover{
-                color: $wl-color-blue;
-                transition: all .4s ease-in-out;
-              }
-            }
-
-            .trenner{
-              width: 18px;
-              font-size: 1.2em;
-              text-align: center;
-            }
-
           }
 
         }
 
 
         .boxBodyRight{
-          width: calc(100% - 400px);
+          width: calc(100% - 120px);
           display: flex;
           flex-direction: row;
           flex-wrap: nowrap;
@@ -143,61 +80,143 @@ header {
           align-items: center;
           align-content: stretch;
 
-
-          .boxMenue{
-            width:100%;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            justify-content: flex-end;
-            align-items: center;
-            align-content: stretch;
-
-            .menueOuter{
-              display: flex;
-              flex-direction: row;
-              flex-wrap: nowrap;
-              justify-content: flex-end;
-              align-items: center;
-              align-content: stretch;
-
-              span{
-
-                &.textMenue{
-                  display: none;
+                .boxMenue{
+                  width:calc( 100% - 95px);
                   @include wl-breakpoint($breakpoint-navigation) {
-                    display: inline-block;
+                    width:calc( 100% - 195px); // hier kommt der Burger Container dazu
                   }
-                  cursor: pointer;
-                  margin-left: 8px;
 
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: nowrap;
+                  justify-content: space-between;
+                  align-items: center;
+                  align-content: stretch;
+
+                      .menueOuter{
+
+                        width: calc( 100% - 245px); // 100% - 225px buttonNavigation -20px Ausgleich center
+                        @include wl-breakpoint(700) {
+                          width: 100%;
+                        }
+
+                        overflow: hidden;
+                        @include wl-breakpoint($breakpoint-navigation) {
+                          overflow: visible;
+                        }
+
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: nowrap;
+                        justify-content: center;
+                        align-items: stretch;
+                        align-content: stretch;
+
+                        span{
+
+                          &.textMenue{
+                            display: none;
+                            @include wl-breakpoint($breakpoint-navigation) {
+                              display: inline-block;
+                            }
+                            cursor: pointer;
+                            margin-left: 8px;
+
+                            color: $wl-color-black;
+                            transition-duration: 0.4s;
+                            @include responsive-font(17px, 20px, $base-font-family-bold, $base-line-height);
+
+                            @include wl-breakpoint(1100) {
+                              padding-top: 1px;
+                            }
+
+                            @include wl-breakpoint(480) {
+                              display: none;
+                            }
+
+                          }
+
+                        }
+
+
+                      }
+
+                      .buttonNavigation {
+                        width: 225px;
+                        background-color: #efeeee;
+
+                        &.buttonNavigationMobile{
+                          display: none;
+                        }
+
+                        &.buttonNavigationDesktop{
+                          @include wl-breakpoint(700) {
+                            display: none;
+                          }
+                        }
+                      }
+
+                }
+
+
+                .boxLanguage {
+
+                  width: 95px;
+
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: nowrap;
+                  justify-content: flex-end;
+                  align-items: center;
+                  align-content: stretch;
+
+                  text-transform: uppercase;
                   color: $wl-color-black;
-                  transition-duration: 0.4s;
-                  @include responsive-font(17px, 20px, $base-font-family-bold, $base-line-height);
 
-                  @include wl-breakpoint(1100) {
-                    padding-top: 1px;
+                  a{
+                    text-transform: uppercase;
+                    color: #979cae;
+                    text-decoration: none;
+
+                    &:hover{
+                      color: $wl-color-blue;
+                      transition: all .4s ease-in-out;
+                    }
                   }
 
-                  @include wl-breakpoint(480) {
-                    display: none;
+                  .trenner{
+                    width: 18px;
+                    font-size: 1.2em;
+                    text-align: center;
                   }
 
                 }
 
-              }
+
+                .menu-toggle-container{
+                  display: none;
+
+                  @include wl-breakpoint($breakpoint-navigation) {
+                    width: 100px;
+                    position: relative;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: flex-end;
+                    align-items: stretch;
+                    align-content: stretch;
+                  }
+
+                }
 
 
-            }
+                .menu-toggle-wrapper{
+                  width: 70px;
+                  margin-right: -17px;
+                }
 
           }
 
-          .wl-wrapper{
-            @media only screen and (min-width: #{$breakpoint-navigation}px ) {
-              padding-left: 0px;
-              padding-right: 0px;
-            }
-          }
 
         }
 
@@ -209,7 +228,7 @@ header {
 
   }
 
-}
+
 
 
 

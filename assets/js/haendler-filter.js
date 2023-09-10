@@ -54,7 +54,7 @@ function changeLand(myValue) {
     var produktgruppe = $('#land-select').attr("data-produktgruppe");
     ajaxFeedback(myValue, produktgruppe);
     //Achtung Testen
-    //statusLandCategory(myValue, produktgruppe);
+    statusLandCategory(produktgruppe);
 }
 
 

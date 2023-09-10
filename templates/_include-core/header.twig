@@ -8,22 +8,9 @@
             <div class="boxBody">
 
                 <div class="boxBodyLeft">
-
-                    <div class="boxLogo">
-                        <div class="logoContainer">
-                            <a class="logo" href="/">
-                                <img src="/assets/images/img/logo-header.svg" height="300" width="43" alt="{{siteConfig.organization}}">
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <div class="boxLanguage">
-                        {{ lg }}
-                        <div class="trenner">|</div>
-                        {{ _self.switcherLinks() | trim | raw  }}
-                    </div>
-
+                    <a class="logo" href="/">
+                        <img src="/assets/images/img/logo-header.svg" height="122" width="117" alt="{{siteConfig.organization}}">
+                    </a>
                 </div>
 
 
@@ -32,22 +19,31 @@
                     <div class="boxMenue">
 
                         <div class="menueOuter">
-
                             {% include '_include-core/navigation' %}
+                        </div>
 
-                            <div class="mobile-nav-button mobile-nav-button-hover">
-                                <div class="hamburger__container">
-                                    <div class="clickAreaContainer">
-                                        <div class="hamburger__inner"></div>
-                                        <div class="hamburger__hidden"></div>
-                                    </div>
-                                </div>
+                        <div class="buttonNavigation buttonNavigationDesktop">
+                            Händler finden
+                        </div>
+
+                    </div>
+
+                    <div class="boxLanguage">
+                        {{ lg }}
+                        <div class="trenner">|</div>
+                        {{ _self.switcherLinks() | trim | raw  }}
+                    </div>
+
+                    <div class="menu-toggle-container">
+                        <div class="menu-toggle-wrapper menu-open">
+                            <div class="menu-toggle">
+                                <span></span>
+                                <span></span>
+                                <span></span>
                             </div>
-
-                            <span class="textMenue">{{translation.translateMenue}}</span>
-
                         </div>
                     </div>
+
 
                 </div>
 
@@ -57,17 +53,3 @@
 
     </div>
 </div>
-
-
-<script>
-    // When the user scrolls down 50px from the top of the document, resize the header's font size
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            document.getElementById("header").style.fontSize = "30px";
-        } else {
-            document.getElementById("header").style.fontSize = "90px";
-        }
-    }
-</script>

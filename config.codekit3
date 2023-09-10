@@ -49,6 +49,14 @@
       "oAP" : "\/.idea\/modules.xml",
       "oF" : 0
     },
+    "\/.idea\/php.xml" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/.idea\/php.xml",
+      "oF" : 0
+    },
     "\/.idea\/sshConfigs.xml" : {
       "cB" : 0,
       "ft" : 8192,
@@ -606,6 +614,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_navigation-style.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_navigation-style.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_navigation.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -661,6 +684,21 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_pagination-entry.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_pagination-haendler.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_pagination-haendler.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -2994,6 +3032,16 @@
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
+    },
+    "\/web\/assets\/images\/img\/kreis-mobile-navigation.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/kreis-mobile-navigation.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
     },
     "\/web\/assets\/images\/img\/logo-footer.svg" : {
       "ft" : 2097152,

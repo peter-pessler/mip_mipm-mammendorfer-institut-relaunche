@@ -1,18 +1,3 @@
-{# *------------* Beschreibung GET Variabeln *------------ *#}
-{# ************************************************* #}
-{#
-template        => Dieses Template wird über get-ajax-feedback.twig aufgerufen diese benötigt den Namen dieses templates
-blockid         => wird das matrixElemente der "Content Page" in der Schleife ausgelesen ist dies die Block ID wo das Modul aufgerufen wird (benötigt in get-ajax-feedback.twig )
-produktgruppe   => IDs Produktgruppe-Kategorie
-land            => IDs Land-Kategorie
-sectionname     => sectionname der "Content Page" Seite welches über das entprechende Modul, das Ajax Event ausgelöst
-pageid          => ID der "Content Page" Seite welches über das entprechende Modul, das Ajax Event ausgelöst
-getall          => Diesen Template ist zugewiesen, ob alle Ergebnisse angezeigt werden oder in Etappen nachgeladen wird. Mit "getall" kann dieses geändert werden.
-artikelausgabe  => Gesamtzahl der Augegebenen Artikel (ohne "weitere Ergebnisse anzeigen" obwohl es weitere gibt)
-#}
-
-{% set catstatus = (catstatus != 1)? 0 : 1 %}
-
 {# ************************************************* #}
 {# *------------* START Konfiguration *------------ * #}
 {# ************************************************* #}
@@ -52,20 +37,18 @@ artikelausgabe  => Gesamtzahl der Augegebenen Artikel (ohne "weitere Ergebnisse 
 
 {% if produktgruppe != '' %}
 
-
     {% set categoryProduktgruppeIdsArray = produktgruppe|split(',') %}
     {% set categoryProduktgruppeIdsAnzahl = categoryProduktgruppeIdsArray|length %}
 
     {% set categoryProduktgruppeSelectById = craft.categories().id(categoryProduktgruppeIdsArray).all() %}
     {% set categoryProduktgruppeBy = { element: categoryProduktgruppeSelectById  }  %}
 
-    {% set articleItemsProduktgruppe = craft.entries().section(sectionName) %}
+    {% set articleItemsProduktgruppe = craft.entries().section(sectionName).relatedTo(['and',categoryProduktgruppeBy]) %}
 
 {% else %}
 
     {% set articleItemsProduktgruppe = craft.entries()
         .section(sectionName) %}
-
 {% endif %}
 
 {# *-----------------------------------------* #}
