@@ -2759,6 +2759,22 @@
       "oAP" : "\/web\/assets\/css\/tabelle-mobile.min.css.map",
       "oF" : 0
     },
+    "\/web\/assets\/fonts\/DINNextLTPr\/DINNextLTPro-Bold.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/DINNextLTPr\/DINNextLTPro-Bold.woff",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/DINNextLTPr\/DINNextLTPro-Bold.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/DINNextLTPr\/DINNextLTPro-Bold.woff2",
+      "oF" : 0
+    },
     "\/web\/assets\/fonts\/karla\/karla-bold.woff" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2789,6 +2805,70 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/web\/assets\/fonts\/karla\/karla-regular.woff2",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-bold.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-bold.woff",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-bold.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-bold.woff2",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-medium.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-medium.woff",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-medium.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-medium.woff2",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-regular.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-regular.woff",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-regular.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-regular.woff2",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-semibold.woff" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-semibold.woff",
+      "oF" : 0
+    },
+    "\/web\/assets\/fonts\/poppins\/poppins-semibold.woff2" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/fonts\/poppins\/poppins-semibold.woff2",
       "oF" : 0
     },
     "\/web\/assets\/imageGallery\/arrows.png" : {

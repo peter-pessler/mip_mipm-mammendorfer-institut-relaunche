@@ -133,7 +133,6 @@ i{
 
 .text {
 
-
   .h2box{
     margin-bottom: 20px;
   }
@@ -156,6 +155,7 @@ i{
   }
 
   a {
+    color: $wl-color-blue-dark;
     @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
     //@include animatedLink($wl-color-red, $wl-color-blue);
     @include link($wl-color-red, $wl-color-orange, $wl-color-orange, $base-font-color);

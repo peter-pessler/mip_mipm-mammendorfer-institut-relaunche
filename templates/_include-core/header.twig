@@ -8,7 +8,7 @@
             <div class="boxBody">
 
                 <div class="boxBodyLeft">
-                    <a class="logo" href="/">
+                    <a class="logo" href="{{ protokollDomain }}">
                         <img src="/assets/images/img/logo-header.svg" height="122" width="117" alt="{{siteConfig.organization}}">
                     </a>
                 </div>
@@ -23,7 +23,9 @@
                         </div>
 
                         <div class="buttonNavigation buttonNavigationDesktop">
-                            Händler finden
+                            {% set showBtnaendlerFinden = siteConfig.buttonHaendlerFinden|default(false) %}{% if showBtnaendlerFinden %}
+                                    {{ _self.linkList( siteConfig.buttonHaendlerFinden, 'buttonHaendlrtFinden' ) | trim | raw  }}
+                            {% endif %}
                         </div>
 
                     </div>

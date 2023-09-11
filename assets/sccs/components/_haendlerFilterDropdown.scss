@@ -1,6 +1,5 @@
 .modul-haendlerFilter{
 
-
   .select-container{
 
     padding-bottom: 60px;
@@ -16,22 +15,42 @@
     }
 
 
-
     .select-Beschreibung{
-      @include responsive-font(15px, 18px, $h4-font-family, $base-line-height-h4);
       margin-top: 0;
+      padding-left: 21px;
       margin-bottom: -0.07em;
       letter-spacing: 0.07em;
-      font-weight: 500;
-      padding-left: 5px;
-      padding-bottom: 15px;
-      color: $wl-color-orange;
+      padding-bottom: 8px;
+      color: $wl-color-green;
+      @include responsive-font(15px, 18px, $font-family-DINNextLTPro-bold, 1.34);
     }
-
 
   }
 
+  .custom-select-2{
+
+    .custom-options {
+      height: 354px;
+      overflow-y: scroll;
+    }
+
+    .custom-options::-webkit-scrollbar
+    {
+      width: 8px;
+    }
+
+    .custom-options::-webkit-scrollbar-thumb
+    {
+      border-radius: 10px;
+      background-color: $wl-color-green;
+    }
+
+  }
+
+
+
   .custom-options{
+
     span{
       display: block;
       padding-top: 14px;
@@ -45,7 +64,7 @@
 
       &.disabled{
         color: #b5b5b5;
-        text-decoration: line-through solid $wl-color-red;
+        text-decoration: line-through solid $wl-color-blue;
         text-decoration-thickness: 2px;
       }
     }
@@ -61,21 +80,6 @@
         &.icon-btn{
           display: none!important;
         }
-      }
-    }
-
-  }
-
-  .resourcen-button{
-
-    @include dynamic-distance(25, 50, margin-top);
-
-    a {
-      &.btn {
-        @include btn($wl-color-orange, $wl-color-white, $wl-color-orange, $wl-color-black, $wl-color-white, $wl-color-black);
-        white-space: wrap;
-        display: inline-table;
-
       }
     }
 
@@ -103,7 +107,7 @@
     width: 350px;
     padding: 15px 53px 10px 18px;
     border-radius: 50px;
-    border: 2px solid $wl-color-black;
+    border: 2px solid $wl-color-green;
     background-color: $wl-color-white;
     font-size: 17px;
 
@@ -115,8 +119,8 @@
       width: 100%;
       font-size: 15px;
     }
-    color: #090421;
-    font-family: $base-font-family;
+    color: $wl-color-blue-dark;
+    @include responsive-font(18px, 23px, $font-family-DINNextLTPro-bold, 1.34);
     cursor: pointer;
   }
 
@@ -124,19 +128,16 @@
     position: absolute;
     display: block;
     content: '';
-    width: 16px;
-    height: 16px;
-    top: 17px;
+    width: 18px;
+    height: 18px;
+    top: 19px;
     @include wl-breakpoint(470) {
       top: 13px;
     }
     right: 20px;
-    //border-bottom: 2px solid $wl-color-black;
-    //border-right: 2px solid $wl-color-black;
     background-image: url("/assets/images/icons/arrow_dropdown-orange.svg");
     background-repeat: no-repeat;
     background-position: center center;
-    //transform: rotate(45deg) translateY(-50%);
     transform: rotate(0deg);
     transform-origin: center center;
     transition: all .4s ease-in-out;
@@ -149,7 +150,7 @@
   }
 
   .custom-select.opened .custom-select-trigger:after {
-    top: 17px;
+    top: 19px;
     @include wl-breakpoint(470) {
       top: 13px;
     }
@@ -263,13 +264,5 @@
   .custom-option.selection {
     background: #f9f9f9;
   }
-
-
-
-  /**
-  *****************************************************
-   */
-
-
 
 }

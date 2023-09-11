@@ -57,7 +57,7 @@
               word-wrap: break-word!important;
               hyphens: initial!important;
               &.themenBtn{
-                @include responsive-font(18px, 20px, $font-family-karlaBold, $base-line-height);
+                @include responsive-font(18px, 20px, $font-family-DINNextLTPro-bold, $base-line-height);
                 margin-top: 25px;
                 margin-right: 10px;
                 margin-left: 10px;

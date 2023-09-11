@@ -244,104 +244,27 @@
 	@include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family-bold, $base-line-height);
 
 	display: inline-block;
-	padding-top: 10px;
-	padding-bottom: 8px;
+	padding-top: 12px;
+	padding-bottom: 6px;
 	padding-left: 20px;
 	padding-right: 20px;
 	border-radius: 30px;
 	color: $textColor;
 	text-decoration: none;
 	border: 2px solid $borderColor;
-
 	transition: all .3s;
 	position: relative;
-	overflow: hidden;
-	z-index: 1;
-	&:after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: $bgColor;
-		//border-radius: 30px;
-		z-index: -2;
-	}
-	&:before {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 0%;
-		height: 100%;
-		background-color: $bgColorHover;
-		transition: all .3s;
-		border-radius: 30px;
-		z-index: -1;
-	}
+	@include responsive-font(16px, 18px, $font-family-DINNextLTPro-bold, 1.7);
+
+	text-transform: uppercase;
+
 	&:hover {
+		box-shadow: inset 0 0 0 2em $bgColorHover;
 		color: $textColorHover;
-		border: 2px solid $borderColorHover;
-		&:before {
-			width: 100%;
-		}
 	}
 
 }
 
-
-/* ************************************************************************************
-* btnSmall-Mixin
-*
-*/
-@mixin btnSmall($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover) {
-
-	display: inline-block;
-	padding-top: 5px;
-	padding-bottom: 3px;
-	padding-left: 20px;
-	padding-right: 20px;
-	border-radius: 30px;
-	color: $textColor;
-	text-decoration: none;
-	border: 1px solid $borderColor;
-
-	transition: all .3s;
-	position: relative;
-	overflow: hidden;
-	z-index: 1;
-	&:after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: $bgColor;
-		z-index: -2;
-	}
-	&:before {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		width: 0%;
-		height: 100%;
-		background-color: $bgColorHover;
-		transition: all .3s;
-		border-radius: 30px;
-		z-index: -1;
-	}
-	&:hover {
-		color: $textColorHover;
-		border: 1px solid $borderColorHover;
-		&:before {
-			width: 100%;
-		}
-	}
-
-}
 
 /* ************************************************************************************
 * item-Mixin

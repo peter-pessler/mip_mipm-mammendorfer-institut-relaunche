@@ -12,22 +12,33 @@ Fonts
 // Fonts vom eigenen Webspace
 /* =================================================== */
 
-$font-name-karlaRegular: "karla-regular";
-$font-family-karlaRegular: $font-name-karlaRegular, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
-@include font-face($font-name-karlaRegular, 'karla/karla-regular', '' , '');
+$font-name-poppinsRegular: "poppins-regular";
+$font-family-poppinsRegular: $font-name-poppinsRegular, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
+@include font-face($font-name-poppinsRegular, 'poppins/poppins-regular', '' , '');
 /* =================================================== */
-$font-name-karlaBold: "karla-bold";
-$font-family-karlaBold: $font-name-karlaBold, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
-@include font-face($font-name-karlaBold, 'karla/karla-bold', '' , '');
+$font-name-poppinsMedium: "poppins-medium";
+$font-family-poppinsMedium: $font-name-poppinsMedium, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
+@include font-face($font-name-poppinsMedium, 'poppins/poppins-medium', '' , '');
+/* =================================================== */
+$font-name-poppinsSemibold: "poppins-semibold";
+$font-family-poppinsSemibold: $font-name-poppinsSemibold, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
+@include font-face($font-name-poppinsSemibold, 'poppins/poppins-semibold', '' , '');
 /* =================================================== */
 
-$base-font-family: $font-family-karlaRegular;
-$base-font-family-bold: $font-family-karlaBold;
-$h1-font-family: $font-family-karlaBold;
-$h2-font-family: $font-family-karlaBold;
-$h3-font-family: $font-family-karlaBold;
-$h4-font-family: $font-family-karlaBold;
-$h5-font-family: $font-family-karlaBold;
+
+$font-name-DINNextLTPro-bold: "DINNextLTPro-bold";
+$font-family-DINNextLTPro-bold: $font-name-DINNextLTPro-bold, Roboto, -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Oxygen, Ubuntu, Cantarell, "Open Sans", Arial, sans-serif;
+@include font-face($font-name-DINNextLTPro-bold, 'DINNextLTPr/DINNextLTPro-Bold', '' , '');
+/* =================================================== */
+
+
+$base-font-family: $font-family-poppinsRegular;
+$base-font-family-bold: $font-family-poppinsMedium;
+$h1-font-family: $font-family-DINNextLTPro-bold;
+$h2-font-family: $font-family-DINNextLTPro-bold;
+$h3-font-family: $font-family-DINNextLTPro-bold;
+$h4-font-family: $font-family-DINNextLTPro-bold;
+$h5-font-family: $font-family-DINNextLTPro-bold;
 
 
 /***** (2) **********************************
@@ -67,7 +78,7 @@ $base-background-color: $wl-bgcolor-html;
 
 $wl-form-font-family: $base-font-family;
 $wl-form-color-fields: $wl-color-white;
-$wl-form-color-text: $wl-color-black;
+$wl-form-color-text: $wl-color-blue-dark;
 $wl-form-color-error: red;
 /* --------------------------------------------------- */
 $wl-input-border-color: $wl-color-grey;
@@ -87,22 +98,22 @@ $wl-input-padding-bottom: 20px;
 // Default Font scale bounding for responsive Font in mixin responsive-font
 /* =================================================== */
 
-$base-font-size-min: 18px;
-$base-font-size-max: 24px;
+$base-font-size-min: 16px;
+$base-font-size-max: 18px;
 /* =================================================== */
 $font-weight-normal:300;
 $font-weight-strong:700;
 /* =================================================== */
 $navigation-font-family: $base-font-family;
 /* =================================================== */
-$base-button-line-height: 1.3;
-$base-line-height: 1.3;
+//$base-button-line-height: 1.3;
+$base-line-height: 1.5;
 $base-line-height-h1: 1.23;
 $base-line-height-h2: 1.23;
 $base-line-height-h3: 1.23;
 $base-line-height-h4: 1.23;
 /* =================================================== */
-$base-font-color: $wl-color-black;
+$base-font-color: $wl-color-blue-dark;
 
 
 

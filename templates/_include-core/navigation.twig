@@ -1,3 +1,5 @@
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
 <div class="navigation">
 
     {% set navigationSteps = 1 %}
@@ -82,51 +84,13 @@
 
         <div class="animation{% if  entry.id != 2 %} active{% endif %}"></div>
 
-
         {# Ausgabe Button #}
         <div class="buttonNavigation buttonNavigationMobile">
-
-            Händler finden
-
-            {% set showBtnNavigation = buttonNavigation.buttonNavigation.one()|default(false) %}
-            {% if showBtnNavigation %}
-                {% for item in buttonNavigation.buttonNavigation.all() %}
-                    {% set className = (item.layout.value != '')? item.layout.value : 'navBtnLayout1' %}
-                    {% set element = item.auswahlSeite %}
-                    {% set type = element.type %}
-                    {% set linkText = '' %}
-
-
-                    {% set showElementEntry = (element.getUrl() == '')? false : true %}
-                    {% if showElementEntry %}
-
-                        {% if  type == 'entry' %}
-
-                            {% if element.getCustomText() == '' %}
-                                {% set linkText = element.text|trim %}
-                                {% set linkText = linkText|replace({ ' ' : '<br />' }) %}
-                                {{ element.title() }} <a class="{{ className }}" href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}>{{ linkText|raw }}</a>
-                            {% else %}
-                                {% set linkText = element.getCustomText()|trim %}
-                                {% set linkText = linkText|replace({ ' ' : '<br />' }) %}
-                                {{ element.title() }} <a class="{{ className }}" href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}>{{ linkText|raw }}</a>
-                            {% endif %}
-
-                        {% elseif  type == 'url' %}
-                            {% set linkText = element.getCustomText()|trim %}
-                            {% set linkText = linkText|replace({ ' ' : '<br />' }) %}
-                            {{ element.title() }} <a class="{{ className }}" href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}>{{ linkText|raw }}</a>
-                        {% endif %}
-
-                    {% endif %}
-
-                {% endfor %}
+            {% set showBtnaendlerFinden = siteConfig.buttonHaendlerFinden|default(false) %}{% if showBtnaendlerFinden %}
+                {{ _self.linkList( siteConfig.buttonHaendlerFinden, 'buttonHaendlrtFinden' ) | trim | raw  }}
             {% endif %}
-            <a style="width: 100%; height: 80px;" data-abstand ></a>
         </div>
 
     </nav>
-
-
 
 </div>

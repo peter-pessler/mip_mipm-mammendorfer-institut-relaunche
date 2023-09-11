@@ -187,28 +187,26 @@ function statusLandCategory(produktgruppe = '') {
                     <div class="select-container">
 
                         <div class="auswahlProduktgruppe" data-start="{{ produktgruppeid }}">
-                            <div class="select-Beschreibung">Produktgruppe</div>
-                            <select name="auswahlProduktgruppe" id="produktgruppe-select" data-categoryLandStr="{{ categoryLandStr }}" class="custom-select-1 custom-select sources"  placeholder="Bitte wählen">
-                                <option class="selectText" value="">Produkt wählen</option>
-                                <option class="allTyp" id="alle" value="{{ categoryProduktgruppeStr }}">alle Produktgruppen</option>
+                            <div class="select-Beschreibung">{{ translation.t_produktgruppe }}</div>
+                            <select name="auswahlProduktgruppe" id="produktgruppe-select" data-categoryLandStr="{{ categoryLandStr }}" class="custom-select-1 custom-select sources"  placeholder="{{ translation.t_produktWaehlen }}">
+                                <option class="selectText" value=""></option>
+                                <option class="allTyp" id="alle" value="{{ categoryProduktgruppeStr }}">{{ translation. t_alleProduktgruppen }}</option>
                                 {% for option in kategorieProduktgruppeArr %}
                                     {{ option|raw }}
                                 {% endfor %}
                             </select>
                         </div>
 
-
                         <div class="auswahlLand">
-                            <div class="select-Beschreibung">Land</div>
-                            <select name="auswahlLand" id="land-select" class="custom-select-2 custom-select sources" placeholder="Bitte wählen" data-produktgruppe>
-                                <option class="selectText"  value="">Land wählen</option>
-                                <option value="" class="alleCat" data-alle>alle Länder</option>
+                            <div class="select-Beschreibung">{{ translation.t_land }}</div>
+                            <select name="auswahlLand" id="land-select" class="custom-select-2 custom-select sources" placeholder="{{ translation.t_landWaehlen }}" data-produktgruppe>
+                                <option class="selectText"  value=""></option>
+                                <option value="" class="alleCat" data-alle>{{ translation.t_alleLaender }}</option>
                                 {% for option in categoryLandArr %}
                                     {{ option|raw }}
                                 {% endfor %}
                             </select>
                         </div>
-
 
                     </div>
                 </div>

@@ -44,8 +44,7 @@ NAVIGATION
       align-items: center;
       align-content: stretch;
 
-      font-size: 20px;
-
+      @include responsive-font(18px, 20px, $font-family-DINNextLTPro-bold, 1.7);
 
       position: relative;
       z-index: 1;
@@ -77,6 +76,17 @@ NAVIGATION
     }
 
 
+  .buttonNavigation {
+    &.buttonNavigationMobile {
+      display: none;
+    }
+  }
+
+
+
+
+
+
     /* MOBILE ANSICHT */
     @include wl-breakpoint($breakpoint-navigation) {
 
@@ -91,7 +101,7 @@ NAVIGATION
             width: 280px;
           }
           height: 100vh;
-          background: rgba(220, 234, 248, 0.9);
+          background: rgba(220, 234, 248, 0.95);
           transform: translateX(100%);
           transition: 0.5s all ease;
           overflow: overlay;
@@ -158,6 +168,22 @@ NAVIGATION
               width: 230px;
             }
           }
+
+
+
+
+      .buttonNavigation {
+        &.buttonNavigationMobile{
+
+          @include wl-breakpoint(700) {
+            display: block;
+            margin-top: 50px;
+            margin-bottom: 50px;
+          }
+
+        }
+      }
+
 
       }
 

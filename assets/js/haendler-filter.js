@@ -153,7 +153,7 @@ function styleSelect(selectId, selectClass) {
                     $(".custom-select-2 .custom-select-trigger").css('color', '#000000');
                     $(".custom-select-2 .custom-options").find(".alleCat").show();
                 } else {
-                    $(".custom-select-2 .custom-select-trigger").css('background-color', '#EC8500');
+                    $(".custom-select-2 .custom-select-trigger").css('background-color', '#31C390');
                     $(".custom-select-2 .custom-select-trigger").css('color', '#FFFFFF');
                     $(".custom-select-2 .custom-select-trigger").addClass('highlight');
                 }

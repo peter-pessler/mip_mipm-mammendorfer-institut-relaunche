@@ -137,7 +137,7 @@
         });
 
 
-        $('.menu-close').on('click', function() {
+        $('.menu-close .menu-toggle').on('click', function() {
             closeMobileMenu();
             return false;
         });
@@ -148,7 +148,8 @@
 
             if(displayWidth <= breakpointNavigation){
 
-                $('html').click(function(e) {
+                //$('html').click(function(e) {
+                $('html').on("click touchstart",function(e) {
                     if (!nav.is(e.target) && nav.has(e.target).length === 0){
                         if($("body").hasClass('menueOpen')) {
                             closeMobileMenu();

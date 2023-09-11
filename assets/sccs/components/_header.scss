@@ -20,8 +20,8 @@ header {
 
   .header-body{
     grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 13;
+    grid-column-start: 2;
+    grid-column-end: 12;
 
     .nav-container{
 
@@ -57,10 +57,14 @@ header {
           align-items: center;
           align-content: stretch;
 
-          width: 100px;
+          width: 117px;
+
+          @include wl-breakpoint(1500) {
+            width: 100px;
+          }
 
           img{
-            width: 117px;
+            @include dynamic-distance(90, 117, width);
             height: auto;
             margin-bottom: 4px;
             @include wl-breakpoint(370) {
@@ -82,8 +86,11 @@ header {
 
                 .boxMenue{
                   width:calc( 100% - 95px);
+                  @include wl-breakpoint(1650) {
+                    width:calc( 100% - 75px);
+                  }
                   @include wl-breakpoint($breakpoint-navigation) {
-                    width:calc( 100% - 195px); // hier kommt der Burger Container dazu
+                    width:calc( 100% - 175px); // hier kommt der Burger Container dazu
                   }
 
                   display: flex;
@@ -95,7 +102,7 @@ header {
 
                       .menueOuter{
 
-                        width: calc( 100% - 245px); // 100% - 225px buttonNavigation -20px Ausgleich center
+                        width: calc( 100% - 210px); // 100% - 190px buttonNavigation -20px Ausgleich center
                         @include wl-breakpoint(700) {
                           width: 100%;
                         }
@@ -142,18 +149,25 @@ header {
                       }
 
                       .buttonNavigation {
-                        width: 225px;
-                        background-color: #efeeee;
 
-                        &.buttonNavigationMobile{
-                          display: none;
-                        }
+                        width: 190px;
 
                         &.buttonNavigationDesktop{
                           @include wl-breakpoint(700) {
                             display: none;
                           }
                         }
+
+                        a{
+
+                          margin-top: -2px;
+                          text-transform: uppercase;
+
+                          &.buttonHaendlrtFinden{
+                              @include btn($wl-color-white, $wl-color-blue-dark,$wl-color-orange, $wl-color-orange, $wl-color-white, $wl-color-orange)
+                          }
+                        }
+
                       }
 
                 }
@@ -162,6 +176,10 @@ header {
                 .boxLanguage {
 
                   width: 95px;
+                  @include wl-breakpoint(1650) {
+                    width: 75px;
+                  }
+                  color: $wl-color-blue;
 
                   display: flex;
                   flex-direction: row;
@@ -169,17 +187,15 @@ header {
                   justify-content: flex-end;
                   align-items: center;
                   align-content: stretch;
-
                   text-transform: uppercase;
-                  color: $wl-color-black;
 
                   a{
                     text-transform: uppercase;
-                    color: #979cae;
+                    color: $wl-color-blue-dark;
                     text-decoration: none;
 
                     &:hover{
-                      color: $wl-color-blue;
+                      color: $wl-color-green;
                       transition: all .4s ease-in-out;
                     }
                   }
