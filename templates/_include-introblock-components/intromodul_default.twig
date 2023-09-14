@@ -33,12 +33,22 @@
 
     <div class="grid-container content-grid-12">
 
-        <div class="containerText-claim{{ claimClassName }}">
-            {{ block.claim }}
-        </div>
+        <div class="containerText-head intromodulAbstandTop">
 
-        <div class="containerText-headline">
-            <h1>{{ block.headline | nl2br  }}</h1>
+            {% set claim = block.claim|default(false) %}
+            {% if claim %}
+                <div class="containerText-claim{{ claimClassName }}">
+                    {{ claim }}
+                </div>
+            {% endif %}
+
+           {% set headline = block.headline|default(false) %}
+           {% if headline %}
+            <div class="containerText-headline">
+                   <h1>{{ headline }}</h1>
+            </div>
+           {% endif %}
+
         </div>
 
         <div class="containerText-body">
@@ -47,9 +57,22 @@
                 {{ block.text }}
             </div>
 
+            <div class="buttonIntro">
+                    <span class="buttonIntro1">
+                    {% set button1 = block.button1|default(false) %}{% if button1 %}
+                            {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
+                        {% endif %}
+                    </span>
+                <span class="buttonIntro2">
+                    {% set button2 = block.button2|default(false) %}{% if button2 %}
+                        {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                    {% endif %}
+                    </span>
+            </div>
+
         </div>
 
-        <div class="containerBild">
+        <div class="containerBild intromodulAbstandTop">
             {% if image %}
                 <div class="introbild">
                     {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
