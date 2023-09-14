@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="buttonNavigation buttonNavigationDesktop">
-                            {% set showBtnaendlerFinden = siteConfig.buttonHaendlerFinden|default(false) %}{% if showBtnaendlerFinden %}
+                            {% set showBtnHaendlerFinden = siteConfig.buttonHaendlerFinden|default(false) %}{% if showBtnHaendlerFinden %}
                                     {{ _self.linkList( siteConfig.buttonHaendlerFinden, 'buttonHaendlrtFinden' ) | trim | raw  }}
                             {% endif %}
                         </div>

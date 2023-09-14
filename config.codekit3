@@ -2339,6 +2339,14 @@
       "oAP" : "\/templates\/_extends-elements\/templ_news-detail.twig",
       "oF" : 0
     },
+    "\/templates\/_extends-elements\/templ_produkt-detail.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_extends-elements\/templ_produkt-detail.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_abstand.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2625,14 +2633,6 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/404.twig",
-      "oF" : 0
-    },
-    "\/templates\/main-backup.twig" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/templates\/main-backup.twig",
       "oF" : 0
     },
     "\/templates\/main.twig" : {
@@ -3112,6 +3112,36 @@
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
+    },
+    "\/web\/assets\/images\/img\/bg-kreis-blue.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/bg-kreis-blue.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
+    },
+    "\/web\/assets\/images\/img\/bg-kreis-green.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/bg-kreis-green.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
+    },
+    "\/web\/assets\/images\/img\/bg-kreis-home.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/bg-kreis-home.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
     },
     "\/web\/assets\/images\/img\/kreis-mobile-navigation.svg" : {
       "ft" : 2097152,

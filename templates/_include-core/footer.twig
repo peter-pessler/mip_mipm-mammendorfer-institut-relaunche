@@ -1,96 +1,67 @@
 {# -------------- Macro -------------- #}
 {% import "_include-core/macros.twig" as _self %}
 
-
-{% set contactMatrix = siteConfig.moduleFooterContactMatrix.all() %}
-{% set contactListArr = {} %}
-{% if contactMatrix is defined and contactMatrix %}
-      {# ---------------------------------------------------------------------------------------------------------------------------------- #}
-
-      {% set counter = 0 %}
-      {% for block in contactMatrix %}
-
-          {# -------------------------------------------------------------------------------------------------------------------------------- #}
-          {% if block.type.handle == 'linkListe' %}
-
-              {% set showHref = ( block.href.getUrl() != '')? true : false %}
-              {% set labelAbstandClass = ( block.label is empty)? '' : 'labelAbstand ' %}
-              {% if showHref %}
-                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="' ~ labelAbstandClass ~ 'list-label list-text-js">' ~ block.label ~ '</span> <span class="list-body">' ~ _self.linkList( block.href, 'list-contact' ) | trim | raw  ~ '</span></li>' }) %}
-              {% else %}
-                  {% set element = '' %}
-                  {% set elementText = block.text|default(false) %}
-                  {% if elementText %}
-                      {% set element = '<span class="list-body">' ~ block.text ~ '</span>' %}
-                  {% endif %}
-                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="' ~ labelAbstandClass ~ 'list-label">' ~ block.label ~ '</span> ' ~ element ~ '</li>'}) %}
-              {% endif %}
-
-              {% set counter = counter + 1 %}
-
-          {% endif %}
-          {# -------------------------------------------------------------------------------------------------------------------------------- #}
-
-          {# -------------------------------------------------------------------------------------------------------------------------------- #}
-          {% if block.type.handle == 'linkListeIcon' %}
-
-              {% set classIconZuweisung = (block.iconZuweisung.value != 0)? ' list-icon ' ~ block.iconZuweisung.value : '' %}
-              {% set showHref = ( block.href.getUrl() != '')? true : false %}
-              {% if showHref %}
-                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="list-label' ~ classIconZuweisung ~ '"></span> <span class="list-body">' ~ _self.linkList( block.href, 'list-contact' ) | trim | raw  ~ '</span></li>' }) %}
-              {% else %}
-                  {% set element = '' %}
-                  {% set elementText = block.text|default(false) %}
-                  {% if elementText %}
-                      {% set element = '<span class="list-body">' ~ block.text ~ '</span>' %}
-                  {% endif %}
-                  {% set contactListArr = contactListArr|merge({ (counter)  :  '<li><span class="list-label' ~ classIconZuweisung ~ '"></span> ' ~ element ~ '</li>'}) %}
-              {% endif %}
-
-              {% set counter = counter + 1 %}
-
-          {% endif %}
-          {# -------------------------------------------------------------------------------------------------------------------------------- #}
-
-      {% endfor %}
-
-{% endif %}
-
-
         <section class="wrapper-outer element-footer">
             <section class="wl-wrapper">
 
+                <div class="foo-container-head content-grid-12">
+                    <div class="foo-container-logo">
+                        <div class="foo-logo">
+                            <img src="/assets/images/img/logo-footer.svg" height="300" width="43" alt="{{siteConfig.organization}}">
+                        </div>
+                    </div>
+                </div>
 
                 <div class="foo-container-body content-grid-12">
 
-                    <div class="foo-container-logo">
-                        <img src="/assets/images/img/logo-footer.svg" height="300" width="43" alt="{{siteConfig.organization}}">
-                        <br />
+                    <div class="foo-container-1">
+
+                        <div class="claim">
+                            Zum Wohle des Menschen, im Dienste der Medizin
+                        </div>
+
                         <p>&copy; {{ 'now'|date('Y') }} {{siteConfig.organization}}</p>
                     </div>
 
 
-                    <div class="foo-container-adresse">
-                        <ul class="footer-liste-kontakt">
-                            {% for element in contactListArr %}{{ element|raw }}{% endfor %}
+                    <div class="foo-container-2">
+                        {% set footerEMailAdresse = siteConfig.eMailAdresse|default(false) %}
+                        {% set footerEMailText = siteConfig.eMailText|default(false) %}
+                        {% set footerMailData = '' %}
+                        {% set footerTelefonNummer = siteConfig.footerTelefonNummer|default(false) %}
+                        <ul class="footer-liste">
+                            {% if footerEMailAdresse and footerEMailText %}
+                                {% set footerMailData = footerEMailAdresse|replace({'@': '[at]'})%}
+                                {% set footerMailData = footerMailData|replace({'.': '[dot]'})%}
+                                <li><a target="_blank" data-email="{{ footerMailData }}">{{ footerEMailText }}</a></li>
+                            {% endif %}
+                            {% if footerTelefonNummer %}
+                                <li>{{ craft.wul.phone(footerTelefonNummer,'tel',footerTelefonNummer)|raw }}</li>
+                            {% endif %}
                         </ul>
                     </div>
 
-                    <div class="foo-container-listen">
-
-                        <div class="foo-container-liste1">
-                            <ul class="footer-liste-1">
-                                {% set showListeLinks = siteConfig.linkListe1.one()|default(false) %}{% if showListeLinks %}
-                                    {% for item in siteConfig.linkListe1.all() %}
-
-                                        <li>{{ _self.linkList( item.linkElement, 'liste-1' ) | trim | raw  }}</li>
-                                    {% endfor %}
-                                {% endif %}
-                            </ul>
+                    <div class="foo-container-4">
+                        <div class="footer-button">
+                            {% set showBtnNewsletterAbo = siteConfig.footerNewsletterAbo|default(false) %}{% if showBtnNewsletterAbo %}
+                                    {{ _self.linkList( siteConfig.footerNewsletterAbo, 'newsletterAbo' ) | trim | raw  }}
+                            {% endif %}
                         </div>
+                    </div>
 
-                        <div class="foo-container-liste2">
-                            <ul class="footer-liste-2">
+
+
+                    <div class="foo-container-3">
+
+                            <div class="footer-adresse">
+                                {{ siteConfig.footerAdresse  | nl2br  }}
+                            </div>
+
+                    </div>
+
+                    <div class="foo-container-5">
+
+                            <ul class="footer-liste">
                                 {% set showListeRechts = siteConfig.linkListe2.one()|default(false) %}{% if showListeRechts %}
                                     {% for item in siteConfig.linkListe2.all() %}
 
@@ -98,9 +69,70 @@
                                     {% endfor %}
                                 {% endif %}
                             </ul>
+
+
+                        <div class="foo-container-socialIcons socialMedia-icons">
+
+                            <a href="{{ siteConfig.facebookIcnUrl }}" target="_blank">
+                                <svg class="facebookIcn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                    <g id="Gruppe_10430" data-name="Gruppe 10430" transform="translate(-1275.999 -426)">
+                                        <g id="facebook-3-2_1_" data-name="facebook-3-2 (1)" transform="translate(1149.555 423.719)">
+                                            <path id="facebook-fill" data-name="Differenzmenge 1" d="M10,20a10.07,10.07,0,0,1-2.015-.2,9.944,9.944,0,0,1-3.576-1.5,10.027,10.027,0,0,1-3.623-4.4A9.949,9.949,0,0,1,.2,12.015a10.1,10.1,0,0,1,0-4.031,9.95,9.95,0,0,1,1.5-3.576A10.03,10.03,0,0,1,6.108.786,9.95,9.95,0,0,1,7.985.2a10.1,10.1,0,0,1,4.031,0,9.944,9.944,0,0,1,3.576,1.5,10.028,10.028,0,0,1,3.623,4.4A9.943,9.943,0,0,1,19.8,7.985a10.1,10.1,0,0,1,0,4.031,9.948,9.948,0,0,1-1.5,3.576,10.03,10.03,0,0,1-4.4,3.623,9.953,9.953,0,0,1-1.877.583A10.07,10.07,0,0,1,10,20ZM6.739,7.543h0v2.42H8.307v6.967h2.881V9.918h1.9l.172-2.381H11.138c0-.01,0-1.065,0-1.367a.735.735,0,0,1,.1-.4.6.6,0,0,1,.235-.212,1.028,1.028,0,0,1,.459-.1h1.32V3.07H11.036a4.034,4.034,0,0,0-.988.116,2.66,2.66,0,0,0-.893.4,2.007,2.007,0,0,0-.646.756,2.313,2.313,0,0,0-.183.535,3.107,3.107,0,0,0-.065.653c0,.442,0,.863,0,1.308,0,.2,0,.455,0,.707H6.739Z" transform="translate(126.445 2.281)" fill="#31c390"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+
+                            <a href="{{ siteConfig.xingIcnUrl}}" target="_blank">
+                                <svg class="xingIcn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                    <g id="Gruppe_10431" data-name="Gruppe 10431" transform="translate(-1324 -426)">
+                                        <rect id="Rechteck_3593" data-name="Rechteck 3593" width="20" height="20" transform="translate(1324 426)" fill="#fff" opacity="0"/>
+                                        <g id="xing-icon" transform="translate(898.594 323.502)">
+                                            <path id="xing-fill-1" data-name="Pfad 3589" d="M428.446,142a.442.442,0,0,0-.393.18.447.447,0,0,0,.017.442L430.02,146a.015.015,0,0,1,0,.016l-3.065,5.408a.446.446,0,0,0,0,.443.425.425,0,0,0,.377.2h2.884A.882.882,0,0,0,431,151.5L434.117,146c-.012-.019-1.983-3.458-1.983-3.458a.891.891,0,0,0-.8-.541h-2.885Z" transform="translate(0 -35.551)" fill="#31c390"/>
+                                            <path id="xing-fill-2" data-name="Pfad 3590" d="M498.854,102.5a.845.845,0,0,0-.772.549s-6.214,11.02-6.419,11.382l4.1,7.519a.9.9,0,0,0,.806.549h2.881a.426.426,0,0,0,.383-.184.449.449,0,0,0-.006-.446l-4.066-7.429a.017.017,0,0,1,0-.019l6.386-11.292a.452.452,0,0,0,.006-.445.428.428,0,0,0-.384-.184h-2.914Z" transform="translate(-58.29)" fill="#31c390"/>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+
+                            <a href="{{ siteConfig.linkedinIcnUrl }}" target="_blank">
+                                <svg class="linkedinIcn" xmlns="http://www.w3.org/2000/svg" width="20.001" height="20" viewBox="0 0 20.001 20">
+                                    <g id="Gruppe_10432" data-name="Gruppe 10432" transform="translate(-1371.999 -427)">
+                                        <rect id="Rechteck_3594" data-name="Rechteck 3594" width="20" height="20" transform="translate(1372 427)" fill="#fff" opacity="0"/>
+                                        <g id="linkedin" transform="translate(105 -3720.574)">
+                                            <g id="Gruppe_10433" data-name="Gruppe 10433">
+                                                <path id="linkedin-fill" d="M0,7.224a2.085,2.085,0,0,1,.675-1.6A2.473,2.473,0,0,1,2.43,5a2.4,2.4,0,0,1,1.717.619,2.184,2.184,0,0,1,.675,1.663A2.039,2.039,0,0,1,4.166,8.83a2.477,2.477,0,0,1-1.774.638H2.373A2.357,2.357,0,0,1,.656,8.83,2.147,2.147,0,0,1,0,7.224ZM.25,24.14V11.227H4.533V24.145Zm6.655,0h4.282V16.927a2.52,2.52,0,0,1,.974-2.157,2.092,2.092,0,0,1,1.38-.454q2.161,0,2.161,2.92v6.9h4.282v-7.4a6.235,6.235,0,0,0-1.35-4.342,4.6,4.6,0,0,0-3.565-1.479,4.375,4.375,0,0,0-3.878,2.147V13.1h-.019l.019-.038V11.227H6.905q.038.619.038,3.848t-.038,9.07Z" transform="translate(1267 4143.002)" fill="#31c390"/>
+                                            </g>
+                                        </g>
+                                    </g>
+                                </svg>
+                            </a>
+
+                            <a href="{{ siteConfig.youtubeIcnUrl }}" target="_blank">
+                                <svg class="youtubeIcn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                    <g id="Gruppe_10434" data-name="Gruppe 10434" transform="translate(-1425 -426)">
+                                        <rect id="Rechteck_3595" data-name="Rechteck 3595" width="20" height="20" transform="translate(1425 426)" fill="#fff" opacity="0"/>
+                                        <path id="youtube-fill" data-name="Pfad 3588" d="M261.365,573.441l-4.1-.075a21.415,21.415,0,0,1-3.963-.245c-1.981-.4-2.122-2.389-2.269-4.054a28.439,28.439,0,0,1,.258-7.044,2.408,2.408,0,0,1,2.376-2.164,131.315,131.315,0,0,1,13.308-.127,9.607,9.607,0,0,1,1.4.167c2.272.4,2.327,2.647,2.475,4.54a25.74,25.74,0,0,1-.2,5.735c-.225,1.573-.656,2.892-2.475,3.019-2.278.166-4.5.3-6.789.258C261.385,573.441,261.372,573.441,261.365,573.441Zm-2.412-3.982c1.717-.986,3.4-1.955,5.108-2.935-1.72-.986-3.4-1.955-5.108-2.935Z" transform="translate(1174.078 -130.542)" fill="#31c390"/>
+                                    </g>
+                                </svg>
+                            </a>
+
+                            <a href="{{ siteConfig.instagramIcnUlr }}" target="_blank">
+                                <svg class="instagramIcn" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                    <g id="Gruppe_10435" data-name="Gruppe 10435" transform="translate(-1476 -425)">
+                                        <rect id="Rechteck_3596" data-name="Rechteck 3596" width="20" height="20" transform="translate(1476 425)" fill="#fff" opacity="0"/>
+                                        <path id="instagram-fill" d="M6.667,10A3.333,3.333,0,1,1,10,13.333,3.333,3.333,0,0,1,6.667,10m-1.8,0A5.135,5.135,0,1,0,10,4.865,5.135,5.135,0,0,0,4.865,10M14.137,4.66a1.2,1.2,0,1,0,1.2-1.2,1.2,1.2,0,0,0-1.2,1.2M5.956,18.138A5.523,5.523,0,0,1,4.1,17.794a3.111,3.111,0,0,1-1.15-.748A3.091,3.091,0,0,1,2.2,15.9a5.523,5.523,0,0,1-.345-1.857C1.808,12.985,1.8,12.669,1.8,10s.011-2.986.058-4.041A5.545,5.545,0,0,1,2.2,4.1a3.111,3.111,0,0,1,.748-1.15A3.091,3.091,0,0,1,4.1,2.2a5.523,5.523,0,0,1,1.857-.345C7.01,1.811,7.327,1.8,10,1.8s2.986.011,4.041.058a5.545,5.545,0,0,1,1.857.345,3.1,3.1,0,0,1,1.15.748,3.1,3.1,0,0,1,.748,1.15,5.523,5.523,0,0,1,.345,1.857c.048,1.054.058,1.371.058,4.041s-.01,2.986-.058,4.041a5.545,5.545,0,0,1-.345,1.857,3.311,3.311,0,0,1-1.9,1.9,5.523,5.523,0,0,1-1.857.345c-1.054.048-1.371.058-4.041.058s-2.986-.01-4.041-.058M5.877.061A7.335,7.335,0,0,0,3.454.525,4.909,4.909,0,0,0,1.678,1.678,4.893,4.893,0,0,0,.525,3.454,7.335,7.335,0,0,0,.061,5.881C.011,6.943,0,7.284,0,10s.011,3.056.061,4.122a7.335,7.335,0,0,0,.465,2.427A4.89,4.89,0,0,0,1.679,18.32a4.909,4.909,0,0,0,1.775,1.154,7.339,7.339,0,0,0,2.427.465c1.063.049,1.4.06,4.118.06s3.056-.011,4.122-.061a7.335,7.335,0,0,0,2.427-.465,5.113,5.113,0,0,0,2.924-2.924,7.314,7.314,0,0,0,.465-2.427C19.987,13.055,20,12.715,20,10s-.011-3.056-.06-4.122a7.335,7.335,0,0,0-.464-2.427A4.918,4.918,0,0,0,18.32,1.678,4.909,4.909,0,0,0,16.55.525,7.323,7.323,0,0,0,14.123.061C13.057.012,12.716,0,10,0S6.944.011,5.877.061" transform="translate(1476 425.001)" fill="#31c390"/>
+                                    </g>
+                                </svg>
+                            </a>
+
+
                         </div>
 
+
                     </div>
+
+
 
                 </div>
 

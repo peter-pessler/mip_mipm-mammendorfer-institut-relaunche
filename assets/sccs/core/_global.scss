@@ -35,7 +35,6 @@ main{
 
 footer{
   overflow-y: visible;
-  border: 1px solid #413f3f;
 }
 
 template, [hidden] {
@@ -154,7 +153,7 @@ i{
     margin-bottom: 0;
   }
 
-  a {
+  a:not(.btn) {
     color: $wl-color-blue-dark;
     @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
     //@include animatedLink($wl-color-red, $wl-color-blue);

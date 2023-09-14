@@ -21,10 +21,9 @@
 {% set showLiveAnsicht = (adminConfig.simulationLiveAnsicht)? true : false %}
 {# -------------- Sprache-------------- #}
 {% set lg = currentSite.handle %}
-
-
 <!DOCTYPE HTML>
 <html{% if doNotTrack %} data-doNotTrack="on"{% else %} data-doNotTrack="off"{% endif %} lang="{{ currentSite.language }}" dir="{{craft.app.i18n.getLocaleById(currentSite.id).getOrientation()}}">
+
 <head>
 {% include '_include-core/meta' %}
 {% include '_include-core/favicons' %}
@@ -50,8 +49,34 @@
 
 </head>
 
-<body data-navbreakpoint="1500" class="{% if pageId == 2%}startseite{% else %}contentseite{% endif %} {{body_class ?? null}} {{craft.app.request.isMobileBrowser() ? 'is-mobile' : 'is-desktop'}}">
+{% if sectionName == 'produkt' %}
+    {% set bgClassName = ' blue' %}
+    {% set claimClassName = ' blue' %}
+{% elseif sectionName == 'produktZubehoer' %}
+    {% set bgClassName = ' green' %}
+    {% set claimClassName = ' green' %}
+{% else %}
+        {% set statusHintergrundbildKreis = entry.statusHintergrundbildKreis.value %}
+        {% switch statusHintergrundbildKreis %}
+                {% case "green" %}
+                    {% set bgClassName = ' green' %}
+                {% case "blue" %}
+                    {% set bgClassName = ' blue' %}
+                {% case "home" %}
+                    {% set bgClassName = ' home' %}
+                {% case "disable" %}
+                    {% set bgClassName = ' ' %}
+                {% default %}
+                    {% set bgClassName = ' green' %}
+        {% endswitch %}
+        {% set claimClassName = ' blue' %}
+{% endif %}
 
+
+{% if pageId == 2%}{% set statusPageClassName = ' startseite' %}{% else %}{% set statusPageClassName = ' contentseite' %}{% endif %}
+{% set device = ( craft.app.request.isMobileBrowser() ) ? 'is-mobile' : 'is-desktop' %}
+
+<body data-navbreakpoint="1500" data-sectionName="{{ sectionName }}" class="{{ device}}{{ bgClassName }}{{ statusPageClassName }}">
 {# -------------- tracking-code-body-start -------------- #}
 {% if not craft.app.config.general.devMode %}
 
@@ -65,24 +90,29 @@
     {% endif %}
 {% endif %}
 
-    {# Startanimation #}
-    {% if startAnimation != 'dontLoad' %}
-    {# {% include '_include-vendor/preloader.twig' %} #}
-    {% endif %}
-
     <header id="header" class="unveiled-navigation">
         <section class="wrapper-outer element-header">
             <section class="wl-wrapper{% if pageId != 2 and sectionName != 'blog' %} contentIntro{% elseif pageId != 2 and sectionName == 'blog'  %} contentIntroBlog{% else %} contentIntroStart{% endif %}">
                 {% include '_include-core/header' %}
             </section>
         </section>
+
+        {% block intro %}{% endblock %}
+
     </header>
 
     <main id="main">
-      {% block intro %}{% endblock %}
-      {# -------------- H1/h2/h3/H4 | Grid ... für Entwicklung -------------- #}
+
+      {# -------------- H1/h2/h3/H4 | Grid ... für Entwicklung --------------
       {% include '_include-vendor/code-entwicklung.twig' %}
+      #}
       {% block content %}{% endblock %}
+
+{# -------------- ür Entwicklung -------------- #}
+<section class="wl-wrapper">
+<br /><br />{% include '_include-vendor/grid-demo-12' %}<br /><br />
+</section>
+
     </main>
 
     <footer id="foo">
@@ -101,114 +131,6 @@
 
     {% endif %}
 {% endif %}
-
-
-<script>
-
-    $(document).ready(function () {
-
-        var displayWidth = $(window).width();
-        display(displayWidth);
-
-        $(window).resize(function(event) {
-
-            displayWidth = $(window).width();
-            display(displayWidth);
-            $("body").removeClass('menueOpen');
-            $('.menu-toggle-wrapper').removeClass('active');
-
-        })
-
-        $('.menu-open').on('click', function() {
-
-            /*
-            if($("body").hasClass('menueOpen')){
-                closeMobileMenu();
-                return false;
-            } else {
-                openMobileMenu();
-                return false;
-            }
-             */
-
-            openMobileMenu();
-            return false;
-
-        });
-
-
-        $('.menu-close .menu-toggle').on('click', function() {
-            closeMobileMenu();
-            return false;
-        });
-
-        function display(displayWidth) {
-
-            var breakpointNavigation = 1500, nav = $('.navigation'), wlNav = $("#wl-nav");
-
-            if(displayWidth <= breakpointNavigation){
-
-                //$('html').click(function(e) {
-                $('html').on("click touchstart",function(e) {
-                    if (!nav.is(e.target) && nav.has(e.target).length === 0){
-                        if($("body").hasClass('menueOpen')) {
-                            closeMobileMenu();
-                        }
-                    }
-                });
-
-                if($("body").hasClass('menueOpen')){
-                    wlNav.addClass('displayShow');
-                    wlNav.removeClass('displayHide');
-                    nav.addClass('statusOff');
-                    nav.removeClass('statusOn');
-                } else {
-                    nav.addClass('displayHide');
-                    nav.removeClass('displayShow');
-                }
-
-            } else {
-                wlNav.addClass('displayShow');
-                wlNav.removeClass('displayHide');
-                nav.removeClass('statusOff');
-            }
-
-        }
-
-        function closeMobileMenu() {
-
-            var nav = $('.navigation'), wlNav = $("#wl-nav"), body = $("body"), toggle = $('.menu-toggle-wrapper');
-
-            if(body.hasClass('menueOpen')){
-                toggle.removeClass('active');
-                body.removeClass('menueOpen');
-                wlNav.addClass('displayHide');
-                wlNav.removeClass('displayShow');
-                nav.addClass('statusOff');
-                nav.removeClass('statusOn');
-            }
-
-        }
-
-        function openMobileMenu() {
-
-            var nav = $('.navigation'), wlNav = $("#wl-nav"), body = $("body"), toggle = $('.menu-toggle-wrapper');
-
-            toggle.addClass('active');
-            body.addClass('menueOpen');
-            wlNav.addClass('displayShow');
-            wlNav.removeClass('displayHide');
-            nav.removeClass('statusOff');
-            nav.addClass('statusOn');
-
-        }
-
-
-    });
-
-</script>
-
-
 
 </body>
 

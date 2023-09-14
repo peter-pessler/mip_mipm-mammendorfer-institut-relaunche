@@ -1,4 +1,4 @@
-// @codekit-prepend  "_jquery.matchHeight.js";
+// @codekit-prepend  "_jquery.matchHeight.js", "_navigation.js";
 
 
 // Ausführen, wenn Website geladen wurde
@@ -80,6 +80,7 @@ $(document).ready(function() {
     setTimeout(function() {
         phoneNumberOnlyIsDesktop();
         styleMenue();
+        replaceEmail();
 
         equal_width($('.list-text-js'));
         responsiveAbstand();
@@ -95,6 +96,7 @@ $(document).ready(function() {
 
         setTimeout(function() {
             styleMenue();
+            replaceEmail();
 
             equal_width($('.list-text-js'));
             responsiveAbstand();

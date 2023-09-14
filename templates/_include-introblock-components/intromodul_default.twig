@@ -1,28 +1,64 @@
-{% set headline =  block.headline |default(false) %}
-{% set text =  block.text |default(false) %}
+{# ###################################################################################################### #}
+{% set settings = {
+    '0-1500' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '1-1200' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '2-900' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '3-700' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '4-500' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '5-300' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+} %}
+{% set image = block.bild.one()|default(false) %}
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+<div class="intromodul-default">
 
-    {% set buttonClass = 'btn btn-js' %}
-    {# -------------- Macro -------------- #}
-    {% import "_include-core/macros.twig" as _self %}
-    {# ###################################################################################################### #}
+    <div class="grid-container content-grid-12">
 
+        <div class="containerText-claim{{ claimClassName }}">
+            {{ block.claim }}
+        </div>
 
-    <div class="content-grid-12">
+        <div class="containerText-headline">
+            <h1>{{ block.headline | nl2br  }}</h1>
+        </div>
 
-        <div class="intromodul-default">
+        <div class="containerText-body">
 
-            {% if headline %}
-                <div class="containerText-headlineH1">
-                    <h1>{{ headline }}</h1>
-                </div>
-            {% endif %}
-
-            {% if text %}
-                <div class="containerText-body text">
-                    {{ block.text }}
-                </div>
-            {% endif %}
+            <div class="text">
+                {{ block.text }}
+            </div>
 
         </div>
 
+        <div class="containerBild">
+            {% if image %}
+                <div class="introbild">
+                    {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                </div>
+            {% endif %}
+        </div>
+
     </div>
+
+</div>
+
+

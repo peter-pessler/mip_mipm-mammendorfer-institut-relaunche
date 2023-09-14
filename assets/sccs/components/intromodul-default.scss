@@ -1,26 +1,141 @@
-.element-header{
+.intromodul-default{
 
-  .intromodul-default{
+  /* ===================================================================== */
 
-    margin-top: 100px;
-
+  .containerText-claim{
+    grid-row: 1;
     grid-column-start: 2;
-    grid-column-end: 12;
+    grid-column-end: 7;
 
-    @include wl-breakpoint(900) {
+    @include wl-breakpoint(1200) {
+      grid-column-end: 8;
+    }
+
+    @include wl-breakpoint(500) {
       grid-column-start: 1;
       grid-column-end: 13;
     }
 
-    .containerText-headlineH1{
+    background-color: #e6ecf0;
 
+    @include dynamic-distance(60, 110, padding-top);
+    @include responsive-font(15px, 17px, $base-font-family, $base-line-height);
+
+    &.blue{
+      color: $wl-color-blue;
     }
 
-    .containerText-body{
-      margin-top: 50px;
+    &.green{
+      color: $wl-color-green;
     }
-
 
   }
+
+  /* ===================================================================== */
+
+  .containerText-headline{
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 6;
+
+    @include wl-breakpoint(1200) {
+      grid-column-end: 8;
+    }
+
+
+    @include wl-breakpoint(500) {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+   background-color: papayawhip;
+
+  }
+
+
+  /* ===================================================================== */
+
+  .containerText-body {
+    grid-row: 3;
+    grid-column-start: 2;
+    grid-column-end: 7;
+
+
+    @include wl-breakpoint(1200) {
+      grid-column-end: 8;
+    }
+
+    @include wl-breakpoint(500) {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    @include dynamic-distance(30, 50, padding-top);
+
+
+    .buttonIntro{
+      @include dynamic-distance(25, 40, padding-top);
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+
+      column-gap: 30px;
+      row-gap: 20px;
+
+      // btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
+
+      .buttonIntro1{
+        a{
+          &.btn{
+            @include btn($wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-blue)
+          }
+        }
+      }
+      .buttonIntro2{
+        a{
+          &.btn{
+            @include btn($wl-color-white, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green)
+          }
+        }
+      }
+
+    }
+
+  }
+
+  /* ===================================================================== */
+
+  .containerBild {
+    grid-row: 1/5;
+    grid-column-start: 7;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(1200) {
+      grid-column-start: 8;
+      grid-column-end: 12;
+    }
+
+    @include wl-breakpoint(500) {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    @include dynamic-distance(60, 110, padding-top);
+
+    background-color: #b7e591;
+
+    img{
+      width: 100%;
+      border-radius: 30px;
+    }
+
+  }
+
+  /* ===================================================================== */
+
 
 }

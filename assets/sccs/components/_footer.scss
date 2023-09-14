@@ -1,225 +1,327 @@
 footer {
-  background-color: $wl-color-blue;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  background-color: $wl-color-blue-dark;
 
+  @include dynamic-distance( 50, 80, padding-top );
+  @include dynamic-distance( 50, 80, padding-bottom );
+
+  color: $wl-color-white;
+
+  .foo-container-head{
+
+    @include dynamic-distance( 40, 60, padding-bottom );
+
+    .foo-container-logo{
+
+      grid-row: 1;
+      grid-column-start: 2;
+      grid-column-end: 12;
+
+      @include wl-breakpoint(500) {
+        grid-column-start: 1;
+        grid-column-end: 13;
+      }
+
+      .foo-logo{
+        width: 95px;
+        img{
+          width: 100%;
+        }
+      }
+
+    }
+  }
+
+  /* =================================================== */
 
   .foo-container-body{
 
-    .foo-container-logo{
-      grid-row: 1;
-      grid-column-start: 2;
-      grid-column-end: 4;
 
-      @include wl-breakpoint(1400) {
-        grid-column-start: 2;
-        grid-column-end: 5;
+    .foo-container-1{
+      grid-row: 1/6;
+      grid-column-start: 2;
+      grid-column-end: 6;
+
+      @include wl-breakpoint(1300) {
+        grid-row: 1;
+        grid-column-end: 12;
+        padding-bottom: 40px;
       }
 
-      @include wl-breakpoint(1100) {
+      @include wl-breakpoint(500) {
+        grid-column-start: 1;
+        grid-column-end: 13;
+      }
+
+      @include wl-breakpoint(730) {
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+
+      .claim{
+        @include responsive-font(28px, 45px, $h2-font-family, $base-line-height-h2);
+      }
+
+    }
+
+    /* =================================================== */
+
+    .foo-container-2{
+      grid-row: 1;
+      grid-column-start: 6;
+      grid-column-end: 9;
+
+      @include wl-breakpoint(1300) {
+        grid-row: 2;
         grid-column-start: 2;
         grid-column-end: 6;
       }
-      @include wl-breakpoint(900) {
+
+      @include wl-breakpoint(950) {
+        grid-column-end: 7;
+      }
+
+      @include wl-breakpoint(730) {
+        grid-row: 3;
         grid-column-start: 2;
         grid-column-end: 12;
+        padding-left: 13px;
+        padding-right: 13px;
       }
-      @include wl-breakpoint(450) {
+
+      @include wl-breakpoint(500) {
         grid-column-start: 1;
         grid-column-end: 13;
       }
 
-      img{
-        max-width: 195px;
-        width: 100%;
+      padding-top: 5px;
+
+    }
+
+    /* =================================================== */
+
+    .foo-container-4{
+      grid-row: 2;
+      grid-column-start: 6;
+      grid-column-end: 9;
+
+      @include wl-breakpoint(1300) {
+        grid-row: 3;
+        grid-column-start: 2;
+        grid-column-end: 6;
+      }
+      @include wl-breakpoint(950) {
+        grid-column-end: 7;
+      }
+
+      @include wl-breakpoint(730) {
+        grid-row: 4;
+        grid-column-start: 2;
+        grid-column-end: 12;
+        padding-left: 13px;
+        padding-right: 13px;
+      }
+
+      @include wl-breakpoint(500) {
+        grid-column-start: 1;
+        grid-column-end: 13;
+      }
+
+      padding-top: 5px;
+      @include wl-breakpoint(730) {
+        padding-top: 25px;
+        padding-bottom: 35px;
+      }
+
+      .footer-button{
+        padding-top: 0;
+        a{
+          &.newsletterAbo{
+            @include btn($wl-color-blue-dark, $wl-color-white,$wl-color-orange, $wl-color-orange, $wl-color-white, $wl-color-orange)
+          }
+        }
       }
 
     }
 
     /* =================================================== */
 
-    .foo-container-adresse{
+    .foo-container-3{
       grid-row: 1;
-      grid-column-start: 5;
-      grid-column-end: 8;
+      grid-column-start: 9;
+      grid-column-end: 12;
 
-      padding-top: 3px;
-
-      @include wl-breakpoint(1600) {
-        grid-column-start: 4;
-        grid-column-end: 7;
-      }
-      @include wl-breakpoint(1400) {
-        grid-row: 1;
+      @include wl-breakpoint(1300) {
+        grid-row: 2;
         grid-column-start: 6;
         grid-column-end: 12;
       }
-      @include wl-breakpoint(900) {
-        grid-row: 2;
+
+      @include wl-breakpoint(950) {
+        grid-column-start: 7;
+      }
+
+      @include wl-breakpoint(730) {
         grid-column-start: 2;
         grid-column-end: 12;
-
-        padding-top: 50px;
+        padding-left: 13px;
+        padding-right: 13px;
       }
-      @include wl-breakpoint(450) {
+
+      @include wl-breakpoint(500) {
         grid-column-start: 1;
         grid-column-end: 13;
       }
-      @include wl-breakpoint(400) {
-        span{
-          display: block;
-          width: 100%;
+
+      .footer-adresse{
+        padding-bottom: 30px;
+        @include wl-breakpoint(730) {
+          padding-bottom: 20px;
         }
+        padding-top: 4px;
       }
-
-
-      .list-label{
-
-        display: inline-block;
-
-        &.labelAbstand{
-          padding-right: 10px;
-        }
-
-        &.list-icon{
-          width: 35px;
-        }
-
-        &.mail{
-          background-image: url("/assets/images/icons/mail-icn.svg");
-          background-repeat: no-repeat;
-          background-size: auto 55%;
-          background-position: left center;
-        }
-
-        &.phone{
-          background-image: url("/assets/images/icons/tel-icn.svg");
-          background-repeat: no-repeat;
-          background-size: auto 55%;
-          background-position: left center;
-        }
-
-      }
-
-      .list-body{
-        display: inline-block;
-      }
-
 
     }
 
     /* =================================================== */
 
-
-    .foo-container-listen{
-      grid-row: 1;
-      grid-column-start: 8;
+    .foo-container-5{
+      grid-row: 2;
+      grid-column-start: 9;
       grid-column-end: 12;
 
-      padding-top: 3px;
-
-      @include wl-breakpoint(1600) {
-        grid-column-start: 7;
+      @include wl-breakpoint(1300) {
+        grid-row: 3;
+        grid-column-start: 6;
         grid-column-end: 12;
       }
 
-      @include wl-breakpoint(1400) {
-        grid-row: 2;
+      @include wl-breakpoint(950) {
+        grid-column-start: 7;
+      }
+
+      @include wl-breakpoint(730) {
+        grid-row: 5;
         grid-column-start: 2;
         grid-column-end: 12;
-
-        padding-top: 25px;
+        padding-left: 13px;
+        padding-right: 13px;
       }
 
-      @include wl-breakpoint(900) {
-        grid-row: 3;
-      }
-
-      @include wl-breakpoint(450) {
+      @include wl-breakpoint(500) {
         grid-column-start: 1;
         grid-column-end: 13;
       }
 
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: space-between;
-      align-items: stretch;
-      align-content: stretch;
+      .foo-container-socialIcons{
 
-      @include wl-breakpoint(900) {
-        flex-direction: column;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+
+        padding-top: 15px;
+
+        &.socialMedia-icons{
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: center;
+          align-content: stretch;
+          column-gap: 25px;
+
+          a {
+            width: 20px;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+          }
+
+          a:hover {
+
+            .facebookIcn{
+              #facebook-fill{
+                fill: $wl-color-white;
+              }
+            }
+
+            .xingIcn{
+              #xing-fill-1, #xing-fill-2{
+                fill: $wl-color-white;
+              }
+            }
+
+            .linkedinIcn{
+              #linkedin-fill{
+                fill: $wl-color-white;
+              }
+            }
+
+            .youtubeIcn{
+              #youtube-fill{
+                fill: $wl-color-white;
+              }
+            }
+
+            .instagramIcn{
+              #instagram-fill{
+                fill: $wl-color-white;
+              }
+            }
+
+          }
+
+
+
+        }
       }
-
-      /* -------------------------------------------------- */
-
-      .foo-container-liste1{
-        width: 38%;
-        @include wl-breakpoint(1600) {
-          padding-left: 30px;
-        }
-
-        @include wl-breakpoint(1400) {
-          padding-left: 0px;
-        }
-
-        @include wl-breakpoint(900) {
-          width: 100%;
-        }
-      }
-
-      /* -------------------------------------------------- */
-
-      .foo-container-liste2{
-        width: 58%;
-        @include wl-breakpoint(900) {
-          width: 100%;
-        }
-      }
-
-      /* -------------------------------------------------- */
 
     }
 
-
     /* =================================================== */
 
-
-    .foo-container-adresse, .foo-container-liste1, .foo-container-liste2{
-
-      ul{
+    ul {
 
         margin: 0px;
         padding: 0;
         list-style: none;
 
-        li{
+          &.footer-liste {
+            li{
 
-          margin: 0px 0px 10px 0px;
-          padding: 0px;
-          list-style-type: none;
-          position: relative;
-          white-space: nowrap;
-          text-decoration: none;
-          color: $wl-color-white;
+              margin: 0px 0px 10px 0px;
+              padding: 0px;
+              list-style-type: none;
+              position: relative;
+              white-space: nowrap;
+              text-decoration: none;
+              color: $wl-color-white;
 
 
-          display: flex;
-          flex-direction: row;
-          flex-wrap: nowrap;
-          justify-content: flex-start;
-          align-items: stretch;
-          align-content: stretch;
+              display: flex;
+              flex-direction: row;
+              flex-wrap: nowrap;
+              justify-content: flex-start;
+              align-items: stretch;
+              align-content: stretch;
 
-          a{
-            text-decoration: none;
-            color: $wl-color-white;
+              a{
+                text-decoration: none;
+                color: $wl-color-white;
+                cursor: pointer;
+              }
+
+            }
           }
 
-        }
-      }
-
     }
+
 
   }
 

@@ -1,16 +1,147 @@
-.modul-intro-home{
+.intromodul-startseite{
 
-  .intro-home-body {
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 13;
+      /* ===================================================================== */
+
+      .containerText-claim{
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(500) {
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance(60, 110, padding-top);
+        @include responsive-font(15px, 17px, $base-font-family, $base-line-height);
+        color: $wl-color-blue;
+
+      }
+
+      /* ===================================================================== */
+
+      .containerText-headline{
+        grid-row: 2;
+        grid-column-start: 2;
+        grid-column-end: 7;
+
+        @include wl-breakpoint(1150) {
+          grid-column-start: 2;
+          grid-column-end: 12;
+        }
 
 
-  }
+        @include wl-breakpoint(500) {
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
 
+        @include dynamic-distance(30, 50, padding-top);
+        @include dynamic-distance(10, 78, padding-right);
+        @include wl-breakpoint(1150) {
+          padding-right: 0;
+        }
+
+      }
+
+      /* ===================================================================== */
+
+      .containerText-body {
+        grid-row: 2;
+        grid-column-start: 7;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(1300) {
+          grid-column-start: 6;
+          @include dynamic-distance(10, 78, padding-left);
+        }
+
+
+        @include wl-breakpoint(1150) {
+          grid-row: 4;
+          grid-column-start: 2;
+          grid-column-end: 12;
+          padding-left: 0;
+        }
+
+
+        @include wl-breakpoint(500) {
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance(30, 50, padding-top);
+
+
+        .buttonIntro{
+          @include dynamic-distance(25, 40, padding-top);
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          align-items: stretch;
+          align-content: stretch;
+
+          column-gap: 30px;
+          row-gap: 20px;
+
+          // btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
+
+          .buttonIntro1{
+            a{
+              &.btn{
+                @include btn($wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-blue)
+              }
+            }
+          }
+          .buttonIntro2{
+            a{
+              &.btn{
+                @include btn($wl-color-white, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green)
+              }
+            }
+          }
+          .buttonIntro3{
+            a{
+              &.btn{
+                @include btn($wl-color-white, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green)
+              }
+            }
+          }
+
+
+        }
+
+      }
+
+      /* ===================================================================== */
+
+      .containerBild {
+        grid-row: 3;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(1150) {
+          grid-row: 3;
+        }
+
+        @include wl-breakpoint(500) {
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance(60, 120, padding-top);
+
+        img{
+          width: 100%;
+          border-radius: 30px;
+        }
+
+      }
+
+      /* ===================================================================== */
 
 }
-
-
 
 
