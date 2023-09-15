@@ -734,7 +734,7 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/assets\/sccs\/components\/intromodul-default.scss" : {
+    "\/assets\/sccs\/components\/intromodul-default-u-produktdetail.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -743,7 +743,7 @@
       "ft" : 4,
       "ma" : 1,
       "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/intromodul-default.min.css",
+      "oAP" : "\/web\/assets\/css\/intromodul-default-u-produktdetail.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -2175,6 +2175,14 @@
       "oO" : 0,
       "oS" : 1
     },
+    "\/config\/tinymce\/wunderlabs-kategorie.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/config\/tinymce\/wunderlabs-kategorie-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
     "\/config\/tinymce\/wunderlabs-teaser.json" : {
       "ft" : 524288,
       "oA" : 1,
@@ -2537,6 +2545,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-introblock-components\/intromodul_default.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-introblock-components\/intromodul_produkt.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-introblock-components\/intromodul_produkt.twig",
       "oF" : 0
     },
     "\/templates\/_include-introblock-components\/intromodul_startseite.twig" : {

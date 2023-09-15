@@ -1,8 +1,16 @@
-{% set produktgruppeid = ( craft.app.request.getParam('produktgruppeid') )? craft.app.request.getParam('produktgruppeid') : '' %}
+{% set produktGruppeId = ( craft.app.request.getParam('pgid') )? craft.app.request.getParam('pgid') : '' %}
+{% set produktPageId = ( craft.app.request.getParam('pid') )? craft.app.request.getParam('pid') : '' %}
 {% set landid = ( craft.app.request.getParam('landid') )? craft.app.request.getParam('landid') : '' %}
-{% set resultContainerClassName = ( craft.app.request.getParam('produktgruppeid') )? '' : ' resultContainer' %}
+{% set resultContainerClassName = ( craft.app.request.getParam('produktGruppeId') )? '' : ' resultContainer' %}
 {% set lgSlug = (currentSite.handle == 'en')? '/en' : '' %}
 
+{% set produktGruppeIdNumberMoreThanZero = false %}
+{% if produktGruppeId != ''  %}
+    {% set produktGruppeIdArray = produktGruppeId|split(',') %}
+    {% set produktGruppeIdNumberMoreThanZero = (produktGruppeIdArray|length > 0)? true : false %}
+{% endif %}
+
+{#  Demo Aufruf für Händler eines betimmten Produktes: /heandler-finden?pgid=1277,1328&pid=1584  #}
 
 <script>
 
@@ -36,17 +44,28 @@
 
         $('.resultContainer').hide();
 
-        {% if produktgruppeid != '' %}
-        changeProduktgruppe({{ produktgruppeid }});
-        setTimeout(function() {
-            var dataElement  = $('[data-value="{{ produktgruppeid }}"]').text();
-            $('.custom-select-1 span.custom-select-trigger').text(dataElement);
-            $('.custom-select-2').find('.alleCat').hide();
-            $(".custom-select-2 .custom-select-trigger").css('background-color', '#EC6500');
-            $(".custom-select-2 .custom-select-trigger").css('color', '#FFFFFF');
-            $(".custom-select-2 .custom-select-trigger").addClass('highlight');
-        }, 100);
+        {#   Ist Funktionstüchtig, wird heir aber nicht benötigt!
 
+        {% if produktGruppeIdNumberMoreThanZero == false %}
+
+                changeProduktgruppe('{{ produktGruppeId }}');
+
+                setTimeout(function() {
+                    var dataElement  = $('[data-value="{{ produktGruppeId }}"]').text();
+                    $('.custom-select-1 span.custom-select-trigger').text(dataElement);
+                    $('.custom-select-2').find('.alleCat').hide();
+                    $(".custom-select-2 .custom-select-trigger").css('background-color', '#EC6500');
+                    $(".custom-select-2 .custom-select-trigger").css('color', '#FFFFFF');
+                    $(".custom-select-2 .custom-select-trigger").addClass('highlight');
+                }, 100);
+
+                {% else %}
+                changeProduktgruppe();
+                {% endif %}
+        #}
+
+        {% if produktGruppeIdNumberMoreThanZero %}
+        changeProduktgruppe('{{ produktGruppeId }}');
         {% else %}
         changeProduktgruppe();
         {% endif %}
@@ -83,6 +102,10 @@
                 phoneNumberOnlyIsDesktop();
                 replaceEmail();
             }, 200);
+
+            setTimeout(function () {
+                $('.artikelCat-js').matchHeight();
+            }, 800);
         });
 
     };
@@ -184,9 +207,10 @@ function statusLandCategory(produktgruppe = '') {
                 {# ------------------------------------------------------------ #}
 
                 <div class="content-grid-12">
+
                     <div class="select-container">
 
-                        <div class="auswahlProduktgruppe" data-start="{{ produktgruppeid }}">
+                        <div class="auswahlProduktgruppe" data-start="{{ produktGruppeId }}">
                             <div class="select-Beschreibung">{{ translation.t_produktgruppe }}</div>
                             <select name="auswahlProduktgruppe" id="produktgruppe-select" data-categoryLandStr="{{ categoryLandStr }}" class="custom-select-1 custom-select sources"  placeholder="{{ translation.t_produktWaehlen }}">
                                 <option class="selectText" value=""></option>
@@ -209,15 +233,38 @@ function statusLandCategory(produktgruppe = '') {
                         </div>
 
                     </div>
-                </div>
 
+                    {% set productGroupStr = '' %}
+                    {% set productGroupText = '' %}
+                    {% if produktGruppeIdNumberMoreThanZero %}
+                        <div class="teaser-result-info">
+                            {% for items in allCategoryProduktgruppe.all() %}
+                                {% if items.id in produktGruppeId %}
+                                    {% if items.id == idKategorieTofProdukte %}
+                                        {% set productGroupText = '<span class="green">' ~ items.kategorieGruppeName ~ '</span>' %}
+                                    {% else %}
+                                        {% set productGroupText = '<span class="blue">' ~ items.kategorieGruppeName ~ '</span>' %}
+                                    {% endif %}
+                                    {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer"> | </span>' ~ productGroupText  %}
+                                {% endif %}
+                            {% endfor %}
+                            {% if produktPageId != '' %}
+                                {% set produktPagesObj = craft.entries.id(produktPageId).one() %}
+                                {% set produktTitle = (produktPagesObj.section.handle == 'produkt')? translation.t_produktInfo : translation.t_produktZubehoerInfo  %}
+                                <div class="productGroup">{{ productGroupStr|raw }}</div>
+                                <div class="produktTitle"><h4>{{ produktTitle }}</h4></div>
+                                <div class="produkt">{{ produktPagesObj.produktName }}</div>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+
+                </div>
 
                 <div class="content-grid-12">
                         <div class="teaser-container" id="articles" data-startLand="{{ landid }}">
                             <div class="result resultContainer"></div>
                         </div>
                 </div>
-
 
     </div>
 </section>

@@ -121,6 +121,8 @@ function styleSelect(selectId, selectClass) {
 
     $(".custom-option").on("click", function() {
 
+        $('.teaser-result-info').remove();
+
         if (!$(this).hasClass('disabled')) {
 
             $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
@@ -138,6 +140,7 @@ function styleSelect(selectId, selectClass) {
                 } else {
                     changeProduktgruppe($(this).data("value"));
                 }
+
 
                 $(".custom-select-2 .custom-options").find(".alleCat").hide();
 
@@ -162,6 +165,7 @@ function styleSelect(selectId, selectClass) {
             if( $(this).parents(".custom-options").parent().parent().parent().attr("class") == 'auswahlLand'){
 
                 changeLand($(this).data("value"));
+
             }
 
         }

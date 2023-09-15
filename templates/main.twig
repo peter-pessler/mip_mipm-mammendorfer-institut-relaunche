@@ -10,6 +10,7 @@
 {% endif %}
 {# ------------------------------------------------------------------- #}
 {% set pageId = entry.id %}
+{% set idKategorieTofProdukte= adminConfig.idKategorieTofProdukte %}
 {% set pageIdParent = entry.getParent().id ?? 0  %}
 {% set imgFormat = adminConfig.imageFormat %}
 {% set sectionName = entry.section.handle %}

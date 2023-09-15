@@ -37,8 +37,8 @@
 
             {% set claim = block.claim|default(false) %}
             {% if claim %}
-                <div class="containerText-claim{{ claimClassName }}">
-                    {{ claim }}
+                <div class="containerText-claim">
+                    <span class="{{ claimClassName|trim(' ') }}">{{ claim }}</span>
                 </div>
             {% endif %}
 
@@ -57,18 +57,22 @@
                 {{ block.text }}
             </div>
 
+            {% set button1 = block.button1|default(false) %}
+            {% set button2 = block.button2|default(false) %}
+            {% if ( button1 and block.button1.getUrl() != '' ) or ( button2 and block.button2.getUrl() != '' ) %}
             <div class="buttonIntro">
                     <span class="buttonIntro1">
-                    {% set button1 = block.button1|default(false) %}{% if button1 %}
+                    {% if button1  and block.button1.getUrl() != '' %}
                             {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
-                        {% endif %}
+                    {% endif %}
                     </span>
-                <span class="buttonIntro2">
-                    {% set button2 = block.button2|default(false) %}{% if button2 %}
+                    <span class="buttonIntro2">
+                    {% if button2  and block.button2.getUrl() != '' %}
                         {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
                     {% endif %}
                     </span>
             </div>
+            {% endif %}
 
         </div>
 
@@ -77,6 +81,12 @@
                 <div class="introbild">
                     {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
                 </div>
+                {% set bildUnterschrift = block.bildUnterschrift|default(false) %}
+                {% if bildUnterschrift %}
+                    <div class="introbildUnterschrift">
+                       {{ bildUnterschrift }}
+                    </div>
+                {% endif %}
             {% endif %}
         </div>
 

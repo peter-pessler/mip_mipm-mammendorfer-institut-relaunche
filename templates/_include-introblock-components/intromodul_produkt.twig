@@ -1,0 +1,115 @@
+{# ###################################################################################################### #}
+{% set settings = {
+    '0-1500' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '1-1200' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '2-900' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '3-700' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '4-500' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+    '5-300' : {
+        'size' : '650x366',
+        'mode' : 'crop'
+    },
+} %}
+{% set image = entry.teaserImage.one()|default(false) %}
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+<div class="intromodul-default">
+
+    <div class="grid-container content-grid-12">
+
+        <div class="containerText-head intromodulAbstandTop">
+
+            {# ======================================================================== #}
+
+            {% set auswahlKategorieProduktgruppeReihenfolgeArr = {} %}
+            {% set sortKategorieProduktgruppeReihenfolgeArr = {} %}
+            {% set productGroupStr = '' %}
+
+            {% set auswahlKategorieProduktgruppe = entry.auswahlKategorieProduktgruppe.all() %}
+            {% for elemente in auswahlKategorieProduktgruppe %}
+                {% set auswahlKategorieProduktgruppeReihenfolgeArr = auswahlKategorieProduktgruppeReihenfolgeArr|merge({ (loop.index)  :  elemente.id }) %}
+            {% endfor %}
+
+            {% set categoryReihenfolge = craft.categories().group('produktGruppen') %}
+            {% for key, elemente in categoryReihenfolge.all() %}
+                {% set valueExistsInArray = elemente.id|integer %}
+                {% set key = elemente.id|string  %}
+                {% if valueExistsInArray in auswahlKategorieProduktgruppeReihenfolgeArr %}
+                    {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
+                {% endif %}
+            {% endfor %}
+
+            {% for key, value in sortKategorieProduktgruppeReihenfolgeArr %}
+                {% set kategorieProduktgruppeID = key|replace({'id-': ''})%}
+                {% if kategorieProduktgruppeID == idKategorieTofProdukte %}
+                    {% set productGroupText = '<span class="green">' ~ value ~ '</span>' %}
+                {% else %}
+                    {% set productGroupText = '<span class="blue">' ~ value ~ '</span>' %}
+                {% endif %}
+                {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer">&nbsp;&frasl;&nbsp;</span>' ~ productGroupText  %}
+            {% endfor %}
+
+            {# ======================================================================== #}
+
+            {% if claimStr != '' %}
+                <div class="containerText-claim{{ claimClassName }}">
+                    {{ productGroupStr|raw }}
+                </div>
+            {% endif %}
+
+           {% set produktName = entry.produktName |default(false) %}
+           {% if produktName %}
+            <div class="containerText-headline">
+                   <h1>{{ produktName}}</h1>
+            </div>
+           {% endif %}
+
+        </div>
+
+        <div class="containerText-body">
+
+            <div class="text">
+                {{ entry.introText }}
+            </div>
+
+            <div class="buttonIntro">
+                    <span class="buttonIntro1">
+                        {% set seiteHaendlerFinden = adminConfig.seiteHaendlerFinden|default(false) %}
+                        {% if seiteHaendlerFinden %}
+                            {% set seiteHaendlerFindenUrl = adminConfig.seiteHaendlerFinden.one().getUrl() %}
+                            <a href="{{ seiteHaendlerFindenUrl }}?pgid={{ paramStr }}&pid={{ entry.id }}" class="btn">{{ translation.t_buttonTextIntro }}</a>
+                        {% endif %}
+                    </span>
+            </div>
+
+        </div>
+
+        <div class="containerBild intromodulAbstandTop">
+            {% if image %}
+                <div class="introbild">
+                    {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+
+

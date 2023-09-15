@@ -9,6 +9,9 @@ sectionname     => sectionname der "Content Page" Seite welches über das entpre
 pageid          => ID der "Content Page" Seite welches über das entprechende Modul, das Ajax Event ausgelöst
 #}
 
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
 
 {# ************************************************* #}
 {# *------------* START Konfiguration *------------ *#}
@@ -21,6 +24,8 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
 
 {# *-----------------------------------------*#}
 {% set sectionName = 'haendler' %}
+{# *-----------------------------------------*#}
+{% set idKategorieTofProdukte= adminConfig.idKategorieTofProdukte %}
 {# *-----------------------------------------*#}
 {% set articleItemsProduktgruppe = '' %}
 {# *-----------------------------------------*#}
@@ -153,11 +158,8 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
      {% set counter = '1' %}
      {% if entries|length > 0 %}
 
-
-
          <div class="article-container">
          {% for entry in entries %}
-
 
              {# * ******************************************************************************************************* *#}
              {% set haendlerWebUrlText = '' %}
@@ -166,6 +168,19 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
              {% set haendlerWebUrl = entry.haendlerWebUrl %}
              {% set haendlerMail = entry.haendlerMail %}
              {% set haendlerMailData = '' %}
+             {% set productGroupStr = ''  %}
+             {% set auswahlKategorieProduktgruppeReihenfolgeArr = {} %}
+             {% set sortKategorieProduktgruppeReihenfolgeArr = {} %}
+             {% set valueExistsInArray = '' %}
+             {% set key = '' %}
+
+             {% set auswahlKategorieProduktgruppe = entry.auswahlKategorieProduktgruppe.all() %}
+             {% for elemente in auswahlKategorieProduktgruppe %}
+                 {% set auswahlKategorieProduktgruppeReihenfolgeArr = auswahlKategorieProduktgruppeReihenfolgeArr|merge({ (loop.index)  :  elemente.id }) %}
+             {% endfor %}
+
+
+
 
              {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
                  {% set haendlerWebUrlArray = haendlerWebUrl|split('//') %}
@@ -179,40 +194,66 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
 
              <article class="haendler-item">
                  <div class="artikelContent">
-                     {{ currentSite.handle }}
-                     <br />=================<br />
 
-                     {{ entry.firmenName }}
-                     <br />=================<br />
+                             <div class="artikelCat artikelCat-js">
 
-                     {{ entry.haendlerName }}
-                     <br />=================<br />
+                                 {% set categoryReihenfolge = craft.categories().group('produktGruppen') %}
+                                 {% for key, elemente in categoryReihenfolge.all() %}
+                                         {% set valueExistsInArray = elemente.id|integer %}
+                                         {% set key = elemente.id|string  %}
+                                         {% if valueExistsInArray in auswahlKategorieProduktgruppeReihenfolgeArr %}
+                                             {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
+                                         {% endif %}
+                                 {% endfor %}
 
-                     <div class="artikelContentAdresse" style="background-color: #b7e591; display: block">
-                     {{ entry.haendlerAdresse|nl2br }}
-                     </div>
+                                 {% for key, value in sortKategorieProduktgruppeReihenfolgeArr %}
+                                             {% set kategorieProduktgruppeID = key|replace({'id-': ''})%}
+                                             {% if kategorieProduktgruppeID == idKategorieTofProdukte %}
+                                                 {% set productGroupText = '<span class="green">' ~ value ~ '</span>' %}
+                                             {% else %}
+                                                 {% set productGroupText = '<span class="blue">' ~ value ~ '</span>' %}
+                                             {% endif %}
+                                             {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer">&nbsp;&frasl;&nbsp;</span>' ~ productGroupText  %}
+                                 {% endfor %}
 
-                     <br />=================<br />
+                                 {{ productGroupStr|raw }}
+                             </div>
 
-                     {% if entry.haendlerTelefonnummer is not empty %}
-                        {{ craft.wul.phone(entry.haendlerTelefonnummer,'phone',entry.haendlerTelefonnummer)|raw }}
-                     {% endif %}
+                             <div class="artikelBody">
 
-                     <br />=================<br />
+                             {{ entry.firmenName }}
+                             <br />=================<br />
 
-                     {% if haendlerMail != '' %}
-                     <div class="artikelContentMail" style="background-color: pink">
-                         <a target="_blank" data-email="{{ haendlerMailData }}">E-Mail schreiben</a>
-                     {% endif %}
+                             {{ entry.haendlerName }}
+                             <br />=================<br />
+
+                             <div class="artikelContentAdresse" style="background-color: #b7e591; display: block">
+                             {{ entry.haendlerAdresse|nl2br }}
+                             </div>
+
+                             <br />=================<br />
+
+                             {% if entry.haendlerTelefonnummer is not empty %}
+                                {{ craft.wul.phone(entry.haendlerTelefonnummer,'phone',entry.haendlerTelefonnummer)|raw }}
+                             {% endif %}
+
+                             <br />=================<br />
+
+                             {% if haendlerMail != '' %}
+                             <div class="artikelContentMail" style="background-color: pink">
+                                 <a target="_blank" data-email="{{ haendlerMailData }}">E-Mail schreiben</a>
+                             {% endif %}
 
 
 
-                     <br />=================<br />
+                             <br />=================<br />
 
-                     <div class="artikelContentWebUrl" style="background-color: pink">
-                         {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
-                         Web: <a href="{{ haendlerWebUrl }}" target="_blank">{{ haendlerWebUrlText }}</a>
-                         {% endif %}
+                             <div class="artikelContentWebUrl" style="background-color: pink">
+                                 {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
+                                 {{ translation.t_web }} <a href="{{ haendlerWebUrl }}" target="_blank">{{ haendlerWebUrlText }}</a>
+                                 {% endif %}
+                             </div>
+
                      </div>
 
                  </div>
