@@ -221,40 +221,37 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
 
                              <div class="artikelBody">
 
-                             {{ entry.firmenName }}
-                             <br />=================<br />
+                                     <div class="artikel-firmenName textBold">
+                                         {{ entry.firmenName }}
+                                     </div>
 
-                             {{ entry.haendlerName }}
-                             <br />=================<br />
+                                     <div class="artikel-haendlerName strong">
+                                     {{ entry.haendlerName }}
+                                     </div>
 
-                             <div class="artikelContentAdresse" style="background-color: #b7e591; display: block">
-                             {{ entry.haendlerAdresse|nl2br }}
-                             </div>
+                                     <div class="artikel-adresse">
+                                     {{ entry.haendlerAdresse|nl2br }}
+                                     </div>
 
-                             <br />=================<br />
+                                     <div class="artikel-tel">
+                                     {% if entry.haendlerTelefonnummer is not empty %}
+                                        {{ craft.wul.phone(entry.haendlerTelefonnummer,'phone',entry.haendlerTelefonnummer)|raw }}
+                                     {% endif %}
+                                     </div>
 
-                             {% if entry.haendlerTelefonnummer is not empty %}
-                                {{ craft.wul.phone(entry.haendlerTelefonnummer,'phone',entry.haendlerTelefonnummer)|raw }}
-                             {% endif %}
+                                     {% if haendlerMail != '' %}
+                                     <div class="artikel-mail">
+                                         <a target="_blank" data-email="{{ haendlerMailData }}">{{ translation.t_mail }}</a>
+                                     {% endif %}
+                                     </div>
 
-                             <br />=================<br />
+                                     <div class="artikel-WebUrl">
+                                         {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
+                                         {{ translation.t_web }} <a href="{{ haendlerWebUrl }}" target="_blank">{{ haendlerWebUrlText }}</a>
+                                         {% endif %}
+                                     </div>
 
-                             {% if haendlerMail != '' %}
-                             <div class="artikelContentMail" style="background-color: pink">
-                                 <a target="_blank" data-email="{{ haendlerMailData }}">E-Mail schreiben</a>
-                             {% endif %}
-
-
-
-                             <br />=================<br />
-
-                             <div class="artikelContentWebUrl" style="background-color: pink">
-                                 {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
-                                 {{ translation.t_web }} <a href="{{ haendlerWebUrl }}" target="_blank">{{ haendlerWebUrlText }}</a>
-                                 {% endif %}
-                             </div>
-
-                     </div>
+                            </div>
 
                  </div>
              </article>
@@ -278,19 +275,18 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
             <div class="pagination-arrow-left">
                 {% if not pageInfo.prevUrl %}
                     <span class="links disabled">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
-                            <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l1.248-1.277L11.417,18.4h15.6V16.616h-15.6l7.338-7.338L17.507,8,8,17.507Z" transform="translate(-8 -8)" fill="#000"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                          <path id="Vereinigungsmenge_52" data-name="Vereinigungsmenge 52" d="M6.358,2.425l5,4.881H0v3.387H11.357l-5,4.881L8.783,18,18,9,8.783,0Z" transform="translate(18 18) rotate(180)" fill="#1372d0"/>
                         </svg>
                     </span>
                 {% else %}
                     <a class="btnPager links"{% if pageInfo.prevUrl %} data-more="{{ pageInfo.prevUrl }}"{% endif %}>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
-                            <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l1.248-1.277L11.417,18.4h15.6V16.616h-15.6l7.338-7.338L17.507,8,8,17.507Z" transform="translate(-8 -8)" fill="#000"/>
+                        <svg id="pagination-arrow-left" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path id="pagination-arrow-left-fill" data-name="Vereinigungsmenge 52" d="M6.358,2.425l5,4.881H0v3.387H11.357l-5,4.881L8.783,18,18,9,8.783,0Z" transform="translate(18 18) rotate(180)" fill="#1372d0"/>
                         </svg>
                     </a>
                 {% endif %}
             </div>
-
 
             <div class="pagination-arrow-counter">
                 <div class="pagination-arrow-counter-inner">
@@ -300,18 +296,17 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                 </div>
             </div>
 
-
             <div class="pagination-arrow-right">
                 {% if not pageInfo.nextUrl %}
                     <span class="rechts disabled">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
-                            <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l-1.248-1.277L23.6,18.4H8V16.616H23.6L16.259,9.277,17.507,8l9.507,9.507Z" transform="translate(-8 -8)" fill="#000"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17.094" height="16.957" viewBox="0 0 17.094 16.957">
+                            <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48_3_-_Kontur" data-name="arrow_forward_FILL0_wght400_GRAD0_opsz48 (3) - Kontur" d="M167.912-783.754l-1.9-1.9,5.377-5.25H159.5v-2.654h11.887l-5.377-5.251,1.9-1.9,8.683,8.479Zm-.132-1.891.143.143,6.893-6.731-6.893-6.731-.143.143,6.646,6.489H160.758v.2h13.667Z" transform="translate(-159.5 800.711)" fill="#1372d0"/>
                         </svg>
                     </span>
             {% else %}
                 <a class="btnPager rechts"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}"{% endif %}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
-                        <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l-1.248-1.277L23.6,18.4H8V16.616H23.6L16.259,9.277,17.507,8l9.507,9.507Z" transform="translate(-8 -8)" fill="#000"/>
+                    <svg id="pagination-arrow-right"  xmlns="http://www.w3.org/2000/svg" width="17.094" height="16.957" viewBox="0 0 17.094 16.957">
+                        <path id="pagination-arrow-right-fill" data-name="arrow_forward_FILL0_wght400_GRAD0_opsz48 (3) - Kontur" d="M167.912-783.754l-1.9-1.9,5.377-5.25H159.5v-2.654h11.887l-5.377-5.251,1.9-1.9,8.683,8.479Zm-.132-1.891.143.143,6.893-6.731-6.893-6.731-.143.143,6.646,6.489H160.758v.2h13.667Z" transform="translate(-159.5 800.711)" fill="#1372d0"/>
                     </svg>
                 </a>
             {% endif %}

@@ -237,21 +237,38 @@ function statusLandCategory(produktgruppe = '') {
                     {% set productGroupStr = '' %}
                     {% set productGroupText = '' %}
                     {% if produktGruppeIdNumberMoreThanZero %}
-                        <div class="teaser-result-info">
-                            {% for items in allCategoryProduktgruppe.all() %}
-                                {% if items.id in produktGruppeId %}
-                                    {% if items.id == idKategorieTofProdukte %}
-                                        {% set productGroupText = '<span class="green">' ~ items.kategorieGruppeName ~ '</span>' %}
-                                    {% else %}
-                                        {% set productGroupText = '<span class="blue">' ~ items.kategorieGruppeName ~ '</span>' %}
-                                    {% endif %}
-                                    {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer"> | </span>' ~ productGroupText  %}
+                        <div class="teaser-result-info" data-value="{{ produktGruppeId }}">
+
+                            {# ======================================================================== #}
+
+                            {% set sortKategorieProduktgruppeReihenfolgeArr = {} %}
+                            {% set productGroupStr = '' %}
+
+                            {% set categoryReihenfolge = craft.categories().group('produktGruppen') %}
+                            {% for key, elemente in categoryReihenfolge.all() %}
+                                {% set valueExistsInArray = elemente.id|integer %}
+                                {% set key = elemente.id|string  %}
+                                {% if valueExistsInArray in produktGruppeIdArray %}
+                                    {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
                                 {% endif %}
                             {% endfor %}
+
+                            {% for key, value in sortKategorieProduktgruppeReihenfolgeArr %}
+                                {% set kategorieProduktgruppeID = key|replace({'id-': ''})%}
+                                {% if kategorieProduktgruppeID == idKategorieTofProdukte %}
+                                    {% set productGroupText = '<span class="green">' ~ value ~ '</span>' %}
+                                {% else %}
+                                    {% set productGroupText = '<span class="blue">' ~ value ~ '</span>' %}
+                                {% endif %}
+                                {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer">&nbsp;&frasl;&nbsp;</span>' ~ productGroupText  %}
+                            {% endfor %}
+
+                            {# ======================================================================== #}
+
                             {% if produktPageId != '' %}
                                 {% set produktPagesObj = craft.entries.id(produktPageId).one() %}
                                 {% set produktTitle = (produktPagesObj.section.handle == 'produkt')? translation.t_produktInfo : translation.t_produktZubehoerInfo  %}
-                                <div class="productGroup">{{ productGroupStr|raw }}</div>
+                                {# <div class="productGroup">{{ productGroupStr|raw }}</div>#}
                                 <div class="produktTitle"><h4>{{ produktTitle }}</h4></div>
                                 <div class="produkt">{{ produktPagesObj.produktName }}</div>
                             {% endif %}

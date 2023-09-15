@@ -105,7 +105,6 @@
           position: relative;
           text-decoration: none;
           display: inline-block;
-          cursor: pointer;
 
           background-color: $wl-color-bg-teaser;
           border-radius: 30px;
@@ -157,7 +156,7 @@
           }
 
           .artikelBody{
-               width: 100%;
+              width: 100%;
 
               padding-top: 35px;
               padding-bottom: 30px;
@@ -170,6 +169,32 @@
                 padding-left: 25px;
                 padding-right: 25px;
               }
+
+
+                  .artikel-firmenName{
+
+                  }
+
+                  .artikel-haendlerName{
+                      padding-top: 40px;
+                  }
+
+                  .artikel-tel{
+                      padding-top: 30px;
+                  }
+
+                  .artikel-tel, .artikel-mail, .artikel-WebUrl{
+
+                      color:$wl-color-blue;
+
+                      a{
+                        color:$wl-color-blue;
+                        text-decoration: none;
+                      }
+
+                  }
+
+
           }
 
 

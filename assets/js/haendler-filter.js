@@ -121,8 +121,6 @@ function styleSelect(selectId, selectClass) {
 
     $(".custom-option").on("click", function() {
 
-        $('.teaser-result-info').remove();
-
         if (!$(this).hasClass('disabled')) {
 
             $(this).parents(".custom-select-wrapper").find("select").val($(this).data("value"));
@@ -133,6 +131,8 @@ function styleSelect(selectId, selectClass) {
             $(this).parents(selectClass).find(".custom-select-trigger").text($(this).text());
 
             if( $(this).parents(".custom-options").parent().parent().parent().attr("class") == 'auswahlProduktgruppe'){
+
+                $('.teaser-result-info').remove();
 
                 if($(this).hasClass('allTyp')){
                     changeProduktgruppe();

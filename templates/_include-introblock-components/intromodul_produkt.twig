@@ -40,6 +40,7 @@
             {% set auswahlKategorieProduktgruppeReihenfolgeArr = {} %}
             {% set sortKategorieProduktgruppeReihenfolgeArr = {} %}
             {% set productGroupStr = '' %}
+            {% set paramStr = '' %}
 
             {% set auswahlKategorieProduktgruppe = entry.auswahlKategorieProduktgruppe.all() %}
             {% for elemente in auswahlKategorieProduktgruppe %}
@@ -63,11 +64,12 @@
                     {% set productGroupText = '<span class="blue">' ~ value ~ '</span>' %}
                 {% endif %}
                 {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer">&nbsp;&frasl;&nbsp;</span>' ~ productGroupText  %}
+                {% set paramStr = (paramStr == '')? kategorieProduktgruppeID : paramStr  ~ ',' ~ kategorieProduktgruppeID  %}
             {% endfor %}
 
             {# ======================================================================== #}
 
-            {% if claimStr != '' %}
+            {% if productGroupStr != '' %}
                 <div class="containerText-claim{{ claimClassName }}">
                     {{ productGroupStr|raw }}
                 </div>
