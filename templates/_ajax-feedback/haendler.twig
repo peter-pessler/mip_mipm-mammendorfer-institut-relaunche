@@ -192,10 +192,10 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                  {% set haendlerMailData = haendlerMailData|replace({'.': '[dot]'})%}
              {% endif %}
 
-             <article class="haendler-item">
+             <article class="article-item">
                  <div class="artikelContent">
 
-                             <div class="artikelCat artikelCat-js">
+                             <div class="artikelCat artikelCatBordrtBottom artikelCat-js">
 
                                  {% set categoryReihenfolge = craft.categories().group('produktGruppen') %}
                                  {% for key, elemente in categoryReihenfolge.all() %}
@@ -219,7 +219,7 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                  {{ productGroupStr|raw }}
                              </div>
 
-                             <div class="artikelBody">
+                             <div class="artikelBody artikelBodyAbstandTop">
 
                                      <div class="artikel-firmenName textBold">
                                          {{ entry.firmenName }}

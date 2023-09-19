@@ -1,0 +1,87 @@
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+ {% set image  = block.teaserImage.one()|default(false) %}
+        {% set settings = {
+            '0-750' : {
+                'size' : '530x298',
+                'mode' : 'crop'
+            },
+            '0-500' : {
+                'size' : '343x193',
+                'mode' : 'crop'
+            }
+        } %}
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-teaserAngebote">
+    <section class="wl-wrapper">
+
+            <div class="content-grid-12">
+
+                {# {% set backgroundColor = '#f4fcf9' %} #}
+                {# {% set backgroundColor = '#fffaf3' %} #}
+
+                {% set imgSrc = '' %}
+                {% set backgroundColor = block.hintergrundFarbe %}
+                {% set imgQuality = 65 %}
+
+                {% if block.bild.one() %}
+                    {% set imgSrc = block.bild.one().getUrl({
+                        mode: 'crop',
+                        width: '650',
+                        height: '500',
+                        quality: (imgQuality),
+                    })  %}
+                {% endif %}
+
+                    <div class="teaserAngeboteRechts">
+
+                        <div class="teaserAngeboteRechtsImg" style="background-image: url('{{ imgSrc }}')">
+                            <div class="teaserAngeboteRechtsVerlauf verlaufWidth-50" style="background-image: linear-gradient(to right, {{ backgroundColor }}, transparent);">
+                                <div class="teaserAngeboteRechtsVerlauf verlaufWidth-90" style="background-image: linear-gradient(to right, {{ backgroundColor }}, transparent);">
+                                    <div class="teaserAngeboteRechtsVerlauf verlaufWidth-100" style="background-image: linear-gradient(to right, {{ backgroundColor }}, transparent);">
+                                        <div class="teaserAngeboteRechtsVerlauf verlaufWidth-100" style="background-image: linear-gradient(to right, {{ backgroundColor }}, transparent);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="teaserAngeboteLinks" style="background-color: {{ backgroundColor }}">
+
+                        <div class="teaserAngeboteLinksText">
+
+                            {% set headline = block.headline|default(false) %}
+                            {% if headline %}
+                                <div class="teaserAngeboteLinksHl">
+                                   {{ headline }}
+                                </div>
+                            {% endif %}
+
+                            {% set text = block.text|default(false) %}
+                            {% if text %}
+                                <div class="teaserAngeboteLinksFliesstext text">
+                                    {{ text }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="teaserAngeboteLinksButton{% if text %} abstandTop{% endif %}">
+                            {% for item in block.button %}
+                                    {% if item.btn|default(false) %}
+                                        {{ _self.linkList( item.btn, 'btn' ) | trim | raw  }}
+                                    {% endif %}
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+
+
+            </div>
+
+    </section>
+</section>

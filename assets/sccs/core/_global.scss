@@ -160,6 +160,12 @@ i{
     @include link($wl-color-red, $wl-color-orange, $wl-color-orange, $base-font-color);
   }
 
+  a{
+    &.btn{
+      @include btn($wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-blue)
+    }
+  }
+
   a[href^="https"], a[href^="http"] {
     word-wrap: break-word!important;
     hyphens: initial;

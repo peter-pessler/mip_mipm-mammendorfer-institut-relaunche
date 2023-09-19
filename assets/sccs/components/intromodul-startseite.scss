@@ -25,7 +25,13 @@
         grid-column-start: 2;
         grid-column-end: 7;
 
+        @include wl-breakpoint(1150) {
+          grid-column-end: 9;
+        }
 
+        @include wl-breakpoint(900) {
+          grid-column-end: 12;
+        }
 
 
         @include wl-breakpoint(500) {
@@ -72,6 +78,7 @@
 
         .buttonIntro{
           @include dynamic-distance(25, 40, padding-top);
+
 
           display: flex;
           flex-direction: row;

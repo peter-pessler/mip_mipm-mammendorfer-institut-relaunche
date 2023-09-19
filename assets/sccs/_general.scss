@@ -1,8 +1,15 @@
 // Layoutbezogene Styles der Website
 
+// zer berechnung mit Javascript
+#bgSizeContent{
+  width: 100%;
+  background-color: transparent;
+  height: 1px;
+}
 
 body{
 
+  /*
   &.green, &.blue {
 
         background-repeat: no-repeat;
@@ -34,6 +41,48 @@ body{
         }
 
   }
+   */
+
+
+
+  &.green, &.blue {
+
+    background-repeat: no-repeat;
+    background-position-y:170px;
+
+    @include wl-breakpoint($page-width) {
+      background-position: top 170px right 7.3vw;
+    }
+
+    @include wl-breakpoint(1500) {
+      @include dynamic-background-size(400, 830, height);
+      @include dynamic-background-size(400, 830, width);
+    }
+
+    @include wl-breakpoint(700) {
+      @include dynamic-background-size(250, 1100, height);
+      @include dynamic-background-size(250, 1100, width);
+      @include dynamic-distance(170, 450, background-position-y);
+    }
+
+    @include wl-breakpoint(600) {
+      background-position: top 170px right 8.5vw;
+    }
+    @include wl-breakpoint(400) {
+      background-position: top 170px right 7vw;
+    }
+
+    @include wl-breakpoint(370) {
+      @include dynamic-background-size(200, 1290, height);
+      @include dynamic-background-size(200, 1290, width);
+    }
+
+  }
+
+
+
+
+
 
 
   &.green{
@@ -46,22 +95,21 @@ body{
 
   /* =============================================================== */
 
-
-  &.home{
+  &.home {
     background-repeat: no-repeat;
     background-image: url("/assets/images/img/bg-kreis-home.svg");
 
-    background-position: top 236px left 140px;
+   background-position-y:236px;
+
+
+
     @include wl-breakpoint($page-width) {
       background-position: top 236px left 7.3vw;
       @include dynamic-distance(150, 236, background-position-y);
     }
-    @include wl-breakpoint(600) {
-      background-position: top 236px left 8.5vw;
-    }
-    @include wl-breakpoint(400) {
-      background-position: top 236px left 7vw;
-    }
+
+
+
 
     @include wl-breakpoint(1500) {
       @include dynamic-background-size(400, 1130, height);
@@ -72,7 +120,13 @@ body{
     @include wl-breakpoint(700) {
       @include dynamic-background-size(250, 1100, height);
       @include dynamic-background-size(250, 1100, width);
-      //@include dynamic-distance(170, 450, background-position-y);
+    }
+
+    @include wl-breakpoint(600) {
+      background-position: top 236px left 8.5vw;
+    }
+    @include wl-breakpoint(400) {
+      background-position: top 236px left 7vw;
     }
 
     @include wl-breakpoint(370) {
@@ -80,8 +134,8 @@ body{
       @include dynamic-background-size(200, 1290, width);
     }
 
-
   }
+
 
 }
 

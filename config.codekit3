@@ -494,7 +494,7 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/assets\/sccs\/components\/_modul_haendlerFilter.scss" : {
+    "\/assets\/sccs\/components\/_modul_haendlerFilter-u-modul-produktFilter.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -503,7 +503,7 @@
       "ft" : 4,
       "ma" : 1,
       "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/_modul_haendlerFilter.min.css",
+      "oAP" : "\/web\/assets\/css\/_modul_haendlerFilter-u-modul-produktFilter.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -564,6 +564,36 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_modul_tabelle.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_teaserAngebote.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_teaserAngebote.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_textLinks.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_textLinks.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -2275,6 +2305,14 @@
       "oAP" : "\/templates\/_ajax-feedback\/haendlerFilter-statusLand.twig",
       "oF" : 0
     },
+    "\/templates\/_ajax-feedback\/produkt.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_ajax-feedback\/produkt.twig",
+      "oF" : 0
+    },
     "\/templates\/_backend\/beispiel.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2289,6 +2327,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_backend\/claim.twig",
+      "oF" : 0
+    },
+    "\/templates\/_backend\/layout.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_backend\/layout.twig",
       "oF" : 0
     },
     "\/templates\/_backend\/shared-on-facebook.twig" : {
@@ -2451,6 +2497,14 @@
       "oAP" : "\/templates\/_include-block-components\/modul_news.twig",
       "oF" : 0
     },
+    "\/templates\/_include-block-components\/modul_produkte.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_produkte.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_search.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2467,12 +2521,28 @@
       "oAP" : "\/templates\/_include-block-components\/modul_tabelle.twig",
       "oF" : 0
     },
+    "\/templates\/_include-block-components\/modul_teaserAngebote.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_teaserAngebote.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_textBild_BildText.twig" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_textBild_BildText.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_textLinks.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_textLinks.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_youTube.twig" : {
@@ -2920,6 +2990,19 @@
       "ou" : "lpckwebp-none",
       "rq" : 75
     },
+    "\/web\/assets\/images\/backend\/layout-teaserAngebote.png" : {
+      "ft" : 32768,
+      "iS" : 114576,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-teaserAngebote.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/web\/assets\/images\/icons\/arrow_accordion.svg" : {
       "ft" : 2097152,
       "miP" : 0,
@@ -3139,6 +3222,16 @@
       "plM" : 3758088159,
       "prP" : 0
     },
+    "\/web\/assets\/images\/img\/bg-kreis-einzeln.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/bg-kreis-einzeln.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
+    },
     "\/web\/assets\/images\/img\/bg-kreis-green.svg" : {
       "ft" : 2097152,
       "miP" : 0,
@@ -3188,6 +3281,19 @@
       "opt" : 0,
       "plM" : 3758088159,
       "prP" : 0
+    },
+    "\/web\/assets\/images\/img\/tof-monitor-tof3d.jpg" : {
+      "ft" : 16384,
+      "iS" : 76453,
+      "jF" : 0,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/img\/tof-monitor-tof3d.jpg",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
     },
     "\/web\/assets\/js\/fileinput.min.js" : {
       "bF" : 0,

@@ -26,31 +26,38 @@
             " block_expand": true,
             "expand": false,
             "deep": true
-          },
-          { "selector": "span", 
-            "attributes": ["style", "class"], 
-            "remove": "empty", 
-            "split": true, 
-            "expand": false, 
-            "deep": true 
-          },
-          { "selector": "*", 
-            "attributes": ["style", "class"], 
-            "split": false, 
-            "expand": false, 
-            "deep": true 
-            }
+          }
         ]  
     },
     "craftlink_adv_tab": false,
     "craftlink_data_attr": [],
     "craftlink_anker": true,
-    "link_class_list": [
-        {
-            "title": "ohne Style",
-            "value": ""
-        }
-    ],
     "object_resizing": false,
-    "craftimage_title": true
+    "craftimage_title": true,
+     "style_formats": [
+    {
+      "title": "Formatierung",
+      "items": [
+        {
+          "title": "No Break",
+          "inline": "span",
+          "classes": "nobreak"
+        },
+        {
+          "title": "Kursiv",
+          "inline": "em"
+        },
+        {
+          "title": "Hochstellen",
+          "inline": "sup"
+        },
+        {
+          "title": "remove Style",
+          "inline": "em",
+          "remove": "all"
+        }
+      ]
+    }
+
+  ]
 }

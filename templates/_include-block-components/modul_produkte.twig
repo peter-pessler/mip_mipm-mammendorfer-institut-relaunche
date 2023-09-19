@@ -1,0 +1,156 @@
+{% set ausgabeNur3Teaser = (block.ausgabeNur3Teaser)? true : false %}
+{% set headline = block.headline |default(false) %}
+<script>
+    $(document).ready(function () {
+
+        var output;
+
+        setTimeout(function () {
+            output = $('.btnAll').attr("data-output");
+            ajaxFeedback(output);
+            themenfilterHeighlight();
+        }, 50);
+
+        $(document).on('click', '.themenBtn', function () {
+            output = $(this).attr("data-output");
+            ajaxFeedback(output);
+        });
+
+        $(document).on('click', '.btnPager', function () {
+            output = $(this).attr("data-more");
+            ajaxFeedbackNext(output);
+        });
+
+
+        if ($("#masonry-effect").length > 0) {
+            setMasonryHeight();
+        }
+
+        $(window).resize(function () {
+
+            if ($("#masonry-effect").length > 0) {
+                setMasonryHeight();
+            }
+
+        })
+
+    });
+
+    function ajaxFeedback(output = '') {
+
+        var ajaxUrl = '/feedback-ajax?template=produkt&blockid={{ blockid }}&output=' + output + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+            resultContainer = $('.result');
+
+        $.get(ajaxUrl, function (data) {
+            $(resultContainer).html(data);
+        }).done(function() {
+            setTimeout(function () {
+                $('.article-item-js').matchHeight();
+            }, 200);
+        });
+
+
+    };
+
+    function ajaxFeedbackNext(ajaxUrl = '') {
+
+        resultContainer = $('.result');
+
+        $.get(ajaxUrl, function (data) {
+            $(resultContainer).html(data);
+
+            setTimeout(function () {
+                setMasonryHeight();
+            }, 200);
+
+        });
+
+    };
+
+    function themenfilterHeighlight() {
+
+        $(document).on('click', '.themenBtn', function () {
+
+            $('.themenBtn').each(function (index, value) {
+                $(this).removeClass("highlight");
+            });
+
+            $(this).addClass('highlight');
+        });
+
+    };
+</script>
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="blog-wrapper-outer modul-produktFilter" id="result">
+    <div class="wl-wrapper">
+
+    {% set allCategory = craft.categories.group('produktGruppen') %}
+    {% set categoryStr = ''  %}
+    {% set counter = '0' %}
+    {% set buttonArr = {} %}
+    {% for elemente in allCategory %}
+        {% set counter = counter + 1 %}
+        {% set categoryStr  = (counter == 1)? elemente.id : categoryStr  ~ ',' ~ elemente.id  %}
+        {% set buttonArr = buttonArr|merge({ (loop.index)  :  '<a href="?#result" class="themenBtn" data-output="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</a>' }) %}
+    {% endfor %}
+
+
+    {# ************************************************ #}
+
+    {% set produktIds = craft.entries()
+        .section('produkt')
+        .relatedTo(['and',categoryStr])
+        .ids()
+    %}
+
+    {% set produktZubehoerIds = craft.entries()
+        .section('produktZubehoer')
+        .relatedTo(['and',categoryStr])
+        .ids()
+    %}
+
+    {% set resultIds = produktIds|merge(produktZubehoerIds) %}
+
+    {# ************************************************ #}
+
+    {% set alleArticelCount = craft.entries.id(resultIds).fixedOrder(true).count() %}
+
+    {# ************************************************ #}
+
+        <div class="themenfilter grid-container content-grid-12">
+            <div class="modul-produkt-themenfilter">
+                <ul>
+
+                    <li class="themenfilterbutton"><a href="?#result" class="themenBtn btnAll highlight" data-output="{{ categoryStr }}">{{ block.buttonText }} ({{ alleArticelCount }})</a></li>
+
+                    {% for btn in buttonArr %}
+                    <li class="themenfilterbutton">{{ btn|raw }}</li>
+
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="content-grid-12">
+            <div class="teaser-container" id="articles">
+                <div class="result resultContainer"></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+

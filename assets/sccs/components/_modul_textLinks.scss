@@ -1,0 +1,22 @@
+.modul-textLinks{
+
+  .wl-wrapper{
+    width: 100%;
+
+    background-image: url("/assets/images/img/bg-kreis-einzeln.svg");
+    background-repeat: no-repeat;
+    background-position: top 0px left 0px;
+
+
+  }
+
+  .textLinks{
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    min-height: 220px;
+    background-color: papayawhip;
+  }
+
+
+}

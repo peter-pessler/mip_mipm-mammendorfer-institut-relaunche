@@ -53,16 +53,6 @@
         {
             "title": "Button",
             "value": "btn"
-        },
-        {
-            "title": "Button Mit Span",
-            "value": "btn",
-            "items": [
-                {
-                    "inline": "span",
-                    "classes": "fc-btn"
-                }
-            ]
         }
     ],
     "object_resizing": false,
@@ -94,27 +84,25 @@
         {
                 "title": "Formatierung",
                 "items": [
-                  {
-                    "title": "No Break",
-                    "inline": "span",
-                    "classes": "nobreak"
-                  },
-                {
-                    "title": "orange",
-                    "inline": "span",
-                    "classes": "fc-orange"
-                },
-                  {
-                    "title": "blau", 
-                    "inline": "span", 
-                    "classes": "fc-blue"
-                },
-                {
-                  "title": "remove Style",
-                  "inline": "span",
-                  "remove": "all"
-                }
-            ]
+            {
+              "title": "No Break",
+              "inline": "span",
+              "classes": "nobreak"
+            },
+            {
+              "title": "Kursiv",
+              "inline": "em"
+            },
+            {
+              "title": "Hochstellen",
+              "inline": "sup"
+            },
+            {
+              "title": "remove Style",
+              "inline": "em",
+              "remove": "all"
+            }
+          ]
         }
 
     ]

@@ -50,6 +50,10 @@
           "inline": "em"
         },
         {
+          "title": "Hochstellen",
+          "inline": "sup"
+        },
+        {
           "title": "remove Style",
           "inline": "em",
           "remove": "all"

@@ -92,6 +92,11 @@
 {% endif %}
 
     <header id="header" class="unveiled-navigation">
+
+        <section class="wl-wrapper">
+            <div id="bgSizeContent"></div>
+        </section>
+
         <section class="wrapper-outer element-header">
             <section class="wl-wrapper{% if pageId != 2 and sectionName != 'blog' %} contentIntro{% elseif pageId != 2 and sectionName == 'blog'  %} contentIntroBlog{% else %} contentIntroStart{% endif %}">
                 {% include '_include-core/header' %}
@@ -132,6 +137,85 @@
 
     {% endif %}
 {% endif %}
+
+
+<script>
+
+    $(document).ready(function() {
+
+        {% if pageId == 2%}
+        backgroundPositionHome();
+        {% else %}
+        backgroundPositionContent();
+        {% endif %}
+
+        $(window).resize(function() {
+
+            setTimeout(function() {
+                {% if pageId == 2%}
+                backgroundPositionHome();
+                {% else %}
+                backgroundPositionContent();
+                {% endif %}
+            }, 50);
+
+        })
+
+    });
+
+
+    function backgroundPositionHome() {
+
+        var body, width, contentwidth, valueLeft, bgpositionLeft;
+
+        body = $('body');
+        width = $(window).width();
+        width = parseInt( width );
+
+        contentwidth = $('#bgSizeContent').width();
+        contentwidth = parseInt( contentwidth );
+        valueLeft = (width-contentwidth)/2;
+        bgpositionLeft = parseInt( valueLeft );
+
+        /* ********************************************** */
+
+        if(width > 1920){
+            body.css('background-position-x', bgpositionLeft);
+        } else {
+            body.css('background-position-x', '');
+        }
+
+
+    }
+
+    function backgroundPositionContent() {
+
+        var body, width, contentwidth, valueLeft, bgpositionLeft;
+
+        body = $('body');
+        width = $(window).width();
+        width = parseInt( width );
+
+        contentwidth = $('#bgSizeContent').width();
+        contentwidth = parseInt( contentwidth );
+        valueLeft = (width-contentwidth)/2;
+        valueLeft = valueLeft+contentwidth-647;
+        bgpositionLeft = parseInt( valueLeft );
+
+        /* ********************************************** */
+
+        if(width > 1920){
+            body.css('background-position-x', bgpositionLeft);
+        } else {
+            body.css('background-position-x', '');
+        }
+
+    }
+
+</script>
+
+
+
 
 </body>
 

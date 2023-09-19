@@ -1,0 +1,251 @@
+{# *------------* START Konfiguration *------------ *#}
+{# ************************************************* #}
+{% set categoryIdStr = output %}
+{# *-----------------------------------------*#}
+{% set categorySectionname = 'produkt' %}
+{# *-----------------------------------------*#}
+{% set idKategorieTofProdukte= adminConfig.idKategorieTofProdukte %}
+{# *-----------------------------------------*#}
+{% set showMore = false %}
+{# *-----------------------------------------*#}
+{% set myUrl = url(craft.app.request.pathInfo) %}
+{% set param = '?template=produkt&blockid=' ~ blockid ~ '&output=' ~ output ~ '&sectionname=' ~ sectionnamepage ~ '&pageid=' ~ pageid %}
+{# *-----------------------------------------*#}
+{% set catParam = '' %}
+{# *-----------------------------------------*#}
+{% set zubehoerIdStr  = '' %}
+
+{# ************************************************ #}
+
+{% set categoryIdsAnzahl = '' %}
+{% set categoryIdArray = {} %}
+{% if categoryIdStr != '' %}
+    {% set categoryIdArray = categoryIdStr|split(',') %}
+    {% set categoryIdsAnzahl = categoryIdArray|length %}
+{% endif %}
+
+{# ************************************************ #}
+
+{% set resultPager = block.pager|number %}
+{% if resultPager == 0 %}
+     {% set showPager = false %}
+{% else %}
+    {% set pageSizeArtikel = block.anzahlArtikel|number %}
+    {% set showPager = true %}
+{% endif %}
+
+{# ************************************************ #}
+
+ {% set produktIds = craft.entries()
+     .section('produkt')
+     .relatedTo(['and',categoryIdStr])
+     .ids()
+     %}
+
+ {% set produktZubehoerIds = craft.entries()
+     .section('produktZubehoer')
+     .relatedTo(['and',categoryIdStr])
+     .ids()
+     %}
+
+
+
+{% set resultIds = produktIds|merge(produktZubehoerIds) %}
+
+{# ************************************************ #}
+{# *------------* ENDE Konfiguration *------------ *#}
+
+{# *------------* Ausgabe *------------ *#}
+{# ************************************************* #}
+
+{% if showPager %}
+    {% set categoriesEntries = craft.entries.id(resultIds).fixedOrder(true).limit(pageSizeArtikel) %}
+ {% else %}
+     {% set categoriesEntries = craft.entries.id(resultIds).fixedOrder(true) %}
+ {% endif %}
+
+{# * ******************************************************************************************************* *#}
+
+     {% set anzahlArtikel = categoriesEntries.count()  %}
+
+     {% if showPager  and anzahlArtikel > 4 and anzahlArtikel > pageSizeArtikel %}
+          {% set pager = true %}
+     {% else %}
+          {% set pager = false %}
+     {% endif %}
+
+{# * ******************************************************************************************************* *#}
+
+     {% set result = categoriesEntries %}
+     {# *-----------------------------------------*#}
+     {% if showPager  %}
+          {% paginate result as pageInfo, entries %}
+     {% else %}
+          {% set entries = result %}
+     {% endif %}
+
+
+
+{# ###################################################################################################### #}
+{% set settings = {
+    '0-900' : {
+        'size' : '635x358',
+        'mode' : 'crop'
+    },
+    '1-700' : {
+        'size' : '494x278',
+        'mode' : 'crop'
+    },
+    '2-400' : {
+        'size' : '344x194',
+        'mode' : 'crop'
+    }
+} %}
+{# ###################################################################################################### #}
+<div class="article-container">
+
+         {% set counter = '1' %}
+         {% if entries|length > 0 %}
+              {% for entry in entries %}
+
+                <a class="article-item-link" href="{{ entry.url }}">
+
+                  <article class="article-item article-item-js">
+                            <div class="artikelContent">
+
+                                                <div class="article-bild">
+                                                    {% set image = entry.teaserImage.one()|default(false) %}
+                                                    {% set imgFormat = adminConfig.imageFormat %}
+                                                    {% set imgQuality = 75 %}
+                                                    {% if image %}
+                                                        {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                                                    {% endif %}
+                                                </div>
+
+
+                                                <div class="artikelProduktInfo{% if entry.id in produktZubehoerIds %} artikelProduktInfoZubehoer{% else %} artikelProduktInfoProdukt{% endif %}">
+                                                    {% if entry.id in produktZubehoerIds %}{{translation.t_zubehoer}}{% else %}{{ translation.t_produkt }}{% endif %}
+                                                </div>
+
+
+                                                <div class="artikelCat artikelCat-js">
+
+                                                    {# * ******************************************************************************************************* *#}
+
+                                                    {% set auswahlKategorieProduktgruppeReihenfolgeArr = {} %}
+                                                    {% set sortKategorieProduktgruppeReihenfolgeArr = {} %}
+                                                    {% set productGroupStr = '' %}
+
+                                                    {% set auswahlKategorieProduktgruppe = entry.auswahlKategorieProduktgruppe.all() %}
+                                                    {% for elemente in auswahlKategorieProduktgruppe %}
+                                                        {% set auswahlKategorieProduktgruppeReihenfolgeArr = auswahlKategorieProduktgruppeReihenfolgeArr|merge({ (loop.index)  :  elemente.id }) %}
+                                                    {% endfor %}
+
+
+                                                    {% set categoryReihenfolge = craft.categories().group('produktGruppen') %}
+                                                    {% for key, elemente in categoryReihenfolge.all() %}
+                                                        {% set valueExistsInArray = elemente.id|integer %}
+                                                        {% set key = elemente.id|string  %}
+                                                        {% if valueExistsInArray in auswahlKategorieProduktgruppeReihenfolgeArr %}
+                                                            {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
+                                                        {% endif %}
+                                                    {% endfor %}
+
+
+                                                    {% for key, value in sortKategorieProduktgruppeReihenfolgeArr %}
+
+                                                        {% set showCat = false %}
+                                                        {% set kategorieProduktgruppeID = key|replace({'id-': ''})%}
+                                                        {% if categoryIdsAnzahl == 1 and kategorieProduktgruppeID == categoryIdStr %}{% set showCat = true %}{% endif %}
+                                                        {% if categoryIdsAnzahl > 1 %}{% set showCat = true %}{% endif %}
+
+                                                        {% if showCat %}
+                                                            {% if kategorieProduktgruppeID == idKategorieTofProdukte %}
+                                                                    {% set productGroupText = '<span class="green">' ~ value ~ '</span>' %}
+                                                            {% else %}
+                                                                    {% set productGroupText = '<span class="blue">' ~ value ~ '</span>' %}
+                                                            {% endif %}
+                                                            {% set productGroupStr = (productGroupStr == '')? productGroupText : productGroupStr  ~ '<span class="spacer">&nbsp;&frasl;&nbsp;</span>' ~ productGroupText  %}
+                                                        {% endif %}
+
+                                                    {% endfor %}
+
+                                                    {{ productGroupStr|raw }}
+                                                </div>
+
+
+                                                <div class="artikelBody">
+
+                                                      <div class="produktName textBold">
+                                                          {% set produktName = entry.produktName  %}
+                                                          {% set produktName = produktName|replace({ '[' : '<span class="produktNr">' }) %}
+                                                          {% set produktName = produktName|replace({ ']' : '</span>' }) %}
+                                                          {{ produktName|raw }}
+                                                      </div>
+
+                                                      <div class="produktteaserText">
+                                                          {{ entry.teaserText }}
+                                                      </div>
+
+                                                      <div class="article-title">
+                                                           <h4>{{ entry.teaserHeadline }}</h4>
+                                                      </div>
+
+                                                      <div class="article-btn">
+                                                           <div class="article-button">
+                                                               <svg class="arrow-weiter-produkt-detail" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                                   <path class="arrow-weiter-fill" id="Vereinigungsmenge_18" data-name="Vereinigungsmenge 18" d="M-2110.523,850.766l6.665-6.509H-2119v-4.515h15.142l-6.665-6.509,3.234-3.234L-2095,842l-12.289,12Z" transform="translate(2119 -830)" fill="#1372d0"/>
+                                                               </svg>
+                                                           </div>
+                                                      </div>
+                                                 </div>
+
+                            </div>
+                        </article>
+                   </a>
+
+                   {% set counter = counter + 1%}
+              {% endfor %}
+         {% else %}
+              {{ block.infoTextErgebnise }}
+         {% endif %}
+
+</div>
+
+{% if pager %}
+  <div class="blog-pagination-container">
+
+      <div class="blog-pagination">
+
+          <div class="blog-pagination-arrow-left">
+               <a class="btnPager links {% if not pageInfo.prevUrl %} disabled{% endif %}"{% if pageInfo.prevUrl %} data-more="{{ pageInfo.prevUrl }}#articles"{% endif %}>
+                   <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
+                       <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l1.248-1.277L11.417,18.4h15.6V16.616h-15.6l7.338-7.338L17.507,8,8,17.507Z" transform="translate(-8 -8)" fill="#000"/>
+                   </svg>
+               </a>
+          </div>
+
+          <div class="blog-pagination-arrow-counter">
+              <div class="blog-pagination-arrow-counter-inner">
+                  {% for i in range(1,pageInfo.totalPages) %}
+                      <a class="btnPager {% if pageInfo.currentPage == loop.index %} active{% endif %}" data-more="{{ myUrl }}/p{{loop.index}}{{ param }}">{{loop.index}}</a>
+                  {% endfor %}
+              </div>
+          </div>
+
+          <div class="blog-pagination-arrow-right">
+               <a class="btnPager rechts {% if not pageInfo.nextUrl %} disabled{% endif %}"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}#articles"{% endif %}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
+                      <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l-1.248-1.277L23.6,18.4H8V16.616H23.6L16.259,9.277,17.507,8l9.507,9.507Z" transform="translate(-8 -8)" fill="#000"/>
+                    </svg>
+               </a>
+          </div>
+
+      </div>
+
+  </div>
+{% endif %}
+
+
+
+

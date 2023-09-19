@@ -1,0 +1,42 @@
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+ {% set image  = block.teaserImage.one()|default(false) %}
+        {% set settings = {
+            '0-750' : {
+                'size' : '530x298',
+                'mode' : 'crop'
+            },
+            '0-500' : {
+                'size' : '343x193',
+                'mode' : 'crop'
+            }
+        } %}
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-textLinks">
+    <section class="wl-wrapper">
+
+            <div class="content-grid-12">
+                    <div class="textLinks">
+
+                        {% set headline = block.headline|default(false) %}
+                        {% if headline %}
+                            <div class="textLinksHeadline">
+                                {{ headline }}
+                            </div>
+                        {% endif %}
+
+                        {% set text = block.text|default(false) %}
+                        {% if text %}
+                            <div class="textLinksFliesstext text">
+                                {{ text }}
+                            </div>
+                        {% endif %}
+
+                    </div>
+            </div>
+
+    </section>
+</section>

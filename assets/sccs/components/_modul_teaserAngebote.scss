@@ -1,0 +1,218 @@
+.modul-teaserAngebote{
+
+    .teaserAngeboteLinks {
+      grid-row: 1;
+      grid-column-start: 2;
+      grid-column-end: 8;
+
+
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+
+      @include wl-breakpoint(900) {
+        grid-row: 2;
+        grid-column-start: 2;
+        grid-column-end: 12;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+      }
+
+
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+
+      @include wl-breakpoint(1300) {
+        flex-direction: column;
+      }
+
+
+      .teaserAngeboteLinksText{
+        width: 65%;
+        @include dynamic-distance(30, 77, padding-left);
+        @include dynamic-distance(30, 77, padding-top);
+        @include dynamic-distance(30, 65, padding-bottom);
+
+        @include wl-breakpoint(1300) {
+          width: 100%;
+          padding-bottom: 0;
+        }
+        @include wl-breakpoint(900) {
+          @include dynamic-distance(30, 77, padding-right);
+        }
+
+        .teaserAngeboteLinksHl{
+          @include responsive-font(22px, 30px, $font-family-DINNextLTPro-bold, $base-line-height-h3);
+          @include dynamic-distance(25, 35, padding-bottom);
+        }
+
+      }
+
+      .teaserAngeboteLinksButton{
+        width: 35%;
+
+        @include dynamic-distance(30, 40, padding-left);
+        @include dynamic-distance(30, 77, padding-top);
+
+        @include wl-breakpoint(1300) {
+          padding-top:0;
+          width: 100%;
+          @include dynamic-distance(30, 77, padding-left);
+          @include dynamic-distance(30, 65, padding-bottom);
+          border-bottom-left-radius: 30px;
+        }
+
+        @include wl-breakpoint(900) {
+          border-bottom-right-radius: 30px
+        }
+
+        &.abstandTop{
+          @include dynamic-distance(30, 77, padding-top);
+        }
+
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: baseline;
+        align-content: flex-start;
+
+        @include wl-breakpoint(1300) {
+          justify-content: flex-start;
+        }
+
+        column-gap: 25px;
+        row-gap: 25px;
+
+
+        a{
+          &.btn{
+            @include btn($wl-color-white, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green);
+            @include dynamic-distance(140, 200, width);
+            text-align: center;
+            @include wl-breakpoint(1300) {
+              width: auto;
+            }
+          }
+        }
+
+
+      }
+
+    }
+
+    .teaserAngeboteRechts {
+      grid-row: 1;
+      grid-column-start: 7;
+      grid-column-end: 12;
+
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+
+      @include wl-breakpoint(900) {
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        border-top-right-radius: 30px;
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+
+        @include dynamic-distance(120, 400, height);
+      }
+
+
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+
+
+      .teaserAngeboteRechtsImg{
+          width: 100%;
+          height: 100%;
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position-x: right;
+
+          border-top-right-radius: 30px;
+          border-bottom-right-radius: 30px;
+
+          @include wl-breakpoint(900) {
+            border-top-left-radius: 30px;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+          }
+
+            .teaserAngeboteRechtsVerlauf{
+
+
+
+
+              @include wl-breakpoint(900) {
+                border-top-left-radius: 30px;
+              }
+
+              height: 100%;
+
+              &.verlaufWidth-50{
+                width: 60%;
+
+
+                @include wl-breakpoint(1500) {
+                  width: 80%;
+                }
+
+                /*
+                @include wl-breakpoint(1700) {
+                  width: 50%;
+                }
+
+                 */
+                @include wl-breakpoint(1300) {
+                  width: 90%;
+                }
+                @include wl-breakpoint(1200) {
+                  width: 70%;
+                }
+
+              }
+
+              &.verlaufWidth-90{
+                width: 90%;
+                @include wl-breakpoint(1500) {
+                  width: 70%;
+                }
+                @include wl-breakpoint(1300) {
+                  width: 60%;
+                }
+              }
+
+              &.verlaufWidth-100{
+                width: 100%;
+                @include wl-breakpoint(1300) {
+                  width: 90%;
+                }
+              }
+
+
+            }
+
+      }
+
+
+
+    }
+
+
+}

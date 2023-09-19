@@ -268,9 +268,14 @@ function statusLandCategory(produktgruppe = '') {
                             {% if produktPageId != '' %}
                                 {% set produktPagesObj = craft.entries.id(produktPageId).one() %}
                                 {% set produktTitle = (produktPagesObj.section.handle == 'produkt')? translation.t_produktInfo : translation.t_produktZubehoerInfo  %}
+
+                                {% set produktName = produktPagesObj.produktName  %}
+                                {% set produktName = produktName|replace({ '[' : '<span class="produktNr">' }) %}
+                                {% set produktName = produktName|replace({ ']' : '</span>' }) %}
+
                                 {# <div class="productGroup">{{ productGroupStr|raw }}</div>#}
                                 <div class="produktTitle"><h4>{{ produktTitle }}</h4></div>
-                                <div class="produkt">{{ produktPagesObj.produktName }}</div>
+                                <div class="produkt">{{ produktName|raw }}</div>
                             {% endif %}
                         </div>
                     {% endif %}
