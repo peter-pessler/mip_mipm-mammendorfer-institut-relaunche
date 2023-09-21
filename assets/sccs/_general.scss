@@ -9,42 +9,6 @@
 
 body{
 
-  /*
-  &.green, &.blue {
-
-        background-repeat: no-repeat;
-        background-position: top 170px right 140px;
-        @include wl-breakpoint($page-width) {
-          background-position: top 170px right 7.3vw;
-        }
-        @include wl-breakpoint(600) {
-          background-position: top 170px right 8.5vw;
-        }
-        @include wl-breakpoint(400) {
-          background-position: top 170px right 7vw;
-        }
-
-        @include wl-breakpoint(1500) {
-          @include dynamic-background-size(400, 830, height);
-          @include dynamic-background-size(400, 830, width);
-        }
-
-        @include wl-breakpoint(700) {
-          @include dynamic-background-size(250, 1100, height);
-          @include dynamic-background-size(250, 1100, width);
-          @include dynamic-distance(170, 450, background-position-y);
-        }
-
-        @include wl-breakpoint(370) {
-          @include dynamic-background-size(200, 1290, height);
-          @include dynamic-background-size(200, 1290, width);
-        }
-
-  }
-   */
-
-
-
   &.green, &.blue {
 
     background-repeat: no-repeat;
@@ -78,11 +42,6 @@ body{
     }
 
   }
-
-
-
-
-
 
 
   &.green{

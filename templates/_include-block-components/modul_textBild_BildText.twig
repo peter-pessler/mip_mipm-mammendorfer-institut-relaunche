@@ -1,85 +1,152 @@
-
-        {# ###################################################################################################### #}
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
         {% set settings = {
             '0-1100' : {
-                'size' : '370x218',
+                'size' : '650x366',
                 'mode' : 'crop'
             },
-            '1-700' : {
-                'size' : '600x353',
+            '1-900' : {
+                'size' : '650x366',
                 'mode' : 'crop'
             },
             '2-450' : {
-                'size' : '374x220',
+                'size' : '650x366',
                 'mode' : 'crop'
             }
         } %}
         {% set image = block.bild.one()|default(false) %}
         {% set modul = block.layoutWechsel.value %}
+        {% set youTubeUrl = block.youTubeUrl|default(false) %}
+        {% set bildYoutubeAuswahl = block.bildYoutubeAuswahl.value %}
+
+{# MODUL TEXT / BILD #################################################################################### #}
+{% set classNameKreisLinksObenEinblenden = '' %}
+{% set styleAbstand = '' %}
+{% set classNameBlauerHintergrund = (block.blauerHintergrundEinblenden)? ' bgBlau' : '' %}
+{% set classNameSpacerTopBottom = (block.blauerHintergrundEinblenden)? ' spacerTopBottom' : '' %}
+{% set abstandObenAusblenden = (block.abstandObenAusblenden)? true : false %}
+{% set abstandUntenAusblenden = (block.abstandUntenAusblenden)? true : false %}
+{% if modul == 'textBild' and block.blauerHintergrundEinblenden %}
+    {% set classNameKreisLinksObenEinblenden = (block.kreisLinksObenEinblenden)? ' bgKreis' : '' %}
+{% endif %}
+
+{% if abstandObenAusblenden %}
+    {% set styleAbstand = 'style="padding-top: 0;"'%}
+{% endif %}
+{% if abstandUntenAusblenden %}
+    {% set styleAbstand = 'style="padding-bottom: 0;"'%}
+{% endif %}
+{% if abstandObenAusblenden and abstandUntenAusblenden %}
+    {% set styleAbstand = 'style="padding-top: 0; padding-bottom: 0;"'%}
+{% endif %}
+
+{# ###################################################################################################### #}
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+
+<section class="wrapper-outer modul-{{ modul }}{{ classNameBlauerHintergrund }}">
+    <section class="wl-wrapper">
+
+        <div class="grid-container content-grid-12{{ classNameSpacerTopBottom }}{{ classNameKreisLinksObenEinblenden }}"{{ styleAbstand|raw }}>
+
+            {# MODUL BILD / TEXT #################################################################################### #}
+
+            {% if modul == 'bildText' %}
+
+                <div class="containerText-headline">
+                    <h2>{{ block.headline }}</h2>
+                </div>
+
+                <div class="containerText-body text">
+
+                    {% set text = block.text|default(false) %}
+                    {% if text %}
+                        {{ text }}
+                    {% endif %}
+
+                    {% set button1 = block.button1|default(false) %}
+                    {% set button2 = block.button2|default(false) %}
+                    {% if ( button1 and block.button1.getUrl() != '' ) or ( button2 and block.button2.getUrl() != '' ) %}
+                        <div class="button-container">
+                            <span class="btn1">
+                            {% if button1  and block.button1.getUrl() != '' %}
+                                {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
+                            {% endif %}
+                            </span>
+                            <span class="btn2">
+                            {% if button2  and block.button2.getUrl() != '' %}
+                                {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                            {% endif %}
+                            </span>
+                        </div>
+                    {% endif %}
+
+                </div>
 
 
+                <div class="containerBild">
 
-        {# MODUL TEXT / BILD #################################################################################### #}
-        <div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
-
-        <section class="wrapper-outer modul-{{ modul }}">
-            <section class="wl-wrapper">
-
-                    <div class="grid-container content-grid-12">
-
-                        {# MODUL TEXT / BILD #################################################################################### #}
-
-                        {% if modul == 'bildText' %}
-
-                        <div class="muster">
-                            <div class="muster-img">
+                    {% if bildYoutubeAuswahl == 'bild' %}
+                        {% if image %}
+                            <div class="modulbild">
+                                {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
                             </div>
-                        </div>
-
-                        <div class="containerText-headline">
-                            <h2>{{ block.headline }}</h2>
-                        </div>
-
-                        <div class="containerText-body text">
-                            {{ block.text }}
-                        </div>
-
-                        <div class="containerBild">
-                            {% if image %}
-                                <div class="modulbild">
-                                    {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '786x463', imageMode: 'crop'} %}
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        {% else %}
-
-                        {# MODUL BILD / TEXT #################################################################################### #}
-
-                        <div class="containerText-headline">
-                            <h2>{{ block.headline }}</h2>
-                        </div>
-
-                        <div class="containerText-body text">
-                            {{ block.text }}
-                        </div>
-
-                        <div class="containerBild">
-                            {% if image %}
-                                <div class="modulbild">
-                                    {% include '_include-vendor/image-picture' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '786x463', imageMode: 'crop'} %}
-                                </div>
-                            {% endif %}
-                        </div>
-
-                        <div class="muster">
-                                <div class="muster-img">
-                                </div>
-                        </div>
-
                         {% endif %}
+                    {% endif %}
 
-                    </div>
+                    {% if bildYoutubeAuswahl == 'youtube' %}
+                        {% if youTubeUrl %}
+                            <div class="video-container">
+                                <iframe class="video" src="{{ youTubeUrl }}" frameborder="0"  allow="accelerometer; autoplay; encrypted-media; gyroscope;" allowfullscreen></iframe>
+                            </div>
+                        {% endif %}
+                    {% endif %}
 
-            </section>
-        </section>
+                </div>
+
+
+            {% else %}
+
+                {# MODUL TEXT / BILD #################################################################################### #}
+
+                <div class="containerText-headline">
+                    <h2>{{ block.headline }}</h2>
+                </div>
+
+                <div class="containerText-body text">
+
+                    {% set text = block.text|default(false) %}
+                    {% if text %}
+                        {{ text }}
+                    {% endif %}
+
+                </div>
+
+                <div class="containerBild">
+
+                    {% if bildYoutubeAuswahl == 'bild' %}
+                        {% if image %}
+                            <div class="modulbild">
+                                {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if bildYoutubeAuswahl == 'youtube' %}
+                        {% if youTubeUrl %}
+                            <div class="video-container">
+                                <iframe class="video" src="{{ youTubeUrl }}" frameborder="0"  allow="accelerometer; autoplay; encrypted-media; gyroscope;" allowfullscreen></iframe>
+                            </div>
+                        {% endif %}
+                    {% endif %}
+
+
+                </div>
+
+
+            {% endif %}
+
+        </div>
+
+    </section>
+</section>

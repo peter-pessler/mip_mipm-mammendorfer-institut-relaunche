@@ -1,0 +1,72 @@
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+ {% set image  = block.teaserImage.one()|default(false) %}
+        {% set settings = {
+            '0-750' : {
+                'size' : '530x298',
+                'mode' : 'crop'
+            },
+            '0-500' : {
+                'size' : '343x193',
+                'mode' : 'crop'
+            }
+        } %}
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-auszeichnung">
+    <section class="wl-wrapper">
+
+            <div class="auszeichnung-container">
+
+                <div class="content-grid-12">
+
+                    <div class="claim">
+                        {{  block.claim }}
+                    </div>
+
+                    {% set headline = block.headline|default(false) %}
+                    {% if headline %}
+                        <div class="headline">
+                            <h2>{{ headline }}</h2>
+                        </div>
+                    {% endif %}
+
+                    {% set text = block.text|default(false) %}
+                    {% if text %}
+                        <div class="fliesstext textNegativ">
+                            {{ text }}
+                        </div>
+                    {% endif %}
+
+                    {% set imgSrc = '' %}
+                    {% set backgroundColor = block.hintergrundFarbe %}
+                    {% set imgQuality = 80 %}
+
+
+                    {% set image = block.bild.one() %}
+                    {% if image %}
+                        {% set img = {
+                            mode: 'fit',
+                            width: '220',
+                            height: '220',
+                            quality: (imgQuality),
+                        } %}
+
+                        {% do image.setTransform(img) %}
+
+                        <div class="auszeichnungImg">
+                            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }} "/>
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+
+            </div>
+
+    </section>
+</section>

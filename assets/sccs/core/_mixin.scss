@@ -256,12 +256,12 @@
 	transition: all .3s;
 	position: relative;
 	@include responsive-font(16px, 18px, $font-family-DINNextLTPro-bold, 1.7);
-
 	text-transform: uppercase;
 
 	&:hover {
 		box-shadow: inset 0 0 0 2em $bgColorHover;
 		color: $textColorHover;
+		background-color: $bgColorHover;
 	}
 
 }

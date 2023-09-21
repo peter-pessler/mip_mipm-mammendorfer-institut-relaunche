@@ -434,6 +434,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_modul_auszeichnung.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_auszeichnung.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_modul_blog.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -624,6 +639,21 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_modul-bildText.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul-textAccordion.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul-textAccordion.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -2425,6 +2455,14 @@
       "oAP" : "\/templates\/_include-block-components\/modul_accordionZweiSpalten.twig",
       "oF" : 0
     },
+    "\/templates\/_include-block-components\/modul_auszeichnung.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_auszeichnung.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_blog.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2527,6 +2565,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_teaserAngebote.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_textAccordion.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_textAccordion.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_textBild_BildText.twig" : {
@@ -2990,11 +3036,50 @@
       "ou" : "lpckwebp-none",
       "rq" : 75
     },
+    "\/web\/assets\/images\/backend\/layout-auszeichnung.png" : {
+      "ft" : 32768,
+      "iS" : 45470,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-auszeichnung.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/web\/assets\/images\/backend\/layout-teaserAngebote.png" : {
       "ft" : 32768,
       "iS" : 114576,
       "oA" : 0,
       "oAP" : "\/web\/assets\/images\/backend\/layout-teaserAngebote.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/backend\/layout-textBild_BildText.png" : {
+      "ft" : 32768,
+      "iS" : 104864,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-textBild_BildText.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/backend\/layout-textLinks.png" : {
+      "ft" : 32768,
+      "iS" : 23368,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-textLinks.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,
@@ -3222,16 +3307,6 @@
       "plM" : 3758088159,
       "prP" : 0
     },
-    "\/web\/assets\/images\/img\/bg-kreis-einzeln.svg" : {
-      "ft" : 2097152,
-      "miP" : 0,
-      "oA" : 2,
-      "oAP" : "\/web\/assets\/images\/img\/bg-kreis-einzeln.svg",
-      "oF" : 0,
-      "opt" : 0,
-      "plM" : 3758088159,
-      "prP" : 0
-    },
     "\/web\/assets\/images\/img\/bg-kreis-green.svg" : {
       "ft" : 2097152,
       "miP" : 0,
@@ -3247,6 +3322,26 @@
       "miP" : 0,
       "oA" : 2,
       "oAP" : "\/web\/assets\/images\/img\/bg-kreis-home.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
+    },
+    "\/web\/assets\/images\/img\/bg-kreis-orange-einzeln.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/bg-kreis-orange-einzeln.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
+    },
+    "\/web\/assets\/images\/img\/bg-kreise-orange.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/img\/bg-kreise-orange.svg",
       "oF" : 0,
       "opt" : 0,
       "plM" : 3758088159,

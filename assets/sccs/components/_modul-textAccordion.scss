@@ -1,6 +1,6 @@
 $breakpoint-text: 1200;
 
-.modul-bildText{
+.modul-textAccordion{
 
   &.bgBlau{
     background-color: #f3f8fd;
@@ -28,43 +28,22 @@ $breakpoint-text: 1200;
     @include dynamic-distance(60, 140, padding-bottom);
   }
 
+
   .containerText-headline{
 
     grid-row: 1;
-    grid-column-start: 7;
-    grid-column-end: 12;
+    grid-column-start: 2;
+    grid-column-end: 7;
 
     @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
 
-    @include wl-breakpoint(1200) {
-      grid-column-start: 6;
-    }
-
-    @include wl-breakpoint(1400) {
-      grid-column-start: 2;
-    }
-
-    @include wl-breakpoint(900) {
-      grid-row: 2;
-      grid-column-start: 2;
-      padding-left: 0;
-    }
-
-    @include wl-breakpoint(500) {
-      grid-column-start: 1;
-      grid-column-end: 13;
-    }
     position: relative;
 
     .h2box{
 
-      h2{
-        color: $wl-color-black;
-      }
-
       @include wl-breakpoint($breakpoint-text) {
         margin-bottom: 0px;
-        padding-left: 0px;
+        padding-right: 0px;
       }
 
     }
@@ -78,7 +57,16 @@ $breakpoint-text: 1200;
       align-content: stretch;
     }
 
+    @include wl-breakpoint(1200) {
+      grid-column-end: 8;
+    }
+
+    @include wl-breakpoint(1400) {
+      grid-column-end: 12;
+    }
+
     @include wl-breakpoint(900) {
+      grid-row: 1;
       grid-column-start: 2;
       grid-column-end: 12;
     }
@@ -88,27 +76,29 @@ $breakpoint-text: 1200;
       grid-column-end: 13;
     }
 
+
   }
 
   .containerText-body{
+
     grid-row: 2;
-    grid-column-start: 7;
-    grid-column-end: 12;
+    grid-column-start: 2;
+    grid-column-end: 7;
 
     p:first-of-type {
       margin-top: 0;
     }
 
+
     @include wl-breakpoint(1200) {
-      grid-column-start: 6;
+      grid-column-end: 8;
     }
 
     @include wl-breakpoint(900) {
-      grid-row: 4;
       grid-column-start: 2;
       grid-column-end: 12;
-      @include dynamic-distance(25, 40, padding-top);
     }
+
 
     @include wl-breakpoint(500) {
       grid-column-start: 1;
@@ -127,6 +117,10 @@ $breakpoint-text: 1200;
 
       column-gap: 30px;
       row-gap: 20px;
+
+      @include wl-breakpoint(900) {
+        padding-bottom: 20px;
+      }
 
       // btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
 
@@ -149,24 +143,26 @@ $breakpoint-text: 1200;
 
   }
 
-  .containerBild{
+
+
+
+
+  .containerAccordion{
     grid-row: 1/4;
 
-    grid-column-start: 2;
-    grid-column-end: 7;
-
-    @include wl-breakpoint(1400) {
-      grid-row: 2/4;
-    }
+    grid-column-start: 8;
+    grid-column-end: 12;
 
     @include wl-breakpoint(1200) {
-      grid-column-end: 6;
+      grid-column-end: 13;
     }
 
     @include wl-breakpoint(900) {
       grid-row: 3;
       grid-column-start: 2;
       grid-column-end: 12;
+
+      padding-top: 40px;
     }
 
     @include wl-breakpoint(500) {
@@ -174,38 +170,11 @@ $breakpoint-text: 1200;
       grid-column-end: 13;
     }
 
-    .modulbild{
-      img{
-        border-radius: 30px;
-        @include wl-breakpoint(1200) {
-          margin-bottom: 5px;
-        }
-      }
-    }
-
-
-
-    .video-container {
-      position: relative;
-      height: 0;
-      padding-top: 56%;
-      overflow: hidden;
-      max-width: 100%;
-      border-radius: 30px;
-    }
-
-    .video-container iframe {
-      border-radius: 30px;
-      position: absolute;
-      top: -7px;
-      left: -7px;
-      width: calc(100% + 14px);
-      height: calc(100% + 14px);
-    }
-
 
   }
+
 }
+
 
 
 

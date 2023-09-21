@@ -93,7 +93,7 @@
 
         a{
           &.btn{
-            @include btn($wl-color-white, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green);
+            @include btn(transparent, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green);
             @include dynamic-distance(140, 200, width);
             text-align: center;
             @include wl-breakpoint(1300) {

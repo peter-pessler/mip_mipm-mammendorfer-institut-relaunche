@@ -62,19 +62,43 @@
             "value": "editor-img-default"
         }
     ],
-    "style_formats": [
+  "style_formats": [
+    {
+      "title": "Überschriften",
+      "items": [
         {
-            "title": "Überschriften",
-            "items": [
-                {
-                    "title": "H3",
-                    "format": "h3"
-                },
-                {
-                    "title": "H4",
-                    "format": "h4"
-                }
-            ]
+          "title": "H3",
+          "format": "h3"
+        },
+        {
+          "title": "H4",
+          "format": "h4"
         }
-    ]
+      ]
+    },
+    {
+      "title": "Formatierung",
+      "items": [
+        {
+          "title": "No Break",
+          "inline": "span",
+          "classes": "nobreak"
+        },
+        {
+          "title": "Kursiv",
+          "inline": "em"
+        },
+        {
+          "title": "Hochstellen",
+          "inline": "sup"
+        },
+        {
+          "title": "remove Style",
+          "inline": "em",
+          "remove": "all"
+        }
+      ]
+    }
+
+  ]
 }

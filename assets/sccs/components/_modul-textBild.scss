@@ -2,37 +2,54 @@ $breakpoint-text: 1200;
 
 .modul-textBild{
 
+  &.bgBlau{
+    background-color: #f3f8fd;
+  }
+
+  .grid-container{
+
+    &.bgKreis{
+        background-image: url("/assets/images/img/bg-kreis-orange-einzeln.svg");
+        background-repeat: no-repeat;
+        @include dynamic-distance(30, 70, background-position-y);
+        background-position-x: 0px;
+
+        @include wl-breakpoint(900) {
+            background-position-y: 40px;
+            @include dynamic-background-size(120, 440, height);
+            @include dynamic-background-size(120, 440, width);
+        }
+    }
+
+  }
+
+
+  .spacerTopBottom{
+    @include dynamic-distance(60, 140, padding-top);
+    @include dynamic-distance(60, 140, padding-bottom);
+  }
+
+
+
+
   .containerText-headline{
+
     grid-row: 1;
     grid-column-start: 2;
     grid-column-end: 7;
 
-    padding-top: 20px;
+    @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
 
-    @include wl-breakpoint(1500) {
-      grid-column-end: 8;
-    }
-    @include wl-breakpoint(1200) {
-      grid-column-end: 9;
-    }
     position: relative;
-
 
     .h2box{
 
-        margin-top: -8px;
-
-        @include dynamic-distance(30, 50, margin-bottom);
-        @include wl-breakpoint($breakpoint-text) {
-          margin-bottom: 0px;
-          padding-right: 0px;
-        }
-        @include wl-breakpoint(900) {
-          margin-bottom: 20px;
-        }
+      @include wl-breakpoint($breakpoint-text) {
+        margin-bottom: 0px;
+        padding-right: 0px;
+      }
 
     }
-
 
     @include wl-breakpoint($breakpoint-text) {
       display: flex;
@@ -43,92 +60,153 @@ $breakpoint-text: 1200;
       align-content: stretch;
     }
 
-    @include wl-breakpoint(900) {
-      grid-column-start: 1;
-      grid-column-end: 13;
-    }
-
-  }
-
-  .containerText-body{
-    grid-row: 2;
-    grid-column-start: 2;
-    grid-column-end: 7;
-
-    @include wl-breakpoint(1500) {
+    @include wl-breakpoint(1200) {
       grid-column-end: 8;
     }
 
-    @include wl-breakpoint(1200) {
-      grid-column-end: 9;
+    @include wl-breakpoint(1400) {
+      grid-column-end: 12;
     }
-
 
     @include wl-breakpoint(900) {
-      grid-row: 3;
-      grid-column-start: 1;
-      grid-column-end: 13;
+      grid-row: 2;
+      grid-column-start: 2;
+      grid-column-end: 12;
     }
 
-  }
-
-  .containerBild{
-    grid-row: 1/4;
-
-    grid-column-start: 7;
-    grid-column-end: 13;
-
-    @include wl-breakpoint(1500) {
-      grid-column-start: 8;
-      grid-column-end: 13;
-    }
-
-    @include wl-breakpoint(1200) {
-      grid-column-start: 9;
-      grid-column-end: 13;
-    }
-
-      @include wl-breakpoint(900) {
+    @include wl-breakpoint(500) {
       grid-row: 2;
       grid-column-start: 1;
       grid-column-end: 13;
     }
 
-      .modulbild{
-        img{
-          border-radius: 30px;
-          @include wl-breakpoint(1200) {
-            margin-top: 5px;
-            margin-bottom: 5px;
-          }
-        }
-      }
 
   }
 
-  .muster{
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 2;
+  .containerText-body{
+
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 7;
+
+    p:first-of-type {
+      margin-top: 0;
+    }
+
+
+    @include wl-breakpoint(1200) {
+      grid-column-end: 8;
+    }
 
     @include wl-breakpoint(900) {
       grid-row: 4;
+      grid-column-start: 2;
+      grid-column-end: 12;
+      @include dynamic-distance(25, 40, padding-top);
+    }
+
+
+    @include wl-breakpoint(500) {
       grid-column-start: 1;
       grid-column-end: 13;
+    }
 
+        .button-container{
+      @include dynamic-distance(25, 40, padding-top);
 
       display: flex;
       flex-direction: row;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
       justify-content: flex-start;
       align-items: stretch;
       align-content: stretch;
+
+      column-gap: 30px;
+      row-gap: 20px;
+
+      // btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
+
+      .btn1{
+        a{
+          &.btn{
+            @include btn($wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-blue)
+          }
+        }
+      }
+      .btn2{
+        a{
+          &.btn{
+            @include btn(transparent, $wl-color-blue-dark, $wl-color-green, $wl-color-green, $wl-color-white, $wl-color-green)
+          }
+        }
+      }
 
     }
 
   }
 
+
+
+
+
+  .containerBild{
+    grid-row: 1/4;
+
+    grid-column-start: 7;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(1400) {
+      grid-row: 2/4;
+    }
+
+    @include wl-breakpoint(1200) {
+      grid-column-start: 8;
+    }
+
+    @include wl-breakpoint(900) {
+      grid-row: 3;
+      grid-column-start: 2;
+      grid-column-end: 12;
+    }
+
+    @include wl-breakpoint(500) {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    .modulbild{
+      img{
+        border-radius: 30px;
+        @include wl-breakpoint(1200) {
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+
+    .video-container {
+      position: relative;
+      height: 0;
+      padding-top: 56%;
+      overflow: hidden;
+      max-width: 100%;
+      border-radius: 30px;
+    }
+
+    .video-container iframe {
+      border-radius: 30px;
+      position: absolute;
+      top: -7px;
+      left: -7px;
+      width: calc(100% + 14px);
+      height: calc(100% + 14px);
+    }
+
+
+  }
+
 }
+
 
 
 

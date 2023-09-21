@@ -19,6 +19,11 @@
 @import "components/pagination-haendler";
 @import "components/modul_teaserAngebote";
 @import "components/modul_textLinks";
+@import "components/modul_auszeichnung";
+@import "components/modul-textBild.scss";
+@import "components/modul-bildText.scss";
+@import "components/modul-textAccordion";
+
 
 
 @import "components/formular";
@@ -31,8 +36,6 @@
 @import "components/pagination-entry";
 @import "components/intromodul-startseite";
 @import "components/modul_entry";
-@import "components/modul-textBild.scss";
-@import "components/modul-bildText.scss";
 @import "components/modul_accordionZweiSpalten";
 @import "components/modul_accordion";
 @import "components/_accordion";

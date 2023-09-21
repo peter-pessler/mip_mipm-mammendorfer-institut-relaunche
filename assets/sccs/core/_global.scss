@@ -207,6 +207,85 @@ i{
 
 }
 
+.textNegativ {
+
+  color: $wl-color-white;
+
+  .h2box{
+    margin-bottom: 20px;
+  }
+
+  .h3box{
+    margin-bottom: 15px;
+  }
+
+  .h4box{
+    margin-bottom: 10px;
+  }
+
+  p:first-of-type{
+    margin-top: 0;
+  }
+
+  p{
+    margin-top: 12px;
+    margin-bottom: 0;
+  }
+
+  a:not(.btn) {
+    color: $wl-color-white;
+    @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
+    //@include animatedLink($wl-color-red, $wl-color-blue);
+    @include link($wl-color-red, $wl-color-orange, $wl-color-orange, $base-font-color);
+  }
+
+  a{
+    &.btn{
+      @include btn($wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-blue)
+    }
+  }
+
+  a[href^="https"], a[href^="http"] {
+    word-wrap: break-word!important;
+    hyphens: initial;
+  }
+
+  li{
+    a[href^="https"], a[href^="http"] {
+      word-wrap: break-word!important;
+      hyphens: initial;
+    }
+  }
+
+  strong{
+    @include responsive-font($base-font-size-min, $base-font-size-max, $font-weight-strong, $base-line-height);
+  }
+
+  ul{
+    list-style:none;
+    padding: 0;
+
+    li{
+      padding-left: 25px;
+      margin-bottom: 8px;
+      &::before {
+        content: '' !important;
+        background-image: url("/assets/images/icons/list-icn-dot-black.svg");
+        @include dynamic-background-size(8, 10, height);
+        @include dynamic-background-size(8, 10, width);
+        display: inline-block;
+        position: absolute;
+        @include dynamic-distance(8, 10, height);
+        @include dynamic-distance(8, 10, width);
+        margin-left: -18px;
+        @include dynamic-distance(7, 11, margin-top);
+      }
+
+    }
+  }
+
+}
+
 .telefonnummer{
   display: inline-flex;
 
