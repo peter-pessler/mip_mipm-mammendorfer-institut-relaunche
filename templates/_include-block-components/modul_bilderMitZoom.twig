@@ -1,0 +1,78 @@
+{# ###################################################################################################### #}
+{% set settings = {
+   '0-1100' : {
+       'size' : '650x366',
+       'mode' : 'crop'
+   },
+   '1-900' : {
+       'size' : '650x366',
+       'mode' : 'crop'
+   },
+   '2-450' : {
+       'size' : '650x366',
+       'mode' : 'crop'
+   }
+} %}
+{% set flipLightBoxCounter = (bilderMitZoomCounter == 0)? '' : bilderMitZoomCounter + 1 %}
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-bilderMitZoom">
+    <section class="wl-wrapper">
+
+            <div class="content-grid-12">
+                {% set headline = block.headline|default(false) %}
+                {% if headline %}
+                    <div class="bilderMitZoomHeadline">
+                        <h2>{{ headline }}</h2>
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="content-grid-12">
+                    <div class="bilderMitZoom" data-lightbox_vonText="von">
+                        <div class="article-container" data-lightbox_bgColor="{{ block.overlayHintergrundFarbe }}">
+
+                            {% for entry in block.bildAuswahl %}
+
+                                {% set image = entry.bildKlein.one()|default(false) %}
+                                {% if image == false %}
+                                    {% set image = entry.bildGross.one()|default(false) %}
+                                {% endif %}
+                                {% set bildBeschreibung = entry.bildBeschreibung|default(false) %}
+
+                                {% set imgSrc = '' %}
+                                {% set imgQuality = 65 %}
+
+                                {% if  entry.bildGross.one() %}
+                                    {% set imgSrc =  entry.bildGross.one().getUrl({
+                                        mode: 'crop',
+                                        width: '1600',
+                                        height: '845',
+                                        quality: (imgQuality),
+                                    })  %}
+                                {% endif %}
+
+                                <a href="{{ imgSrc }}" class="flipLightBox{{ flipLightBoxCounter }}" data-lightbox_bgColor="{{ block.overlayHintergrundFarbe }}">
+                                    {% if image %}
+                                        {% include '_include-vendor/image-picture.twig' with {class: 'flb-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                                    {% endif %}
+                                    <span>{% if bildBeschreibung %}<output class="textBold"> {{ entry.bildBeschreibung }}</output>{% endif %}</span>
+                                </a>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+            </div>
+
+    </section>
+</section>
+
+
+
+<script type="text/javascript">
+    $( document ).ready(function() {
+        $('.modul-bilderMitZoom').flipLightBox()
+    });
+</script>

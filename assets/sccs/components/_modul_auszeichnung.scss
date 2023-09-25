@@ -80,6 +80,14 @@
                       grid-row: 4;
                     }
 
+
+                    a{
+                      //  btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
+                      &.btn{
+                        @include btn(transparent, $wl-color-white, $wl-color-white, $wl-color-white, $wl-color-green, $wl-color-white)
+                      }
+                    }
+
               }
 
 

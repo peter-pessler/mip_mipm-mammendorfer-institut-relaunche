@@ -1,0 +1,175 @@
+.modul-bilderMitZoom{
+
+
+  /** **********************************************************
+Style Lightbox
+*/
+
+  .article-container{
+    a{
+      cursor: zoom-in;
+      img{
+        cursor: zoom-in;
+      }
+
+    }
+  }
+
+
+  img{
+    &#flb-close{
+      width: 25px;
+      border-left: 5px solid transparent;
+
+      @include wl-breakpoint(560){
+        width: 25px;
+        border-left: 0px;
+      }
+
+    }
+  }
+
+
+  div{
+
+    &#flb-lightbox-text{
+
+      @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
+
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      align-content: stretch;
+
+      span{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+      }
+
+      output{
+        width: 100%;
+        display: block;
+      }
+
+      a{
+
+        &#flb-next-pic{
+          svg{
+            margin-left: 10px;
+
+            #flb-next-pic-path{
+              &.flb-next-pic-fill{
+                fill:$wl-color-orange;
+              }
+            }
+
+          }
+        }
+      }
+
+      a{
+
+        &#flb-back-pic{
+          svg{
+            margin-right: 10px;
+
+            #flb-back-pic-path{
+              &.lfb-back-pic-fill{
+                fill:$wl-color-orange;
+              }
+            }
+
+          }
+
+        }
+      }
+
+    }
+
+  }
+
+  /** ********************************************************** */
+
+
+
+      .bilderMitZoomHeadline{
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(500){
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+      }
+
+
+      .bilderMitZoom{
+
+            grid-row: 1;
+            grid-column-start: 2;
+            grid-column-end: 12;
+
+            @include wl-breakpoint(500){
+              grid-column-start: 1;
+              grid-column-end: 13;
+            }
+
+           .article-container{
+            width: 100%;
+
+            display:  grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Umbrechen, sobald die Box 180 Pixel Breite hat */
+
+            @include wl-breakpoint(1191){
+              grid-template-columns: repeat(auto-fit, minmax(261px, 1fr)); /* Umbrechen, sobald die Box 180 Pixel Breite hat */
+            }
+
+            @include wl-breakpoint(776){
+              grid-template-columns: repeat(auto-fit, minmax(166px, 1fr)); /* Umbrechen, sobald die Box 180 Pixel Breite hat */
+            }
+
+            @include wl-breakpoint(509){
+              grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Umbrechen, sobald die Box 180 Pixel Breite hat */
+            }
+
+            @include wl-breakpoint(450){
+              grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Umbrechen, sobald die Box 180 Pixel Breite hat */
+            }
+
+            justify-content:center;
+
+            @include dynamic-distance(15, 65, column-gap);
+            @include dynamic-distance(40, 60, row-gap);
+
+          }
+
+           a {
+
+              position: relative;
+              text-decoration: none;
+              display: inline-block;
+
+              background-color: $wl-color-bg-teaser;
+              border-radius: 30px;
+
+              img{
+                border-radius: 30px;
+              }
+
+            }
+
+      }
+
+
+}

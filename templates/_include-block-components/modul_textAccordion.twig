@@ -42,7 +42,28 @@
                 {% endif %}
             </div>
 
+
+
+            {% set accordionHeadline = block.accordionHeadline|default(false) %}
+            {% set accordionText = block.accordionText|default(false) %}
             <div class="containerAccordion">
+
+                <div class="{% if accordionHeadline or accordionText %}containerAccordionSpacerBottom{% endif %}">
+                    {% if accordionHeadline %}
+                        <div class="containerText-headline">
+                             <h2>{{ accordionHeadline}}</h2>
+                        </div>
+                    {% endif %}
+
+                    {% if accordionText %}
+                        <div class="containerText-body text">
+                            {{ accordionText }}
+                        </div>
+                    {% endif %}
+
+                 </div>
+
+
                 <div class="accordionContent">
                     <div class="accordion">
                         {% for entry in block.accordionRechts %}

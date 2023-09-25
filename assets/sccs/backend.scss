@@ -9,7 +9,8 @@ $headline-color: #052641;
 $text-color: #74797e;
 $underline-color: #bcddf3;
 $btn-border-color: #639cc2;
-$wl-color-blue: #1558ED;
+$wl-color-blue: #1372D0;
+$wl-color-green: #31C390;
 
 
 $font-name-karlaRegular: "karla-regular";
@@ -51,6 +52,36 @@ $font-family-karlaBold: $font-name-karlaBold, Roboto, -apple-system, BlinkMacSys
     color: $headline-color;
     font-size: 1.1em
   }
+
+  h2, h3, h4{
+
+    span{
+      &.text-blue{
+        color:$wl-color-blue;
+      }
+    }
+
+    span{
+      &.text-green{
+        color:$wl-color-green;
+      }
+    }
+
+  }
+
+
+  span{
+    &.text-blue{
+      color:$wl-color-blue;
+    }
+  }
+
+  span{
+    &.text-green{
+      color:$wl-color-green;
+    }
+  }
+
 
   a:not(.btn) {
     hyphens: auto!important;

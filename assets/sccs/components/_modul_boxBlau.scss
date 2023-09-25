@@ -1,0 +1,155 @@
+.modul-boxBlau{
+
+      .grid-container{
+
+          &.bgKreis{
+
+              background-image: url("/assets/images/img/bg-kreise-orange.svg");
+              background-repeat: no-repeat;
+              @include dynamic-distance(30, 50, background-position-y);
+              background-position-x: 0px;
+
+              @include wl-breakpoint(900) {
+                //background-position-y: 40px;
+                @include dynamic-background-size(120, 440, height);
+                @include dynamic-background-size(120, 440, width);
+              }
+
+
+            @include wl-breakpoint(500) {
+              background-image: none;
+            }
+
+
+
+
+          }
+
+      }
+
+
+    .boxBlau-container{
+      grid-row: 1;
+      grid-column-start: 2;
+      grid-column-end: 12;
+
+      background-color: $wl-color-blue;
+      border-radius: 30px;
+
+      @include dynamic-distance(30, 77, padding-left);
+      @include dynamic-distance(30, 77, padding-right);
+      @include dynamic-distance(30, 77, padding-top);
+      @include dynamic-distance(30, 77, padding-bottom);
+
+
+      @include wl-breakpoint(500) {
+        grid-column-start: 1;
+        grid-column-end: 13;
+
+        background-image: url("/assets/images/img/bg-kreise-orange.svg");
+        background-repeat: no-repeat;
+        background-position-y: 10px;
+        background-position-x: 10px;
+        @include dynamic-background-size(120, 440, height);
+        @include dynamic-background-size(120, 440, width);
+      }
+
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: stretch;
+      align-content: stretch;
+
+
+      @include wl-breakpoint(900) {
+        flex-direction: column;
+      }
+
+              .headline{
+
+                    width: 40%;
+                    @include dynamic-distance(30, 77, padding-right);
+
+                    padding-bottom: 20px;
+                    color: $wl-color-white;
+
+                    @include wl-breakpoint(900) {
+                      width: 100%;
+                      padding-right: 0;
+                      @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+                    }
+
+              }
+
+
+              .content{
+
+                    width: 60%;
+
+                    @include wl-breakpoint(900) {
+                      width: 100%;
+                    }
+
+                    .fliesstext {
+
+                          @include wl-breakpoint(1100) {
+                            grid-row: 3;
+                            grid-column-start: 1;
+                            grid-column-end: 13;
+                          }
+
+                          @include wl-breakpoint(650) {
+                            grid-row: 4;
+                          }
+
+
+                          a{
+                            //  btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
+                            &.btn{
+                              @include btn(transparent, $wl-color-white, $wl-color-white, $wl-color-white, $wl-color-blue, $wl-color-white)
+                            }
+                          }
+
+                    }
+
+                    .button-container{
+
+                          @include dynamic-distance(25, 40, padding-top);
+
+                          display: flex;
+                          flex-direction: row;
+                          flex-wrap: wrap;
+                          justify-content: flex-start;
+                          align-items: stretch;
+                          align-content: stretch;
+
+                          column-gap: 30px;
+                          row-gap: 20px;
+
+                          // btn($bgColor, $textColor, $borderColor, $bgColorHover, $textColorHover, $borderColorHover)
+
+                          .btn1{
+                            a{
+                              &.btn{
+                                @include btn($wl-color-white, $wl-color-blue, $wl-color-white, #3b8ad8, $wl-color-white, $wl-color-white)
+                              }
+                            }
+                          }
+                          .btn2{
+                            a{
+                              &.btn{
+                                @include btn($wl-color-blue, $wl-color-white, $wl-color-white,  #3b8ad8, $wl-color-white, $wl-color-white)
+                              }
+                            }
+                          }
+
+                }
+
+              }
+
+
+    }
+
+}

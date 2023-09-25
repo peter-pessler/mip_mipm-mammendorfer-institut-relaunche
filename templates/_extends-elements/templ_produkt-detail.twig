@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block content %}
+  {% set bilderMitZoomCounter = 0 %}
   {% if pageId == '' %}{% set entry = seite404 %}{% endif %}
   <section>
     {% set matrixElemente = entry.moduleProduktMatrix %}
@@ -18,7 +19,8 @@
         {% if block.type.handle != 'abstand' %}
           {% set blockCounter = blockCounter + 1 %}
         {% endif %}
-        {% include ('_include-block-components/modul_' ~ block.type.handle) with {blockid: block.id, sectionname: entry.section.handle, pageid: entry.id, blockCounter: blockCounter }  %}
+        {% include ('_include-block-components/modul_' ~ block.type.handle) with {blockid: block.id, sectionname: entry.section.handle, pageid: entry.id, blockCounter: blockCounter, bilderMitZoomCounter: bilderMitZoomCounter }  %}
+        {% if block.type.handle == 'bilderMitZoom' %}{% set bilderMitZoomCounter = bilderMitZoomCounter + 1 %}{% endif %}
       {% endfor %}
     {% endif %}
   </section>
@@ -32,8 +34,7 @@
     {# ---------------------------------------------------------------------------------------------------------------------------------- #}
     {% set counter = 0 %}
     {% set logoleisteSlider = 0 %}
-    {% set formular = 0 %}
-    {% set imageGallery = 0 %}
+    {% set bilderMitZoom = 0 %}
     {% set haendlerFilter = 0 %}
     {% for block in matrixElemente %}
       {# -------------------------------------------------------------------------------------------------------------------------------- #}
@@ -45,33 +46,12 @@
         {% set haendlerFilter = haendlerFilter + 1 %}
       {% endif %}
       {# -------------------------------------------------------------------------------------------------------------------------------- #}
-      {% if block.type.handle == 'logoleisteSlider' %}
+      {% if block.type.handle == 'bilderMitZoom' %}
         {% set counter = counter + 1 %}
-        {% if logoleisteSlider == 0 %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/slick.min.js"></script>' }) %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<link defer rel="stylesheet" href="/assets/css/slick-logoleisteSlider.min.css">' }) %}
+        {% if bilderMitZoom == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script type="text/javascript" src="/assets/js/fliplightbox.min.js"></script>' }) %}
         {% endif %}
-        {% set logoleisteSlider = logoleisteSlider + 1 %}
-      {% endif %}
-      {# -------------------------------------------------------------------------------------------------------------------------------- #}
-      {% if block.type.handle == 'formular' %}
-        {% set counter = counter + 1 %}
-        {% if formular == 0 %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/select.min.js"></script>' }) %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/fileinput.min.js"></script>' }) %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/formValidate.min.js"></script>' }) %}
-        {% endif %}
-        {% set formular = formular + 1 %}
-      {% endif %}
-      {#
-      {# -------------------------------------------------------------------------------------------------------------------------------- #}
-      {% if block.type.handle == 'imageGallery' %}
-        {% set counter = counter + 1 %}
-        {% if imageGallery == 0 %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/lazysizes.min.js"></script>' }) %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/jquery.imageGallery.min.js"></script>' }) %}
-        {% endif %}
-        {% set imageGallery = imageGallery + 1 %}
+        {% set bilderMitZoom = bilderMitZoom + 1 %}
       {% endif %}
       {# -------------------------------------------------------------------------------------------------------------------------------- #}
     {% endfor %}

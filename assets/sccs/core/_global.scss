@@ -156,8 +156,8 @@ i{
   a:not(.btn) {
     color: $wl-color-blue-dark;
     @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
-    //@include animatedLink($wl-color-red, $wl-color-blue);
-    @include link($wl-color-red, $wl-color-orange, $wl-color-orange, $base-font-color);
+    // $textColor, $lineColor, $textColorHover, $lineColorHover
+    @include link($wl-color-orange,$wl-color-orange-underline, $wl-color-orange, $wl-color-orange)
   }
 
   a{
@@ -187,104 +187,98 @@ i{
     padding: 0;
 
     li{
-      padding-left: 25px;
-      margin-bottom: 8px;
+      @include dynamic-distance(24, 28, padding-left);
+      margin-bottom: 6px;
       &::before {
         content: '' !important;
         background-image: url("/assets/images/icons/list-icn-dot-black.svg");
-        @include dynamic-background-size(8, 10, height);
-        @include dynamic-background-size(8, 10, width);
+        @include dynamic-background-size(6, 7, height);
+        @include dynamic-background-size(6, 7, width);
         display: inline-block;
         position: absolute;
-        @include dynamic-distance(8, 10, height);
-        @include dynamic-distance(8, 10, width);
-        margin-left: -18px;
-        @include dynamic-distance(7, 11, margin-top);
+        @include dynamic-distance(6, 7, height);
+        @include dynamic-distance(6, 7, width);
+        @include dynamic-distance-negativ(22, 26, margin-left);
+        margin-top: 8px
       }
 
     }
   }
 
-}
 
-.textNegativ {
+  h2, h3, h4{
 
-  color: $wl-color-white;
+    span{
+      &.text-blue{
+        color:$wl-color-blue;
+      }
+    }
 
-  .h2box{
-    margin-bottom: 20px;
+    span{
+      &.text-green{
+        color:$wl-color-green;
+      }
+    }
+
   }
 
-  .h3box{
-    margin-bottom: 15px;
+
+  span{
+    &.text-blue{
+      color:$wl-color-blue;
+    }
   }
 
-  .h4box{
-    margin-bottom: 10px;
+  span{
+    &.text-green{
+      color:$wl-color-green;
+    }
   }
 
-  p:first-of-type{
-    margin-top: 0;
-  }
 
-  p{
-    margin-top: 12px;
-    margin-bottom: 0;
-  }
+  /* *********************************************************************** */
 
-  a:not(.btn) {
+
+  &.textNegativ {
+
     color: $wl-color-white;
-    @include responsive-font($base-font-size-min, $base-font-size-max, $base-font-family, $base-line-height);
-    //@include animatedLink($wl-color-red, $wl-color-blue);
-    @include link($wl-color-red, $wl-color-orange, $wl-color-orange, $base-font-color);
-  }
 
-  a{
-    &.btn{
-      @include btn($wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-white, $wl-color-blue, $wl-color-blue)
+
+    a:not(.btn) {
+      color: $wl-color-white;
+      @include link(rgba($wl-color-white, 0.75), rgba($wl-color-white, 0.75), $wl-color-white, $wl-color-white );
     }
-  }
 
-  a[href^="https"], a[href^="http"] {
-    word-wrap: break-word!important;
-    hyphens: initial;
-  }
 
-  li{
-    a[href^="https"], a[href^="http"] {
-      word-wrap: break-word!important;
-      hyphens: initial;
-    }
-  }
-
-  strong{
-    @include responsive-font($base-font-size-min, $base-font-size-max, $font-weight-strong, $base-line-height);
-  }
-
-  ul{
-    list-style:none;
-    padding: 0;
-
-    li{
-      padding-left: 25px;
-      margin-bottom: 8px;
-      &::before {
-        content: '' !important;
-        background-image: url("/assets/images/icons/list-icn-dot-black.svg");
-        @include dynamic-background-size(8, 10, height);
-        @include dynamic-background-size(8, 10, width);
-        display: inline-block;
-        position: absolute;
-        @include dynamic-distance(8, 10, height);
-        @include dynamic-distance(8, 10, width);
-        margin-left: -18px;
-        @include dynamic-distance(7, 11, margin-top);
+    ul{
+      li{
+        &::before {
+          background-image: url("/assets/images/icons/list-icn-dot-white.svg");
+        }
       }
-
     }
+
   }
+
+
+  /* *********************************************************************** */
+
+
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 .telefonnummer{
   display: inline-flex;

@@ -18,9 +18,16 @@ body{
       background-position: top 170px right 7.3vw;
     }
 
+    /*
     @include wl-breakpoint(1500) {
       @include dynamic-background-size(400, 830, height);
       @include dynamic-background-size(400, 830, width);
+    }
+
+     */
+    @include wl-breakpoint($page-width) {
+      @include dynamic-background-size(400, 647, height);
+      @include dynamic-background-size(400, 647, width);
     }
 
     @include wl-breakpoint(700) {

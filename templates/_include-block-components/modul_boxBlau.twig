@@ -1,0 +1,71 @@
+{# -------------- Macro -------------- #}
+{% import "_include-core/macros.twig" as _self %}
+{# ###################################################################################################### #}
+ {% set image  = block.teaserImage.one()|default(false) %}
+        {% set settings = {
+            '0-750' : {
+                'size' : '530x298',
+                'mode' : 'crop'
+            },
+            '0-500' : {
+                'size' : '343x193',
+                'mode' : 'crop'
+            }
+        } %}
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-boxBlau">
+    <section class="wl-wrapper">
+
+            <div class="grid-container content-grid-12 bgKreis">
+
+                <div class="boxBlau-container">
+
+
+                    {% set headline = block.headline|default(false) %}
+                    {% if headline %}
+                        <div class="headline">
+                            <h2>{{ headline }}</h2>
+                        </div>
+                    {% endif %}
+
+
+                    <div class="content">
+
+                            {% set text = block.text|default(false) %}
+                            {% if text %}
+                                <div class="fliesstext text textNegativ">
+                                    {{ text }}
+                                </div>
+                            {% endif %}
+
+
+                            {% set button1 = block.button1|default(false) %}
+                            {% set button2 = block.button2|default(false) %}
+                            {% if ( button1 and block.button1.getUrl() != '' ) or ( button2 and block.button2.getUrl() != '' ) %}
+                                <div class="button-container">
+                                    <span class="btn1">
+                                    {% if button1  and block.button1.getUrl() != '' %}
+                                        {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
+                                    {% endif %}
+                                    </span>
+                                    <span class="btn2">
+                                    {% if button2  and block.button2.getUrl() != '' %}
+                                        {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                                    {% endif %}
+                                    </span>
+                                </div>
+                            {% endif %}
+
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+    </section>
+</section>

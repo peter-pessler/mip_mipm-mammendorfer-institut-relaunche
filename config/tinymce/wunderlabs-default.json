@@ -98,6 +98,16 @@
               "inline": "sup"
             },
             {
+              "title": "Text blau",
+              "inline": "span",
+              "classes": "text-blue"
+            },
+            {
+              "title": "Text grün",
+              "inline": "span",
+              "classes": "text-green"
+            },
+            {
               "title": "remove Style",
               "inline": "em",
               "remove": "all"

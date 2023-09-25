@@ -148,6 +148,12 @@ $breakpoint-text: 1200;
 
 
   .containerAccordion{
+
+    .containerAccordionSpacerBottom{
+      padding-bottom: 30px;
+    }
+
+
     grid-row: 1/4;
 
     grid-column-start: 8;
@@ -168,6 +174,13 @@ $breakpoint-text: 1200;
     @include wl-breakpoint(500) {
       grid-column-start: 1;
       grid-column-end: 13;
+    }
+
+    .accordion-content-body{
+      ul{
+        margin-top: 0px!important;
+        margin-bottom: 0px!important;
+      }
     }
 
 
