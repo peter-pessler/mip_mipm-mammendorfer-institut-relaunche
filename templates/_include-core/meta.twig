@@ -6,7 +6,7 @@
 {% endif %}
 {% set titleZuatzInfo = siteConfig.organization|default(false) %}
 {% if titleZuatzInfo %}
-        {% set title = (titleZuatzInfo)? title ~ ' | ' ~ titleZuatzInfo %}
+        {% set title = (titleZuatzInfo)? title ~ ' | ' ~ titleZuatzInfo : title %}
 {% endif %}
 {# ------------------------------------------------------------------------------- #}
 {% set seoDescriptionPage = entry.seoDescription|default(false) %}

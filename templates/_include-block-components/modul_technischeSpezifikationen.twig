@@ -1,0 +1,61 @@
+{# ###################################################################################################### #}
+
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-technischeSpezifikationen">
+    <section class="wl-wrapper">
+
+            <div class="content-grid-12">
+                {% set headline = block.headline|default(false) %}
+                {% if headline %}
+                    <div class="technischeSpezifikationenHeadline">
+                        <h2>{{ headline }}</h2>
+                    </div>
+                {% endif %}
+
+                {% set einleitung = block.einleitung|default(false) %}
+                {% if einleitung %}
+                    <div class="technischeSpezifikationenEinleitung">
+                       {{ einleitung }}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="content-grid-12">
+                    <div class="technischeSpezifikationen">
+                        <div class="pezifikationenSpalteLinks">
+                            {% for entry in block.spezifikationenSpalteLinks %}
+                                <div class="spezifikationenSpalteWrapper">
+                                    <div class="beschreibung textBold">
+                                        {{ entry.beschreibung|nl2br  }}
+                                    </div>
+                                    <div class="technischeAngaben">
+                                        {% set technischeAngaben = entry.technischeAngaben %}
+                                        {% set technischeAngaben = technischeAngaben|replace({'<p>': ''}) %}
+                                        {% set technischeAngaben = technischeAngaben|replace({'</p>': '<br />'}) %}
+                                        {{ technischeAngaben|raw }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <div class="pezifikationenSpalteRechts">
+                            {% for entry in block.spezifikationenSpalteRechts %}
+                            <div class="spezifikationenSpalteWrapper">
+                                <div class="beschreibung textBold">
+                                    {{ entry.beschreibung|nl2br  }}
+                                </div>
+                                <div class="technischeAngaben">
+                                    {% set technischeAngaben = entry.technischeAngaben %}
+                                    {% set technischeAngaben = technischeAngaben|replace({'<p>': ''}) %}
+                                    {% set technischeAngaben = technischeAngaben|replace({'</p>': '<br />'}) %}
+                                    {{ technischeAngaben|raw }}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+            </div>
+
+    </section>
+</section>

@@ -82,9 +82,9 @@
 
             next_and_back_image_text_style: 'font-weight: bold; color: #000000;',
 
-            image_number_page: 'Image',
+            image_number_page: '',
 
-            image_number_of: 'of',
+            image_number_of: $('.bilderMitZoom').attr("data-lightbox_vonText"),
 
             image_number_text_style: 'color: #000000;',
 

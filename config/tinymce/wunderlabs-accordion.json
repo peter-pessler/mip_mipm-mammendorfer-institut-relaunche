@@ -2,10 +2,11 @@
     "branding": false,
     "menubar": false,
     "contextmenu": false,
-    "extended_valid_elements": "img[src|alt|title|width|height|class|loading],+@[data-options]",
+    "extended_valid_elements": "br,img[src|alt|title|width|height|class|loading],+@[data-options]",
+    "forced_root_block": "",
     "force_br_newlines" : true,
     "force_p_newlines" : false,
-    "forced_root_block": "",
+    "convert_newlines_to_brs": true,
     "relative_urls": false,
     "remove_script_host": false,
     "convert_urls": false,
@@ -102,3 +103,4 @@
 
   ]
 }
+

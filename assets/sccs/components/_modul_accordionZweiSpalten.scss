@@ -1,13 +1,48 @@
 
 .modul-accordionZweiSpalten {
 
+  .grid-container{
+
+    &.bgKreis{
+      background-image: url("/assets/images/img/bg-kreis-orange-einzeln.svg");
+      background-repeat: no-repeat;
+      //@include dynamic-distance(30, 70, background-position-y);
+
+      background-position-y: 0px;
+      background-position-x: 0px;
+
+      @include wl-breakpoint(900) {
+        //background-position-y: 40px;
+        @include dynamic-background-size(120, 440, height);
+        @include dynamic-background-size(120, 440, width);
+      }
+    }
+
+  }
+
+  .accordionZweiSpaltenHheadline{
+
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(500){
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    padding-top: 40px;
+
+    @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+    }
+
 
   .accordionZweiSpalten {
 
-
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 13;
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 12;
 
     display: flex;
     flex-direction: row;
@@ -18,10 +53,19 @@
 
     margin-bottom: 15px;
 
-    @include wl-breakpoint(800) {
+    @include wl-breakpoint(500){
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    @include wl-breakpoint(900) {
       flex-direction: column;
     }
 
+
+    .accordionContent{
+      margin-top: 0!important;
+    }
 
     /**
     ============================ Accordion Body ============================
@@ -29,14 +73,14 @@
 
     .articleContainerLinks {
       width: 46%;
-      @include wl-breakpoint(800) {
+      @include wl-breakpoint(900) {
         width: 100%;
       }
     }
 
     .articleContainerRechts {
       width: 46%;
-      @include wl-breakpoint(800) {
+      @include wl-breakpoint(900) {
         width: 100%;
       }
     }

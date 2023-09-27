@@ -2,7 +2,15 @@
 <section class="wrapper-outer modul-accordionZweiSpalten">
     <section class="wl-wrapper">
 
-        <div class="content-grid-12" id="articles">
+        <div class="grid-container bgKreis content-grid-12" id="articles">
+
+            {% set headline = block.headline|default(false) %}
+            {% if headline %}
+                <div class="accordionZweiSpaltenHheadline">
+                    <h2>{{ headline }}</h2>
+                </div>
+            {% endif %}
+
             <div class="accordionZweiSpalten">
 
                 <div class="articleContainerLinks">

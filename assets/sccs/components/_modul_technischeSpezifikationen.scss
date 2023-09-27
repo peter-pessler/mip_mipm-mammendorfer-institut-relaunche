@@ -1,0 +1,195 @@
+.modul-technischeSpezifikationen{
+
+
+      .technischeSpezifikationenHeadline{
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(500){
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+      }
+
+
+      .technischeSpezifikationenEinleitung{
+        grid-row: 2;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(500){
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+      }
+
+
+      .technischeSpezifikationen{
+
+            grid-row: 1;
+            grid-column-start: 2;
+            grid-column-end: 12;
+
+            @include wl-breakpoint(500){
+              grid-column-start: 1;
+              grid-column-end: 13;
+            }
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-items: stretch;
+            align-content: stretch;
+
+            @include wl-breakpoint(900){
+              display: flex;
+              flex-direction: column;
+              flex-wrap: nowrap;
+              justify-content: flex-start;
+              align-items: stretch;
+              align-content: stretch;
+            }
+
+           .pezifikationenSpalteLinks{
+             width: 48%;
+             @include wl-breakpoint(900){
+               width: 100%;
+             }
+           }
+
+           .pezifikationenSpalteRechts{
+             width: 48%;
+             @include wl-breakpoint(900){
+               width: 100%;
+             }
+           }
+
+
+            .pezifikationenSpalteLinks, .pezifikationenSpalteRechts{
+
+              display: flex;
+              flex-direction: column;
+              flex-wrap: nowrap;
+              justify-content: flex-start;
+              align-items: stretch;
+              align-content: stretch;
+
+                  .spezifikationenSpalteWrapper{
+
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: nowrap;
+                    justify-content: flex-start;
+                    align-items: stretch;
+                    align-content: stretch;
+
+                    padding-bottom: 25px;
+
+                    @include wl-breakpoint(1200){
+                      flex-direction: column;
+                      padding-bottom: 30px;
+                    }
+
+                    @include wl-breakpoint(900){
+                      flex-direction: row;
+                      padding-bottom: 25px;
+                    }
+
+                    @include wl-breakpoint(600){
+                      flex-direction: column;
+                      padding-bottom: 30px;
+                    }
+
+
+                    .beschreibung{
+                      width: 45%;
+                      @include dynamic-distance(25, 45, padding-right);
+                      margin:0px!important;
+
+                      @include wl-breakpoint(1200){
+                        padding-right: 0;
+                        width: 100%;
+                      }
+
+                      @include wl-breakpoint(900){
+                        padding-right: 25px;
+                        width: 45%;
+                      }
+
+                      @include wl-breakpoint(600){
+                        padding-right: 0;
+                        width: 100%;
+                      }
+
+                    }
+
+                    .technischeAngaben{
+                      width: 55%;
+
+                      @include wl-breakpoint(1200){
+                        width: 100%;
+                        padding-top: 15px;
+                      }
+
+                      @include wl-breakpoint(900){
+                        width: 55%;
+                        padding-top:0px;
+                      }
+
+                      @include wl-breakpoint(600){
+                        width: 100%;
+                        padding-top: 15px;
+                      }
+
+
+                      ul{
+                        list-style:none;
+                        padding: 0;
+                        margin: 0px!important;
+
+                        li{
+                          @include dynamic-distance(16, 20, padding-left);
+                          margin-bottom: 6px;
+                          &::before {
+                            content: '' !important;
+                            background-image: url("/assets/images/icons/list.svg");
+                            @include dynamic-background-size(2, 2, height);
+                            @include dynamic-background-size(8, 10, width);
+                            display: inline-block;
+                            position: absolute;
+                            @include dynamic-distance(2, 2, height);
+                            @include dynamic-distance(8, 10, width);
+                            @include dynamic-distance-negativ(16, 20, margin-left);
+
+                            margin-top: 11px;
+                            @include wl-breakpoint(1400){
+                              margin-top: 10px;
+                            }
+
+                          }
+
+                        }
+                      }
+
+
+                    }
+
+                  }
+
+            }
+
+
+
+      }
+
+
+}

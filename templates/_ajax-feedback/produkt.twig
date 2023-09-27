@@ -14,6 +14,10 @@
 {% set catParam = '' %}
 {# *-----------------------------------------*#}
 {% set zubehoerIdStr  = '' %}
+{# *-----------------------------------------*#}
+{% set ausgabeProduktUndZubehoer  = (sectionnamepage != 'produkt')? true : false %}
+
+
 
 {# ************************************************ #}
 
@@ -26,7 +30,7 @@
 
 {# ************************************************ #}
 
-{% set resultPager = block.pager|number %}
+{% set resultPager = (ausgabeProduktUndZubehoer)? block.pager|number : 0 %}
 {% if resultPager == 0 %}
      {% set showPager = false %}
 {% else %}
@@ -36,21 +40,34 @@
 
 {# ************************************************ #}
 
- {% set produktIds = craft.entries()
-     .section('produkt')
-     .relatedTo(['and',categoryIdStr])
-     .ids()
-     %}
+{% if ausgabeProduktUndZubehoer %}
 
- {% set produktZubehoerIds = craft.entries()
-     .section('produktZubehoer')
-     .relatedTo(['and',categoryIdStr])
-     .ids()
-     %}
+    {# AUsgabe Teaser Produkte & Zubehör #}
+    {% set produktIds = craft.entries()
+        .section('produkt')
+        .relatedTo(['and',categoryIdStr])
+        .ids()
+    %}
 
+    {% set produktZubehoerIds = craft.entries()
+        .section('produktZubehoer')
+        .relatedTo(['and',categoryIdStr])
+        .ids()
+    %}
 
+    {% set resultIds = produktIds|merge(produktZubehoerIds) %}
 
-{% set resultIds = produktIds|merge(produktZubehoerIds) %}
+{% else %}
+
+    {# AUsgabe Teaser  Zubehör #}
+    {% set resultIds = craft.entries()
+        .section('produktZubehoer')
+        .relatedTo(['and',categoryIdStr])
+        .ids()
+    %}
+
+{% endif %}
+
 
 {# ************************************************ #}
 {# *------------* ENDE Konfiguration *------------ *#}
@@ -122,10 +139,11 @@
                                                     {% endif %}
                                                 </div>
 
-
+                                                {% if ausgabeProduktUndZubehoer %}
                                                 <div class="artikelProduktInfo{% if entry.id in produktZubehoerIds %} artikelProduktInfoZubehoer{% else %} artikelProduktInfoProdukt{% endif %}">
                                                     {% if entry.id in produktZubehoerIds %}{{translation.t_zubehoer}}{% else %}{{ translation.t_produkt }}{% endif %}
                                                 </div>
+                                                {% endif %}
 
 
                                                 <div class="artikelCat artikelCat-js">
@@ -207,7 +225,7 @@
                    {% set counter = counter + 1%}
               {% endfor %}
          {% else %}
-              {{ block.infoTextErgebnise }}
+              {{ translation.t_infoTextErgebnise }}
          {% endif %}
 
 </div>

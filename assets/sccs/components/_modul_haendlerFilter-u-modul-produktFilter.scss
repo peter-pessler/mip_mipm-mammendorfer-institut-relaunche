@@ -1,5 +1,24 @@
 .modul-haendlerFilter, .modul-produktFilter{
 
+  &.teaserAusgabeZubehoerAbstandBottom{
+    @include dynamic-distance(80, 120, padding-bottom);
+  }
+
+
+      .zubehoerHeadline{
+        grid-row: 1;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        @include wl-breakpoint(500){
+          grid-column-start: 1;
+          grid-column-end: 13;
+        }
+
+        @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+      }
+
       .select-container{
 
         width: 100%;
@@ -195,11 +214,13 @@
             &.artikelProduktInfoZubehoer{
               background-color: #edf2f7;
               color: $wl-color-blue-dark-soft;
-              font-size: 0.7em;
+              font-size: 0.8em;
             }
 
             &.artikelProduktInfoProdukt{
-              background-color: #edf2f7;;
+              background-color: #edf2f7;
+              color: $wl-color-blue-dark-soft;
+              font-size: 0.8em;
             }
 
 

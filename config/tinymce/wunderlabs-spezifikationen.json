@@ -2,20 +2,19 @@
     "branding": false,
     "menubar": false,
     "contextmenu": false,
-    "extended_valid_elements": "img[src|alt|title|width|height|class|loading],+@[data-options]",
-    "force_br_newlines" : false,
+    "extended_valid_elements": "br,img[src|alt|title|width|height|class|loading],+@[data-options]",
+    "forced_root_block": "",
+    "force_br_newlines" : true,
     "force_p_newlines" : false,
-    "forced_root_block": "block",
+    "convert_newlines_to_brs": true,
     "relative_urls": false,
     "remove_script_host": false,
     "convert_urls": false,
     "paste_as_text": true,
-    "content_css": "https://starter-vers4-entwicklung.dev-wunderlabs.io/assets/css/styles.min.css",
     "content_css_cors": true,
-    "newline_behavior": "",
     "plugins": "autoresize advcode code table anchor link lists craftlink craftimage table wordcount visualblocks",
     "toolbar": [
-        "code | styles"
+        "code | styles | bold | bullist"
     ],
     "Selector": "textarea",
     "formats": {
@@ -27,7 +26,20 @@
             " block_expand": true,
             "expand": false,
             "deep": true
-          }
+          },
+          { "selector": "span", 
+            "attributes": ["style", "class"], 
+            "remove": "empty", 
+            "split": true, 
+            "expand": false, 
+            "deep": true 
+          },
+          { "selector": "*", 
+            "attributes": ["style", "class"], 
+            "split": false, 
+            "expand": false, 
+            "deep": true 
+            }
         ]  
     },
     "craftlink_adv_tab": false,
@@ -37,14 +49,42 @@
         {
             "title": "ohne Style",
             "value": ""
+        },
+        {
+            "title": "Button",
+            "value": "btn"
         }
     ],
     "object_resizing": false,
     "craftimage_title": true,
-    "style_formats": [
+    "craftimage_class_list": [
+        {
+            "title": "Default",
+            "value": "editor-img-default"
+        }
+    ],
+  "style_formats": [
+    {
+      "title": "Überschriften",
+      "items": [
+        {
+          "title": "H3",
+          "format": "h3"
+        },
+        {
+          "title": "H4",
+          "format": "h4"
+        }
+      ]
+    },
     {
       "title": "Formatierung",
       "items": [
+        {
+          "title": "No Break",
+          "inline": "span",
+          "classes": "nobreak"
+        },
         {
           "title": "Kursiv",
           "inline": "em"
@@ -63,3 +103,4 @@
 
   ]
 }
+

@@ -23,6 +23,37 @@
         {% if block.type.handle == 'bilderMitZoom' %}{% set bilderMitZoomCounter = bilderMitZoomCounter + 1 %}{% endif %}
       {% endfor %}
     {% endif %}
+
+    {% if sectionName == 'produkt' %}
+    <section class="blog-wrapper-outer modul-produktFilter teaserAusgabeZubehoerAbstandBottom" id="result">
+      <div class="wl-wrapper">
+
+        <div class="content-grid-12">
+          {% set headline = translation.t_headlineTeaserZubehoer|default(false) %}
+          {% if headline %}
+            <div class="zubehoerHeadline">
+              <h2>{{ headline }} {{ entry.auswahlKategorieProduktgruppe.one() }}</h2>
+            </div>
+          {% endif %}
+        </div>
+
+          <div class="content-grid-12">
+            <div class="teaser-container" id="articles">
+              <div class="result resultContainer">
+                {% set output = entry.auswahlKategorieProduktgruppe.one().id %}{# auswahlKategorieProduktgruppeId #}
+                {% include  '_ajax-feedback/produkt' with { block: '', output: output, pageid: '', sectionnamepage: sectionName, blockid: '' }  %}
+              </div>
+            </div>
+          </div>
+      </div>
+    </section>
+      <script>
+        $(document).ready(function() {
+          $('.article-item-js').matchHeight();
+        });
+      </script>
+    {% endif %}
+
   </section>
 {% endblock %}
 
