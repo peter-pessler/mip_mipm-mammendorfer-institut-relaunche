@@ -1,0 +1,168 @@
+.modul-sliderInfoTeaser{
+
+
+  .sliderInfoTeaserHeadline{
+
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(500){
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+  }
+
+
+  .artikelSliderContainer{
+    grid-row: 2;
+    grid-column-start: 2;
+    grid-column-end: 12;
+
+    @include wl-breakpoint( 500) {
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    padding-top: 80px;
+
+    p{
+      pading: 0!important;
+      margin: 0!important;
+    }
+
+    @include dynamic-distance-negativ(10, 30, margin-left);
+    @include dynamic-distance-negativ(10, 30, margin-right);
+
+          .artikelSliderBody{
+              position: relative;
+              height: 100%;
+
+              .slick-track{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                align-items: stretch;
+                align-content: stretch;
+              }
+
+              .item{
+
+                text-decoration: none;
+
+                display: inline-block;
+                position: relative;
+                height: 100%;
+                @include dynamic-distance(12, 30, padding);
+                @include dynamic-distance(10, 30, margin-left);
+                @include dynamic-distance(10, 30, margin-right);
+
+                background-color: #f3f8fd;
+                border-radius: 30px;
+                cursor: pointer;
+
+                p{
+                  margin: 0;
+                  @include wl-breakpoint(500) {
+                    line-height: 1.3;
+                  }
+                }
+
+                .artikelSliderItemIcon {
+                  width: 100%;
+
+                  display: flex;
+                  flex-direction: column;
+                  flex-wrap: nowrap;
+                  justify-content: center;
+                  align-items: center;
+                  align-content: stretch;
+                  @include dynamic-distance(15, 27, padding-bottom);
+
+                  margin-top: 20px;
+
+                  .itemImg{
+
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    justify-content: center;
+                    align-items: center;
+                    align-content: stretch;
+
+                    width: 35px;
+                    height: 35px;
+
+                    img{
+                      max-width: 35px;
+                      max-height: 35px;
+                    }
+
+                  }
+
+                }
+
+                .artikelSliderItemText{
+                  width: 100%;
+                  text-align: center;
+                  @include responsive-font(18px, 23px, $font-family-DINNextLTPro-bold, 1.34);
+                  margin-bottom: 20px;
+                }
+
+
+              }
+
+          }
+
+  }
+
+
+  .sliderWrapper{
+
+    height: 1px;
+    width: 100%;
+
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(500){
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+
+    .blendeLinks{
+      display: inline-block;
+      position: relative;
+      z-index: 100;
+      //height: 110px;
+      @include dynamic-distance(15, 30, width);
+      @include dynamic-distance-negativ(17, 36, margin-left);
+      background-color: $wl-color-white;
+    }
+
+    .blendeRechts{
+      display: inline-block;
+      position: relative;
+      z-index: 100;
+      @include dynamic-distance(15, 30, width);
+      @include dynamic-distance-negativ(17, 36, margin-right);
+      background-color: $wl-color-white;
+    }
+
+  }
+
+
+
+}

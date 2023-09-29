@@ -344,6 +344,41 @@
 *  AUFRUF:
 *  @include dynamic-distance(70, 200, height);
 */
+@mixin dynamic-distance-sliderButtonNext( $dataMin, $dataMax, $style ) {
+
+	$pageMaxWidth: $page-width; //wird aus _vars.scss übergeben
+	$breakpointWidth: calc(calc($dataMin / $dataMax)  * $pageMaxWidth );
+	$dataMaxStart: calc($dataMax + 60);
+	$dataMinEnd: calc($dataMin + 60);
+
+	#{$style}: #{$dataMaxStart}px;
+
+	@include wl-breakpoint($pageMaxWidth) {
+		$display_width: 100vw;
+		$einheit:  calc($pageMaxWidth / 100);
+		$factor:  calc($display_width / $einheit);
+		$abstandFactor:  calc($dataMax / 100);
+
+		#{$style}: calc(calc(calc($display_width / $einheit)  *  $abstandFactor) + 60px);
+	}
+
+	@include wl-breakpoint($breakpointWidth) {
+		#{$style}: #{$dataMinEnd}px;
+	}
+}
+
+
+/* ************************************************************************************
+* dynamic-distance-Mixin
+*
+*  mindest Wert
+*  maximaler Wert
+*  height | margin-bottom | margin-top | padding-bottom | padding-top
+*  Alle Werte ohne px angabe!
+*
+*  AUFRUF:
+*  @include dynamic-distance(70, 200, height);
+*/
 @mixin dynamic-treaserWidth( $width, $dataMin, $dataMax) {
 
 	$pageMaxWidth: $page-width; //wird aus _vars.scss übergeben

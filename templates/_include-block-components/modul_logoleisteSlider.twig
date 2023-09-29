@@ -1,0 +1,110 @@
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-logoleisteSlider">
+    <section class="wl-wrapper">
+
+                    <div class="content-grid-12">
+
+                        {% set headline = block.headline|default(false) %}
+                        {% if headline %}
+                            <div class="iconSliderHeadline">
+                                <h2>{{ headline }}</h2>
+                            </div>
+                        {% endif %}
+
+                        <div class="iconSliderContainer">
+                                    <div id="iconSlider{{ blockid }}" class="icnSlider">
+                                        {% set logoSlider = block.logos.one()|default(false) %}
+                                        {% if logoSlider %}
+                                            {% for logo in block.logos.all() %}
+                                                {% set imgSrc = logo.getUrl({
+                                                    mode: 'fit',
+                                                    width: '220',
+                                                    height: '107',
+                                                    quality: (imgQuality),
+                                                })  %}
+                                               <div class="item"><img src="{{ imgSrc }}" /></div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                            </div>
+
+                    </div>
+
+                    <div class="sliderWrapper">
+                        <div class="blendeLinks"></div>
+                        <div class="blendeRechts"></div>
+                    </div>
+
+    </section>
+</section>
+
+
+<script>
+    $(document).ready(function() {
+
+        $('#iconSlider{{ blockid }}').slick({
+            dots: false,
+            infinite: true,
+            speed: 2000,
+            autoplay: true,
+            autoplaySpeed: 4000,
+            slidesToShow: 6,
+            slidesToScroll: 6,
+            responsive: [
+                {
+                    breakpoint: 1400,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 5,
+                    }
+                },
+                {
+                    breakpoint: 1100,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                    }
+                },
+                {
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll:2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+
+        $('#iconSlider{{ blockid }}').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+            $('.item-js').matchHeight();
+            heightBlende{{ blockid }}();
+        });
+
+        function heightBlende{{ blockid }}() {
+
+            var height = $('#iconSlider{{ blockid }}').height();
+
+            $('.blende{{ blockid }}').css('height', height + 'px');
+            $('.blende{{ blockid }}').css('margin-top',  '-' + height + 'px');
+
+        }
+
+    });
+
+
+</script>

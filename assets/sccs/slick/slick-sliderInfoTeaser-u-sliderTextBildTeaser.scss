@@ -1,13 +1,10 @@
-
 // Mixin
 @import "../core/mixin";
 
 // Variables
 @import "../core/vars";
 
-/* Slider */
-.modul-logoleisteSlider {
-
+.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser{
 
     .slick-slider {
         position: relative;
@@ -116,12 +113,6 @@
 @charset "UTF-8";
 
     // Default Variables
-
-    // Slick icon entity codes outputs the following
-    // "\2190" outputs ascii character "←"
-    // "\2192" outputs ascii character "→"
-    // "\2022" outputs ascii character "•"
-
     $slick-font-path: "/assets/slick/" !default;
     $slick-font-family: "slick" !default;
     $slick-loader-path: "/assets/slick/" !default;
@@ -132,9 +123,9 @@
     $slick-next-character: "" !default;
     $slick-dot-character: "\2022" !default;
     $slick-dot-size: 6px !default;
-    $slick-opacity-default: 0.75 !default;
+    $slick-opacity-default: 1 !default;
     $slick-opacity-on-hover: 1 !default;
-    $slick-opacity-not-active: 0.25 !default;
+    $slick-opacity-not-active: 1 !default;
 
     @function slick-image-url($url) {
         @if function-exists(image-url) {
@@ -179,18 +170,14 @@
         //z-index: 100;
         display: block;
 
-        height: 24px;
-        //width: 68px;
-        @include dynamic-distance(25, 68, width);
-        @include wl-breakpoint(820) {
-            width: 29px;
-        }
+        height: 43px;
+        width: 25px;
+
         line-height: 0px;
         font-size: 0px;
         cursor: pointer;
         background: transparent;
         color: transparent;
-        top: 50%;
         -webkit-transform: translate(0, -50%);
         -ms-transform: translate(0, -50%);
         transform: translate(0, -50%);
@@ -198,101 +185,34 @@
         border: none;
         outline: none;
 
-        &.slick-disabled:before {
-            opacity: $slick-opacity-not-active;
-        }
-
-        &:before {
-            font-family: $slick-font-family;
-            font-size: 60px;
-            line-height: 1;
-            color: $slick-arrow-color;
-            opacity: $slick-opacity-default;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
     }
 
-    .slick-prev {
+    button{
 
-        background-image: url('/assets/images/arrow-prev.png');
-        background-position: left 0px center;
-        background-repeat: no-repeat;
-        left: 0;
-        margin-left: -80px;
-        @include wl-breakpoint(1100) {
-            margin-left: -60px;
-        }
-        @include wl-breakpoint(820) {
-            margin-left: -50px;
-        }
-        @include wl-breakpoint(400) {
-            margin-left: -43px;
+        &.slick-prev {
+
+            background-image: url('/assets/images/icons/arrow-prev.png');
+            background-position: left 0px center;
+            background-repeat: no-repeat;
+
+            //@include dynamic-distance(20, 40, left);
+            //@include dynamic-distance-negativ(50, 70, top);
+
         }
 
-        [dir="rtl"] & {
-            left: 0;
-            margin-left: -80px;
-            @include wl-breakpoint(1100) {
-                margin-left: -60px;
-            }
-            @include wl-breakpoint(820) {
-                margin-left: -50px;
-            }
-            @include wl-breakpoint(400) {
-                margin-left: -43px;
-            }
+        &.slick-next {
+
+            background-image: url('/assets/images/icons/arrow-next.png');
+            background-position: left 0px center;
+            background-repeat: no-repeat;
+
+            //@include dynamic-distance(80, 100, left);
+            //@include dynamic-distance-negativ(50, 70, top);
+
         }
 
-        &:before {
-            content: $slick-prev-character;
-
-            [dir="rtl"] & {
-                content: $slick-next-character;
-            }
-        }
     }
 
-    .slick-next {
-
-        background-image: url('/assets/images/arrow-next.png');
-        background-position: right 0px center;
-        background-repeat: no-repeat;
-
-        right: 0;
-        margin-right: -80px;
-        @include wl-breakpoint(1100) {
-            margin-right: -60px;
-        }
-        @include wl-breakpoint(820) {
-            margin-right: -50px;
-        }
-        @include wl-breakpoint(400) {
-            margin-right: -43px;
-        }
-
-        [dir="rtl"] & {
-            right: 0;
-            margin-right: -80px;
-            @include wl-breakpoint(1100) {
-                margin-right: -60px;
-            }
-            @include wl-breakpoint(820) {
-                margin-right: -50px;
-            }
-            @include wl-breakpoint(400) {
-                margin-right: -43px;
-            }
-        }
-
-        &:before {
-            content: $slick-next-character;
-
-            [dir="rtl"] & {
-                content: $slick-prev-character;
-            }
-        }
-    }
 
     /* Dots */
 
@@ -371,4 +291,42 @@
         // background-color:red;
     }
 
+}
+
+.modul-sliderInfoTeaser{
+    button{
+
+        &.slick-prev {
+            @include dynamic-distance(20, 40, left);
+            @include dynamic-distance-negativ(50, 70, top);
+        }
+
+        &.slick-next {
+            @include dynamic-distance(80, 100, left);
+            @include dynamic-distance-negativ(50, 70, top);
+        }
+
+    }
+}
+
+.modul-sliderTextBildTeaser{
+    button{
+
+        &.slick-prev {
+            @include dynamic-distance(47, 173, left);
+            @include wl-breakpoint(500){
+                @include dynamic-distance(20, 40, left);
+            }
+            @include dynamic-distance-negativ(50, 70, top);
+        }
+
+        &.slick-next {
+            @include dynamic-distance-sliderButtonNext(47, 173, left);
+            @include wl-breakpoint(500){
+                @include dynamic-distance(80, 100, left);
+            }
+            @include dynamic-distance-negativ(50, 70, top);
+        }
+
+    }
 }

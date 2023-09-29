@@ -1,0 +1,102 @@
+.modul-logoleisteSlider{
+
+  .iconSliderHeadline{
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 12;
+
+    @include wl-breakpoint(500){
+      grid-column-start: 1;
+      grid-column-end: 13;
+    }
+
+    @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+  }
+
+
+  .iconSliderContainer{
+    grid-row: 2;
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+  }
+
+  .sliderWrapper{
+
+    height: 1px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+
+    .blendeLinks{
+      display: inline-block;
+      position: relative;
+      z-index: 100;
+      height: 110px;
+      @include dynamic-distance(15, 30, width);
+      @include dynamic-distance-negativ(15, 30, margin-left);
+      margin-top: -108px;
+      background-color: $wl-color-white;
+    }
+
+    .blendeRechts{
+      display: inline-block;
+      position: relative;
+      z-index: 100;
+      height: 110px;
+      @include dynamic-distance(15, 30, width);
+      @include dynamic-distance-negativ(15, 30, margin-right);
+      margin-top: -108px;
+      background-color: $wl-color-white;
+    }
+
+  }
+
+
+
+ .icnSlider{
+
+    @include dynamic-distance-negativ(12, 30, margin-left);
+    @include dynamic-distance-negativ(12, 30, margin-right);
+
+    height: 107px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+
+    .item{
+
+      @include dynamic-distance(12, 30, padding-left);
+      @include dynamic-distance(12, 30, padding-right);
+
+      height: 107px;
+
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      align-content: stretch;
+
+      img, svg{
+        max-height: 107px;
+        object-fit: fill;
+      }
+
+    }
+
+  }
+
+
+}

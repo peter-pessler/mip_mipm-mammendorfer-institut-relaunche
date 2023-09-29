@@ -490,6 +490,51 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_modul_logoleisteSlider.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_logoleisteSlider.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_sliderInfoTeaser.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_sliderInfoTeaser.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_sliderTextBildTeaser.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_sliderTextBildTeaser.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_modul_teaserAngebote.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -760,21 +805,6 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/assets\/sccs\/components\/momentan-nicht-eingebunden\/_modul_logoleisteSlider.scss" : {
-      "aP" : 1,
-      "bl" : 0,
-      "co" : 0,
-      "dP" : 10,
-      "ec" : 1,
-      "ft" : 4,
-      "ma" : 1,
-      "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/_modul_logoleisteSlider.min.css",
-      "oF" : 0,
-      "oS" : 3,
-      "pg" : 0,
-      "sct" : 0
-    },
     "\/assets\/sccs\/components\/momentan-nicht-eingebunden\/_modul_news.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -995,6 +1025,21 @@
       "ma" : 1,
       "oA" : 0,
       "oAP" : "\/web\/assets\/css\/slick-logoleisteSlider.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/slick\/slick-sliderInfoTeaser-u-sliderTextBildTeaser.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/css\/slick-sliderInfoTeaser-u-sliderTextBildTeaser.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -1944,6 +1989,18 @@
       "oF" : 0,
       "pg" : 0
     },
+    "\/config\/tinymce\/resources\/wunderlabs-slider.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/config\/tinymce\/resources\/wunderlabs-slider-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
     "\/config\/tinymce\/resources\/wunderlabs-spezifikationen.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -1953,6 +2010,18 @@
       "ma" : 0,
       "oA" : 0,
       "oAP" : "\/config\/tinymce\/resources\/wunderlabs-spezifikationen-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/config\/tinymce\/resources\/wunderlabs-teaser.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/config\/tinymce\/resources\/wunderlabs-teaser-min.css",
       "oF" : 0,
       "pg" : 0
     },
@@ -1992,6 +2061,14 @@
       "ft" : 524288,
       "oA" : 1,
       "oAP" : "\/config\/tinymce\/wunderlabs-kategorie-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
+    "\/config\/tinymce\/wunderlabs-slider.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/config\/tinymce\/wunderlabs-slider-min.json",
       "oF" : 0,
       "oO" : 0,
       "oS" : 1
@@ -2272,6 +2349,14 @@
       "oAP" : "\/templates\/_include-block-components\/modul_haendlerFilter.twig",
       "oF" : 0
     },
+    "\/templates\/_include-block-components\/modul_logoleisteSlider.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_logoleisteSlider.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_news.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2286,6 +2371,22 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_produkte.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_sliderInfoTeaser.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_sliderInfoTeaser.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_sliderTextBildTeaser.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_sliderTextBildTeaser.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_teaserAngebote.twig" : {
@@ -2350,14 +2451,6 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/momentan-nicht-eingebunden\/modul_imageGallery.twig",
-      "oF" : 0
-    },
-    "\/templates\/_include-block-components\/momentan-nicht-eingebunden\/modul_logoleisteSlider.twig" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/templates\/_include-block-components\/momentan-nicht-eingebunden\/modul_logoleisteSlider.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/momentan-nicht-eingebunden\/modul_youTube.twig" : {
@@ -2590,6 +2683,26 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/web\/assets\/css\/slick-logoleisteSlider.min.css.map",
+      "oF" : 0
+    },
+    "\/web\/assets\/css\/slick-sliderInfoTeaser-u-sliderTextBildTeaser.min.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/css\/slick-sliderInfoTeaser-u-sliderTextBildTeaser.min-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/web\/assets\/css\/slick-sliderInfoTeaser-u-sliderTextBildTeaser.min.css.map" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/css\/slick-sliderInfoTeaser-u-sliderTextBildTeaser.min.css.map",
       "oF" : 0
     },
     "\/web\/assets\/css\/slick.min.css" : {
@@ -2921,6 +3034,19 @@
       "plM" : 3758088159,
       "prP" : 0
     },
+    "\/web\/assets\/images\/icons\/arrow-next.png" : {
+      "ft" : 32768,
+      "iS" : 531,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/icons\/arrow-next.png",
+      "oF" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/web\/assets\/images\/icons\/arrow-pager-next.svg" : {
       "ft" : 2097152,
       "miP" : 0,
@@ -2940,6 +3066,19 @@
       "opt" : 0,
       "plM" : 3758088159,
       "prP" : 0
+    },
+    "\/web\/assets\/images\/icons\/arrow-prev.png" : {
+      "ft" : 32768,
+      "iS" : 367,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/icons\/arrow-prev.png",
+      "oF" : 0,
+      "oIPL" : 1,
+      "opt" : 1,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
     },
     "\/web\/assets\/images\/icons\/arrow.svg" : {
       "ft" : 2097152,
@@ -2963,6 +3102,16 @@
       "ou" : "lpckwebp-none",
       "q" : 100,
       "rq" : 75
+    },
+    "\/web\/assets\/images\/icons\/icn-checkmark.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/icons\/icn-checkmark.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
     },
     "\/web\/assets\/images\/icons\/list-icn-dot-black.svg" : {
       "ft" : 2097152,
@@ -3473,6 +3622,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/web\/index.php",
+      "oF" : 0
+    },
+    "\/web\/test.txt" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/test.txt",
       "oF" : 0
     },
     "\/web\/web.config" : {

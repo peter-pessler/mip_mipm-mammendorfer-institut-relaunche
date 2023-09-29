@@ -1,0 +1,210 @@
+{% set bgKreisAusblenden = (block.bgKreisAusblenden)? true : false %}
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-sliderTextBildTeaser">
+    <section class="wl-wrapper">
+
+         <div class="grid-container content-grid-12{% if bgKreisAusblenden %} bgRightKreis{% endif %}">
+
+             {% set headline  = block.headline|default(false) %}
+             {% if headline  %}
+                 <div class="sliderInfoTeaserHeadline{% if bgKreisAusblenden %} bgRightKreisAbstandTop{% endif %}">
+                     <h2>{{ headline }}</h2>
+                 </div>
+             {% endif %}
+
+         {% switch block.ausgabe %}
+
+                 {% case "headlineText" %}
+
+                    {% set show_artikelSliderItemIcon = false %}
+                    {% set show_artikelSliderItemImage = false %}
+                    {% set show_fixesIconHaeckchenHeadlineText = false %}
+
+                {% case "fixesIconHaeckchenHeadlineText" %}
+
+                    {% set show_artikelSliderItemIcon = false %}
+                    {% set show_artikelSliderItemImage = false %}
+                    {% set show_fixesIconHaeckchenHeadlineText = true %}
+
+                 {% case "bildHeadlineText" %}
+
+                    {% set show_artikelSliderItemIcon = false %}
+                    {% set show_artikelSliderItemImage = true %}
+                    {% set show_fixesIconHaeckchenHeadlineText = false %}
+
+                 {% case "iconHeadlineText" %}
+
+                    {% set show_artikelSliderItemIcon = true %}
+                    {% set show_artikelSliderItemImage = false %}
+                    {% set show_fixesIconHaeckchenHeadlineText = false %}
+
+         {% default %}
+
+                    {% set show_artikelSliderItemIcon = false %}
+                    {% set show_artikelSliderItemImage = false %}
+                    {% set show_fixesIconHaeckchenHeadlineText = false %}
+
+         {% endswitch %}
+
+            <div class="artikelSliderContainer">
+                    <div id="artikelSlider{{ blockid }}" class="artikelSliderBody">
+
+                        {% set showItemListe = block.item.one()|default(false) %}{% if showItemListe %}
+                            {% for element in block.item.all() %}
+
+                                <div class="item item-js">
+
+                                    {% if show_artikelSliderItemImage %}
+                                    <div class="artikelSliderItemImage">
+
+                                        {% set img =  element.bild.one()|default(false) %}
+                                        {% if img %}
+                                        {% set imgSrc = element.bild.one().getUrl({
+                                            mode: 'crop',
+                                            width: '220',
+                                            height: '107',
+                                            quality: (imgQuality),
+                                        })  %}
+                                            <div class="itemImg"><img src="{{ imgSrc }}" width="220" height="107" alt="{{ element.bild.one().title }}" /></div>
+                                        {% endif %}
+
+                                    </div>
+                                    {% endif %}
+
+                                    {% if show_artikelSliderItemIcon %}
+                                    <div class="artikelSliderItemIcon">
+
+                                        {% set img =  element.bild.one()|default(false) %}
+                                        {% if img %}
+                                        {% set imgSrc = element.bild.one().getUrl({
+                                            mode: 'fit',
+                                            width: '220',
+                                            height: '107',
+                                            quality: (imgQuality),
+                                        })  %}
+                                            <div class="itemIcon"><img src="{{ imgSrc }}" alt="{{ element.bild.one().title }}" /></div>
+                                        {% endif %}
+
+                                    </div>
+                                    {% endif %}
+
+                                    {% if show_fixesIconHaeckchenHeadlineText %}
+                                    <div class="fixesIconHaeckchenHeadlineText">
+                                            <div class="itemImg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33">
+                                                    <g id="Gruppe_10422" data-name="Gruppe 10422" transform="translate(-282 -1037)">
+                                                        <rect id="Rechteck_3586" data-name="Rechteck 3586" width="33" height="33" transform="translate(282 1037)" fill="#fff" opacity="0"/>
+                                                        <path id="done_FILL0_wght400_GRAD0_opsz48_4_" data-name="done_FILL0_wght400_GRAD0_opsz48 (4)" d="M165.355-692.175,154-703.53l2.18-2.18,9.175,9.175L184.82-716l2.18,2.18Z" transform="translate(128 1758)" fill="#31c390"/>
+                                                    </g>
+                                                </svg>
+                                            </div>
+                                    </div>
+                                    {% endif %}
+
+
+                                    <div class="artikelSliderItemText">
+                                        <div class="sliderItemHeadline">
+                                            {{ element.headline }}
+                                        </div>
+                                        <div class="sliderItemText text">
+                                            {{ element.text }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+                        {% endif %}
+
+                    </div>
+            </div>
+
+        </div>
+
+        <div class="content-grid-12">
+
+            <div class="sliderWrapper">
+                <div class="blendeLinks blende{{ blockid }}"></div>
+                <div class="blendeRechts blende{{ blockid }}"></div>
+            </div>
+
+        </div>
+
+    </section>
+</section>
+
+{% set autoplay = (block.automatischesScrollen)? 'true' : 'false' %}
+{% set backNextArrowAusblenden = (block.backNextArrowAusblenden)? 'true' : 'false' %}
+
+{% if autoplay == 'true' %}
+
+        {% if backNextArrowAusblenden == 'true' %}
+            {% set arrows = 'false' %}
+        {% else %}
+            {% set arrows = 'true' %}
+        {% endif %}
+
+{% else %}
+        {% set arrows = 'true' %}
+{% endif %}
+
+
+
+<script>
+    $(document).ready(function() {
+
+       $('.item-js').matchHeight();
+
+        $('#artikelSlider{{ blockid }}').slick({
+
+            dots: false,
+            infinite: true,
+            speed: 2500,
+            autoplay: {{ autoplay }},
+            autoplaySpeed: 2000,
+            slidesToShow: 4,
+            arrows: {{ arrows }},
+            //slidesToScroll: 1,
+
+            responsive: [
+                {
+                    breakpoint: 1300,
+                    settings: {
+                        slidesToShow: 3,
+                        //slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 1000,
+                    settings: {
+                        slidesToShow: 2,
+                        //slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 650,
+                    settings: {
+                        slidesToShow: 1,
+                        //slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+    });
+
+
+    $('#artikelSlider{{ blockid }}').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+        $('.item-js').matchHeight();
+        heightBlende{{ blockid }}();
+    });
+
+    function heightBlende{{ blockid }}() {
+
+       var height = $('#artikelSlider{{ blockid }}').height();
+
+       $('.blende{{ blockid }}').css('height', height + 'px');
+       $('.blende{{ blockid }}').css('margin-top',  '-' + height + 'px');
+
+    }
+
+</script>
