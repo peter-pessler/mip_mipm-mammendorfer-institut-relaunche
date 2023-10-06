@@ -1,0 +1,82 @@
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-sliderHistory">
+    <section class="wl-wrapper">
+
+            <div class="content-grid-12">
+
+                    <div class="sliderHistory content-grid-12">
+                        <div class="sliderHistoryBody">
+
+                            {% set headline = block.headline|default(false) %}
+                            {% if headline %}
+                                <div class="historySliderHeadline">
+                                    <h2>{{ headline }}</h2>
+                                </div>
+                            {% endif %}
+
+                                <div id="slider-history{{ blockid }}" class="historySliderContainer">
+
+                                    {% set entryItems = craft.entries().section('history') %}
+                                    {% for items in entryItems %}
+
+                                        <article>
+
+                                            <div class="line">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21">
+                                                    <circle id="Ellipse_1" data-name="Ellipse 1" cx="10.5" cy="10.5" r="10.5" fill="#31c390"/>
+                                                </svg>
+                                            </div>
+                                            <div class="article-content">
+                                                <div class="articleJahreszahl"><h4>{{ items.jahreszahl }}</h4></div>
+                                                <div class="articleHeadline textBold">{{ items.teaserHeadline }}</div>
+                                                <div class="articleText text">{{ items.teaserText }}</div>
+                                            </div>
+
+                                        </article>
+
+
+                                    {% endfor %}
+                                </div>
+
+                        </div>
+                     </div>
+
+            </div>
+
+    </section>
+</section>
+
+<script>
+    $(document).ready(function() {
+
+        $('#slider-history{{ blockid }}').slick({
+            dots: false,
+            infinite: true,
+            speed: 2000,
+            autoplay: false,
+            autoplaySpeed: 4000,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [
+                {
+                    breakpoint: 1000,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll:2
+                    }
+                },
+                {
+                    breakpoint: 650,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+
+
+    });
+
+
+</script>

@@ -1,0 +1,108 @@
+.modul-sliderHistory {
+
+  .sliderHistory {
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+
+    border-radius: 30px;
+    background-color: #f4fdf9;
+
+    .sliderHistoryBody{
+      grid-row: 1;
+      grid-column-start: 2;
+      grid-column-end: 12;
+
+      @include wl-breakpoint(500){
+        grid-column-start: 1;
+        grid-column-end: 13;
+        padding: 25px;
+      }
+      @include wl-breakpoint(400){
+        padding: 20px;
+      }
+      @include wl-breakpoint(350){
+        padding: 15px;
+      }
+
+    }
+
+  }
+
+
+  .sliderHistoryBody {
+
+    @include dynamic-distance(45, 70, padding-top);
+    @include dynamic-distance(45, 70, padding-bottom);
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    .historySliderHeadline {
+      width: 100%;
+      @include dynamic-distance(60, 100, padding-bottom);
+    }
+
+    .historySliderContainer {
+      position: relative;
+      height: 100%;
+
+
+      article {
+
+        position: relative;
+        height: 100%;
+
+        display: inline-flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+
+        cursor: pointer;
+
+        .line{
+          background-image: url("/assets/images/img/bg-history-line.png");
+          background-repeat: repeat-x;
+          background-position: center;
+          height: 83px;
+
+          display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: center;
+          align-content: stretch;
+        }
+
+
+        .article-content{
+          width: 100%;
+          @include dynamic-distance(30, 70, padding-right);
+          @include wl-breakpoint(650){
+            padding-right:20px;
+          }
+        }
+
+        .articleJahreszahl{
+          @include dynamic-distance(30, 40, padding-bottom);
+        }
+
+        .articleText{
+          padding-top: 8px;
+        }
+      }
+
+    }
+
+  }
+
+
+}
+

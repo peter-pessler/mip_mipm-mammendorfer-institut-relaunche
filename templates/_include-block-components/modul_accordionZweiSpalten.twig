@@ -1,12 +1,13 @@
+{% set bgKreisAusblenden = (block.bgKreisAusblenden)? true : false %}
 <div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
 <section class="wrapper-outer modul-accordionZweiSpalten">
     <section class="wl-wrapper">
 
-        <div class="grid-container bgKreis content-grid-12" id="articles">
+        <div class="grid-container content-grid-12 {% if bgKreisAusblenden %} bgKreis{% endif %}" id="articles">
 
             {% set headline = block.headline|default(false) %}
             {% if headline %}
-                <div class="accordionZweiSpaltenHheadline">
+                <div class="accordionZweiSpaltenHheadline{% if bgKreisAusblenden %} bgRightKreisAbstandTop{% endif %}">
                     <h2>{{ headline }}</h2>
                 </div>
             {% endif %}

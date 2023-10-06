@@ -120,6 +120,24 @@
                         {{ text }}
                     {% endif %}
 
+
+                    {% set button1 = block.button1|default(false) %}
+                    {% set button2 = block.button2|default(false) %}
+                    {% if ( button1 and block.button1.getUrl() != '' ) or ( button2 and block.button2.getUrl() != '' ) %}
+                        <div class="button-container">
+                            <span class="btn1">
+                            {% if button1  and block.button1.getUrl() != '' %}
+                                {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
+                            {% endif %}
+                            </span>
+                            <span class="btn2">
+                            {% if button2  and block.button2.getUrl() != '' %}
+                                {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                            {% endif %}
+                            </span>
+                        </div>
+                    {% endif %}
+
                 </div>
 
                 <div class="containerBild">

@@ -4,7 +4,7 @@
 // Variables
 @import "../core/vars";
 
-.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser{
+.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser, .modul-sliderHistory{
 
     .slick-slider {
         position: relative;
@@ -293,6 +293,7 @@
 
 }
 
+
 .modul-sliderInfoTeaser{
     button{
 
@@ -308,6 +309,24 @@
 
     }
 }
+
+
+.modul-sliderHistory{
+    button{
+
+        &.slick-prev {
+            left: 0;
+            @include dynamic-distance-negativ(15, 40, top);
+        }
+
+        &.slick-next {
+            left: 60px;
+            @include dynamic-distance-negativ(15, 40, top);
+        }
+
+    }
+}
+
 
 .modul-sliderTextBildTeaser{
     button{

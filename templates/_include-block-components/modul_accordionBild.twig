@@ -1,0 +1,85 @@
+{# ###################################################################################################### #}
+        {% set settings = {
+            '0-1100' : {
+                'size' : '650x366',
+                'mode' : 'crop'
+            },
+            '1-900' : {
+                'size' : '650x366',
+                'mode' : 'crop'
+            },
+            '2-450' : {
+                'size' : '650x366',
+                'mode' : 'crop'
+            }
+        } %}
+        {% set image = block.bild.one()|default(false) %}
+{# ###################################################################################################### #}
+
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-accordionBild">
+    <section class="wl-wrapper">
+
+        <div class="grid-container content-grid-12">
+
+
+            <div class="containerBild">
+
+                {% if image %}
+                    <div class="modulbild">
+                        {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                    </div>
+                {% endif %}
+
+            </div>
+
+
+            {% set accordionHeadline = block.accordionHeadline|default(false) %}
+            {% set accordionText = block.accordionText|default(false) %}
+
+
+            {% if accordionHeadline %}
+                <div class="containerText-headline">
+                    <h2>{{ accordionHeadline}}</h2>
+                </div>
+            {% else %}
+                <div class="containerText-headline-leer"></div>
+            {% endif %}
+
+            {% if accordionText %}
+                <div class="containerText-body text">
+                    {{ accordionText }}
+                </div>
+            {% else %}
+                <div class="containerText-body-leer"></div>
+            {% endif %}
+
+
+            <div class="accordionContent{% if accordionHeadline or accordionText %} accordionSpacerTop{% endif %}">
+                <div class="accordion">
+                    {% for entry in block.accordionLinks %}
+                        <ul class="accordion-list {{ craft.app.request.isMobileBrowser() ? 'mobile' : 'desktop' }}">
+                            <li>
+                                <label class="accordion-label lableOff">
+                                    <div class="label-body">
+                                        {{ entry.headline }}
+                                    </div>
+                                </label>
+                                <div class="accordion-content">
+                                    <div class="accordion-content-body text">
+                                        {{ entry.text }}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+</section>
+
+

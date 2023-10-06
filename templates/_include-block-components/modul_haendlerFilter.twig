@@ -187,7 +187,7 @@ function statusLandCategory(produktgruppe = '') {
                 {% set counter = '1' %}
                 {% set categoryLandArr = {} %}
 
-                {% set allCategoryLand = craft.categories().group('land') %}
+                {% set allCategoryLand = craft.categories().group('land').orderBy('title asc') %}
                 {% for elemente in allCategoryLand.all() %}
                     {% set categoryLandStr  = (counter == 1)? elemente.id : categoryLandStr  ~ ',' ~ elemente.id  %}
                     {% set categoryLandArr = categoryLandArr|merge({ (loop.index)  :  '<option value="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</option>' }) %}

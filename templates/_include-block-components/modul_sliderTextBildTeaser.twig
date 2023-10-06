@@ -46,7 +46,7 @@
 
          {% endswitch %}
 
-            <div class="artikelSliderContainer">
+            <div class="artikelSliderContainer"{% if img %}>
                     <div id="artikelSlider{{ blockid }}" class="artikelSliderBody">
 
                         {% set showItemListe = block.item.one()|default(false) %}{% if showItemListe %}

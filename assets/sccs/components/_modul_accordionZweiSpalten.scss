@@ -31,9 +31,13 @@
       grid-column-end: 13;
     }
 
-    padding-top: 40px;
-
     @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
+
+
+    &.bgRightKreisAbstandTop{
+      padding-top: 40px;
+    }
+
 
     }
 
