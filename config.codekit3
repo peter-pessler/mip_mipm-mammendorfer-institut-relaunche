@@ -490,6 +490,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_modul_kontaktFormular.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_kontaktFormular.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_modul_logoleisteSlider.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -2603,20 +2618,12 @@
       "oAP" : "\/templates\/_include-vendor\/code-example.twig",
       "oF" : 0
     },
-    "\/templates\/_include-vendor\/formular_id-1__backup.twig" : {
+    "\/templates\/_include-vendor\/formular_id-1-u-2.twig" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 2,
-      "oAP" : "\/templates\/_include-vendor\/formular_id-1__backup.twig",
-      "oF" : 0
-    },
-    "\/templates\/_include-vendor\/formular_id-1.twig" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/templates\/_include-vendor\/formular_id-1.twig",
+      "oAP" : "\/templates\/_include-vendor\/formular_id-1-u-2.twig",
       "oF" : 0
     },
     "\/templates\/_include-vendor\/grid-demo-12.twig" : {

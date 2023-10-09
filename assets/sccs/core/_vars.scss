@@ -82,17 +82,17 @@ $base-background-color: $wl-bgcolor-html;
 $wl-form-font-family: $base-font-family;
 $wl-form-color-fields: $wl-color-white;
 $wl-form-color-text: $wl-color-blue-dark;
-$wl-form-color-error: red;
+$wl-form-color-error: #f04a34;
 /* --------------------------------------------------- */
-$wl-input-border-color: $wl-color-grey;
+$wl-input-border-color: $wl-color-green;
 $wl-checkmark-border-color: $wl-color-grey;
 /* --------------------------------------------------- */
-$wl-input-border-radius: 16px;
+$wl-input-border-radius: 20px;
 /* --------------------------------------------------- */
 $wl-input-padding-right: 30px;
 $wl-input-padding-left: 30px;
 $wl-input-padding-top: 20px;
-$wl-input-padding-bottom: 20px;
+$wl-input-padding-bottom: 12px;
 
 
 

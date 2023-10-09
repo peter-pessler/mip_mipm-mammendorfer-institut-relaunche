@@ -186,48 +186,6 @@ function formValidate(form, btn) {
         /* *********************************************************** */
         /* *********************************************************** */
 
-        $(form + " input[type=file]").each(function() {
-
-            if( $(this).hasClass('required') ) {
-
-                if (isValidPdfUpload() == false) {
-                    sendForm = false;
-                    $(this).parents('.uploadFileContainer').addClass('formStateError');
-
-                    // Bug fixing
-                    if(formParamTest){
-                        alert( $(this).attr("name") );
-                    }
-
-                } else {
-
-                    if (sendForm == false) {
-                        sendForm = false;
-                    } else {
-                        sendForm = true;
-                    }
-
-                    $(this).parents('.uploadFileContainer').removeClass('formStateError');
-
-                }
-
-            }
-
-        });
-
-        // Bug fixing
-        if(formParamTest){
-            if(sendForm){
-                alert('sendForm meldet (type file): alles richtig');
-            } else {
-                alert('sendForm meldet (type File): Fehler');
-            }
-        }
-
-
-        /* *********************************************************** */
-        /* *********************************************************** */
-
         $(form + " textarea").each ( function () {
 
             if( $(this).hasClass('required') ){
@@ -310,12 +268,21 @@ function formValidate(form, btn) {
 
             /* Form inputs valid, submit form. */
 
+            $(".form-info").css("display", "none");
+
+            //Tracking
+            var location =  $('#form').attr('data-location'),  mail = $('#form-email').val();
+            tracking(location, mail);
+
+            // Senden
             $('#submit').click();
             return true;
 
         } else {
 
             /* Form inputs not all valid, display error messages. */
+
+            $(".form-info").css("display", "block");
 
             $('html, body').animate(
                 {
@@ -330,58 +297,22 @@ function formValidate(form, btn) {
         $("#lock-modal").css("display", "block");
         $("#loading-circle").css("display", "block");
 
+
     });
 }
 
-
-function isValidPdfUpload() {
-
-    var result = false, file, extension, statusExtension;
-
-
-    $(".fileresult").each(function() {
-
-        file = $(this).text();
-
-        if( file != '' ){
-
-            extension = file.split('.').pop();
-
-            switch(extension) {
-                case 'pdf':
-                case 'PDF':
-
-                    if (statusExtension == false) {
-                        statusExtension = false;
-
-                    } else {
-                        statusExtension = true;
-                    }
-
-                    break;
-
-                default:
-                    statusExtension = false;
-            }
-
-
-            if(statusExtension){
-                result = true;
-            } else {
-                result = false;
-            }
-
-        }
-
+function tracking(location,mail) {
+    window.dataLayer.push({
+        'event': 'contact_form_submitted',
+        'formLocation': 'Seite: ' + location + ' / Mail: ' + mail,
     });
 
-    if(result){
-        return true;
-    } else {
-        return false;
-    }
+    /*
+    alert(JSON.stringify(dataLayer));
+    */
 
-}
+};
+
 
 
 

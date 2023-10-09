@@ -1,0 +1,45 @@
+.modul-kontaktformular {
+
+    .formularContainer {
+      grid-row: 1;
+      grid-column-start: 2;
+      grid-column-end: 7;
+
+      @include wl-breakpoint(900) {
+        grid-column-start: 2;
+        grid-column-end: 12;
+      }
+
+      @include wl-breakpoint(500) {
+        grid-column-start: 1;
+        grid-column-end: 13;
+      }
+
+    }
+
+    .textContainer {
+
+      grid-row: 1;
+      grid-column-start: 7;
+      grid-column-end: 12;
+
+
+      @include wl-breakpoint(900) {
+        grid-row: 2;
+        grid-column-start: 2;
+        grid-column-end: 12;
+
+        padding-top: 70px;
+
+      }
+
+      @include wl-breakpoint(500) {
+        grid-column-start: 1;
+        grid-column-end: 13;
+      }
+
+      }
+
+
+}
+

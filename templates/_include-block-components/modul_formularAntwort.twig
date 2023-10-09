@@ -1,14 +1,14 @@
 {# -------------- Formular Antwortseite -------------- #}
 {% set submission = wheelform.lastSubmission %}
-{% set anrede = '' %}
-{% set name = '' %}
+{% set vorname = '' %}
+{% set nachname = '' %}
 {% if submission %}
 {% for field in submission.fields %}
-  {% if field.name == 'anrede' %}
-      {% set anrede = field.value %}
+  {% if field.name == 'vorname' %}
+      {% set vorname = field.value %}
   {% endif %}
-  {% if field.name == 'name' %}
-      {% set name = field.value %}
+  {% if field.name == 'nachname' %}
+      {% set nachname = field.value %}
   {% endif %}
 {% endfor %}
 {% else %}
@@ -22,10 +22,10 @@
 
 {% set antwortHeadline = craft.wul.findReplaceElementRemoveSpaces(block.headline) %}
 {% set antwortText = craft.wul.findReplaceElementRemoveSpaces(block.text) %}
-{% set antwortHeadline = antwortHeadline|replace({'[[anrede]]': anrede}) %}
-{% set antwortHeadline = antwortHeadline|replace({'[[name]]': name}) %}
-{% set antwortText = antwortText|replace({'[[anrede]]': anrede}) %}
-{% set antwortText = antwortText|replace({'[[name]]': name}) %}
+{% set antwortHeadline = antwortHeadline|replace({'[[vorname]]': vorname}) %}
+{% set antwortHeadline = antwortHeadline|replace({'[[nachname]]': nachname}) %}
+{% set antwortText = antwortText|replace({'[[vorname]]': vorname}) %}
+{% set antwortText = antwortText|replace({'[[nachname]]': nachname}) %}
 <section class="wl-wrapper-outer modul-formularAntwort">
     <section class="wl-wrapper">
         <div class="content-grid-12">

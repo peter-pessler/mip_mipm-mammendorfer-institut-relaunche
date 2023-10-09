@@ -106,7 +106,7 @@ h3, .h3 {
   margin-bottom: -0.2em;
 }
 h4, .h4 {
-  @include responsive-font(20px, 26px, $h4-font-family, $base-line-height-h3);
+  @include responsive-font(18px, 23px, $h4-font-family, $base-line-height-h3);
 
   margin-top: 0;
   margin-bottom: -0.2em;

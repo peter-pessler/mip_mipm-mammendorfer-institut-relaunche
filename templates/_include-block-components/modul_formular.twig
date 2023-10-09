@@ -3,18 +3,31 @@
 
     <section class="wl-wrapper" data-myFormular>
 
-        {% set formularId = block.formularAuswahl.id %}
-        {% set formularAntwortUrl = '' %}
-        {% set isFormularAntwortUrl = block.antwortSeite|default(false) %}
-        {% if isFormularAntwortUrl %}
-            {% set formularAntwortUrl = block.antwortSeite.one().getUrl() %}
-        {% endif %}
-        {% set formTempl = 'id-' ~ formularId %}
+        <div class="content-grid-12">
 
-        {% switch formularId %}
-        {% case 1 %}
-            {% include '_include-vendor/formular_' ~ formTempl with {formularId: formularId, formularAntwortUrl: formularAntwortUrl} %}
-        {% endswitch %}
+                <div class="formularContainer">
+
+                    {% set formularId = block.formularAuswahl.id %}
+                    {% set formularAntwortUrl = '' %}
+                    {% set isFormularAntwortUrl = block.antwortSeite|default(false) %}
+                    {% if isFormularAntwortUrl %}
+                        {% set formularAntwortUrl = block.antwortSeite.one().getUrl() %}
+                    {% endif %}
+                    {% set formTempl = 'id-' ~ formularId %}
+
+                    {% switch formularId %}
+                    {% case 1 %}
+                        {% include '_include-vendor/formular_id-1-u-2' with {formularId: formularId, formularAntwortUrl: formularAntwortUrl} %}
+                    {% case 2 %}
+                        {% include '_include-vendor/formular_id-1-u-2' with {formularId: formularId, formularAntwortUrl: formularAntwortUrl} %}
+                    {% endswitch %}
+
+                </div>
+
+                <div class="textContainer text">
+                    {{ block.textRechts }}
+                </div>
+        <div>
 
     </section>
 

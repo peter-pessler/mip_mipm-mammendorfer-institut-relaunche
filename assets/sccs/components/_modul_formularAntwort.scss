@@ -1,12 +1,10 @@
 .modul-formularAntwort{
     .modul-formular-antwor-body{
 
-      background-color: orange;
-
       grid-column-start: 2;
       grid-column-end: 12;
 
-      @include wl-breakpoint(900) {
+      @include wl-breakpoint(500) {
         grid-column-start: 1;
         grid-column-end: 13;
       }

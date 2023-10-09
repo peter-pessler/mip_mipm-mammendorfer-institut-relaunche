@@ -16,7 +16,9 @@
     redirect: formularAntwortUrl,
 }) %}
 
-<div id="form" class="wl-form-wrapper">
+{% set formLocation = (craft.app.request.segments|last != '')? craft.app.request.segments|last : 'home' %}
+
+<div id="form" class="wl-form-wrapper" data-location="{{ formLocation }}">
 
     {{ form.open() }}
     {#
@@ -32,10 +34,6 @@
     <div class="field-group-1">
 
         <div class="field-group">
-            <div class="group-single">{{ _self.formField( formularId, 'anrede', block ) | trim | raw  }}</div>
-        </div>
-
-        <div class="field-group">
             <div class="group-single">{{ _self.formField( formularId, 'vorname', block ) | trim | raw  }}</div>
         </div>
 
@@ -48,11 +46,7 @@
         </div>
 
         <div class="field-group">
-            <div class="group-single">{{ _self.formField( formularId, 'abstammung', block ) | trim | raw  }}</div>
-        </div>
-
-        <div class="field-group">
-            <div class="group-single">{{ _self.formField( formularId, 'File', block ) | trim | raw  }}</div>
+            <div class="group-single">{{ _self.formField( formularId, 'telefon', block ) | trim | raw  }}</div>
         </div>
 
         <div class="field-group">
@@ -66,23 +60,15 @@
     </div>
 
 
-
     <input type="hidden" name="scrollto" value="1">
 
-
-    {#
-    <pre>{{ dump(errorArray) }}</pre>
-    <div class="InputfieldSubmit"><button class="btn-form" id="submit">Send</button></div>
-    #}
     <button style="display:none" type="submit" class="submit-button" id="submit">{{ block.submitButtonText }}</button>
     <span class="submit-button" id="checkSubmit">{{ block.submitButtonText }}</span>
 
+    <div class="form-info">
+        {{ block.infoText }}
+    </div>
 
-    {% if formError == 1%}
-        <div class="form-info">
-            {{ block.infoText }}
-        </div>
-    {% endif %}
     <div id="lock-modal"></div>
     <div id="loading-circle"><img src="/assets/images/icons/loading-circle.svg" alt="loading-circle" /></div>
 
@@ -98,20 +84,15 @@
 
         $(document).ready(function() {
 
+            window.dataLayer = window.dataLayer || [];
+
             $('#form').find('form').addClass('formular-Kontakt');
 
             formValidate('.formular-Kontakt', '#checkSubmit');
 
-            $('#inputUploadFile').fileinput({
-                multipleText: '{1} files',
-                showMultipleNames: true,
-            });
+            var scrollTo = {{ scrollTo }}, antispamContent = '<input style="display: none;" class="antispam" type="checkbox" value="prevent spam" name="antispam[]" id="" checked />';
 
-            $('.fileinput').append('<label class="uploadInfoText">' + 'Bitte PDF wählen <em></em>' + '</label>')
-
-            var scrollTo = {{ scrollTo }}, antispamContent = '<input style="display: block;" class="antispam" type="checkbox" value="prevent spam" name="antispam[]" id="" checked />';
-
-            $('#form').find('.wf-bouncer-1').after(antispamContent);
+            $('#form').find('.wf-bouncer-{{ formularId }}').after(antispamContent);
 
             if(scrollTo == '1') {
 
