@@ -1,0 +1,186 @@
+.modul-sliderTeam {
+
+
+  &.bgBlau{
+    background-color: #f3f8fd;
+  }
+
+  .spacerTop{
+    @include dynamic-distance(60, 140, padding-top);
+  }
+
+  .spacerBottom{
+    @include dynamic-distance(60, 140, padding-bottom);
+  }
+
+  .sliderTeam {
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 13;
+
+    .sliderTeamBody{
+      grid-row: 1;
+      grid-column-start: 2;
+      grid-column-end: 12;
+
+      @include wl-breakpoint(500){
+        grid-column-start: 1;
+        grid-column-end: 13;
+        //padding: 25px;
+      }
+      @include wl-breakpoint(400){
+       //padding: 20px;
+      }
+      @include wl-breakpoint(350){
+        //padding: 15px;
+      }
+
+    }
+
+  }
+
+
+  .sliderTeamBody {
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
+    .teamSliderHeadline {
+      width: 100%;
+      @include dynamic-distance(60, 100, padding-bottom);
+    }
+
+    .teamSliderContainer {
+      position: relative;
+      height: 100%;
+
+      @include dynamic-distance(25, 50, margin-top);
+      @include wl-breakpoint(600) {
+        margin-top: 0;
+      }
+      padding-top: 30px;
+
+
+      /*
+      article:not(.slick-active){
+        .slideAbstandOn{
+
+          display: none;
+
+          opacity: 0;
+          transition: all .3s;
+
+          @include dynamic-distance(80, 150, padding-left);
+          @include dynamic-distance(80, 150, padding-right);
+
+          @include wl-breakpoint(500) {
+            padding-right: 40px;
+            padding-left: 40px;
+          }
+
+        }
+
+      }
+
+       */
+
+
+      article {
+
+        position: relative;
+        height: 100%;
+
+        transition: all .3s;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: stretch;
+        align-content: stretch;
+
+        @include wl-breakpoint(1100) {
+          display: flex;
+          flex-direction: column;
+          flex-wrap: nowrap;
+          justify-content: flex-start;
+          align-items: stretch;
+          align-content: stretch;
+        }
+
+        cursor: pointer;
+
+
+        .articleImage{
+
+          width: 30%;
+          @include wl-breakpoint(1300) {
+            width: 275px;
+          }
+          @include wl-breakpoint(1200) {
+            width: 250px;
+          }
+
+          .itemImg{
+
+            max-width: 220px;
+            @include wl-breakpoint(1300) {
+              width: 180px;
+            }
+            @include wl-breakpoint(600) {
+              width: 150px;
+            }
+
+            img{
+              border-radius: 50%;
+            }
+
+          }
+
+        }
+
+
+        .articleText{
+
+          width: 70%;
+          @include wl-breakpoint(1300) {
+            width: calc(100% - 275px);
+          }
+          @include wl-breakpoint(1200) {
+            width: calc(100% - 250px);
+          }
+          @include wl-breakpoint(1100) {
+            width: 100%;
+            @include dynamic-distance(30, 50, padding-top);
+          }
+
+          .teamName{
+            padding-bottom: 12px;
+          }
+
+          .teamPosition{
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: $wl-color-blue;
+          }
+
+          .teamText{
+            padding-top: 10px;
+          }
+
+
+        }
+
+      }
+
+    }
+
+  }
+
+
+}
+

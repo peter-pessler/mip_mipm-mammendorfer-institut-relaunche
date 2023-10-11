@@ -1,3 +1,6 @@
+{% if sectionName == 'blog' %}
+    {% set block = entry %}
+{% endif %}
 {# ###################################################################################################### #}
 {% set settings = {
     '0-900' : {
@@ -27,6 +30,13 @@
             {% if claim %}
                 <div class="containerText-claim">
                     <span class="{{ claimClassName|trim(' ') }}">{{ claim }}</span>
+                </div>
+            {% endif %}
+            {% if sectionName == 'blog' %}
+                <div class="containerText-claim">
+                    {% set auswahlKategorieObj = entry.auswahlKategorie.one() %}
+                    {% set date = (lg == 'de')? entry.startDate|date('d.m.Y') : entry.startDate|date('m-d-Y') %}
+                    <span class="blue">{{ auswahlKategorieObj.title }} | {{ date }}</span>
                 </div>
             {% endif %}
 

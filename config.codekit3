@@ -310,6 +310,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_blog-detail.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_blog-detail.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_footer.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -400,6 +415,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_modul_allesNeue.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_allesNeue.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_modul_auszeichnung.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -425,6 +455,21 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_modul_bilderMitZoom.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_blog.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_blog.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -545,6 +590,21 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_modul_sliderInfoTeaser.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_sliderTeam.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_sliderTeam.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -760,21 +820,6 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/assets\/sccs\/components\/momentan-nicht-eingebunden\/_blog-detail.scss" : {
-      "aP" : 1,
-      "bl" : 0,
-      "co" : 0,
-      "dP" : 10,
-      "ec" : 1,
-      "ft" : 4,
-      "ma" : 1,
-      "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/_blog-detail.min.css",
-      "oF" : 0,
-      "oS" : 3,
-      "pg" : 0,
-      "sct" : 0
-    },
     "\/assets\/sccs\/components\/momentan-nicht-eingebunden\/_entry-detail.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -800,21 +845,6 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_masonry.min.css",
-      "oF" : 0,
-      "oS" : 3,
-      "pg" : 0,
-      "sct" : 0
-    },
-    "\/assets\/sccs\/components\/momentan-nicht-eingebunden\/_modul_blog.scss" : {
-      "aP" : 1,
-      "bl" : 0,
-      "co" : 0,
-      "dP" : 10,
-      "ec" : 1,
-      "ft" : 4,
-      "ma" : 1,
-      "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/_modul_blog.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -1060,6 +1090,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/slick\/slick-InfoTeaser-textBildTeaser-History-Team.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/css\/slick-InfoTeaser-textBildTeaser-History-Team.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/slick\/slick-logoleisteSlider.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -1085,21 +1130,6 @@
       "ma" : 1,
       "oA" : 0,
       "oAP" : "\/web\/assets\/css\/slick.min.css",
-      "oF" : 0,
-      "oS" : 3,
-      "pg" : 0,
-      "sct" : 0
-    },
-    "\/assets\/sccs\/slick\/slickslider-InfoTeaser-textBildTeaser-History.scss" : {
-      "aP" : 1,
-      "bl" : 0,
-      "co" : 0,
-      "dP" : 10,
-      "ec" : 1,
-      "ft" : 4,
-      "ma" : 1,
-      "oA" : 0,
-      "oAP" : "\/web\/assets\/css\/slickslider-InfoTeaser-textBildTeaser-History.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -2330,6 +2360,14 @@
       "oAP" : "\/templates\/_include-block-components\/modul_accordionZweiSpalten.twig",
       "oF" : 0
     },
+    "\/templates\/_include-block-components\/modul_allesNeue.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_allesNeue.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_auszeichnung.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2440,6 +2478,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_sliderInfoTeaser.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_sliderTeam.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_sliderTeam.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_sliderTextBildTeaser.twig" : {
@@ -2718,6 +2764,26 @@
       "oAP" : "\/web\/assets\/css\/backend.min.css.map",
       "oF" : 0
     },
+    "\/web\/assets\/css\/slick-InfoTeaser-textBildTeaser-History-Team.min.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/css\/slick-InfoTeaser-textBildTeaser-History-Team.min-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
+    "\/web\/assets\/css\/slick-InfoTeaser-textBildTeaser-History-Team.min.css.map" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/css\/slick-InfoTeaser-textBildTeaser-History-Team.min.css.map",
+      "oF" : 0
+    },
     "\/web\/assets\/css\/slick-logoleisteSlider.min.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -2756,26 +2822,6 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/web\/assets\/css\/slick.min.css.map",
-      "oF" : 0
-    },
-    "\/web\/assets\/css\/slickslider-InfoTeaser-textBildTeaser-History.min.css" : {
-      "aP" : 1,
-      "bl" : 0,
-      "ci" : 0,
-      "co" : 0,
-      "ft" : 16,
-      "ma" : 0,
-      "oA" : 0,
-      "oAP" : "\/web\/assets\/css\/slickslider-InfoTeaser-textBildTeaser-History.min-min.css",
-      "oF" : 0,
-      "pg" : 0
-    },
-    "\/web\/assets\/css\/slickslider-InfoTeaser-textBildTeaser-History.min.css.map" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/web\/assets\/css\/slickslider-InfoTeaser-textBildTeaser-History.min.css.map",
       "oF" : 0
     },
     "\/web\/assets\/css\/styles.min.css" : {
@@ -3333,6 +3379,19 @@
       "iS" : 1962,
       "oA" : 0,
       "oAP" : "\/web\/assets\/images\/icons\/wul-icn.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/img\/bg-alles-neue-trenner.png" : {
+      "ft" : 32768,
+      "iS" : 115,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/img\/bg-alles-neue-trenner.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,

@@ -6,13 +6,11 @@
     &.bgKreis{
       background-image: url("/assets/images/img/bg-kreis-orange-einzeln.svg");
       background-repeat: no-repeat;
-      //@include dynamic-distance(30, 70, background-position-y);
 
       background-position-y: 0px;
       background-position-x: 0px;
 
       @include wl-breakpoint(900) {
-        //background-position-y: 40px;
         @include dynamic-background-size(120, 440, height);
         @include dynamic-background-size(120, 440, width);
       }
@@ -20,7 +18,7 @@
 
   }
 
-  .accordionZweiSpaltenHheadline{
+  .accordionZweiSpaltenHeadline{
 
     grid-row: 1;
     grid-column-start: 2;

@@ -1,0 +1,40 @@
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-allesNeue">
+    <section class="wl-wrapper">
+
+        <div class="grid-container content-grid-12 bgKreis">
+
+            {% set headline = block.headline|default(false) %}
+            {% if headline %}
+                <div class="allesNeueHeadline">
+                    <h2>{{ headline }}</h2>
+                </div>
+            {% endif %}
+
+            <div class="articleContainerLinks text">
+                {{ block.text }}
+            </div>
+
+            <div class="articleContainerRechts">
+                {% set entries = craft.entries().orderBy('startDate desc').limit('2') %}
+                {% set counter = '1' %}
+                {% if entries|length > 0 %}
+                    {% for entry in entries %}
+                        <div class="allesNeueText strong">
+                            <a href="{{ entry.url }}">{{ entry.teaserText }}</a>
+                        </div>
+                        {% if counter == 1 %}
+                        <div class="allesNeueTrenner"></div>
+                        {% endif %}
+                        {% set counter = counter + 1%}
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+
+        </div>
+
+    </section>
+</section>
+
+

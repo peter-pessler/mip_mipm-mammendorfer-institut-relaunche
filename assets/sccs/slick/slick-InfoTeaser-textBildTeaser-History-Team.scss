@@ -4,7 +4,7 @@
 // Variables
 @import "../core/vars";
 
-.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser, .modul-sliderHistory{
+.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser, .modul-sliderHistory, .modul-sliderTeam{
 
     .slick-slider {
         position: relative;
@@ -311,7 +311,7 @@
 }
 
 
-.modul-sliderHistory{
+.modul-sliderHistory, .modul-sliderTeam{
     button{
 
         &.slick-prev {

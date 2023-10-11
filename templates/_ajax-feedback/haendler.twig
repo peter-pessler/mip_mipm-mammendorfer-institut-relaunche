@@ -192,7 +192,7 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                  {% set haendlerMailData = haendlerMailData|replace({'.': '[dot]'})%}
              {% endif %}
 
-             <article class="article-item">
+             <article class="article-item"{% if entries|length == 1 %} style="max-width: 788px;" {% endif %}>
                  <div class="artikelContent">
 
                              <div class="artikelCat artikelCatBordrtBottom artikelCat-js">
@@ -230,7 +230,8 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                      </div>
 
                                      <div class="artikel-adresse">
-                                     {{ entry.haendlerAdresse|nl2br }}
+                                     {{ entry.haendlerAdresse|nl2br }}<br />
+                                     {{ entry.auswahlKategorieLand.one().title }}
                                      </div>
 
                                      <div class="artikel-tel">

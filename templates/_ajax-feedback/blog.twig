@@ -46,15 +46,7 @@
 {# *------------* Ausgabe *------------ *#}
 {# ************************************************* #}
 
- {% if ausgabeNur3Teaser %}
-
-        {% set categoriesEntries = craft.entries()
-        .section(categorySectionname)
-        .relatedTo(['and',categoryBy])
-        .orderBy('startDate desc')
-        .limit(pageSizeArtikel) %}
-
-{% elseif showPager %}
+{% if showPager %}
 
         {% set categoriesEntries = craft.entries()
         .section(categorySectionname)
@@ -76,7 +68,7 @@
    {% set anzahlArtikel = categoriesEntries.count()  %}
 
 
-     {% if showPager  and anzahlArtikel > 3 and anzahlArtikel > pageSizeArtikel %}
+     {% if showPager  and anzahlArtikel > 4 and anzahlArtikel > pageSizeArtikel %}
           {% set pager = true %}
      {% else %}
           {% set pager = false %}
@@ -92,101 +84,127 @@
           {% set entries = result %}
      {% endif %}
      {# *-----------------------------------------*#}
-<div class="container-body  content-grid-12">
-    <div class="masonry-grid">
-        <div id="masonry-effect" class="masonryContainer">
+{# ###################################################################################################### #}
+{% set settings = {
+    '0-900' : {
+        'size' : '635x358',
+        'mode' : 'crop'
+    },
+    '1-700' : {
+        'size' : '494x278',
+        'mode' : 'crop'
+    },
+    '2-400' : {
+        'size' : '344x194',
+        'mode' : 'crop'
+    }
+} %}
+{# ###################################################################################################### #}
+<div class="article-container">
 
-         {% if categoryIdsCount == 1 %}{% set catParam = '?cat=' ~ categoryIdStr %}{% else %}{% set catParam = '?cat=all' %}{% endif %}
-         {% set counter = '1' %}
-         {% if entries|length > 0 %}
-              {% for entry in entries %}
+             {% set counter = '1' %}
+             {% if entries|length > 0 %}
+                  {% for entry in entries %}
 
-                    <a href="{{ entry.url }}{{ catParam }}" class="article-link item">
-                        <article class="item-content">
+                        <a href="{{ entry.url }}" class="article-item item article-item-link"{% if entries|length == 1 %} style="max-width: 788px;" {% endif %}>
+                            <article class="item-content">
 
-                             <div class="article-text">
+                                <div class="article-bild">
+                                    {% set teaserImage = entry.teaserImage.one()|default(false) %}
+                                    {% if teaserImage == false %}
+                                        {% set image = entry.bild.one()|default(false) %}
+                                    {% else %}
+                                        {% set image = entry.teaserImage.one()|default(false) %}
+                                    {% endif %}
 
-                                 <div class="article-kategorie-button">
-                                     {% set auswahlKategorieObj = entry.auswahlKategorie %}
-                                     {% if categoryIdsCount > 1 %}
+                                    {% set imgFormat = adminConfig.imageFormat %}
+                                    {% set imgQuality = 75 %}
+                                    {% if image %}
+                                        {% include '_include-vendor/image-picture' with {class: 'intro-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                                    {% endif %}
+                                </div>
 
-                                         {% for item in auswahlKategorieObj %}
-                                             <div class="kategorie-button">{{ item.title }}</div>
-                                         {% endfor %}
+                                <div class="articleBody">
+                                    {% set auswahlKategorieObj = entry.auswahlKategorie.one() %}
+                                    <div class="article-Info">{{ auswahlKategorieObj.title }}</div>
 
-                                     {% else %}
+                                    <div class="article-Title">
+                                        <h4>{{ entry.teaserHeadline }}</h4>
+                                    </div>
 
-                                         {% for item in auswahlKategorieObj %}
-                                             {% if categoryIdStr == item.id|string %}
-                                                 <div class="kategorie-button">{{ item.title }}</div>
-                                             {% endif %}
-                                         {% endfor %}
+                                    <div class="article-Text">
+                                        {{ entry.teaserText }}
+                                    </div>
 
-                                     {% endif %}
-                                 </div>
-
-                                  <div class="article-title">
-                                       <h4>{{ entry.teaserHeadline }}</h4>
-                                  </div>
-
-                                  <div class="article-btn">
-                                       <div class="article-button">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="44.303" height="44.303" viewBox="0 0 44.303 44.303">
-                                                 <path id="arrow-forward" d="M30.151,52.3l-2.907-2.977,17.1-17.1H8V28.075H44.342l-17.1-17.1L30.151,8,52.3,30.151Z" transform="translate(-8 -8)" fill="#fff"/>
+                                    <div class="article-btn">
+                                        <div class="article-button">
+                                            <svg class="arrow-weiter-produkt-detail" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                                <path class="arrow-weiter-fill" id="Vereinigungsmenge_18" data-name="Vereinigungsmenge 18" d="M-2110.523,850.766l6.665-6.509H-2119v-4.515h15.142l-6.665-6.509,3.234-3.234L-2095,842l-12.289,12Z" transform="translate(2119 -830)" fill="#1372d0"/>
                                             </svg>
-                                       </div>
-                                  </div>
-                             </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                        </article>
-                   </a>
+                            </article>
+                       </a>
 
-                   {% set counter = counter + 1%}
-              {% endfor %}
-         {% else %}
-              {{ block.infoTextErgebnise }}
-         {% endif %}
+                       {% set counter = counter + 1%}
+                  {% endfor %}
+             {% else %}
+                  {{ block.infoTextErgebnise }}
+             {% endif %}
 
-        </div>
-    </div>
 </div>
 
 
 {% if pager %}
-  <div class="blog-pagination-container" style="margin-top: 50px;">
+    <div class="pagination-container">
 
-      <div class="blog-pagination">
+        <div class="pagination">
 
-          <div class="blog-pagination-arrow-left">
-               <a class="btnPager links {% if not pageInfo.prevUrl %} disabled{% endif %}"{% if pageInfo.prevUrl %} data-more="{{ pageInfo.prevUrl }}#articles"{% endif %}>
-                   <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
-                       <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l1.248-1.277L11.417,18.4h15.6V16.616h-15.6l7.338-7.338L17.507,8,8,17.507Z" transform="translate(-8 -8)" fill="#000"/>
-                   </svg>
-               </a>
-          </div>
+            <div class="pagination-arrow-left">
+                {% if not pageInfo.prevUrl %}
+                    <span class="links disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                          <path id="Vereinigungsmenge_52" data-name="Vereinigungsmenge 52" d="M6.358,2.425l5,4.881H0v3.387H11.357l-5,4.881L8.783,18,18,9,8.783,0Z" transform="translate(18 18) rotate(180)" fill="#1372d0"/>
+                        </svg>
+                    </span>
+                {% else %}
+                    <a class="btnPager links"{% if pageInfo.prevUrl %} data-more="{{ pageInfo.prevUrl }}"{% endif %}>
+                        <svg id="pagination-arrow-left" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path id="pagination-arrow-left-fill" data-name="Vereinigungsmenge 52" d="M6.358,2.425l5,4.881H0v3.387H11.357l-5,4.881L8.783,18,18,9,8.783,0Z" transform="translate(18 18) rotate(180)" fill="#1372d0"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
 
+            <div class="pagination-arrow-counter">
+                <div class="pagination-arrow-counter-inner">
+                    {% for i in range(1,pageInfo.totalPages) %}
+                        <a class="btnPager {% if pageInfo.currentPage == loop.index %} active{% endif %}" data-more="{{ myUrl }}/p{{loop.index}}{{ param }}">{{loop.index}}</a>
+                    {% endfor %}
+                </div>
+            </div>
 
-          <div class="blog-pagination-arrow-counter">
-              <div class="blog-pagination-arrow-counter-inner">
-                  {% for i in range(1,pageInfo.totalPages) %}
-                      <a class="btnPager {% if pageInfo.currentPage == loop.index %} active{% endif %}" data-more="{{ myUrl }}/p{{loop.index}}{{ param }}">{{loop.index}}</a>
-                  {% endfor %}
-              </div>
-          </div>
+            <div class="pagination-arrow-right">
+                {% if not pageInfo.nextUrl %}
+                    <span class="rechts disabled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="17.094" height="16.957" viewBox="0 0 17.094 16.957">
+                            <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48_3_-_Kontur" data-name="arrow_forward_FILL0_wght400_GRAD0_opsz48 (3) - Kontur" d="M167.912-783.754l-1.9-1.9,5.377-5.25H159.5v-2.654h11.887l-5.377-5.251,1.9-1.9,8.683,8.479Zm-.132-1.891.143.143,6.893-6.731-6.893-6.731-.143.143,6.646,6.489H160.758v.2h13.667Z" transform="translate(-159.5 800.711)" fill="#1372d0"/>
+                        </svg>
+                    </span>
+                {% else %}
+                    <a class="btnPager rechts"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}"{% endif %}>
+                        <svg id="pagination-arrow-right"  xmlns="http://www.w3.org/2000/svg" width="17.094" height="16.957" viewBox="0 0 17.094 16.957">
+                            <path id="pagination-arrow-right-fill" data-name="arrow_forward_FILL0_wght400_GRAD0_opsz48 (3) - Kontur" d="M167.912-783.754l-1.9-1.9,5.377-5.25H159.5v-2.654h11.887l-5.377-5.251,1.9-1.9,8.683,8.479Zm-.132-1.891.143.143,6.893-6.731-6.893-6.731-.143.143,6.646,6.489H160.758v.2h13.667Z" transform="translate(-159.5 800.711)" fill="#1372d0"/>
+                        </svg>
+                    </a>
+                {% endif %}
+            </div>
 
+        </div>
 
-          <div class="blog-pagination-arrow-right">
-               <a class="btnPager rechts {% if not pageInfo.nextUrl %} disabled{% endif %}"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}#articles"{% endif %}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="19.014" height="19.014" viewBox="0 0 19.014 19.014">
-                      <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48" d="M17.507,27.014l-1.248-1.277L23.6,18.4H8V16.616H23.6L16.259,9.277,17.507,8l9.507,9.507Z" transform="translate(-8 -8)" fill="#000"/>
-                    </svg>
-               </a>
-          </div>
-
-
-      </div>
-
-  </div>
+    </div>
 {% endif %}
 
 

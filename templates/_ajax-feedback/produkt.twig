@@ -125,7 +125,7 @@
          {% if entries|length > 0 %}
               {% for entry in entries %}
 
-                <a class="article-item-link" href="{{ entry.url }}">
+                <a class="article-item-link" href="{{ entry.url }}"{% if entries|length == 1 %} style="max-width: 788px;" {% endif %}>
 
                   <article class="article-item article-item-js">
                             <div class="artikelContent">

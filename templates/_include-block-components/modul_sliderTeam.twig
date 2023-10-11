@@ -1,0 +1,96 @@
+{% set abstandOben = (block.abstandObenAusblenden)? '' : ' spacerTop' %}
+{% set abstandUnten = (block.abstandUntenAusblenden)? '' : ' spacerBottom' %}
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-sliderTeam bgBlau">
+    <section class="wl-wrapper">
+
+            <div class="content-grid-12{{ abstandOben }}{{ abstandUnten }}">
+
+                    <div class="sliderTeam content-grid-12">
+                        <div class="sliderTeamBody">
+
+                            {% set headline = block.headline|default(false) %}
+                            {% if headline %}
+                                <div class="teamSliderHeadline">
+                                    <h2>{{ headline }}</h2>
+                                </div>
+                            {% endif %}
+
+                                <div id="slider-team{{ blockid }}" class="teamSliderContainer">
+
+                                    {% set showItemTeam= block.team.one()|default(false) %}{% if showItemTeam%}
+                                        {% for element in block.team.all() %}
+
+                                            <article class="item">
+                                                <div class="articleImage">
+                                                    {% set teamBild =  element.teamBild.one()|default(false) %}
+                                                    {% if teamBild %}
+                                                        {% set imgSrc = teamBild.getUrl({
+                                                            mode: 'crop',
+                                                            width: '220',
+                                                            height: '220',
+                                                            quality: (imgQuality),
+                                                        })  %}
+
+                                                        <div class="itemImg"><img src="{{ imgSrc }}" alt="{{ element.teamBild.one().title }}" width="220" height="220" /></div>
+
+                                                    {% endif %}
+                                                </div>
+                                                <div class="articleText slideAbstandOn">
+                                                    <div class="teamName textBold">{{ element.teamName }}</div>
+                                                    <div class="teamPosition">{{ element.teamPosition }}</div>
+                                                    <div class="teamText">{{ element.teamText }}</div>
+                                                </div>
+                                            </article>
+
+                                        {% endfor %}
+                                    {% endif %}
+
+                                </div>
+
+                        </div>
+                     </div>
+
+            </div>
+
+    </section>
+</section>
+
+<script>
+    $(document).ready(function() {
+
+        $('#slider-team{{ blockid }}').slick({
+            dots: false,
+            infinite: true,
+            speed: 2000,
+            autoplay: false,
+            autoplaySpeed: 4000,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            fade: true,
+        });
+
+
+        /*
+        $('#slider-team{{ blockid }}').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+
+            $('#slider-team{{ blockid }}').each(function() {
+              $(this).find(".articleText").addClass('slideAbstandOn');
+              $(this).find(".articleImage").addClass('slideAbstandOn');
+            });
+
+        });
+
+        $('#slider-team{{ blockid }}').on('afterChange', function(event, slick, currentSlide, nextSlide){
+            $('#slider-team{{ blockid }}').each(function() {
+                $(this).find(".articleText").removeClass('slideAbstandOn');
+                $(this).find(".articleImage").removeClass('slideAbstandOn');
+            });
+        });
+        */
+
+
+    });
+
+
+</script>

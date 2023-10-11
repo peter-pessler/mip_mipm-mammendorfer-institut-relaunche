@@ -57,7 +57,8 @@
     {% set bgClassName = ' green' %}
     {% set claimClassName = ' green' %}
 {% else %}
-        {% set statusHintergrundbildKreis = entry.statusHintergrundbildKreis.value %}
+        {% set statusHintergrundbildKreis = entry.statusHintergrundbildKreis.value|default(false) %}
+        {% if statusHintergrundbildKreis %}
         {% switch statusHintergrundbildKreis %}
                 {% case "green" %}
                     {% set bgClassName = ' green' %}
@@ -70,6 +71,9 @@
                 {% default %}
                     {% set bgClassName = ' green' %}
         {% endswitch %}
+        {% else %}
+            {% set bgClassName = ' green' %}
+        {% endif %}
         {% set claimClassName = ' blue' %}
 {% endif %}
 
