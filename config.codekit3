@@ -385,6 +385,21 @@
       "pg" : 0,
       "sct" : 0
     },
+    "\/assets\/sccs\/components\/_jobs-detail.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_jobs-detail.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
     "\/assets\/sccs\/components\/_modul_accordion.scss" : {
       "aP" : 1,
       "bl" : 0,
@@ -530,6 +545,21 @@
       "ma" : 1,
       "oA" : 1,
       "oAP" : "\/web\/assets\/css\/_modul_haendlerFilter-u-modul-produktFilter.min.css",
+      "oF" : 0,
+      "oS" : 3,
+      "pg" : 0,
+      "sct" : 0
+    },
+    "\/assets\/sccs\/components\/_modul_jobs.scss" : {
+      "aP" : 1,
+      "bl" : 0,
+      "co" : 0,
+      "dP" : 10,
+      "ec" : 1,
+      "ft" : 4,
+      "ma" : 1,
+      "oA" : 1,
+      "oAP" : "\/web\/assets\/css\/_modul_jobs.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -775,7 +805,7 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/assets\/sccs\/components\/_pagination-haendler.scss" : {
+    "\/assets\/sccs\/components\/_pagination-haendler-aktuelles-jobs.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -784,7 +814,7 @@
       "ft" : 4,
       "ma" : 1,
       "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/_pagination-haendler.min.css",
+      "oAP" : "\/web\/assets\/css\/_pagination-haendler-aktuelles-jobs.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -2064,6 +2094,18 @@
       "oF" : 0,
       "pg" : 0
     },
+    "\/config\/tinymce\/resources\/wunderlabs-jobtabelle.css" : {
+      "aP" : 1,
+      "bl" : 0,
+      "ci" : 0,
+      "co" : 0,
+      "ft" : 16,
+      "ma" : 0,
+      "oA" : 0,
+      "oAP" : "\/config\/tinymce\/resources\/wunderlabs-jobtabelle-min.css",
+      "oF" : 0,
+      "pg" : 0
+    },
     "\/config\/tinymce\/resources\/wunderlabs-slider.css" : {
       "aP" : 1,
       "bl" : 0,
@@ -2128,6 +2170,14 @@
       "ft" : 524288,
       "oA" : 1,
       "oAP" : "\/config\/tinymce\/wunderlabs-headline-min.json",
+      "oF" : 0,
+      "oO" : 0,
+      "oS" : 1
+    },
+    "\/config\/tinymce\/wunderlabs-jobtabelle.json" : {
+      "ft" : 524288,
+      "oA" : 1,
+      "oAP" : "\/config\/tinymce\/wunderlabs-jobtabelle-min.json",
       "oF" : 0,
       "oO" : 0,
       "oS" : 1
@@ -2240,12 +2290,28 @@
       "oAP" : "\/templates\/_ajax-feedback\/haendlerFilter-statusLand.twig",
       "oF" : 0
     },
+    "\/templates\/_ajax-feedback\/jobs.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_ajax-feedback\/jobs.twig",
+      "oF" : 0
+    },
     "\/templates\/_ajax-feedback\/produkt.twig" : {
       "cB" : 0,
       "ft" : 8192,
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_ajax-feedback\/produkt.twig",
+      "oF" : 0
+    },
+    "\/templates\/_backend\/anchorName.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_backend\/anchorName.twig",
       "oF" : 0
     },
     "\/templates\/_backend\/beispiel.twig" : {
@@ -2262,6 +2328,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_backend\/claim.twig",
+      "oF" : 0
+    },
+    "\/templates\/_backend\/layout-blaue-box-jobs.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_backend\/layout-blaue-box-jobs.twig",
       "oF" : 0
     },
     "\/templates\/_backend\/layout.twig" : {
@@ -2320,6 +2394,14 @@
       "oAP" : "\/templates\/_extends-elements\/templ_entry-detail.twig",
       "oF" : 0
     },
+    "\/templates\/_extends-elements\/templ_jobs-detail.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_extends-elements\/templ_jobs-detail.twig",
+      "oF" : 0
+    },
     "\/templates\/_extends-elements\/templ_news-detail.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2366,6 +2448,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_allesNeue.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_anchor.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_anchor.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_auszeichnung.twig" : {
@@ -2438,6 +2528,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_haendlerFilter.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_jobs.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_jobs.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_logoleisteSlider.twig" : {
@@ -3002,6 +3100,19 @@
       "q" : 100,
       "rq" : 75
     },
+    "\/web\/assets\/images\/backend\/layout-anchor.png" : {
+      "ft" : 32768,
+      "iS" : 2471,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-anchor.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/web\/assets\/images\/backend\/layout-auszeichnung.png" : {
       "ft" : 32768,
       "iS" : 45470,
@@ -3059,6 +3170,45 @@
       "iS" : 10655,
       "oA" : 0,
       "oAP" : "\/web\/assets\/images\/backend\/layout-logoleisteSlider.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/backend\/layout-sliderHistory.png" : {
+      "ft" : 32768,
+      "iS" : 54075,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-sliderHistory.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/backend\/layout-sliderInfoTeaser.png" : {
+      "ft" : 32768,
+      "iS" : 25521,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-sliderInfoTeaser.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/backend\/layout-sliderTeam.png" : {
+      "ft" : 32768,
+      "iS" : 85221,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/layout-sliderTeam.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,

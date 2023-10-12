@@ -2,12 +2,12 @@
 {# ************************************************* #}
 {% set categoryIdStr = output %}
 {# *-----------------------------------------*#}
-{% set categorySectionname = 'blog' %}
+{% set categorySectionname = 'jobs' %}
 {# *-----------------------------------------*#}
 {% set showMore = false %}
 {# *-----------------------------------------*#}
 {% set myUrl = url(craft.app.request.pathInfo) %}
-{% set param = '?template=blog&blockid=' ~ blockid ~ '&output=' ~ output ~ '&sectionname=' ~ sectionnamepage ~ '&pageid=' ~ pageid %}
+{% set param = '?template=jobs&blockid=' ~ blockid ~ '&output=' ~ output ~ '&sectionname=' ~ sectionnamepage ~ '&pageid=' ~ pageid %}
 {# *-----------------------------------------*#}
 {% set catParam = '' %}
 {# *-----------------------------------------*#}
@@ -43,15 +43,13 @@
         {% set categoriesEntries = craft.entries()
         .section(categorySectionname)
         .relatedTo(['and',categoryBy])
-        .orderBy('startDate desc')
         .limit(pageSizeArtikel) %}
 
  {% else %}
 
         {% set categoriesEntries = craft.entries()
         .section(categorySectionname)
-        .relatedTo(['and',categoryBy])
-        .orderBy('startDate desc') %}
+        .relatedTo(['and',categoryBy]) %}
 
  {% endif %}
 
@@ -117,7 +115,7 @@
                                 </div>
 
                                 <div class="articleBody">
-                                    {% set auswahlKategorieObj = entry.auswahlKategorie.one() %}
+                                    {% set auswahlKategorieObj = entry.auswahlKategorieJobs.one() %}
                                     <div class="article-Info">{{ auswahlKategorieObj.title }}</div>
 
                                     <div class="article-Title">

@@ -1,0 +1,125 @@
+{% extends 'main' %}
+
+{% block content %}
+
+    {% if sectionName == 'jobs' %}
+        {% set block = entry %}
+    {% endif %}
+
+    {% set cat = ( craft.app.request.getParam('cat') )? craft.app.request.getParam('cat') : '' %}
+    {% set auswahlKategorieObj = entry.auswahlKategorie %}
+
+    <section class="wl-wrapper contentIntro">
+        {% include '_include-introblock-components/intromodul_default.twig' %}
+    </section>
+
+
+    <section class="wl-wrapper jobs-detail">
+        <div class="elementJobsDetailBody content-grid-12">
+
+            <div class="elementContent">
+
+                {# ###################################################################################################### #}
+                {% set settings = {
+                    '0-1300': {
+                        'size' : '726x409',
+                        'mode' : 'crop'
+                    },
+                    '1-500': {
+                        'size' : '415x243',
+                        'mode' : 'crop'
+                    },
+                    '0-500': {
+                        'size' : '344x194',
+                        'mode' : 'crop'
+                    },
+                } %}
+                {# ###################################################################################################### #}
+                {% set matrixElemente = entry.jobsDetailMatrix %}
+                {% if matrixElemente is defined and matrixElemente %}
+                    {% for block in matrixElemente %}
+
+                        {% if block.type == "text" %}
+                            <div class="elementContentText text">
+                                {{ block.detailText }}
+                            </div>
+                        {% elseif block.type == "abstand" %}
+                            {% include '_include-block-components/modul_abstand.twig' %}
+                        {% endif %}
+
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+
+            <div class="elementInfo">
+
+                {% set abstandUntenArbeitszeit = (entry. abstandUntenArbeitszeit)? true : false %}
+                {% set abstandUntenDauer = (entry. abstandUntenDauer)? true : false %}
+                {% set abstandUntenOrt = (entry. abstandUntenOrt)? true : false %}
+                {# ============================================================================== #}
+                {% set arbeitszeit = entry.arbeitszeit |default(false) %}
+                {% set dauer = entry.dauer |default(false) %}
+                {% set ort = entry.ort |default(false) %}
+                {% set ansprechpartner = entry.ansprechpartner |default(false) %}
+                {# ============================================================================== #}
+                {% set counter = 0 %}
+                {% set anzahlItems = entry.jobTabelle|length %}
+
+                <div class="infoBox">
+
+                    {% if anzahlItems == 0 %}
+
+                       {% if arbeitszeit %}
+                       <div class="zeile{% if abstandUntenArbeitszeit %} zeilenAbstandUnten{% endif %}">
+                           <div class="zeileLinks">{{ translation.t_arbeitszeit }}:</div>
+                           <div class="zeileRechts">{{ arbeitszeit }}</div>
+                       </div>
+                       {% endif %}
+
+                        {% if dauer %}
+                        <div class="zeile{% if abstandUntenDauer %} zeilenAbstandUnten{% endif %}">
+                           <div class="zeileLinks">{{ translation.t_dauer }}:</div>
+                           <div class="zeileRechts">{{ dauer }}</div>
+                       </div>
+                       {% endif %}
+
+                        {% if ort %}
+                        <div class="zeile{% if abstandUntenOrt %} zeilenAbstandUnten{% endif %}">
+                            <div class="zeileLinks">{{ translation.t_ort }}:</div>
+                            <div class="zeileRechts">{{ ort }}</div>
+                        </div>
+                        {% endif %}
+
+                        {% if ansprechpartner %}
+                        <div class="zeile">
+                            <div class="zeileLinks">{{ translation.t_ansprechpartner }}:</div>
+                            <div class="zeileRechts">{{ ansprechpartner }}</div>
+                        </div>
+                        {% endif %}
+
+                    {% endif %}
+
+                        {% for item in entry.jobTabelle %}
+                            {% set counter = counter + 1 %}
+                            <div class="zeile{% if counter < anzahlItems %} zeilenAbstandUnten{% endif %}">
+                                <div class="zeileLinks">{{ item.textSpalteLinks }}:</div>
+                                <div class="zeileRechts">{{ item.textSpalteRechts }}</div>
+                            </div>
+                        {% endfor %}
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </section>
+
+    {% set blaueBoxAnzeigen = (entry. blaueBoxAnzeigen)? true : false %}
+    {% if blaueBoxAnzeigen %}
+        {% include '_include-block-components/modul_boxBlau.twig' %}
+        <div class="abstandAbschluss"></div>
+    {% endif %}
+
+{% endblock %}

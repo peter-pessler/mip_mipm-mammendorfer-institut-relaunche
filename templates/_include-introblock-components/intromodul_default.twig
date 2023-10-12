@@ -39,6 +39,12 @@
                     <span class="blue">{{ auswahlKategorieObj.title }} | {{ date }}</span>
                 </div>
             {% endif %}
+            {% if sectionName == 'jobs' %}
+                <div class="containerText-claim">
+                    {% set auswahlKategorieObj = entry.auswahlKategorieJobs.one() %}
+                    <span class="blue">{{ auswahlKategorieObj.title }}</span>
+                </div>
+            {% endif %}
 
            {% set headline = block.headline|default(false) %}
            {% if headline %}

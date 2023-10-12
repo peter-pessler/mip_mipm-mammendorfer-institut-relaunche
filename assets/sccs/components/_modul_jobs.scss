@@ -1,0 +1,226 @@
+.modul-jobs{
+
+          /**
+          ============================  Einleitung ============================
+          */
+
+            .body-einleitung{
+              grid-row: 1;
+              grid-column-start: 2;
+              grid-column-end: 12;
+
+              text-align: center;
+
+            }
+
+
+
+
+          /**
+          ============================  Themenfilter ============================
+          */
+
+
+            .modul-jobs-themenfilter{
+
+              @include dynamic-distance(40, 60, padding-bottom);
+
+              grid-row: 1;
+              grid-column-start: 2;
+              grid-column-end: 12;
+
+              @include wl-breakpoint(500) {
+                grid-column-start: 1;
+                grid-column-end: 13;
+              }
+
+              ul{
+
+                margin: 0px;
+                padding: 0;
+                list-style: none;
+
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                align-items: stretch;
+                align-content: stretch;
+
+                li{
+                  padding: 0px;
+                  display: inline-block;
+                  list-style-type: none;
+                  position: relative;
+                  white-space: wrap;
+                  text-decoration: none;
+                  color: $wl-color-black;
+                  text-align: center;
+
+
+                  a{
+                    word-wrap: break-word!important;
+                    hyphens: initial!important;
+                    &.themenBtn{
+                      cursor: pointer;
+                      @include responsive-font(18px, 20px, $font-family-DINNextLTPro-bold, $base-line-height);
+                      margin-top: 25px;
+                      margin-right: 10px;
+                      margin-left: 10px;
+                      display: block;
+                      padding-top: 11px;
+                      padding-bottom: 9px;
+                      padding-left: 20px;
+                      padding-right: 20px;
+                      border-radius: 50px;
+                      border: 2px solid $wl-color-green;
+                      text-align: center;
+                      text-decoration: none;
+                      color: $wl-color-black;
+                      position: relative;
+                      overflow: hidden;
+                      background: transparent;
+                      background-size: 300% 100%;
+                      transition: all .4s ease-in-out;
+                      z-index: 1;
+                    }
+
+                    &.highlight{
+                      border: 2px solid $wl-color-blue;
+                      background: $wl-color-blue;
+                      color: $wl-color-white;
+
+                    }
+                  }
+
+                  a{
+                    &.themenBtn:not(.highlight){
+                      &:hover{
+                        border: 2px solid $wl-color-blue;
+                        color:  $wl-color-blue;
+                      }
+                    }
+                  }
+
+                }
+              }
+
+
+            }
+
+
+
+          /**
+          ============================  Artikel ============================
+          */
+
+      #articles{
+        width: 100%;
+      }
+
+
+      .result{
+
+        width: 100%;
+
+
+        .article-container{
+          width: 100%;
+
+          display:  grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Umbrechen, sobald die Box 300 Pixel Breite hat */
+          justify-content:center;
+
+          @include dynamic-distance(15, 65, column-gap);
+          @include dynamic-distance(40, 60, row-gap);
+
+        }
+
+
+        .article-item {
+
+          flex-direction: column;
+          position: relative;
+          text-decoration: none;
+          display: inline-block;
+
+          background-color: $wl-color-bg-teaser;
+          border-radius: 30px;
+
+          .article-bild {
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+
+            img {
+              border-top-left-radius: 30px;
+              border-top-right-radius: 30px;
+            }
+          }
+        }
+
+
+          .article-item-link{
+              &:hover{
+                  svg{
+                      &.arrow-weiter-produkt-detail{
+                          .arrow-weiter-fill{
+                            fill: $wl-color-green;
+                          }
+                      }
+                  }
+              }
+           }
+
+
+          .articleBody{
+
+
+            width: 100%;
+
+            padding-bottom: 30px;
+            padding-left: 35px;
+            padding-right: 35px;
+
+            @include wl-breakpoint(450) {
+              padding-bottom: 25px;
+              padding-left: 25px;
+              padding-right: 25px;
+            }
+
+            &.artikelBodyAbstandTop {
+              padding-top: 35px;
+              @include wl-breakpoint(450) {
+                padding-top: 25px;
+              }
+            }
+
+
+              .article-Info{
+                width: 100%;
+                font-size: 0.8em;
+
+
+                padding-top: 23px;
+                padding-bottom: 10px;
+
+                @include wl-breakpoint(450) {
+                  padding-top: 20px;
+                }
+
+              }
+
+              .article-button{
+                padding-top: 35px;
+              }
+
+
+          }
+
+
+
+      }
+
+}
+
+
+

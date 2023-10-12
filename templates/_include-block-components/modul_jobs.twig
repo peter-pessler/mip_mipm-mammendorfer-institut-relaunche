@@ -37,7 +37,7 @@
 
     function ajaxFeedback(output = '') {
 
-        var ajaxUrl = '/feedback-ajax?template=blog&blockid={{ blockid }}&output=' + output + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+        var ajaxUrl = '/feedback-ajax?template=jobs&blockid={{ blockid }}&output=' + output + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
             resultContainer = $('.result');
 
         $.get(ajaxUrl, function (data) {
@@ -82,10 +82,10 @@
 
 <div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
 <div class="anchor" id="result"></div>
-<section class="blog-wrapper-outer modul-aktuelles">
+<section class="jobs-wrapper-outer modul-jobs">
     <div class="wl-wrapper">
 
-    {% set allCategory = craft.categories.group('blogCat') %}
+    {% set allCategory = craft.categories.group('jobsCat') %}
     {% set categoryStr = ''  %}
     {% set counter = '0' %}
     {% set buttonArr = {} %}
@@ -96,10 +96,10 @@
     {% endfor %}
 
         <div class="themenfilter grid-container content-grid-12">
-            <div class="modul-blog-themenfilter">
+            <div class="modul-jobs-themenfilter">
                 <ul>
 
-                    <li class="themenfilterbutton"><a href="?#result" class="themenBtn btnAll highlight" data-output="{{ categoryStr }}">{{ block.buttonText }}</a></li>
+                    <li class="themenfilterbutton"><a href="?#result" class="themenBtn btnAll highlight" data-output="{{ categoryStr }}">{{ block.alleEintraege }}</a></li>
 
                     {% for btn in buttonArr %}
                         <li class="themenfilterbutton">{{ btn|raw }}</li>

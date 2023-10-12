@@ -1,0 +1,73 @@
+{
+    "branding": false,
+    "menubar": false,
+    "contextmenu": false,
+    "extended_valid_elements": "img[src|alt|title|width|height|class|loading],+@[data-options]",
+    "force_br_newlines" : false,
+    "force_p_newlines" : false,
+    "forced_root_block": "block",
+    "relative_urls": false,
+    "remove_script_host": false,
+    "convert_urls": false,
+    "paste_as_text": true,
+    "content_css": "https://starter-vers4-entwicklung.dev-wunderlabs.io/assets/css/styles.min.css",
+    "content_css_cors": true,
+    "plugins": "autoresize advcode code table anchor link lists craftlink craftimage table wordcount visualblocks",
+    "toolbar": [
+        "code | styles | craftlink unlink"
+    ],
+    "Selector": "textarea",
+    "formats": {
+        "removeformat": [
+          {
+            "selector": "b,strong,em,i,font,u,strike,s,sub,sup,dfn,code,samp,kbd,var,cite,mark,q,del,ins,small",
+            "remove": "all",
+            "split": true,
+            " block_expand": true,
+            "expand": false,
+            "deep": true
+          }
+        ]  
+    },
+    "craftlink_adv_tab": false,
+    "craftlink_data_attr": [],
+    "craftlink_anker": true,
+    "link_class_list": [
+    {
+      "title": "ohne Style",
+      "value": ""
+    },
+    {
+      "title": "Button",
+      "value": "btn"
+    }
+  ],
+    "object_resizing": false,
+    "craftimage_title": true,
+     "style_formats": [
+    {
+      "title": "Formatierung",
+      "items": [
+        {
+          "title": "No Break",
+          "inline": "span",
+          "classes": "nobreak"
+        },
+        {
+          "title": "Kursiv",
+          "inline": "em"
+        },
+        {
+          "title": "Hochstellen",
+          "inline": "sup"
+        },
+        {
+          "title": "remove Style",
+          "inline": "em",
+          "remove": "all"
+        }
+      ]
+    }
+
+  ]
+}

@@ -13,8 +13,9 @@
             }
         } %}
 {# ###################################################################################################### #}
-
-<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+{% if sectionName == 'contentPage' %}
+  <div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+{% endif %}
 <section class="wrapper-outer modul-boxBlau">
     <section class="wl-wrapper">
 
@@ -22,8 +23,11 @@
 
                 <div class="boxBlau-container">
 
-
+                    {% if sectionName == 'contentPage' or sectionName == 'home' %}
                     {% set headline = block.headline|default(false) %}
+                    {% else %}
+                    {% set headline = entry.blauBoxHeadline|default(false) %}
+                    {% endif %}
                     {% if headline %}
                         <div class="headline">
                             <h2>{{ headline }}</h2>
@@ -33,7 +37,11 @@
 
                     <div class="content">
 
-                            {% set text = block.text|default(false) %}
+                            {% if sectionName == 'contentPage' or sectionName == 'home' %}
+                                {% set text = block.text|default(false) %}
+                            {% else %}
+                                {% set text = entry.blauBoxText|default(false) %}
+                            {% endif %}
                             {% if text %}
                                 <div class="fliesstext text textNegativ">
                                     {{ text }}

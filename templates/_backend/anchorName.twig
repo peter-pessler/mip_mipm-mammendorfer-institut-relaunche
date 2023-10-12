@@ -1,0 +1,16 @@
+{% set anchorName = 'anker' ~ element.id %}
+<style>
+    .layoutContainer{
+        color: #000000;
+        .highlight{
+            color: #1372D0;
+            font-weight: bold;
+        }
+    }
+</style>
+
+<div class="layoutContainer">
+    <div>
+        Anker Name: <span class="highlight">{{ anchorName }}</span>
+    </div>
+</div>
