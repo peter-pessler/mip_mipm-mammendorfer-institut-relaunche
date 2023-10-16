@@ -23,7 +23,7 @@
 
                 <div class="boxBlau-container">
 
-                    {% if sectionName == 'contentPage' or sectionName == 'home' %}
+                    {% if sectionName == 'contentPage' or sectionName == 'home' or sectionName == 'produkt' or sectionName == 'produktZubehoer' %}
                     {% set headline = block.headline|default(false) %}
                     {% else %}
                     {% set headline = entry.blauBoxHeadline|default(false) %}
@@ -37,7 +37,7 @@
 
                     <div class="content">
 
-                            {% if sectionName == 'contentPage' or sectionName == 'home' %}
+                            {% if sectionName == 'contentPage' or sectionName == 'home'  or sectionName == 'produkt' or sectionName == 'produktZubehoer' %}
                                 {% set text = block.text|default(false) %}
                             {% else %}
                                 {% set text = entry.blauBoxText|default(false) %}
