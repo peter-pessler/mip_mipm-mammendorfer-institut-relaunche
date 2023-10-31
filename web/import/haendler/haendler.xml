@@ -2,62 +2,369 @@
 <entries>
         <entry>
 
-            <item>
+            <item data-nummer="1">
 
-                <title>Händler 1</title>
+                <title>Medivar OÜ</title>
 
-                <firmenName>Firmen Name (1)</firmenName>
+                <firmenName>Medivar OÜ</firmenName>
 
-                <haendlerName>Händler Name 1</haendlerName>
+                <haendlerName>Ivar Risti</haendlerName>
 
                 <haendlerAdresse>
-                    Dr. Rudolf-Eberle-Straße 8 – 10
-                    76534 Baden-Baden
-                    Germany
+                    Pärnu mnt. 139 E/2
+                    11317 Tallinn
                 </haendlerAdresse>
 
-                <haendlerTelefonnummer>11110 / 011111</haendlerTelefonnummer>
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
 
-                <haendlerMail>haendler1@gmx.de</haendlerMail>
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
 
-                <haendlerWebUrl>https://www.haendler1.de</haendlerWebUrl>
+                <haendlerTelefonnummer>+372 5569 1485</haendlerTelefonnummer>
+
+                <haendlerMail>+372 5569 1485</haendlerMail>
+
+                <haendlerWebUrl>https://www.medivar.eu</haendlerWebUrl>
+
+                <Land>Estland</Land>
+
+                <categories>
+                    <category>Tesla DUO</category>
+                    <category>Tesla M3</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="2">
+
+                <title>Dräger Medical Deutschland GmbH</title>
+
+                <firmenName>Dräger Medical Deutschland GmbH</firmenName>
+
+                <haendlerName></haendlerName>
+
+                <haendlerAdresse>
+                    Moislinger Allee 53-55
+                    23558 Lübeck
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>+49 800 882 882 0</haendlerTelefonnummer>
+
+                <haendlerMail>dsc@draeger.com</haendlerMail>
+
+                <haendlerWebUrl>https://www.draeger.com/</haendlerWebUrl>
 
                 <Land>Deutschland</Land>
 
                 <categories>
                     <category>Tesla M3</category>
-                    <category>Tesla DUO</category>
                 </categories>
 
             </item>
 
+            <item data-nummer="3">
 
-            <item>
+                <title>SIA "Tradintek"</title>
 
-                <title>Händler 2</title>
+                <firmenName>SIA "Tradintek"</firmenName>
 
-                <firmenName>Firmen Name 2</firmenName>
-
-                <haendlerName>Händler Name 2</haendlerName>
+                <haendlerName>Peteris Panins</haendlerName>
 
                 <haendlerAdresse>
-                    Oeyvaersbosch 12
-                    2630 Aartselaar
-                    Belgium
+                    Citadeles idela 2
+                    606 kab.Riga 1010
                 </haendlerAdresse>
 
-                <haendlerTelefonnummer>222222222</haendlerTelefonnummer>
+                <haendlerAdresseLandDe>
+                    Lettland
+                </haendlerAdresseLandDe>
 
-                <haendlerMail>haendler2@gmx.de</haendlerMail>
+                <haendlerAdresseLandEn>
+                    Latvia
+                </haendlerAdresseLandEn>
 
-                <haendlerWebUrl>https://www.haendler2.de</haendlerWebUrl>
+                <haendlerTelefonnummer>+371 67325943</haendlerTelefonnummer>
 
-                <Land>Belgien</Land>
+                <haendlerMail>peteris.pannins@tradintek.lv</haendlerMail>
+
+                <haendlerWebUrl>https://www.tradintek.lv</haendlerWebUrl>
+
+                <Land>Lettland</Land>
 
                 <categories>
                     <category>Tesla DUO</category>
+                    <category>Tesla M3</category>
+                    <category>TOF 3D</category>
                 </categories>
 
             </item>
+
+            <item data-nummer="4">
+
+                <title>SIA "Tradintek"</title>
+
+                <firmenName>SIA "Tradintek"</firmenName>
+
+                <haendlerName>Peteris Panins</haendlerName>
+
+                <haendlerAdresse>
+                    Citadeles idela 2
+                    606 kab.Riga 1010
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>+371 67325943</haendlerTelefonnummer>
+
+                <haendlerMail>peteris.panins@tradintek.lv</haendlerMail>
+
+                <haendlerWebUrl>https://www.tradintek.lv</haendlerWebUrl>
+
+                <Land>Litauen</Land>
+
+                <categories>
+                    <category>Tesla DUO</category>
+                    <category>Tesla M3</category>
+                    <category>TOF 3D</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="5">
+
+                <title>ALSEVIA PHARMA</title>
+
+                <firmenName>ALSEVIA PHARMA</firmenName>
+
+                <haendlerName>Anne-Sophie Degorce-Dumas</haendlerName>
+
+                <haendlerAdresse>
+                    48 rue Vital
+                    75016 Paris
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>+33 1 42 30 53 43</haendlerTelefonnummer>
+
+                <haendlerMail>contact@alsevia.com</haendlerMail>
+
+                <haendlerWebUrl>https://www.alsevia.com/</haendlerWebUrl>
+
+                <Land>Luxemburg</Land>
+
+                <categories>
+                    <category>TOF 3D</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="6">
+
+                <title>JAEJ S.A.</title>
+
+                <firmenName>JAEJ S.A.</firmenName>
+
+                <haendlerName>Juan Ignacio Mithieux</haendlerName>
+
+                <haendlerAdresse>
+                    Catamarca 3426 Martínez
+                    (B1640FWB) Pcia.
+                    Buenos Aires
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>+54 11 4717 1011</haendlerTelefonnummer>
+
+                <haendlerMail>Juan.Mithieux@jaej.com.ar</haendlerMail>
+
+                <haendlerWebUrl>https://jaej.com.ar</haendlerWebUrl>
+
+                <Land>Argentinien</Land>
+
+                <categories>
+                    <category>Tesla DUO</category>
+                    <category>Tesla M3</category>
+                    <category>TOF 3D</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="7">
+
+                <title>Mhedica</title>
+
+                <firmenName>Mhedica</firmenName>
+
+                <haendlerName>Douglas Robert</haendlerName>
+
+                <haendlerAdresse>
+                    Rua Itamaracá, 556
+                    Concórdia, Belo Horizonte
+                    Minas Gerais 31110-580
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>+55 31 3214 2620</haendlerTelefonnummer>
+
+                <haendlerMail>douglas@mhedica.com.br</haendlerMail>
+
+                <haendlerWebUrl>https://www.mhedica.com.br</haendlerWebUrl>
+
+                <Land>Brasilien</Land>
+
+                <categories>
+                    <category>Tesla DUO</category>
+                    <category>Tesla M3</category>
+                    <category>TOF 3D</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="8">
+
+                <title>xxx</title>
+
+                <firmenName>xxx</firmenName>
+
+                <haendlerName>xxx</haendlerName>
+
+                <haendlerAdresse>
+                    xxx
+                    xxx
+                    xxx
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>xxxx</haendlerTelefonnummer>
+
+                <haendlerMail>xxx</haendlerMail>
+
+                <haendlerWebUrl>xxx</haendlerWebUrl>
+
+                <Land>xxx</Land>
+
+                <categories>
+                    <category>xxx</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="9">
+
+                <title>xxx</title>
+
+                <firmenName>xxx</firmenName>
+
+                <haendlerName>xxx</haendlerName>
+
+                <haendlerAdresse>
+                    xxx
+                    xxx
+                    xxx
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>xxxx</haendlerTelefonnummer>
+
+                <haendlerMail>xxx</haendlerMail>
+
+                <haendlerWebUrl>xxx</haendlerWebUrl>
+
+                <Land>xxx</Land>
+
+                <categories>
+                    <category>xxx</category>
+                </categories>
+
+            </item>
+
+            <item data-nummer="10">
+
+                <title>xxx</title>
+
+                <firmenName>xxx</firmenName>
+
+                <haendlerName>xxx</haendlerName>
+
+                <haendlerAdresse>
+                    xxx
+                    xxx
+                    xxx
+                </haendlerAdresse>
+
+                <haendlerAdresseLandDe>
+                    xxx
+                </haendlerAdresseLandDe>
+
+                <haendlerAdresseLandEn>
+                    xxx
+                </haendlerAdresseLandEn>
+
+                <haendlerTelefonnummer>xxxx</haendlerTelefonnummer>
+
+                <haendlerMail>xxx</haendlerMail>
+
+                <haendlerWebUrl>xxx</haendlerWebUrl>
+
+                <Land>xxx</Land>
+
+                <categories>
+                    <category>xxx</category>
+                </categories>
+
+            </item>
+
         </entry>
 </entries>

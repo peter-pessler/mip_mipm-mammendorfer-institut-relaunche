@@ -16,7 +16,7 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
 {# ************************************************* #}
 {# *------------* START Konfiguration *------------ *#}
 {# ************************************************* #}
-{% set lg = 'en' %}
+{% set lg = language %}
 {# *-----------------------------------------*#}
 
 {% set myUrl = url(craft.app.request.pathInfo) %}
@@ -72,10 +72,12 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
 
 {# *-------------* Produktgruppe *------------- #}
 {% set categoryProduktgruppeIdsAnzahl = 0 %}
+{% set categoryProduktgruppeIdEinzelAuswahl = 0 %}
 {% if produktgruppe != '' %}
 
     {% set categoryProduktgruppeIdsArray = produktgruppe|split(',') %}
     {% set categoryProduktgruppeIdsAnzahl = categoryProduktgruppeIdsArray|length %}
+    {% set categoryProduktgruppeIdEinzelAuswahl = (categoryProduktgruppeIdsAnzahl == 1)?categoryProduktgruppeIdsArray[0] : '' %}
     {% set categoryProduktgruppeSelectById = craft.categories().id(categoryProduktgruppeIdsArray).all() %}
     {% set categoryProduktgruppeBy = { element: categoryProduktgruppeSelectById  }  %}
     {# ###################################### #}
@@ -179,9 +181,6 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                  {% set auswahlKategorieProduktgruppeReihenfolgeArr = auswahlKategorieProduktgruppeReihenfolgeArr|merge({ (loop.index)  :  elemente.id }) %}
              {% endfor %}
 
-
-
-
              {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
                  {% set haendlerWebUrlArray = haendlerWebUrl|split('//') %}
                  {% set haendlerWebUrlText = haendlerWebUrlArray[1] %}
@@ -195,15 +194,25 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
              <article class="article-item"{% if entries|length == 1 %} style="max-width: 788px;" {% endif %}>
                  <div class="artikelContent">
 
-                             <div class="artikelCat artikelCatBordrtBottom artikelCat-js">
+                             <div class="artikelCat artikelCatBorderBottom artikelCat-js">
 
                                  {% set categoryReihenfolge = craft.categories().group('produktGruppen') %}
                                  {% for key, elemente in categoryReihenfolge.all() %}
                                          {% set valueExistsInArray = elemente.id|integer %}
                                          {% set key = elemente.id|string  %}
-                                         {% if valueExistsInArray in auswahlKategorieProduktgruppeReihenfolgeArr %}
-                                             {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
+
+                                         {% if  categoryProduktgruppeIdsAnzahl == 1 and elemente.id|string == categoryProduktgruppeIdEinzelAuswahl %}
+                                             {% if valueExistsInArray in auswahlKategorieProduktgruppeReihenfolgeArr %}
+                                                 {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
+                                             {% endif %}
                                          {% endif %}
+
+                                        {% if  categoryProduktgruppeIdsAnzahl > 1 %}
+                                            {% if valueExistsInArray in auswahlKategorieProduktgruppeReihenfolgeArr %}
+                                                 {% set sortKategorieProduktgruppeReihenfolgeArr = sortKategorieProduktgruppeReihenfolgeArr|merge({ ( 'id-' ~ key )  : elemente.kategorieGruppeName }) %}
+                                             {% endif %}
+                                         {% endif %}
+
                                  {% endfor %}
 
                                  {% for key, value in sortKategorieProduktgruppeReihenfolgeArr %}
@@ -219,6 +228,12 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                  {{ productGroupStr|raw }}
                              </div>
 
+
+                             <div class="artikelLanguage artikelLanguage-js">
+                                 {{ entry.auswahlKategorieLand.one() }}
+                             </div>
+
+
                              <div class="artikelBody artikelBodyAbstandTop">
 
                                      <div class="artikel-firmenName textBold">
@@ -230,8 +245,24 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                      </div>
 
                                      <div class="artikel-adresse">
+                                         {% set haendlerAdresseLandOtional = '' %}
+                                         {% set haendlerAdresseLand = '' %}
+                                         {% if lg == 'de' %}
+                                             {% set haendlerAdresseLandOtional = entry.haendlerAdresseLandDe|default(false) %}
+                                         {% endif %}
+                                         {% if lg == 'en' %}
+                                             {% set haendlerAdresseLandOtional = entry.haendlerAdresseLandEn|default(false) %}
+                                         {% endif %}
+                                         {% if haendlerAdresseLandOtional != '' %}
+                                             {% set haendlerAdresseLand = haendlerAdresseLandOtional %}
+                                         {% else %}
+                                             {% set ifHaendlerAdresseLand = entry.auswahlKategorieLand.one().title|default(false) %}
+                                             {% if ifHaendlerAdresseLand %}
+                                                 {% set haendlerAdresseLand = entry.auswahlKategorieLand.one().title %}
+                                             {% endif %}
+                                         {% endif %}
                                      {{ entry.haendlerAdresse|nl2br }}<br />
-                                     {{ entry.auswahlKategorieLand.one().title }}
+                                     {{ haendlerAdresseLand }}
                                      </div>
 
                                      <div class="artikel-tel">

@@ -4,6 +4,7 @@
 {% set produktgruppe = ( craft.app.request.getParam('produktgruppe') )? craft.app.request.getParam('produktgruppe') : '' %}
 {% set sectionname = ( craft.app.request.getParam('sectionname') )? craft.app.request.getParam('sectionname') : '' %}
 {% set pageid = ( craft.app.request.getParam('pageid') )? craft.app.request.getParam('pageid') : '' %}
+{% set language = ( craft.app.request.getParam('language') )? craft.app.request.getParam('language') : '' %}
 {#
 {% set getall = ( craft.app.request.getParam('getall') )? craft.app.request.getParam('getall') : '' %}
 {% set artikelausgabe = ( craft.app.request.getParam('artikelausgabe') )? craft.app.request.getParam('artikelausgabe') : '' %}
@@ -17,7 +18,7 @@
             {% if craft.app.request.getParam('template') %}
                 {% set tempalte = craft.app.request.getParam('template') %}
                 {% if tempalte is not empty  %}
-                    {% include  '_ajax-feedback/' ~ tempalte with { block: block, output: output, pageid: entry.id, sectionnamepage: sectionname, blockid: mID }  %}
+                    {% include  '_ajax-feedback/' ~ tempalte with { block: block, output: output, pageid: entry.id, sectionnamepage: sectionname, blockid: mID, language: language }  %}
                 {% endif %}
             {% endif %}
         {% endfor %}

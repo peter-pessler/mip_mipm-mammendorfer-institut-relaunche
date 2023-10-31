@@ -173,7 +173,7 @@
 
 
 
-            &.artikelCatBordrtBottom{
+            &.artikelCatBorderBottom{
               border-bottom: 2px solid $wl-color-blue;
             }
 
@@ -197,6 +197,23 @@
 
           }
 
+          .artikelLanguage{
+            background-color: $wl-color-blue;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            border-bottom: 2px solid $wl-color-blue;
+
+            padding-top: 5px;
+            padding-left: 35px;
+            padding-right: 35px;
+
+            @include wl-breakpoint(450) {
+              padding-left: 25px;
+              padding-right: 25px;
+            }
+          }
 
           .artikelProduktInfo{
             height: 30px;

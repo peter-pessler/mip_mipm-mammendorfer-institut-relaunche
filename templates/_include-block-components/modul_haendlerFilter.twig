@@ -3,6 +3,7 @@
 {% set landid = ( craft.app.request.getParam('landid') )? craft.app.request.getParam('landid') : '' %}
 {% set resultContainerClassName = ( craft.app.request.getParam('produktGruppeId') )? '' : ' resultContainer' %}
 {% set lgSlug = (currentSite.handle == 'en')? '/en' : '' %}
+{% set language = currentSite.handle %}
 
 {% set produktGruppeIdNumberMoreThanZero = false %}
 {% if produktGruppeId != ''  %}
@@ -91,7 +92,7 @@
             dataElementLand = '';
         }
 
-        var ajaxUrl='{{lgSlug}}/feedback-ajax/?template=haendler&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+        var ajaxUrl='{{lgSlug}}/feedback-ajax/?template=haendler&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&land=' + land + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}' + '&language={{ language }}',
             resultContainer = $('.resultContainer');
 
         $.get(ajaxUrl, function(data){
@@ -105,6 +106,7 @@
 
             setTimeout(function () {
                 $('.artikelCat-js').matchHeight();
+                $('.artikelLanguage-js').matchHeight();
             }, 800);
         });
 

@@ -1,4 +1,5 @@
 {% set headline = block.headline |default(false) %}
+{% set lgSlug = (currentSite.handle == 'en')? '/en' : '' %}
 <script>
     $(document).ready(function () {
 
@@ -25,7 +26,7 @@
 
     function ajaxFeedback(output = '') {
 
-        var ajaxUrl = '/feedback-ajax?template=produkt&blockid={{ blockid }}&output=' + output + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
+        var ajaxUrl = '{{lgSlug}}/feedback-ajax?template=produkt&blockid={{ blockid }}&output=' + output + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}',
             resultContainer = $('.result');
 
         $.get(ajaxUrl, function (data) {
