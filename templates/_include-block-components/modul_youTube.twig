@@ -1,0 +1,14 @@
+{% set youTubeUrl = block.youTubeUrl|default(false) %}
+<div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
+<section class="wrapper-outer modul-youTube">
+    <section class="wl-wrapper">
+    <div class="content-grid-12">
+        <div class="video-container-outer">
+            <div class="video-container">
+                <iframe class="video" src="{{ youTubeUrl }}" frameborder="0"  allow="accelerometer; autoplay; encrypted-media; gyroscope;" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+    </section>
+</section>
+

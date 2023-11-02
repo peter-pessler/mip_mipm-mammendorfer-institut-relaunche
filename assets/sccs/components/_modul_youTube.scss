@@ -1,0 +1,36 @@
+.modul-youTube{
+
+.video-container-outer{
+  grid-row: 1;
+  grid-column-start: 2;
+  grid-column-end: 12;
+
+  @include wl-breakpoint(500){
+    grid-column-start: 1;
+    grid-column-end: 13;
+  }
+
+}
+
+  .video-container {
+    position:relative;
+    padding-bottom:56.25%;
+    height:0;
+    overflow:hidden;
+    border-radius: 30px;
+  }
+
+  .video-container iframe {
+    border-radius: 30px;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
+
+
+}
+
+
+
