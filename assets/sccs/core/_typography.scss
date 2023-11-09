@@ -68,6 +68,8 @@ h1, h2, h3, h4 {
 
 h1, .h1 {
 
+  color: $wl-color-blue-dark;
+
   &.home{
     @include responsive-font(40px, 70px, $h1-font-family, $base-line-height-h1);
 
@@ -78,6 +80,8 @@ h1, .h1 {
 }
 
 h1, .h1 {
+  color: $wl-color-blue-dark;
+
   @include responsive-font(32px, 60px, $h1-font-family, $base-line-height-h1);
 
   margin-top: 0;
@@ -93,6 +97,8 @@ h1, .h1 {
 }
 
 h2, .h2 {
+  color: $wl-color-blue-dark;
+
   @include responsive-font(28px, 45px, $h2-font-family, $base-line-height-h2);
 
   margin-top: 0;
@@ -100,12 +106,18 @@ h2, .h2 {
 }
 
 h3, .h3 {
+  color: $wl-color-blue-dark;
+
+
   @include responsive-font(24px, 34px, $h3-font-family, $base-line-height-h3);
 
   margin-top: 0;
   margin-bottom: -0.2em;
 }
 h4, .h4 {
+  color: $wl-color-blue-dark;
+
+
   @include responsive-font(18px, 23px, $h4-font-family, $base-line-height-h3);
 
   margin-top: 0;

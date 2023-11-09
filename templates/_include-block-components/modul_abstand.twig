@@ -7,7 +7,9 @@
 {% set abstandMax = (outputAbstandMax == '')? dataMaxDefault : outputAbstandMax %}
 {% set abstandMin = (outputAbstandMin == '')? dataMinDefault : outputAbstandMin %}
 {% set prefix = loop.index %}
-
+{% set showModul = (block.modulAusblenden)? false : true %}
+{% if showModul %}
 <section data-abstandContainer class="wl-wrapper">
     <div data-attr="height" data-min="{{ abstandMin }}" data-max="{{ abstandMax }}" class="abstand-{{ prefix }}"></div>
 </section>
+{% endif %}

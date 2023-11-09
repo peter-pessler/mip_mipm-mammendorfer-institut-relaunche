@@ -16,11 +16,9 @@
                 </haendlerAdresse>
 
                 <haendlerAdresseLandDe>
-                    xxx
                 </haendlerAdresseLandDe>
 
                 <haendlerAdresseLandEn>
-                    xxx
                 </haendlerAdresseLandEn>
 
                 <haendlerTelefonnummer>+372 5569 1485</haendlerTelefonnummer>
@@ -52,11 +50,9 @@
                 </haendlerAdresse>
 
                 <haendlerAdresseLandDe>
-                    xxx
                 </haendlerAdresseLandDe>
 
                 <haendlerAdresseLandEn>
-                    xxx
                 </haendlerAdresseLandEn>
 
                 <haendlerTelefonnummer>+49 800 882 882 0</haendlerTelefonnummer>
@@ -75,7 +71,7 @@
 
             <item data-nummer="3">
 
-                <title>SIA "Tradintek"</title>
+                <title>SIA "Tradintek" | Lettland</title>
 
                 <firmenName>SIA "Tradintek"</firmenName>
 
@@ -87,7 +83,7 @@
                 </haendlerAdresse>
 
                 <haendlerAdresseLandDe>
-                    Lettland
+                    Lettland test
                 </haendlerAdresseLandDe>
 
                 <haendlerAdresseLandEn>
@@ -112,7 +108,7 @@
 
             <item data-nummer="4">
 
-                <title>SIA "Tradintek"</title>
+                <title>SIA "Tradintek" | Litauen</title>
 
                 <firmenName>SIA "Tradintek"</firmenName>
 
@@ -124,11 +120,11 @@
                 </haendlerAdresse>
 
                 <haendlerAdresseLandDe>
-                    xxx
+                    Lettland
                 </haendlerAdresseLandDe>
 
                 <haendlerAdresseLandEn>
-                    xxx
+                     Latvia
                 </haendlerAdresseLandEn>
 
                 <haendlerTelefonnummer>+371 67325943</haendlerTelefonnummer>
@@ -161,11 +157,9 @@
                 </haendlerAdresse>
 
                 <haendlerAdresseLandDe>
-                    xxx
                 </haendlerAdresseLandDe>
 
                 <haendlerAdresseLandEn>
-                    xxx
                 </haendlerAdresseLandEn>
 
                 <haendlerTelefonnummer>+33 1 42 30 53 43</haendlerTelefonnummer>
@@ -182,189 +176,6 @@
 
             </item>
 
-            <item data-nummer="6">
-
-                <title>JAEJ S.A.</title>
-
-                <firmenName>JAEJ S.A.</firmenName>
-
-                <haendlerName>Juan Ignacio Mithieux</haendlerName>
-
-                <haendlerAdresse>
-                    Catamarca 3426 Martínez
-                    (B1640FWB) Pcia.
-                    Buenos Aires
-                </haendlerAdresse>
-
-                <haendlerAdresseLandDe>
-                    xxx
-                </haendlerAdresseLandDe>
-
-                <haendlerAdresseLandEn>
-                    xxx
-                </haendlerAdresseLandEn>
-
-                <haendlerTelefonnummer>+54 11 4717 1011</haendlerTelefonnummer>
-
-                <haendlerMail>Juan.Mithieux@jaej.com.ar</haendlerMail>
-
-                <haendlerWebUrl>https://jaej.com.ar</haendlerWebUrl>
-
-                <Land>Argentinien</Land>
-
-                <categories>
-                    <category>Tesla DUO</category>
-                    <category>Tesla M3</category>
-                    <category>TOF 3D</category>
-                </categories>
-
-            </item>
-
-            <item data-nummer="7">
-
-                <title>Mhedica</title>
-
-                <firmenName>Mhedica</firmenName>
-
-                <haendlerName>Douglas Robert</haendlerName>
-
-                <haendlerAdresse>
-                    Rua Itamaracá, 556
-                    Concórdia, Belo Horizonte
-                    Minas Gerais 31110-580
-                </haendlerAdresse>
-
-                <haendlerAdresseLandDe>
-                    xxx
-                </haendlerAdresseLandDe>
-
-                <haendlerAdresseLandEn>
-                    xxx
-                </haendlerAdresseLandEn>
-
-                <haendlerTelefonnummer>+55 31 3214 2620</haendlerTelefonnummer>
-
-                <haendlerMail>douglas@mhedica.com.br</haendlerMail>
-
-                <haendlerWebUrl>https://www.mhedica.com.br</haendlerWebUrl>
-
-                <Land>Brasilien</Land>
-
-                <categories>
-                    <category>Tesla DUO</category>
-                    <category>Tesla M3</category>
-                    <category>TOF 3D</category>
-                </categories>
-
-            </item>
-
-            <item data-nummer="8">
-
-                <title>xxx</title>
-
-                <firmenName>xxx</firmenName>
-
-                <haendlerName>xxx</haendlerName>
-
-                <haendlerAdresse>
-                    xxx
-                    xxx
-                    xxx
-                </haendlerAdresse>
-
-                <haendlerAdresseLandDe>
-                    xxx
-                </haendlerAdresseLandDe>
-
-                <haendlerAdresseLandEn>
-                    xxx
-                </haendlerAdresseLandEn>
-
-                <haendlerTelefonnummer>xxxx</haendlerTelefonnummer>
-
-                <haendlerMail>xxx</haendlerMail>
-
-                <haendlerWebUrl>xxx</haendlerWebUrl>
-
-                <Land>xxx</Land>
-
-                <categories>
-                    <category>xxx</category>
-                </categories>
-
-            </item>
-
-            <item data-nummer="9">
-
-                <title>xxx</title>
-
-                <firmenName>xxx</firmenName>
-
-                <haendlerName>xxx</haendlerName>
-
-                <haendlerAdresse>
-                    xxx
-                    xxx
-                    xxx
-                </haendlerAdresse>
-
-                <haendlerAdresseLandDe>
-                    xxx
-                </haendlerAdresseLandDe>
-
-                <haendlerAdresseLandEn>
-                    xxx
-                </haendlerAdresseLandEn>
-
-                <haendlerTelefonnummer>xxxx</haendlerTelefonnummer>
-
-                <haendlerMail>xxx</haendlerMail>
-
-                <haendlerWebUrl>xxx</haendlerWebUrl>
-
-                <Land>xxx</Land>
-
-                <categories>
-                    <category>xxx</category>
-                </categories>
-
-            </item>
-
-            <item data-nummer="10">
-
-                <title>xxx</title>
-
-                <firmenName>xxx</firmenName>
-
-                <haendlerName>xxx</haendlerName>
-
-                <haendlerAdresse>
-                    xxx
-                    xxx
-                    xxx
-                </haendlerAdresse>
-
-                <haendlerAdresseLandDe>
-                    xxx
-                </haendlerAdresseLandDe>
-
-                <haendlerAdresseLandEn>
-                    xxx
-                </haendlerAdresseLandEn>
-
-                <haendlerTelefonnummer>xxxx</haendlerTelefonnummer>
-
-                <haendlerMail>xxx</haendlerMail>
-
-                <haendlerWebUrl>xxx</haendlerWebUrl>
-
-                <Land>xxx</Land>
-
-                <categories>
-                    <category>xxx</category>
-                </categories>
-
-            </item>
 
         </entry>
 </entries>

@@ -86,14 +86,20 @@
 <section class="blog-wrapper-outer modul-aktuelles">
     <div class="wl-wrapper">
 
+    {% set myUrl = craft.app.sites.primarySite.baseUrl  %}
     {% set allCategory = craft.categories.group('blogCat') %}
     {% set categoryStr = ''  %}
     {% set counter = '0' %}
     {% set buttonArr = {} %}
+
     {% for elemente in allCategory %}
         {% set counter = counter + 1 %}
         {% set categoryStr  = (counter == 1)? elemente.id : categoryStr  ~ ',' ~ elemente.id  %}
-        {% set buttonArr = buttonArr|merge({ (loop.index)  :  '<a href="?#result" class="themenBtn" data-output="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</a>' }) %}
+        {#
+        {% set buttonArr = buttonArr|merge({ (loop.index)  :  '<a href="' ~ domainAndPath ~ '?#result" class="themenBtn" data-output="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</a>' }) %}
+        #}
+
+        {% set buttonArr = buttonArr|merge({ (loop.index)  :  '<a class="themenBtn" data-output="' ~ elemente.id ~ '">' ~ elemente.title  ~ '</a>' }) %}
     {% endfor %}
 
         <div class="themenfilter grid-container content-grid-12">

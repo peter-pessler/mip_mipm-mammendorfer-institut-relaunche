@@ -3773,14 +3773,6 @@
       "oAP" : "\/web\/cpresources\/.gitignore",
       "oF" : 0
     },
-    "\/web\/import\/haendler\/haendler-en.xml" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/web\/import\/haendler\/haendler-en.xml",
-      "oF" : 0
-    },
     "\/web\/import\/haendler\/haendler.xml" : {
       "cB" : 0,
       "ft" : 8192,
@@ -3795,14 +3787,6 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/web\/import\/haendler\/land-de.xml",
-      "oF" : 0
-    },
-    "\/web\/import\/haendler\/land-en.xml" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/web\/import\/haendler\/land-en.xml",
       "oF" : 0
     },
     "\/web\/index.php" : {
