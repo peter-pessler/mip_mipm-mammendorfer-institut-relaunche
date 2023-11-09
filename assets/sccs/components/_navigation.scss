@@ -31,8 +31,14 @@
 
 .menu-open{
 
+  margin-top: -10px;
+
+  &.active{
+    margin-top: 0;
+  }
+
   span{
-    background: $wl-color-black;
+    background: $wl-color-blue-dark;
   }
 
   &:hover{

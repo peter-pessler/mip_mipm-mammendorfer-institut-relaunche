@@ -127,6 +127,8 @@
 
           label {
 
+            color: $wl-color-blue-dark;
+
             &.lableOff{
                 transition: $transition;
                 &::after {

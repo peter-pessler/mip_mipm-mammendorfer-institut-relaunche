@@ -78,6 +78,10 @@
                       @include dynamic-distance($min-bottomAbstandHeadline, $max-bottomAbstandHeadline, padding-bottom);
                     }
 
+                    h2{
+                      color: $wl-color-white;
+                    }
+
               }
 
 
