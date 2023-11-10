@@ -49,6 +49,11 @@ $breakpoint-text: 1200;
         padding-right: 0px;
       }
 
+      h2{
+        color: $wl-color-blue-dark!important;
+      }
+
+
     }
 
     @include wl-breakpoint($breakpoint-text) {

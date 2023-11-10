@@ -59,7 +59,7 @@ $breakpoint-text: 1200;
     .h2box{
 
       h2{
-        color: $wl-color-black;
+        color: $wl-color-blue-dark!important;
       }
 
       @include wl-breakpoint($breakpoint-text) {
