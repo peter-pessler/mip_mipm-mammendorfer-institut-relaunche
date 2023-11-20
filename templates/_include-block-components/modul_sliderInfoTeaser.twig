@@ -63,9 +63,6 @@
 <script>
     $(document).ready(function() {
 
-        $('.item-js').matchHeight();
-
-
         $('#artikelSlider{{ blockid }}').slick({
 
             dots: false,
@@ -111,9 +108,11 @@
     });
 
 
-    $('#artikelSlider{{ blockid }}').on('beforeChange', function(event, slick, currentSlide, nextSlide){
+    $('#artikelSlider{{ blockid }}').on('setPosition', function(event, slick, currentSlide){
+
         $('.item-js').matchHeight();
         heightBlende{{ blockid }}();
+
     });
 
     function heightBlende{{ blockid }}() {
