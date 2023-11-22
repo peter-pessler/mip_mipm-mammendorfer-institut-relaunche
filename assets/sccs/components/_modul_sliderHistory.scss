@@ -92,10 +92,33 @@
 
         .articleJahreszahl{
           @include dynamic-distance(30, 40, padding-bottom);
+
+          &.startColor{
+            .h4box{
+              h4{
+                color: $wl-color-blue;
+              }
+            }
+          }
+
+        }
+
+        .articleHeadline{
+          &.startColor{
+            color: $wl-color-blue;
+          }
         }
 
         .articleText{
           padding-top: 8px;
+          hyphens: auto!important;
+
+          &.text{
+            &.startColor{
+              color: $wl-color-blue;
+            }
+          }
+
         }
       }
 

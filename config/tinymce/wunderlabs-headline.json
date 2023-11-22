@@ -3,9 +3,9 @@
   "menubar": false,
   "contextmenu": false,
   "extended_valid_elements": "img[src|alt|title|width|height|class|loading],+@[data-options]",
-  "force_br_newlines" : true,
+  "force_br_newlines" : false,
   "force_p_newlines" : false,
-  "forced_root_block": "",
+  "forced_root_block": "block",
   "relative_urls": false,
   "remove_script_host": false,
   "convert_urls": false,
@@ -63,6 +63,14 @@
     {
       "title": "Formatierung",
       "items": [
+        {
+          "title": "Kursiv",
+          "inline": "em"
+        },
+        {
+          "title": "Hochstellen",
+          "inline": "sup"
+        },
         {
           "title": "No Break",
           "inline": "span",

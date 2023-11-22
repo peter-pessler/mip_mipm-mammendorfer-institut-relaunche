@@ -232,6 +232,17 @@
       "sC" : 0,
       "tS" : 0
     },
+    "\/assets\/js\/lightboxed.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 1,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/js\/lightboxed.min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
     "\/assets\/js\/scripts.js" : {
       "bF" : 0,
       "ft" : 64,
@@ -2309,6 +2320,14 @@
       "oAP" : "\/templates\/_include-block-components\/modul_bildAccordion.twig",
       "oF" : 0
     },
+    "\/templates\/_include-block-components\/modul_bilderMitZoom-backup.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_bilderMitZoom-backup.twig",
+      "oF" : 0
+    },
     "\/templates\/_include-block-components\/modul_bilderMitZoom.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2435,14 +2454,6 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_teaserAngebote.twig",
-      "oF" : 0
-    },
-    "\/templates\/_include-block-components\/modul_technischeSpezifikationen.twig" : {
-      "cB" : 0,
-      "ft" : 8192,
-      "hM" : 0,
-      "oA" : 2,
-      "oAP" : "\/templates\/_include-block-components\/modul_technischeSpezifikationen.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_textAccordion.twig" : {
@@ -3221,6 +3232,19 @@
       "plM" : 3758088159,
       "prP" : 0
     },
+    "\/web\/assets\/images\/icons\/controls.png" : {
+      "ft" : 32768,
+      "iS" : 2020,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/icons\/controls.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/web\/assets\/images\/icons\/delete-icn.png" : {
       "ft" : 32768,
       "iS" : 916,
@@ -3486,6 +3510,32 @@
       "plM" : 3758088159,
       "prP" : 0
     },
+    "\/web\/assets\/images\/img\/stantard.png" : {
+      "ft" : 32768,
+      "iS" : 2013,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/img\/stantard.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/img\/start.png" : {
+      "ft" : 32768,
+      "iS" : 2240,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/img\/start.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
     "\/web\/assets\/images\/img\/tof-monitor-tof3d.jpg" : {
       "ft" : 16384,
       "iS" : 76453,
@@ -3662,6 +3712,25 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/web\/assets\/js\/lazysizes.min.js.map",
+      "oF" : 0
+    },
+    "\/web\/assets\/js\/lightboxed.min.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 1,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/js\/lightboxed.min.min.js",
+      "oF" : 0,
+      "sC" : 0,
+      "tS" : 0
+    },
+    "\/web\/assets\/js\/lightboxed.min.js.map" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/js\/lightboxed.min.js.map",
       "oF" : 0
     },
     "\/web\/assets\/js\/scripts.min.js" : {

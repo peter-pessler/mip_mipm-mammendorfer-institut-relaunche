@@ -80,7 +80,8 @@
       {% if block.type.handle == 'bilderMitZoom' %}
         {% set counter = counter + 1 %}
         {% if bilderMitZoom == 0 %}
-          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script type="text/javascript" src="/assets/js/fliplightbox.min.js"></script>' }) %}
+          {# {% set assetsArr = assetsArr|merge({ (counter)  :  '<script type="text/javascript" src="/assets/js/fliplightbox.min.js"></script>' }) %}  #}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script type="text/javascript" src="/assets/js/lightboxed.min.js"></script>' }) %}
         {% endif %}
         {% set bilderMitZoom = bilderMitZoom + 1 %}
       {% endif %}

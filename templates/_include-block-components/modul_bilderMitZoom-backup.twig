@@ -51,23 +51,14 @@
                                         height: '845',
                                         quality: (imgQuality),
                                     })  %}
-                                    {% set imgSrcSmall =  entry.bildGross.one().getUrl({
-                                        mode: 'crop',
-                                        width: '650',
-                                        height: '366',
-                                        quality: (imgQuality),
-                                    })  %}
                                 {% endif %}
-                                {#
+
                                 <a href="{{ imgSrc }}" class="flipLightBox{{ flipLightBoxCounter }}" data-lightbox_bgColor="{{ block.overlayHintergrundFarbe }}">
                                     {% if image %}
                                         {% include '_include-vendor/image-picture.twig' with {class: 'flb-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
                                     {% endif %}
                                     <span>{% if bildBeschreibung %}<output class="textBold"> {{ entry.bildBeschreibung }}</output>{% endif %}</span>
                                 </a>
-                                #}
-                                <a><img class="lightboxed" rel="group{{ blockid }}" src="{{ imgSrcSmall }}" data-link="{{ imgSrc }}" alt="Image Alt" data-caption="{{ entry.bildBeschreibung }}" /></a>
-
 
                             {% endfor %}
 
@@ -79,84 +70,9 @@
 </section>
 
 
-{#
+
 <script type="text/javascript">
     $( document ).ready(function() {
         $('.modul-bilderMitZoom').flipLightBox()
     });
-</script>
-#}
-
-<script>
-
-
-
-
-$( document ).ready(function() {
-
-      $(".lightboxed").on( "click", function() {
-                var bg = $(this).parent().parent().attr("data-lightbox_bgColor");
-                var bgRGBA = convertHexToRgbA(bg);
-
-                $("#lightboxed--content").css('background-color', bgRGBA );
-
-                  $(window).resize(function() {
-                      setTimeout(function() {
-                          $('#lightboxed--bttn_close').trigger('click');
-                      }, 50);
-                  })
-      });
-
-
-        function convertHexToRgbA(hexVal) {
-            let ret;
-
-            // If the hex value is valid.
-            if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hexVal)) {
-
-                // Getting the content after '#',
-                // eg. 'ffffff' in case of '#ffffff'
-                ret = hexVal.slice(1);
-
-                // Splitting each character
-                ret = ret.split('');
-
-                // Checking if the length is 3
-                // then make that 6
-                if (ret.length == 3) {
-                    let ar = [];
-                    ar.push(ret[0]);
-                    ar.push(ret[0]);
-                    ar.push(ret[1]);
-                    ar.push(ret[1]);
-                    ar.push(ret[2]);
-                    ar.push(ret[2]);
-                    ret = ar;
-                }
-
-                // Starts with '0x'(in hexadecimal)
-                ret = '0x' + ret.join('');
-
-                // Converting the first 2 characters
-                // from hexadecimal to r value
-                let r = (ret >> 16) & 255;
-
-                // Converting the second 2 characters
-                // to hexadecimal to g value
-                let g = (ret >> 8) & 255;
-
-                // Converting the last 2 characters
-                // to hexadecimal to b value
-                let b = ret & 255;
-
-                // Appending all of them to make
-                // the RGBA value
-                return 'rgba(' + [r, g, b].join(',') + ',0.5)';
-            }
-
-        }
-
-    });
-
-
 </script>

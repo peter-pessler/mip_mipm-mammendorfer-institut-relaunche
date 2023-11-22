@@ -118,7 +118,9 @@
 
                                 <div class="articleBody">
                                     {% set auswahlKategorieObj = entry.auswahlKategorie.one() %}
-                                    <div class="article-Info">{{ auswahlKategorieObj.title }}</div>
+                                    {% set lg = currentSite.handle %}
+                                    {% set date = (lg == 'de')? entry.startDate|date('d.m.Y') : entry.startDate|date('m-d-Y') %}
+                                    <div class="article-Info">{{ auswahlKategorieObj.title }} | {{ date }}</div>
 
                                     <div class="article-Title">
                                         <h4>{{ entry.teaserHeadline }}</h4>

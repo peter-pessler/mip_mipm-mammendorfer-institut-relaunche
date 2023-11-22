@@ -62,33 +62,13 @@
         $('#slider-team{{ blockid }}').slick({
             dots: false,
             infinite: true,
-            speed: 2000,
+            speed: 1000,
             autoplay: false,
-            autoplaySpeed: 4000,
+            autoplaySpeed: 1000,
             slidesToShow: 1,
             slidesToScroll: 1,
             fade: true,
         });
-
-
-        /*
-        $('#slider-team{{ blockid }}').on('beforeChange', function(event, slick, currentSlide, nextSlide){
-
-            $('#slider-team{{ blockid }}').each(function() {
-              $(this).find(".articleText").addClass('slideAbstandOn');
-              $(this).find(".articleImage").addClass('slideAbstandOn');
-            });
-
-        });
-
-        $('#slider-team{{ blockid }}').on('afterChange', function(event, slick, currentSlide, nextSlide){
-            $('#slider-team{{ blockid }}').each(function() {
-                $(this).find(".articleText").removeClass('slideAbstandOn');
-                $(this).find(".articleImage").removeClass('slideAbstandOn');
-            });
-        });
-        */
-
 
     });
 
