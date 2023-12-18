@@ -88,6 +88,12 @@
                             <a href="{{ seiteHaendlerFindenUrl }}?pgid={{ paramStr }}&pid={{ entry.id }}" class="btn">{{ translation.t_buttonTextIntro }}</a>
                         {% endif %}
                     </span>
+                    {% set button2 = produktConfig.backLink|default(false) %}
+                    <span class="buttonIntro2"  data-button2>
+                    {% if button2  and produktConfig.backLink.getUrl() != '' %}
+                        {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                    {% endif %}
+                    </span>
             </div>
 
         </div>

@@ -117,3 +117,34 @@ a {
     @include btnWul();
   }
 }
+
+
+.back-to-top {
+
+  display: inline-block;
+  background-image: url("/assets/images/icons/top-arrow.svg");
+  background-position: center center;
+  background-size: cover;
+  position: fixed;
+  bottom: 50px;
+  @include dynamic-distance(30, 50, width);
+  @include dynamic-distance(30, 50, height);
+  z-index: 9;
+  text-emphasis: none;
+
+
+  right: 50px;
+
+  @include wl-breakpoint($page-width) {
+    @include dynamic-distance(30, 50, right);
+  }
+  @include wl-breakpoint(600) {
+    right: 25px;
+    bottom: 30px;
+  }
+
+  @include wl-breakpoint(400) {
+    right: 15px;
+  }
+
+}

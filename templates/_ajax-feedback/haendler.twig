@@ -269,6 +269,9 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                      {% if entry.haendlerTelefonnummer is not empty %}
                                         {{ craft.wul.phone(entry.haendlerTelefonnummer,'phone',entry.haendlerTelefonnummer)|raw }}
                                      {% endif %}
+                                     {% if entry.haendlerTelefonnummer2 is not empty %}
+                                         <br />{{ craft.wul.phone(entry.haendlerTelefonnummer2,'phone',entry.haendlerTelefonnummer2)|raw }}
+                                     {% endif %}
                                      </div>
 
                                      {% if haendlerMail != '' %}
@@ -277,11 +280,11 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                      {% endif %}
                                      </div>
 
+                                     {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
                                      <div class="artikel-WebUrl">
-                                         {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
-                                         {{ translation.t_web }} <a href="{{ haendlerWebUrl }}" target="_blank">{{ haendlerWebUrlText }}</a>
-                                         {% endif %}
+                                        <a href="{{ haendlerWebUrl }}" target="_blank">{{ translation.t_web }}</a>
                                      </div>
+                                     {% endif %}
 
                             </div>
 
@@ -335,13 +338,13 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                             <path id="arrow_forward_FILL0_wght400_GRAD0_opsz48_3_-_Kontur" data-name="arrow_forward_FILL0_wght400_GRAD0_opsz48 (3) - Kontur" d="M167.912-783.754l-1.9-1.9,5.377-5.25H159.5v-2.654h11.887l-5.377-5.251,1.9-1.9,8.683,8.479Zm-.132-1.891.143.143,6.893-6.731-6.893-6.731-.143.143,6.646,6.489H160.758v.2h13.667Z" transform="translate(-159.5 800.711)" fill="#1372d0"/>
                         </svg>
                     </span>
-            {% else %}
+                {% else %}
                 <a class="btnPager rechts"{% if pageInfo.nextUrl %} data-more="{{ pageInfo.nextUrl }}"{% endif %}>
                     <svg id="pagination-arrow-right"  xmlns="http://www.w3.org/2000/svg" width="17.094" height="16.957" viewBox="0 0 17.094 16.957">
                         <path id="pagination-arrow-right-fill" data-name="arrow_forward_FILL0_wght400_GRAD0_opsz48 (3) - Kontur" d="M167.912-783.754l-1.9-1.9,5.377-5.25H159.5v-2.654h11.887l-5.377-5.251,1.9-1.9,8.683,8.479Zm-.132-1.891.143.143,6.893-6.731-6.893-6.731-.143.143,6.646,6.489H160.758v.2h13.667Z" transform="translate(-159.5 800.711)" fill="#1372d0"/>
                     </svg>
                 </a>
-            {% endif %}
+                {% endif %}
             </div>
 
         </div>

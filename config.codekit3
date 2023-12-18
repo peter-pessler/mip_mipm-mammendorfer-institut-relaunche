@@ -831,7 +831,7 @@
       "pg" : 0,
       "sct" : 0
     },
-    "\/assets\/sccs\/components\/_pagination-haendler-aktuelles-jobs.scss" : {
+    "\/assets\/sccs\/components\/_pagination-haendler-aktuelles-jobs-produktFilter.scss" : {
       "aP" : 1,
       "bl" : 0,
       "co" : 0,
@@ -840,7 +840,7 @@
       "ft" : 4,
       "ma" : 1,
       "oA" : 1,
-      "oAP" : "\/web\/assets\/css\/_pagination-haendler-aktuelles-jobs.min.css",
+      "oAP" : "\/web\/assets\/css\/_pagination-haendler-aktuelles-jobs-produktFilter.min.css",
       "oF" : 0,
       "oS" : 3,
       "pg" : 0,
@@ -3386,6 +3386,16 @@
       "miP" : 0,
       "oA" : 2,
       "oAP" : "\/web\/assets\/images\/icons\/tel-icn.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 3758088159,
+      "prP" : 0
+    },
+    "\/web\/assets\/images\/icons\/top-arrow.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/web\/assets\/images\/icons\/top-arrow.svg",
       "oF" : 0,
       "opt" : 0,
       "plM" : 3758088159,

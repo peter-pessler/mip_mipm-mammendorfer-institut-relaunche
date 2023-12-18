@@ -61,22 +61,55 @@
                 {{ block.text }}
             </div>
 
+
+        {% if sectionName == 'jobs' %}
+
+            {% set button1 = jobsConfig.jobButton1|default(false) %}
+            {% set button2 = jobsConfig.backLink|default(false) %}
+            {% if ( button1 and jobsConfig.jobButton1.getUrl() != '' ) or ( button2 and jobsConfig.backLink.getUrl() != '' ) %}
+                <div class="buttonIntro">
+                    <span class="buttonIntro1"  data-button1>
+                    {% if button1  and jobsConfig.jobButton1.getUrl() != '' %}
+                        {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
+                    {% endif %}
+                    </span>
+                    <span class="buttonIntro2"  data-button2>
+                    {% if button2  and jobsConfig.backLink.getUrl() != '' %}
+                        {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                    {% endif %}
+                    </span>
+                </div>
+            {% endif %}
+
+        {% elseif sectionName == 'blog' %}
+            {% set button2 = blogConfig.backLink|default(false) %}
+            <div class="buttonIntro">
+                <span class="buttonIntro2"  data-button2>
+                    {% if button2  and blogConfig.backLink.getUrl() != '' %}
+                        {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                    {% endif %}
+                </span>
+            </div>
+        {% else %}
+
             {% set button1 = block.button1|default(false) %}
             {% set button2 = block.button2|default(false) %}
             {% if ( button1 and block.button1.getUrl() != '' ) or ( button2 and block.button2.getUrl() != '' ) %}
-            <div class="buttonIntro">
-                    <span class="buttonIntro1">
+                <div class="buttonIntro">
+                    <span class="buttonIntro1"  data-button1>
                     {% if button1  and block.button1.getUrl() != '' %}
-                            {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
+                        {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
                     {% endif %}
                     </span>
-                    <span class="buttonIntro2">
+                    <span class="buttonIntro2"  data-button2>
                     {% if button2  and block.button2.getUrl() != '' %}
                         {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
                     {% endif %}
                     </span>
-            </div>
+                </div>
             {% endif %}
+
+        {% endif %}
 
         </div>
 

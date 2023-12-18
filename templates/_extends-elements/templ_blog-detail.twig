@@ -36,6 +36,7 @@
                 } %}
                 {# ###################################################################################################### #}
                 {% set matrixElemente = entry.blogDetailMatrix %}
+                {% set blockCounter = 0 %}
                 {% if matrixElemente is defined and matrixElemente %}
                     {% for block in matrixElemente %}
 
@@ -70,14 +71,17 @@
 
                         {% endif %}
 
+                        {% set blockCounter = blockCounter + 1 %}
                     {% endfor %}
                 {% endif %}
 
+                {% if blockCounter > 0 %}
                 <div class="buttonBackContainer">
                     {% if  blogConfig.backLink.type == 'entry' %}
                         <a class="btn" href="{{blogConfig.backLink.getUrl()}}#result">{{blogConfig.backLink.getCustomText()}}</a>
                     {% endif %}
                 </div>
+                {% endif %}
 
             </div>
 
