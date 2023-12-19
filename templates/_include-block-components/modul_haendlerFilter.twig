@@ -115,7 +115,7 @@
 
 function statusLandCategory(produktgruppe = '') {
 
-        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendlerFilter-statusLand&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result, resutArr,  IDsCategoryLandDisabledStr;
+        var ajaxUrl='{{lgSlug}}/feedback-ajax?template=haendlerFilter-statusLand&blockid={{ blockid }}&produktgruppe=' + produktgruppe + '&sectionname={{ sectionname }}' + '&pageid={{ pageid }}', result, resutArr,  IDsCategoryLandDisabledStr, removeItem;
 
         $.ajax({
             produktgruppee: "GET",
@@ -134,16 +134,19 @@ function statusLandCategory(produktgruppe = '') {
                 IDsCategoryLandArr = IDsCategoryLandStr.split(',');
                 IDsCategoryLandDisabledStr = IDsCategoryLandStr;
 
+                 $.each(IDsCategoryLandArr, function(key, land) {
 
-                //$(".custom-select-2 .custom-options").children().removeClass( "disabled" );
-                $.each(IDsCategoryLandArr, function(key, land) {
 
                     $("#land-select").children("[value^=" + land + "]").prop( "disabled", false );
 
+                    testarray = resutArr;
+
                     $.each(resutArr, function(k, value) {
+
                         if( value == land ) {
                             IDsCategoryLandDisabledStr = IDsCategoryLandDisabledStr.replace("," + value, "");
                             IDsCategoryLandDisabledStr = IDsCategoryLandDisabledStr.replace( value + ",", "");
+                            IDsCategoryLandDisabledStr = IDsCategoryLandDisabledStr.replace( value , "");
                         }
                     });
 
@@ -154,6 +157,8 @@ function statusLandCategory(produktgruppe = '') {
                     $("#land-select").children("[value^=" + land + "]").prop( "disabled", true ).addClass('disabled');
                     $(".custom-select-2 .custom-options").children("[data-value^=" + land + "]").addClass('disabled');
                 });
+
+
 
             },
             error: function() {

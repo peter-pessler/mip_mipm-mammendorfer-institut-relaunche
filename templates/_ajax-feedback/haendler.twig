@@ -275,10 +275,11 @@ pageid          => ID der "Content Page" Seite welches über das entprechende Mo
                                      </div>
 
                                      {% if haendlerMail != '' %}
-                                     <div class="artikel-mail">
-                                         <a target="_blank" data-email="{{ haendlerMailData }}">{{ haendlerMail }}</a>
-                                     {% endif %}
+                                     <div class="artikel-mail">{# {{ haendlerMail }} {{ haendlerMailData }} #}
+                                         <a target="_blank" data-email="{{ haendlerMailData }}">{{ translation.t_mailSchreiben }}</a>
                                      </div>
+                                     {% endif %}
+
 
                                      {% if haendlerWebUrl != '' and '//' in haendlerWebUrl %}
                                      <div class="artikel-WebUrl">
