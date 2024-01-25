@@ -35,6 +35,18 @@ $breakpoint-text: 1200;
     }
 
     .modulbild{
+      display: block;
+      width: 100%;
+      position: relative;
+      height: 100%;
+
+      .slick-slide{
+        display: block!important;
+        picture,img{
+          display: block!important;
+        }
+      }
+
       img{
         border-radius: 30px;
         @include wl-breakpoint(1200) {

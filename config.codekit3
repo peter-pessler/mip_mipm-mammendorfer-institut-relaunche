@@ -2216,6 +2216,14 @@
       "oAP" : "\/templates\/_backend\/textBild_BildText.twig",
       "oF" : 0
     },
+    "\/templates\/_backend\/trenner.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_backend\/trenner.twig",
+      "oF" : 0
+    },
     "\/templates\/_extends-elements\/templ_blog-detail.twig" : {
       "cB" : 0,
       "ft" : 8192,
@@ -2382,6 +2390,14 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/_include-block-components\/modul_haendlerFilter.twig",
+      "oF" : 0
+    },
+    "\/templates\/_include-block-components\/modul_htmlCode.twig" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/templates\/_include-block-components\/modul_htmlCode.twig",
       "oF" : 0
     },
     "\/templates\/_include-block-components\/modul_jobs.twig" : {
@@ -2686,6 +2702,22 @@
       "hM" : 0,
       "oA" : 2,
       "oAP" : "\/templates\/main.twig",
+      "oF" : 0
+    },
+    "\/web-original-mipm-server\/.php-ini" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web-original-mipm-server\/.php-ini",
+      "oF" : 0
+    },
+    "\/web-original-mipm-server\/.php-version" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 2,
+      "oAP" : "\/web-original-mipm-server\/.php-version",
       "oF" : 0
     },
     "\/web\/.htaccess" : {
@@ -3128,6 +3160,19 @@
       "iS" : 23368,
       "oA" : 0,
       "oAP" : "\/web\/assets\/images\/backend\/layout-textLinks.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 100,
+      "rq" : 75
+    },
+    "\/web\/assets\/images\/backend\/trennlinie.png" : {
+      "ft" : 32768,
+      "iS" : 142,
+      "oA" : 0,
+      "oAP" : "\/web\/assets\/images\/backend\/trennlinie.png",
       "oF" : 0,
       "oIPL" : 0,
       "opt" : 0,

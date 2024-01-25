@@ -65,6 +65,13 @@
     @include dynamic-distance(15, 30, padding-bottom);
     @include responsive-font(15px, 17px, $base-font-family, $base-line-height);
 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+
     span{
       &.blue{
         color: $wl-color-blue;
@@ -117,6 +124,11 @@
     }
 
     @include dynamic-distance(30, 50, padding-top);
+
+    .produktNr{
+      display: inline-block;
+      color: $wl-color-blue-dark-soft;
+    }
 
 
     .buttonIntro{

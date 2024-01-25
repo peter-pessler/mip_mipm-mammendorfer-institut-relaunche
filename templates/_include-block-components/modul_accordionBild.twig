@@ -13,9 +13,25 @@
                 'mode' : 'crop'
             }
         } %}
+
+        {% set settingsBildHoeheFix = {
+            '0-1100' : {
+                'size' : '650x',
+                'mode' : 'crop'
+            },
+            '1-900' : {
+                'size' : '650x',
+                'mode' : 'crop'
+            },
+            '2-450' : {
+                'size' : '650x',
+                'mode' : 'crop'
+            }
+        } %}
         {% set image = block.bild.one()|default(false) %}
 {# ###################################################################################################### #}
-
+  {% set auswahlAusgabeBild = block.auswahlAusgabeBild.value %}
+{# ###################################################################################################### #}
 <div class="anchor" id="{{ 'anker' ~ blockid }}"></div>
 <section class="wrapper-outer modul-accordionBild">
     <section class="wl-wrapper">
@@ -25,10 +41,37 @@
 
             <div class="containerBild">
 
-                {% if image %}
-                    <div class="modulbild">
-                        {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
-                    </div>
+                {% if auswahlAusgabeBild == 'bildHoeheFix' %}
+                    {% if image %}
+                        <div class="modulbild">
+                            {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if auswahlAusgabeBild == 'bildHoeheVariabel' %}
+                    {% if image %}
+                        <div class="modulbild">
+                            {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settingsBildHoeheFix, image: image, imageSize: '650x', imageMode: 'crop'} %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+
+                {% if auswahlAusgabeBild == 'bildWechselFadeEffekt' %}
+                     {% set fadeBilder = block.fadeBilder.one()|default(false) %}
+                     {% if fadeBilder %}
+                        <div class="modulbild">
+                            <div id="fadeEffekt{{ blockid }}" class="imgSliderFadeEffektContainer">
+                                {% for image in block.fadeBilder.all() %}
+                                    {% if image %}
+
+                                        {% include '_include-vendor/image-picture.twig' with {class: 'modul-img', sourceMediaSettings: settingsBildHoeheFix, image: image, imageSize: '650x', imageMode: 'crop'} %}
+
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                     {% endif %}
                 {% endif %}
 
             </div>
@@ -80,4 +123,19 @@
     </section>
 </section>
 
+<script>
+    $(document).ready(function() {
 
+        $('#fadeEffekt{{ blockid }}').slick({
+            autoplay: true,
+            autoplaySpeed: 5000,
+            fade: true,
+            dots: false,
+            speed: 1200,
+            pauseOnHover: false,
+            infinite: true,
+            cssEase: 'linear'
+        });
+
+    });
+</script>

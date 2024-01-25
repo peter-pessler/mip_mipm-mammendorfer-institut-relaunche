@@ -4,7 +4,7 @@
 // Variables
 @import "../core/vars";
 
-.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser, .modul-sliderHistory, .modul-sliderTeam{
+.modul-sliderInfoTeaser, .modul-sliderTextBildTeaser, .modul-sliderHistory, .modul-sliderTeam, .modul-bildAccordion, .modul-accordionBild{
 
     .slick-slider {
         position: relative;
@@ -345,6 +345,21 @@
                 @include dynamic-distance(80, 100, left);
             }
             @include dynamic-distance-negativ(50, 70, top);
+        }
+
+    }
+}
+
+.modul-bildAccordion, .modul-accordionBild{
+    button{
+        display: none!important;
+
+        &.slick-prev {
+            display: none!important;
+        }
+
+        &.slick-next {
+            display: none!important;
         }
 
     }

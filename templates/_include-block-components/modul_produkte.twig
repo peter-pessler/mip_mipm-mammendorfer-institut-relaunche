@@ -34,7 +34,14 @@
         }).done(function() {
             setTimeout(function () {
                 $('.article-item-js').matchHeight();
-            }, 200);
+                $('.produktNummer-js').matchHeight();
+                $('.produktName-js').matchHeight();
+            }, 150);
+            setTimeout(function () {
+                $('.article-item-js').matchHeight();
+                $('.produktNummer-js').matchHeight();
+                $('.produktName-js').matchHeight();
+            }, 500);
         });
 
 
@@ -48,7 +55,7 @@
             $(resultContainer).html(data);
 
             setTimeout(function () {
-                setMasonryHeight();
+                //setMasonryHeight();
             }, 200);
 
         });

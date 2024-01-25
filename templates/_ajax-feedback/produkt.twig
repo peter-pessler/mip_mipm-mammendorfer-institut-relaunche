@@ -194,16 +194,22 @@
 
                                                 <div class="artikelBody">
 
-                                                      <div class="produktName textBold">
+                                                      <div class="produktName textBold produktName-js">
                                                           {% set produktName = entry.produktName  %}
                                                           {% set produktName = produktName|replace({ '[' : '<span class="produktNr">' }) %}
                                                           {% set produktName = produktName|replace({ ']' : '</span>' }) %}
                                                           {{ produktName|raw }}
                                                       </div>
 
+                                                      <div class="produktNummer textBold produktNummer-js">
+                                                          {{ entry.produktNummer | nl2br  }}
+                                                      </div>
+
+                                                      {#
                                                       <div class="produktteaserText">
                                                           {{ entry.teaserText }}
                                                       </div>
+                                                      #}
 
                                                       <div class="article-title">
                                                            <h4>{{ entry.teaserHeadline }}</h4>

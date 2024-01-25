@@ -553,6 +553,19 @@
       "plM" : 52780316221407,
       "prP" : 0
     },
+    "\/assets\/images\/icons\/controls.png" : {
+      "ft" : 32768,
+      "iS" : 2020,
+      "oA" : 0,
+      "oAP" : "\/assets\/images\/icons\/controls.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
     "\/assets\/images\/icons\/delete-icn.png" : {
       "ft" : 32768,
       "iS" : 916,
@@ -699,6 +712,16 @@
       "plM" : 52780316221407,
       "prP" : 0
     },
+    "\/assets\/images\/icons\/top-arrow.svg" : {
+      "ft" : 2097152,
+      "miP" : 0,
+      "oA" : 2,
+      "oAP" : "\/assets\/images\/icons\/top-arrow.svg",
+      "oF" : 0,
+      "opt" : 0,
+      "plM" : 52780316221407,
+      "prP" : 0
+    },
     "\/assets\/images\/icons\/wul-icn.png" : {
       "ft" : 32768,
       "iS" : 1962,
@@ -817,6 +840,32 @@
       "opt" : 0,
       "plM" : 52780316221407,
       "prP" : 0
+    },
+    "\/assets\/images\/img\/stantard.png" : {
+      "ft" : 32768,
+      "iS" : 2013,
+      "oA" : 0,
+      "oAP" : "\/assets\/images\/img\/stantard.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
+    },
+    "\/assets\/images\/img\/start.png" : {
+      "ft" : 32768,
+      "iS" : 2240,
+      "oA" : 0,
+      "oAP" : "\/assets\/images\/img\/start.png",
+      "oF" : 0,
+      "oIPL" : 0,
+      "opt" : 0,
+      "oT" : 1,
+      "ou" : "lpckwebp-none",
+      "q" : 90,
+      "rq" : 75
     },
     "\/assets\/images\/img\/tof-monitor-tof3d.jpg" : {
       "ft" : 16384,
@@ -994,6 +1043,25 @@
       "hM" : 0,
       "oA" : 0,
       "oAP" : "\/assets\/js\/lazysizes.min.js.map",
+      "oF" : 0
+    },
+    "\/assets\/js\/lightboxed.min.js" : {
+      "bF" : 0,
+      "ft" : 64,
+      "ma" : 0,
+      "mi" : 1,
+      "oA" : 0,
+      "oAP" : "\/assets\/js\/lightboxed.min-min.js",
+      "oF" : 0,
+      "sC" : 3,
+      "tS" : 0
+    },
+    "\/assets\/js\/lightboxed.min.js.map" : {
+      "cB" : 0,
+      "ft" : 8192,
+      "hM" : 0,
+      "oA" : 0,
+      "oAP" : "\/assets\/js\/lightboxed.min.js.map",
       "oF" : 0
     },
     "\/assets\/js\/scripts.min.js" : {

@@ -303,7 +303,16 @@
                     }
                   }
 
+                  .produktNummer{
+                    display: block;
+                    padding-top: 12px;
+                    color: $wl-color-blue-dark-soft;
+                    font-size: 0.9em;
+                    letter-spacing: 0.02em;
+                  }
+
                   .artikel-haendlerName{
+                      display: block;
                       padding-top: 40px;
                   }
 

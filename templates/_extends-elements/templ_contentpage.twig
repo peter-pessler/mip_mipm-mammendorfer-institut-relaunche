@@ -45,6 +45,8 @@
     {% set haendlerFilter = 0 %}
     {% set sliderInfoTeaser = 0 %}
     {% set sliderTextBildTeaser = 0 %}
+    {% set accordionBild = 0 %}
+    {% set bildAccordion = 0 %}
     {% set sliderHistory = 0 %}
     {% for block in matrixElemente %}
       {# -------------------------------------------------------------------------------------------------------------------------------- #}
@@ -82,6 +84,24 @@
           {% set assetsArr = assetsArr|merge({ (counter)  :  '<link defer rel="stylesheet" href="/assets/css/slick-InfoTeaser-textBildTeaser-History-Team.min.css">' }) %}
         {% endif %}
         {% set sliderTextBildTeaser = sliderTextBildTeaser + 1 %}
+      {% endif %}
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+      {% if block.type.handle == 'accordionBild' %}
+        {% set counter = counter + 1 %}
+        {% if accordionBild == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/slick.min.js"></script>' }) %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<link defer rel="stylesheet" href="/assets/css/slick-InfoTeaser-textBildTeaser-History-Team.min.css">' }) %}
+        {% endif %}
+        {% set accordionBild = accordionBild + 1 %}
+      {% endif %}
+      {# -------------------------------------------------------------------------------------------------------------------------------- #}
+      {% if block.type.handle == 'bildAccordion' %}
+        {% set counter = counter + 1 %}
+        {% if bildAccordion == 0 %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<script defer src="/assets/js/slick.min.js"></script>' }) %}
+          {% set assetsArr = assetsArr|merge({ (counter)  :  '<link defer rel="stylesheet" href="/assets/css/slick-InfoTeaser-textBildTeaser-History-Team.min.css">' }) %}
+        {% endif %}
+        {% set bildAccordion = bildAccordion + 1 %}
       {% endif %}
       {# -------------------------------------------------------------------------------------------------------------------------------- #}
       {% if block.type.handle == 'sliderHistory' %}

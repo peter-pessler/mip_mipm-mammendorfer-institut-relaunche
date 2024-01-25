@@ -77,6 +77,8 @@
         <div class="containerText-body">
 
             <div class="text">
+                {% set produktNummer = entry.produktNummer |default(false) %}
+                {% if produktNummer %}<span class="produktNr textBold">{{ produktNummer | nl2br  }}</span>{% endif %}
                 {{ entry.introText }}
             </div>
 

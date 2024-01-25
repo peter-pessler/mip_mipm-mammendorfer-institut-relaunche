@@ -46,24 +46,40 @@
                 <div class="text">
                     {{ block.text }}
                 </div>
-                
+
+
+                {% set button1 = block.button1|default(false) %}
+                {% set button1Url = block.button1.getUrl() %}
+                {% set button2 = block.button2|default(false) %}
+                {% set button2Url = block.button2.getUrl() %}
+                {% set button3 = block.button3|default(false) %}
+                {% set button3Url = block.button3.getUrl() %}
+
+                {% if button2Url != '' or button2Url != '' or button3Url != '' %}
                 <div class="buttonIntro">
-                    <span class="buttonIntro1">
-                    {% set button1 = block.button1|default(false) %}{% if button1 %}
-                        {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
-                    {% endif %}
-                    </span>
-                    <span class="buttonIntro2">
-                    {% set button2 = block.button2|default(false) %}{% if button2 %}
-                            {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                    {% if button1 and button1Url != '' %}
+                        <span class="buttonIntro1">
+                        {% set button1 = block.button1|default(false) %}{% if button1 %}
+                            {{ _self.linkList( button1, 'btn' ) | trim | raw  }}
                         {% endif %}
-                    </span>
-                    <span class="buttonIntro3">
-                    {% set button3 = block.button3|default(false) %}{% if button3 %}
-                        {{ _self.linkList( button3, 'btn' ) | trim | raw  }}
+                        </span>
                     {% endif %}
-                    </span>
+                    {% if button2 and button2Url != '' %}
+                    <span class="buttonIntro2">
+                        {% set button2 = block.button2|default(false) %}{% if button2 %}
+                                {{ _self.linkList( button2, 'btn' ) | trim | raw  }}
+                            {% endif %}
+                        </span>
+                    {% endif %}
+                    {% if button3 and button3Url != '' %}
+                        <span class="buttonIntro3">
+                        {% set button3 = block.button3|default(false) %}{% if button3 %}
+                            {{ _self.linkList( button3, 'btn' ) | trim | raw  }}
+                        {% endif %}
+                        </span>
+                    {% endif %}
                 </div>
+                {% endif %}
 
             </div>
 
