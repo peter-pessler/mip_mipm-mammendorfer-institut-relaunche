@@ -39,7 +39,6 @@
                                 {% if image == false %}
                                     {% set image = entry.bildGross.one()|default(false) %}
                                 {% endif %}
-                                {% set bildBeschreibung = entry.bildBeschreibung|default(false) %}
 
                                 {% set imgSrc = '' %}
                                 {% set imgQuality = 65 %}
@@ -58,15 +57,8 @@
                                         quality: (imgQuality),
                                     })  %}
                                 {% endif %}
-                                {#
-                                <a href="{{ imgSrc }}" class="flipLightBox{{ flipLightBoxCounter }}" data-lightbox_bgColor="{{ block.overlayHintergrundFarbe }}">
-                                    {% if image %}
-                                        {% include '_include-vendor/image-picture.twig' with {class: 'flb-img', sourceMediaSettings: settings, image: image, imageSize: '650x366', imageMode: 'crop'} %}
-                                    {% endif %}
-                                    <span>{% if bildBeschreibung %}<output class="textBold"> {{ entry.bildBeschreibung }}</output>{% endif %}</span>
-                                </a>
-                                #}
-                                <a><img class="lightboxed" rel="group{{ blockid }}" src="{{ imgSrcSmall }}" data-link="{{ imgSrc }}" alt="Image Alt" data-caption="{{ entry.bildBeschreibung }}" /></a>
+
+                                <a><img class="lightboxed" rel="group{{ blockid }}" src="{{ imgSrcSmall }}" data-link="{{ imgSrc }}" alt="Image Alt" /></a>
 
 
                             {% endfor %}

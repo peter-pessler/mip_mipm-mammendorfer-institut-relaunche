@@ -16,7 +16,7 @@
                                 </div>
                             {% endif %}
 
-                                <div id="slider-team{{ blockid }}" class="teamSliderContainer">
+                                <div id="fadeEffekt{{ blockid }}" class="teamSliderContainer">
 
                                     {% set showItemTeam= block.team.one()|default(false) %}{% if showItemTeam%}
                                         {% for element in block.team.all() %}
@@ -61,7 +61,7 @@
     $(document).ready(function() {
 
         $('#fadeEffekt{{ blockid }}').slick({
-            autoplay: true,
+            autoplay: false,
             autoplaySpeed: 5000,
             fade: true,
             dots: false,
