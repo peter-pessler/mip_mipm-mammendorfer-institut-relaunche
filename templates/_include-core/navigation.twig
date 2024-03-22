@@ -70,11 +70,7 @@
             {% if redirect is defined and redirect is not null %}
                 {% set redirectLink = redirect.getUrl() %}
                 {% if redirectLink is not null %}
-                    {% if redirect.getTarget() == '_blank' %}
-                        {% set output = '<a class="navi" href="' ~ outputUrl ~ '" target="_blank"><span>' ~ outputTitle ~ '</span></a>' %}
-                    {% else %}
-                        {% set output = '<a class="navi" href="' ~ redirectLink ~ '"><span>' ~ outputTitle ~ '</span></a>' %}
-                    {% endif %}
+                    {% set output = _self.linkListOnlyAtag( redirect, 'navi' ) | trim | raw ~ '<span>' ~ outputTitle ~ '</span></a>' %}
                 {% endif %}
             {% endif %}
 

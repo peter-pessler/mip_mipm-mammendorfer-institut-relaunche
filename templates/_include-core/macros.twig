@@ -1,60 +1,118 @@
-{% macro linkList(element, className) %}
-
-    {% set customText = element.getCustomText() %}
-    {% set customText = customText|replace({'[[': '<em>'}) %}
-    {% set customText = customText|replace({']]': '</em>'}) %}
-    {% set customText = customText|replace({'((': '<sup>'}) %}
-    {% set customText = customText|replace({'))': '</sup>'}) %}
-
-    {% if className != '' %}{% set class = ' class="' ~ className ~'"' %}{% else %}{% set class = '' %}{% endif %}
-    {% set type = element.type %}{# asset, email, entry, tel, url, custom #}{% if type == 'email' %}
-    {% set mailCustomText = element.getCustomText() %}
-    {% if mailCustomText != '' %}
-        {% set mailText = mailCustomText %}
-    {% else %}
-         {% set mailText = element.getUrl()|replace({'mailto:': ''}) %}
-    {% endif %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ mailText }}</a>
-{% elseif  type == 'entry' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ customText|raw }}</a>
-{% elseif  type == 'tel' %}
-    {% set phonenumber = element.getUrl()|replace({'tel:': ''}) %}
-    {% if phonenumber != '' %}{% set cleanPhonenumber = craft.wul.phone(phonenumber,'','','','','1')|raw  %}{% endif %}
-    {% if element.getCustomText() == 'Learn More' %}{# Learn More wird ausgegeben, wenn das Feld leer ist #}
-        {% set phoneText = element.getCustomText() ~ ' ' ~ phonenumber %}
-    {% else %}
-        {% set phoneText = phonenumber %}
-    {% endif %}
-    <a href="tel:{{cleanPhonenumber}}"{{ class|raw }}>{{ phoneText }}</a>
-{% elseif  type == 'url' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ customText|raw }}</a>
-{% elseif  type == 'custom' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ customText|raw }}</a>
-{% elseif  type == 'asset' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>{{ customText|raw }}</a>
-{% endif %}
+{% macro checkLinkList(element) %}
+    {{ (element.getLink() != '')? '1' : '0'  }}
 {% endmacro %}
 
 {# ======================================================================================================================================================== #}
 
-{% macro linkListOnlyAtag(element, className) %}
-    {% if className != '' %}{% set class = ' class="' ~ className ~'"' %}{% else %}{% set class = '' %}{% endif %}
-    {% set type = element.type %}{# asset, email, entry, tel, url, custom #}{% if type == 'email' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
-{% elseif  type == 'entry' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
-{% elseif  type == 'tel' %}
-    {% set phonenumber = element.getUrl()|replace({'tel:': ''}) %}
-    {% if phonenumber != '' %}{% set cleanPhonenumber = craft.wul.phone(phonenumber,'','','','','1')|raw  %}{% endif %}
-    <a href="tel:{{cleanPhonenumber}}"{{ class|raw }}>
-{% elseif  type == 'url' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
-{% elseif  type == 'custom' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
-{% elseif  type == 'asset' %}
-    <a href="{{element.getUrl()}}"{% if element.getTarget() == '_blank' %} target="_blank" {% endif %}{{ class|raw }}>
-{% endif %}
-{% endmacro %}
+{% macro linkList(element, className) %}{% apply spaceless %}
+
+    {# All Types: Asset |  Category | Custom | Email | Embed | Entry | Phone | Site | URL | User #}
+    {# Types in use: Entry | URL | Custom | Email | Phone | Asset #}
+
+    {% set type = element.label %}
+    {% set text = element.getText() %}
+    {% set link = element %}
+    {% set class = (className != '')? ' class="' ~ className ~ '"' : '' %}
+    {% set anchorName = element.anchorName|trim |replace({'#':''}) %}
+    {% set anchor = (anchorName != '')? '#' ~ anchorName : '' %}
+    {% set url = ( anchor != '')? link ~ anchor : link %}
+    {% set target = ( element.getTarget() == '_blank' )? '_blank' : '_self' %}
+    {% set showLink = (element.getLink() != '')? true : false  %}
+
+    {# *** Cases ************************************************************* #}
+
+    {% if  type == 'Email' %}
+
+        {% if text == '' %}
+            {% set text = link |replace({'mailto:':''}) %}
+        {% endif %}
+
+    {% elseif  type == 'Phone' %}
+
+        {% if text == '' %}
+            {% set text = link |replace({'tel:':''}) %}
+        {% endif %}
+        {% set cleanPhonenumber = 'tel:' ~ craft.wul.phone(link,'','','','','1')|raw  %}
+
+    {% endif %}
+    {# ************************************************************************* #}
+
+    {% if showLink %}
+
+        {% if type == 'Entry' %}
+            {# Entry --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">{{ text|trim }}</a>
+        {% elseif  type == 'URL' %}
+            {# URL --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">{{ text|trim }}</a>
+        {% elseif  type == 'Custom' %}
+            {# Custom --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">{{ text|trim }}</a>
+        {% elseif  type == 'Asset' %}
+            {# Asset --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">{{ text|trim }}</a>
+        {% elseif  type == 'Email' %}
+            {# URL --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">{{ text|trim }}</a>
+        {% elseif  type == 'Phone' %}
+            {# URL --------------------------------------------------------------------- #}
+            <a href="{{ cleanPhonenumber }}"{{ class|raw }}>{{ text|trim }}</a>
+        {% endif %}
+
+    {% endif %}
+
+{% endapply %}{% endmacro %}
+
+{# ======================================================================================================================================================== #}
+
+{% macro linkListOnlyAtag(element, className) %}{% apply spaceless %}
+
+
+    {# All Types: Asset |  Category | Custom | Email | Embed | Entry | Phone | Site | URL | User #}
+    {# Types in use: Entry | URL | Custom | Email | Phone | Asset #}
+
+    {% set type = element.label %}
+    {% set text = element.getText() %}
+    {% set link = element %}
+    {% set class = (className != '')? ' class="' ~ className ~ '"' : '' %}
+    {% set anchorName = element.anchorName|trim |replace({'#':''}) %}
+    {% set anchor = (anchorName != '')? '#' ~ anchorName : '' %}
+    {% set url = ( anchor != '')? link ~ anchor : link %}
+    {% set target = ( element.getTarget() == '_blank' )? '_blank' : '_self' %}
+    {% set showLink = (element.getLink() != '')? true : false  %}
+
+    {# *** Check & Cases ******************************************************** #}
+    {% if  type == 'Phone' %}
+        {% set cleanPhonenumber = 'tel:' ~ craft.wul.phone(link,'','','','','1')|raw  %}
+    {% endif %}
+    {# ************************************************************************* #}
+
+    {% if showLink %}
+
+        {% if type == 'Entry' %}
+            {# Entry --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">
+        {% elseif  type == 'URL' %}
+            {# URL --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">
+        {% elseif  type == 'Custom' %}
+            {# Custom --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">
+        {% elseif  type == 'Asset' %}
+            {# Asset --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">
+        {% elseif  type == 'Email' %}
+            {# URL --------------------------------------------------------------------- #}
+            <a href="{{ url|raw }}"{{ class|raw }} target="{{ target }}">
+        {% elseif  type == 'Phone' %}
+            {# URL --------------------------------------------------------------------- #}
+            <a href="{{ cleanPhonenumber }}"{{ class|raw }}>
+        {% endif %}
+
+     {% endif %}
+
+{% endapply %}{% endmacro %}
+
 
 {# ======================================================================================================================================================== #}
 
